@@ -1,0 +1,974 @@
+@startuml
+skinparam classAttributeIconSize 0
+left to right direction
+hide circle
+scale 1.0
+
+entity "evaluasi.r_indikator" as evaluasi__r_indikator #FFFFFF {
+  kd_sub_sub : character varying <<PK>>
+  id_indikator : bigint
+  jns_nilai : character varying
+  kd_indikator : character varying
+  kd_matrix_ahp : character varying
+  kd_sub : character varying
+  stat_data : character varying
+  ur_indikator : character varying
+  ur_sub : character varying
+  ur_sub_sub : character varying
+}
+
+entity "evaluasi.r_interval_det_kualitatif" as evaluasi__r_interval_det_kualitatif #FFFFFF {
+  id_interval_det_kualitatif : bigint <<PK>>
+  kd_indikator : character varying
+  kd_sub : character varying
+  kd_subsub : character varying
+  kd_subsub_det : character varying
+  ur_indikator : character varying
+  ur_sub : character varying
+  ur_subsub : character varying
+  ur_subsub_det : character varying
+}
+
+entity "evaluasi.r_kelas_scorecard" as evaluasi__r_kelas_scorecard #FFFFFF {
+  id_kelas_scorecard : bigint <<PK>>
+  interval : character varying
+  nil_maks : integer
+  nil_min : integer
+  warna_html : character varying
+  warna_sc : character varying
+}
+
+entity "evaluasi.r_kertas_kerja" as evaluasi__r_kertas_kerja #FFFFFF {
+  group : character varying
+  id_kertas_kerja : integer
+  sub_group : character varying
+  uraian : character varying
+}
+
+entity "evaluasi.r_konversi_skor" as evaluasi__r_konversi_skor #FFFFFF {
+  id_konversi_skor : bigint <<PK>>
+  ket : character varying
+  konversi_nilai : smallint
+  konversi_warna : character varying
+  skor : smallint
+}
+
+entity "evaluasi.r_lookup_value" as evaluasi__r_lookup_value #FFFFFF {
+  id_lookup : bigint <<PK>>
+  kategori : character varying
+  kode_lookup : character varying
+  status_data : character varying
+  uraian_lookup : character varying
+}
+
+entity "evaluasi.r_matrix_pasangan" as evaluasi__r_matrix_pasangan #FFFFFF {
+  id_matrix_pasangan : bigint <<PK>>
+  kd_kriteria1 : character varying
+  kd_kriteria2 : character varying
+  ket : character varying
+  kombinasi_kriteria : character varying
+}
+
+entity "evaluasi.r_metode_nilai" as evaluasi__r_metode_nilai #FFFFFF {
+  rowid : integer <<PK>>
+  id_metode_nilai : bigint
+  kd_metode_nilai : character varying
+  ur_metode_nilai : character varying
+}
+
+entity "evaluasi.r_narasi" as evaluasi__r_narasi #FFFFFF {
+  id_narasi : bigint <<PK>>
+  kd_narasi : character varying
+  no_narasi : character varying
+  value_narasi : character varying
+}
+
+entity "evaluasi.r_no_laporan" as evaluasi__r_no_laporan #FFFFFF {
+  id_kpknl : integer
+  no_lap : smallint
+}
+
+entity "evaluasi.r_peruntukan" as evaluasi__r_peruntukan #FFFFFF {
+  id_peruntukan : bigint <<PK>>
+  kd_peruntukan : character varying
+  ur_peruntukan : character varying
+}
+
+entity "evaluasi.r_random_index" as evaluasi__r_random_index #FFFFFF {
+  id_random_index : bigint <<PK>>
+  nilai_ri : numeric
+  ukuran_matrix : smallint
+}
+
+entity "evaluasi.r_satuan_nilai" as evaluasi__r_satuan_nilai #FFFFFF {
+  rowid : bigint <<PK>>
+  id_satuan_nilai : integer
+  kd_satuan_nilai : character varying
+  ur_satuan_nilai : character varying
+}
+
+entity "evaluasi.r_skala_perbandingan" as evaluasi__r_skala_perbandingan #FFFFFF {
+  id_skala_perbandingan : bigint <<PK>>
+  ket : character varying
+  nil_kepentingan : smallint
+}
+
+entity "evaluasi.r_skor" as evaluasi__r_skor #FFFFFF {
+  id_skor : bigint <<PK>>
+  kategori_skor : character varying
+  skor : smallint
+}
+
+entity "evaluasi.r_skor_indikator" as evaluasi__r_skor_indikator #FFFFFF {
+  id_skor_indikator : bigint <<PK>>
+  indikator : character varying
+  kd_indikator : character varying
+  kd_sub_indikator : character varying
+  kd_sub_sub_indikator : character varying
+  ket : character varying
+  nilai : character varying
+  ref_indikator : character varying
+  skor : smallint
+  sub_indikator : character varying
+  sub_sub_indikator : character varying
+}
+
+entity "evaluasi.r_t_kepuasan" as evaluasi__r_t_kepuasan #FFFFFF {
+  id_t_kepuasan : bigint <<PK>>
+  daya_tahan : character varying
+  fitur_fitur : character varying
+  fungsionalitas : character varying
+  kehandalan : character varying
+  keindahan_desain : character varying
+  kemudahan_dpt_layanan : character varying
+  kesesuaian : character varying
+  kualitas_layanan : character varying
+  skor : smallint
+}
+
+entity "evaluasi.t_adm_dokumen" as evaluasi__t_adm_dokumen #FFFFFF {
+  id_adm_dokumen : integer <<PK>>
+  created_at : timestamp without time zone
+  created_by : smallint
+  edited_by : smallint
+  nm_dokumen : character varying
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : smallint
+}
+
+entity "evaluasi.t_bmn_batas" as evaluasi__t_bmn_batas #FFFFFF {
+  id_bmn_batas : bigint <<PK>>
+  bts_barat : character varying
+  bts_selatan : character varying
+  bts_timur : character varying
+  bts_utara : character varying
+  gps_latitude : numeric
+  gps_longitude : numeric
+  id_aset : integer
+  id_siap_bmn : bigint
+}
+
+entity "evaluasi.t_bmn_foto" as evaluasi__t_bmn_foto #FFFFFF {
+  id_bmn_foto : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_aset : integer
+  id_foto_siman : bigint
+  id_satker : integer
+  id_siap_bmn : bigint
+  ket_foto : character varying
+  nm_foto : character varying
+  stat_data : character varying
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "evaluasi.t_bmn_hukum" as evaluasi__t_bmn_hukum #FFFFFF {
+  id_bmn_hukum : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_aset : integer
+  id_kib : integer
+  id_satker : integer
+  id_siap_bmn : integer
+  kd_status_hukum : character varying
+  phk_sengketa : character varying
+  stat_data : character varying
+  status_data : smallint
+  status_hukum : character varying
+  tgl_sengketa : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_masalah : character varying
+}
+
+entity "evaluasi.t_bmn_lainlain" as evaluasi__t_bmn_lainlain #FFFFFF {
+  id_bmn_lainlain : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  hotel : character varying
+  id_aset : integer
+  id_satker : integer
+  id_siap_bmn : bigint
+  industri : character varying
+  jrk_bandara : character varying
+  jrk_jln_stasiun : character varying
+  jrk_jln_utama : character varying
+  jrk_pelabuhan : character varying
+  kantor : character varying
+  ket_tambahan : character varying
+  lainnya : character varying
+  lebar_muka : character varying
+  optimalisasi : character varying
+  perbelanjaan : character varying
+  stat_data : character varying
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+  vacancy_rate : character varying
+  wisata : character varying
+}
+
+entity "evaluasi.t_bmn_lantai" as evaluasi__t_bmn_lantai #FFFFFF {
+  id_bmn_lantai : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_aset : integer
+  id_kib : integer
+  id_satker : integer
+  id_siap_bmn : bigint
+  keterangan : character varying
+  luas : integer
+  no_lantai : character varying
+  stat_data : character varying
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "evaluasi.t_bmn_psp" as evaluasi__t_bmn_psp #FFFFFF {
+  id_bmn_psp : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_aset : integer
+  id_satker : integer
+  id_siap_bmn : integer
+  sk_keputusan : character varying
+  stat_data : character varying
+  status_data : smallint
+  tgl_sk : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "evaluasi.t_bmn_relasi" as evaluasi__t_bmn_relasi #FFFFFF {
+  id_bmn_relasi : bigint <<PK>>
+  gps : character varying
+  id_aset : bigint
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_kpknl : integer
+  id_satker : integer
+  id_satker_parent : integer
+  id_siap_bmn : bigint
+  id_user : character varying
+  jml_bdg : integer
+  jml_lantai : integer
+  jns_dok_bukti : character varying
+  kd_brg : character varying
+  kd_jns_bmn : integer
+  kd_jns_idle : character varying
+  kd_kab : character varying
+  kd_kondisi : character varying
+  kd_prov : character varying
+  kd_satker : character varying
+  kec : character varying
+  kel : character varying
+  lokasi : character varying
+  luas_bdg : integer
+  luas_tnh : integer
+  luas_tnh_k : integer
+  luas_tnh_l : integer
+  merk : character varying
+  nilai_buku : integer
+  nm_jns_bmn : character varying
+  no_aset : integer
+  no_dok_bukti : character varying
+  no_paket : character varying
+  no_perkara_hukum : character varying
+  no_psp : character varying
+  rph_aset : bigint
+  rph_susut : bigint
+  rtrw : character varying
+  status_evaluasi : character varying
+  tahun : integer
+  tgl_create : date
+  tgl_perolehan : date
+  tgl_psp : date
+  tipe : character varying
+  ur_kab : character varying
+  ur_kanwil : character varying
+  ur_kl : character varying
+  ur_kondisi : character varying
+  ur_kpknl : character varying
+  ur_prov : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+}
+
+entity "evaluasi.t_bobot" as evaluasi__t_bobot #FFFFFF {
+  id_bobot : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_kanwil : integer
+  id_kpknl : integer
+  id_user : integer
+  kd_kanwil : character varying
+  kd_kpknl : character varying
+  kd_level : character varying
+  stat_data : character varying
+  status_data : smallint
+  tahun : integer
+  tgl_create : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kanwil : character varying
+  ur_kpknl : character varying
+}
+
+entity "evaluasi.t_bobot_ind" as evaluasi__t_bobot_ind #FFFFFF {
+  id_bobot_ind : bigint <<PK>>
+  bobot : numeric
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_bobot : integer
+  id_kanwil : integer
+  id_kpknl : integer
+  kd_indikator : character varying
+  kd_kanwil : character varying
+  kd_kpknl : character varying
+  kd_level : character varying
+  satuan : character varying
+  stat_data : character varying
+  status_data : smallint
+  tahun : integer
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_indikator : character varying
+  ur_kanwil : character varying
+  ur_kpknl : character varying
+}
+
+entity "evaluasi.t_bobot_subind" as evaluasi__t_bobot_subind #FFFFFF {
+  id_bobot_subind : bigint <<PK>>
+  bobot : numeric
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_bobot : bigint
+  id_bobot_ind : bigint
+  id_kanwil : integer
+  id_kpknl : integer
+  kd_indikator : character varying
+  kd_kanwil : character varying
+  kd_kpknl : character varying
+  kd_level : character varying
+  kd_sub : character varying
+  kd_subsub : character varying
+  satuan : character varying
+  stat_data : character varying
+  status_data : smallint
+  tahun : integer
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_indikator : character varying
+  ur_kanwil : character varying
+  ur_kpknl : character varying
+  ur_sub : character varying
+  ur_subsub : character varying
+}
+
+entity "evaluasi.t_dokumen" as evaluasi__t_dokumen #FFFFFF {
+  id_dokumen : integer <<PK>>
+  created_at : timestamp without time zone
+  created_by : smallint
+  edited_by : smallint
+  id_siap : integer
+  nm_dokumen : character varying
+  no_paket : character varying
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : smallint
+}
+
+entity "evaluasi.t_hasil" as evaluasi__t_hasil #FFFFFF {
+  id_hasil : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_aset : integer
+  id_kanwil : integer
+  id_kpknl : integer
+  id_satker : integer
+  id_siap_bmn : bigint
+  id_user : integer
+  kd_brg : character varying
+  kd_indikator : character varying
+  kd_jns_bmn : integer
+  kd_kpknl : character varying
+  kd_peruntukan : character varying
+  kd_satker : character varying
+  kd_status : character varying
+  keterangan : character varying
+  metode_penilaian : character varying
+  no_aset : integer
+  no_paket : character varying
+  rekomendasi : character varying
+  skor_akhir : integer
+  stat_data : character varying
+  status_data : smallint
+  tahun : integer
+  tgl_create : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_indikator : character varying
+  ur_kanwil : character varying
+  ur_kpknl : character varying
+  ur_peruntukan : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+  warna_scorecard : character varying
+}
+
+entity "evaluasi.t_history_proses" as evaluasi__t_history_proses #FFFFFF {
+  id_history_proses : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_user : integer
+  kd_brg : character varying
+  nm_pengguna : character varying
+  no_paket : character varying
+  stat_data : character varying
+  status_data : smallint
+  status_ket : character varying
+  status_proses : character varying
+  tahun : integer
+  tgl_create : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_sskel : character varying
+}
+
+entity "evaluasi.t_indeks_skor" as evaluasi__t_indeks_skor #FFFFFF {
+  id_indeks_skor : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  indeks : numeric
+  kd_indikator : character varying
+  kd_peruntukan : character varying
+  kd_sub : character varying
+  kd_subsub : character varying
+  skor : integer
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_indikator : character varying
+  ur_sub : character varying
+  ur_subsub : character varying
+}
+
+entity "evaluasi.t_interval" as evaluasi__t_interval #FFFFFF {
+  id_interval : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_interval0 : bigint
+  id_kanwil : integer
+  id_kpknl : integer
+  jns_nilai : character varying
+  kd_indikator : character varying
+  kd_kanwil : character varying
+  kd_kpknl : character varying
+  kd_level : character varying
+  kd_peruntukan : character varying
+  kd_sub : character varying
+  kd_subsub : character varying
+  keterangan : character varying
+  kurang_dari : character varying
+  lebih_dari : character varying
+  nilai_batas : numeric
+  nilai_maks : numeric
+  nilai_min : numeric
+  satuan : character varying
+  stat_data : character varying
+  status_data : smallint
+  tahun : integer
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_indikator : character varying
+  ur_kanwil : character varying
+  ur_kpknl : character varying
+  ur_peruntukan : character varying
+  ur_sub : character varying
+  ur_subsub : character varying
+}
+
+entity "evaluasi.t_interval0" as evaluasi__t_interval0 #FFFFFF {
+  id_interval0 : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_kanwil : integer
+  id_kpknl : integer
+  id_user : integer
+  kd_kanwil : character varying
+  kd_kpknl : character varying
+  kd_level : character varying
+  stat_data : character varying
+  status_data : smallint
+  tahun : integer
+  tgl_create : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kanwil : character varying
+  ur_kpknl : character varying
+}
+
+entity "evaluasi.t_kertas_kerja" as evaluasi__t_kertas_kerja #FFFFFF {
+  id : integer <<PK>>
+  ada : boolean
+  id_r_kertas_kerja : integer
+  id_siap : integer
+  id_siap_bmn : bigint
+  keterangan : character varying
+  no_paket : character varying
+  sesuai : boolean
+  tidak_ada : boolean
+  tidak_sesuai : boolean
+}
+
+entity "evaluasi.t_laksana" as evaluasi__t_laksana #FFFFFF {
+  id_laksana : bigint <<PK>>
+  bobot : numeric
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_aset : integer
+  id_interval : bigint
+  id_interval0 : bigint
+  id_interval_det : integer
+  id_kanwil : integer
+  id_kpknl : integer
+  id_laks_ind : bigint
+  id_pembobotan : bigint
+  id_satker : integer
+  id_siap_bmn : bigint
+  id_user : character varying
+  jns_nilai : character varying
+  kd_brg : character varying
+  kd_indikator : character varying
+  kd_jns_bmn : integer
+  kd_kpknl : character varying
+  kd_level_bobot : character varying
+  kd_level_interval : character varying
+  kd_peruntukan : character varying
+  kd_satker : character varying
+  kd_sub : character varying
+  kd_sub_sub : character varying
+  ket : character varying
+  ket_na_nu : character varying
+  ket_validasi : character varying
+  metode_nilai : character varying
+  nilai_maks : integer
+  nilai_min : integer
+  nilai_sub_sub : numeric
+  nilai_sub_sub2 : character varying
+  no_aset : integer
+  no_paket : character varying
+  score_color : character varying
+  skor : character varying
+  stat_data : character varying
+  status_data : smallint
+  status_na_nu : character varying
+  status_proses : character varying
+  tahun : integer
+  tgl_create : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_indikator : character varying
+  ur_kanwil : character varying
+  ur_kpknl : character varying
+  ur_peruntukan : character varying
+  ur_satker : character varying
+  ur_satuan_nilai : character varying
+  ur_sskel : character varying
+  ur_sub : character varying
+  ur_sub_sub : character varying
+  validasi : integer
+}
+
+entity "evaluasi.t_laksana_indikator" as evaluasi__t_laksana_indikator #FFFFFF {
+  id_laks_ind : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_aset : integer
+  id_kanwil : integer
+  id_kpknl : integer
+  id_metode_nilai : integer
+  id_pembobotan : bigint
+  id_satker : integer
+  id_sc_card : bigint
+  id_siap_bmn : bigint
+  id_user : integer
+  kd_brg : character varying
+  kd_indikator : character varying
+  kd_jns_bmn : integer
+  kd_kpknl : character varying
+  kd_peruntukan : character varying
+  kd_satker : character varying
+  keterangan : character varying
+  metode_nilai : character varying
+  no_aset : integer
+  no_paket : character varying
+  skor_akhir : numeric
+  stat_data : character varying
+  stat_nil_indikator : character varying
+  stat_nil_subsub : character varying
+  status_data : smallint
+  tahun : integer
+  tgl_create : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_indikator : character varying
+  ur_kanwil : character varying
+  ur_kpknl : character varying
+  ur_peruntukan : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+  warna_sc_card : character varying
+}
+
+entity "evaluasi.t_laporan_evaluasi" as evaluasi__t_laporan_evaluasi #FFFFFF {
+  created_at : timestamp without time zone
+  created_by : smallint
+  edited_by : smallint
+  id_laporan_evaluasi : bigint
+  nm_dokumen : character varying
+  no_paket : character varying
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : smallint
+}
+
+entity "evaluasi.t_sccard_agregat" as evaluasi__t_sccard_agregat #FFFFFF {
+  id_sccard_agregat : bigint <<PK>>
+  bobot : numeric
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_bobot : bigint
+  id_kpknl : integer
+  id_satker : integer
+  kd_indikator : character varying
+  kd_kpknl : character varying
+  kd_satker : character varying
+  metode : character varying
+  no_paket : character varying
+  skor_akhir : numeric
+  stat_nil_agregat : character varying
+  stat_nil_bmn : character varying
+  status_data : smallint
+  tahun : integer
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_indikator : character varying
+  ur_kpknl : character varying
+  ur_satker : character varying
+  warna_sc : character varying
+}
+
+entity "evaluasi.t_set_bobot" as evaluasi__t_set_bobot #FFFFFF {
+  id_set_bobot : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_bobot : bigint
+  id_user : integer
+  kd_level : character varying
+  status_aktif : character varying
+  status_data : smallint
+  tahun : integer
+  tgl_create : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "evaluasi.t_set_interval2020" as evaluasi__t_set_interval2020 #FFFFFF {
+  id_set_interval : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_interval0 : bigint
+  id_user : integer
+  kd_level : character varying
+  status_aktif : character varying
+  status_data : smallint
+  tahun : integer
+  tgl_create : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "evaluasi.t_siap" as evaluasi__t_siap #FFFFFF {
+  id_siap : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  deskripsi : character varying
+  edited_by : integer
+  file_surat : character varying
+  hal_surat : character varying
+  id_bobot : bigint
+  id_eselon1 : integer
+  id_interval0 : bigint
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_r_menu_access_state : integer
+  id_satker : integer
+  id_st : bigint
+  id_user : integer
+  jns_paket : character varying
+  kd_eselon_kl : character varying
+  kd_kl : character varying
+  kd_korwil : character varying
+  kd_kpknl : character varying
+  kd_peruntukan : character varying
+  kd_prov : character varying
+  kd_satker : character varying
+  kd_status : character varying
+  kinerja : character varying
+  nil_scorecard : character varying
+  no_lap : integer
+  no_paket : character varying
+  no_st : character varying
+  no_surat : character varying
+  stat_data : character varying
+  status_data : smallint
+  status_paket : character varying
+  tahun : integer
+  tdklnjt_no : character varying
+  tdklnjt_stat : character varying
+  tdklnjt_tgl : date
+  tgl_create : date
+  tgl_lap : timestamp without time zone
+  tgl_surat : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_eselon1 : character varying
+  ur_kanwil : character varying
+  ur_kl : character varying
+  ur_korwil : character varying
+  ur_kpknl : character varying
+  ur_peruntukan : character varying
+  ur_prov : character varying
+  ur_satker : character varying
+  val_kwl_ket : character varying
+  val_kwl_stat : character varying
+  val_kwl_tgl : date
+}
+
+entity "evaluasi.t_siap_bmn" as evaluasi__t_siap_bmn #FFFFFF {
+  id_siap_bmn : bigint <<PK>>
+  cara_evaluasi : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  gps_latitude : character varying
+  gps_longitude : character varying
+  id_aset : integer
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_kpknl : integer
+  id_satker : integer
+  id_satker_parent : integer
+  id_user : character varying
+  jml_bdg : integer
+  jml_lantai : integer
+  jns_dok_bukti : character varying
+  kd_brg : character varying
+  kd_jns_bmn : integer
+  kd_jns_idle : character varying
+  kd_kab : character varying
+  kd_kondisi : character varying
+  kd_peruntukan : character varying
+  kd_prov : character varying
+  kd_satker : character varying
+  kec : character varying
+  kel : character varying
+  kinerja_aset : character varying
+  lokasi : character varying
+  luas : integer
+  luas_tnh_k : integer
+  luas_tnh_l : integer
+  merk : character varying
+  nilai_buku : numeric
+  nm_jns_bmn : character varying
+  no_aset : integer
+  no_dok_bukti : character varying
+  no_paket : character varying
+  no_perkara_hukum : character varying
+  no_psp : character varying
+  rph_aset : numeric
+  rph_susut : numeric
+  rtrw : character varying
+  stat_data : character varying
+  status_data : smallint
+  status_evaluasi : character varying
+  status_validasi : integer
+  tahun : integer
+  tgl_create : date
+  tgl_perolehan : date
+  tgl_psp : date
+  tgl_survey : date
+  tipe : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kab : character varying
+  ur_kanwil : character varying
+  ur_kl : character varying
+  ur_kondisi : character varying
+  ur_kpknl : character varying
+  ur_peruntukan : character varying
+  ur_prov : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+}
+
+entity "evaluasi.t_siap_hapus" as evaluasi__t_siap_hapus #FFFFFF {
+  created_at : timestamp without time zone
+  created_by : integer
+  no_lap : character varying
+  no_paket : character varying
+  t_siap_hapus : integer
+}
+
+entity "evaluasi.t_siap_narasi" as evaluasi__t_siap_narasi #FFFFFF {
+  id_siap_narasi : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_satker : integer
+  id_user : integer
+  kd_narasi : character varying
+  kd_satker : character varying
+  no_narasi : character varying
+  no_paket : character varying
+  stat_data : character varying
+  status_data : smallint
+  tahun : integer
+  tgl_create : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_narasi : character varying
+  ur_satker : character varying
+}
+
+entity "evaluasi.t_sk" as evaluasi__t_sk #FFFFFF {
+  id_sk : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  hal_sk : character varying
+  id_kanwil : integer
+  id_kpknl : integer
+  kd_kanwil : character varying
+  kd_kpknl : character varying
+  no_sk : character varying
+  stat_data : character varying
+  status_data : smallint
+  tgl_sk : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "evaluasi.t_sk_tim" as evaluasi__t_sk_tim #FFFFFF {
+  id_sk_tim : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_sk : bigint
+  nama : character varying
+  nip : character varying
+  no_sk : character varying
+  stat_data : character varying
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "evaluasi.t_st" as evaluasi__t_st #FFFFFF {
+  id_st : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  hal_st : character varying
+  id_kanwil : integer
+  id_kpknl : integer
+  kd_kanwil : character varying
+  kd_kpknl : character varying
+  no_st : character varying
+  stat_data : character varying
+  status_data : smallint
+  tgl_st : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "evaluasi.t_st_tim" as evaluasi__t_st_tim #FFFFFF {
+  id_st_tim : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_sk : bigint
+  id_sk_tim : bigint
+  id_st : bigint
+  nama : character varying
+  nip : character varying
+  no_st : character varying
+  stat_data : character varying
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "evaluasi.t_tdklanjut_narasi" as evaluasi__t_tdklanjut_narasi #FFFFFF {
+  id_tdklanjut_narasi : bigint <<PK>>
+  id_satker : integer
+  id_siap : bigint
+  jns_dok : character varying
+  kd_satker : character varying
+  ket : character varying
+  nm_file : character varying
+  no_bukti : character varying
+  no_paket : character varying
+  tgl_bukti : timestamp without time zone
+  ur_satker : character varying
+  url_file : character varying
+}
+
+@enduml

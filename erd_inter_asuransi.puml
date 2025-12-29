@@ -1,0 +1,705 @@
+@startuml
+skinparam classAttributeIconSize 0
+left to right direction
+hide circle
+scale 1.0
+
+entity "asuransi.r_formula_asuransi" as asuransi__r_formula_asuransi #FFFFFF {
+  id_formula_asuransi : integer <<PK>>
+  flag : character varying
+  flag_aktif : boolean
+  formula : numeric
+  nama_formula : character varying
+  tgl_berakhir : timestamp without time zone
+  tgl_berlaku : timestamp without time zone
+}
+
+entity "asuransi.r_jenis_dokumen" as asuransi__r_jenis_dokumen #FFFFFF {
+  is_active : integer
+  kd_dokumen_asuransi : character varying
+  level_dokumen : character varying
+  orders : integer
+  ur_dokumen_asuransi : character varying
+}
+
+entity "asuransi.r_jumlah_lantai" as asuransi__r_jumlah_lantai #FFFFFF {
+  kd_jumlah_lantai : character varying <<PK>>
+  is_active : integer
+  ur_jumlah_lantai : character varying
+}
+
+entity "asuransi.r_kelas_konstruksi" as asuransi__r_kelas_konstruksi #FFFFFF {
+  kd_kelas_konstruksi : character varying <<PK>>
+  is_active : integer
+  ur_kelas_konstruksi : character varying
+}
+
+entity "asuransi.r_klasifikasi" as asuransi__r_klasifikasi #FFFFFF {
+  kd_klasifikasi : character varying <<PK>>
+  is_active : integer
+  orders : integer
+  ur_klasifikasi : character varying
+}
+
+entity "asuransi.r_okupasi" as asuransi__r_okupasi #FFFFFF {
+  kd_okupasi : character varying <<PK>>
+  is_active : integer
+  kd_jenis_asuransi : character varying
+  ur_okupasi : character varying
+}
+
+entity "asuransi.r_penggantian_klaim" as asuransi__r_penggantian_klaim #FFFFFF {
+  kd_penggantian_klaim : character varying <<PK>>
+  ur_penggantian_klaim : character varying
+}
+
+entity "asuransi.r_pertimbangan_asuransi" as asuransi__r_pertimbangan_asuransi #FFFFFF {
+  is_active : integer
+  kd_pertimbangan : character varying
+  ur_pertimbangan : character varying
+}
+
+entity "asuransi.r_pokja" as asuransi__r_pokja #FFFFFF {
+  id_kas : integer <<PK>>
+  alamat : character varying
+  created_at : timestamp with time zone
+  created_by : bigint
+  id_kl : integer
+  jabatan_koordinator : character varying
+  kode_pos : integer
+  nama_koordinator : character varying
+  nip_koordinator : character varying
+  npwp : bigint
+  status_data : smallint
+  updated_at : timestamp with time zone
+  updated_by : bigint
+  ur_kas : character varying
+}
+
+entity "asuransi.r_pokja_satker" as asuransi__r_pokja_satker #FFFFFF {
+  id_kas_satker : bigint <<PK>>
+  created_at : timestamp with time zone
+  created_by : bigint
+  id_kas : integer
+  id_satker : integer
+  status_data : smallint
+  updated_at : timestamp with time zone
+  updated_by : bigint
+}
+
+entity "asuransi.r_pokja_user_detail" as asuransi__r_pokja_user_detail #FFFFFF {
+  id_kas_user_detail : bigint <<PK>>
+  created_at : timestamp with time zone
+  created_by : bigint
+  id_kas : integer
+  id_user_detail : integer
+  is_pic : smallint
+  jabatan : character varying
+  kd_tugas_asuransi : character varying
+  kontak : character varying
+  status_data : smallint
+  updated_at : timestamp with time zone
+  updated_by : bigint
+}
+
+entity "asuransi.r_referensi_jenis_asuransi" as asuransi__r_referensi_jenis_asuransi #FFFFFF {
+  kd_jenis_asuransi : character varying <<PK>>
+  is_active : integer
+  ur_jenis_asuransi : character varying
+}
+
+entity "asuransi.r_referensi_jenis_bmn" as asuransi__r_referensi_jenis_bmn #FFFFFF {
+  id_referensi_jenis_bmn : bigint <<PK>>
+  is_active : integer
+  kd_barang : character varying
+  kd_jenis_asuransi : character varying
+  kd_klasifikasi : character varying
+  kd_okupasi : character varying
+  nm_barang : character varying
+}
+
+entity "asuransi.r_risiko" as asuransi__r_risiko #FFFFFF {
+  kd_risiko : character varying <<PK>>
+  is_active : integer
+  ur_risiko : character varying
+}
+
+entity "asuransi.r_rule_asuransi" as asuransi__r_rule_asuransi #FFFFFF {
+  id_r_rule_asuransi : integer <<PK>>
+  aktif : boolean
+  deskripsi : character varying
+  flag : character varying
+  kode : character varying
+  kriteria : character varying
+  tgl_berlaku : timestamp without time zone
+  urut : integer
+}
+
+entity "asuransi.r_satker_dana_khusus" as asuransi__r_satker_dana_khusus #FFFFFF {
+  id_satker_dana_khusus : integer <<PK>>
+  id_satker : integer
+  is_active : integer
+  kd_satker : character varying
+  kd_sumber_dana : character varying
+  ur_satker : character varying
+}
+
+entity "asuransi.r_sumber_dana" as asuransi__r_sumber_dana #FFFFFF {
+  kd_sumber_dana : character varying <<PK>>
+  is_active : integer
+  tipe : character varying
+  ur_sumber_dana : character varying
+}
+
+entity "asuransi.r_sumber_dana_lainnya" as asuransi__r_sumber_dana_lainnya #FFFFFF {
+  id_sumber_dana_lainnya : integer <<PK>>
+  id_kl : integer
+  is_active : integer
+  kd_kl : character varying
+  ur_kl : character varying
+  ur_sumber_dana_lainnya : character varying
+}
+
+entity "asuransi.r_sumber_nilai" as asuransi__r_sumber_nilai #FFFFFF {
+  kd_sumber_nilai : character varying <<PK>>
+  is_active : integer
+  ur_sumber_nilai : character varying
+}
+
+entity "asuransi.r_tugas_asuransi" as asuransi__r_tugas_asuransi #FFFFFF {
+  is_active : integer
+  kd_tugas_asuransi : character varying
+  orders : integer
+  ur_tugas_asuransi : character varying
+}
+
+entity "asuransi.t_api_log_polis" as asuransi__t_api_log_polis #FFFFFF {
+  id_api_log_polis : integer <<PK>>
+  no_polis : character varying
+  no_transaksi : character varying
+  tanggal : timestamp without time zone
+  tgl_transaksi : timestamp without time zone
+}
+
+entity "asuransi.t_api_log_status" as asuransi__t_api_log_status #FFFFFF {
+  id_api_log_status : integer <<PK>>
+  no_transaksi : character varying
+  status : character varying
+  tanggal : timestamp without time zone
+  tgl_transaksi : timestamp without time zone
+}
+
+entity "asuransi.t_api_sip" as asuransi__t_api_sip #FFFFFF {
+  jenis : character varying
+  jumlah_sip : bigint
+  kota_sip : character varying
+  tahun_sip : bigint
+  tgl_sip : timestamp without time zone
+  type : character varying
+}
+
+entity "asuransi.t_asuransi" as asuransi__t_asuransi #FFFFFF {
+  id_asuransi : bigint <<PK>>
+  OptimisticLockField : bigint
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : character varying
+  edited_date : timestamp without time zone
+  email_pic_satker : character varying
+  estimasi_kerugian : numeric
+  flag_asuransi : character varying
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kas : integer
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  id_r_menu_access_state : integer
+  id_satker : bigint
+  id_satker_parent : bigint
+  id_struktur : integer
+  id_user : bigint
+  is_create_ubah : character varying
+  jenis_generate : character varying
+  jml_aset : integer
+  kd_eselon1 : character varying
+  kd_kanwil : character varying
+  kd_kl : character varying
+  kd_korwil : character varying
+  kd_kpknl : character varying
+  kd_satker : character varying
+  kd_satker_parent : character varying
+  kd_status_state : character varying
+  kronologi_kerugian : text
+  last_generate : timestamp without time zone
+  lokasi_kerugian : text
+  nilai_perolehan : bigint
+  nilai_premi : bigint
+  nm_eselon1 : character varying
+  nm_kanwil : character varying
+  nm_kl : character varying
+  nm_korwil : character varying
+  nm_kpknl : character varying
+  nm_lokasi_satker : character varying
+  nm_satker : character varying
+  nm_satker_parent : character varying
+  no_tiket : character varying
+  no_tiket_parent : character varying
+  nomor_polis : character varying
+  penyebab_kerugian : text
+  pic_satker : character varying
+  porsi_dana_bersama : bigint
+  status_akses_apip : character varying
+  status_akses_e1 : character varying
+  status_akses_kl : character varying
+  status_akses_korwil : character varying
+  status_akses_pengelola : character varying
+  status_akses_satker : character varying
+  status_all_asuransi_satker : integer
+  status_approve : character varying
+  status_data : smallint
+  status_generate : character varying
+  status_state : character varying
+  status_tiket : character varying
+  tahun_anggaran : bigint
+  tgl_kejadian : timestamp without time zone
+  tgl_kirim_askrev_e1 : timestamp without time zone
+  tgl_kirim_askrev_kl : timestamp without time zone
+  tgl_kirim_askrev_korwil : timestamp without time zone
+  tgl_kirim_by_apip : timestamp without time zone
+  tgl_kirim_by_e1 : timestamp without time zone
+  tgl_kirim_by_kl : timestamp without time zone
+  tgl_kirim_by_kl_2apip : timestamp without time zone
+  tgl_kirim_by_korwil : timestamp without time zone
+  tgl_kirim_by_pengelola : timestamp without time zone
+  tgl_kirim_by_satker : timestamp without time zone
+  tgl_kirim_revisi_2e1 : timestamp without time zone
+  tgl_kirim_revisi_2kl : timestamp without time zone
+  tgl_kirim_revisi_2korwil : timestamp without time zone
+  tgl_polis : timestamp without time zone
+  tgl_tiket : timestamp without time zone
+  tindakan_dilakukan : text
+  tlp_pic_satker : character varying
+  total_pemeliharaan : bigint
+  total_pengadaan : bigint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "asuransi.t_asuransi_bayar" as asuransi__t_asuransi_bayar #FFFFFF {
+  id_asuransi_bayar : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_asuransi : bigint
+  id_r_menu_access_state_detail : integer
+  jml_bayar : integer
+  kd_billing : character varying
+  no_tiket : character varying
+  ntpn : character varying
+  status_data : smallint
+  tgl_bayar : timestamp without time zone
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "asuransi.t_asuransi_detail" as asuransi__t_asuransi_detail #FFFFFF {
+  id_asuransi_detail : bigint <<PK>>
+  OptimisticLockField : bigint
+  air : character varying
+  alamat : character varying
+  besaran_premi : integer
+  besaran_premi_rencana : integer
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  diserahkan : character varying
+  diusulkan : character varying
+  edited_by : character varying
+  edited_date : timestamp without time zone
+  end_at : date
+  flag_fasilitas : boolean
+  flag_tab_asuransi : character varying
+  id_anggaran : bigint
+  id_aset : bigint
+  id_aset_induk : bigint
+  id_asuransi : bigint
+  id_jns_rkbmn : smallint
+  id_kab : integer
+  id_r_menu_access_state_detail : integer
+  id_rkbmn_asuransi : bigint
+  id_satker : bigint
+  id_satker_parent_pemilik : bigint
+  id_satker_pemilik : bigint
+  is_pihak_ke3 : character varying
+  is_selected : character varying
+  is_tarif_nilai_baku : boolean
+  jml_foto : smallint
+  jml_lantai : character varying
+  jumlah_lantai : smallint
+  kd_akun_pemeliharaan : character varying
+  kd_barang : character varying
+  kd_barang_induk : character varying
+  kd_barang_tanah : character varying
+  kd_jns_bmn : bigint
+  kd_kelas_konstruksi : character varying
+  kd_klasifikasi : character varying
+  kd_lokasi : character varying
+  kd_neraca : character varying
+  kd_okupasi : character varying
+  kd_satker : character varying
+  kd_satker_pemilik : character varying
+  kd_sumber_dana : character varying
+  keterangan : character varying
+  keterangan_apip : character varying
+  keterangan_es1 : character varying
+  keterangan_final : character varying
+  keterangan_pb : character varying
+  keterangan_telaah : character varying
+  kondisi_barang : character varying
+  lantai : character varying
+  listrik : character varying
+  luas : bigint
+  luas_pemanfaatan : bigint
+  luas_riil : bigint
+  luas_usulan : bigint
+  material_atap : character varying
+  material_langit : character varying
+  matrial_dinding : character varying
+  merk_tipe : character varying
+  nilai_buku : bigint
+  nilai_perolehan : bigint
+  nilai_persetujuan : bigint
+  nilai_pertanggungan : bigint
+  nilai_pertanggungan_rencana : bigint
+  nm_akun_pemeliharaan : character varying
+  nm_barang : character varying
+  nm_barang_induk : character varying
+  nm_barang_tanah : character varying
+  nm_lokasi : character varying
+  nm_neraca : character varying
+  nm_satker : character varying
+  nm_satker_pemilik : character varying
+  no_tiket : character varying
+  nup : bigint
+  nup_induk : bigint
+  nup_tanah : bigint
+  optimalisasi : bigint
+  pagar : character varying
+  pelapis_dindin_dlm : character varying
+  pelapis_dindin_lr : character varying
+  perkerasan : character varying
+  pertimbangan : character varying
+  risiko : character varying
+  sbsk : bigint
+  setuju_pemilik : character varying
+  sisa_waktu_bln : bigint
+  start_at : date
+  status : character varying
+  status_approve : character varying
+  status_data : smallint
+  status_penggunaan : character varying
+  status_persetujuan : character varying
+  status_setuju_apip : character varying
+  status_setuju_es1 : character varying
+  status_setuju_final : character varying
+  status_setuju_pb : character varying
+  str_atap : character varying
+  str_rangka : character varying
+  sts_psp : character varying
+  tahun_pelaksanaan : character varying
+  tarif_asuransi : numeric
+  tgl_perolehan : timestamp without time zone
+  thn_bgn : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kab : character varying
+  ur_kelas_konstruksi : character varying
+  ur_klasifikasi : character varying
+  ur_okupasi : character varying
+  ur_sumber_dana : character varying
+  usulan_apip : bigint
+  usulan_es1 : bigint
+  usulan_final : bigint
+  usulan_pb : bigint
+  usulan_setuju_pb : character varying
+  v2018 : character varying
+}
+
+entity "asuransi.t_asuransi_detail_risiko" as asuransi__t_asuransi_detail_risiko #FFFFFF {
+  id_asuransi_detail_risiko : bigint <<PK>>
+  id_asuransi_detail : bigint
+  kd_risiko : character varying
+}
+
+entity "asuransi.t_asuransi_log" as asuransi__t_asuransi_log #FFFFFF {
+  id_asuransi_log : bigint <<PK>>
+  aktivitas : character varying
+  catatan : character varying
+  data : jsonb
+  id_eselon1 : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_menu : bigint
+  id_menu_detail : bigint
+  id_user : bigint
+  id_user_detail : bigint
+  ip_address : character varying
+  kd_eselon1 : character varying
+  kd_eselonkl : character varying
+  kd_kl : character varying
+  kd_korwil : character varying
+  nama : character varying
+  no_tiket : character varying
+  role : character varying
+  tahun_anggaran : bigint
+  tgl_aktivitas : timestamp without time zone
+  username : character varying
+}
+
+entity "asuransi.t_asuransi_perencanaan" as asuransi__t_asuransi_perencanaan #FFFFFF {
+  id_asuransi_perencanaan : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  dokumen_usulan : character varying
+  id_eselon1 : integer
+  id_kl : integer
+  id_korwil : integer
+  id_r_menu_access_state : integer
+  id_rkbmn : integer
+  id_satker : bigint
+  kd_eselonkl : character varying
+  kd_kl : character varying
+  kd_satker : character varying
+  kd_wileselon : character varying
+  nm_satker : character varying
+  no_revisi : integer
+  no_revisi_rkbmn : integer
+  no_tiket : character varying
+  no_tiket_rkbmn : character varying
+  status_penetapan : smallint
+  tahun_anggaran : bigint
+  tgl_tiket : timestamp without time zone
+  tgl_tiket_rkbmn : timestamp without time zone
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_eselon1 : character varying
+  ur_kl : character varying
+  ur_korwil : character varying
+}
+
+entity "asuransi.t_asuransi_perencanaan_detail" as asuransi__t_asuransi_perencanaan_detail #FFFFFF {
+  id_asuransi_perencanaan_detail : bigint <<PK>>
+  alamat : character varying
+  approve_apip : smallint
+  approve_djkn : smallint
+  approve_final : smallint
+  approve_pb : smallint
+  approve_pokja : smallint
+  besaran_premi : numeric
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  end_at : date
+  formula_asuransi : numeric
+  gps_latitude : numeric
+  gps_longitude : numeric
+  id_aset : bigint
+  id_aset_induk : bigint
+  id_asuransi_perencanaan : bigint
+  id_formula_asuransi : numeric
+  id_kl : bigint
+  id_satker : bigint
+  is_kab : smallint
+  is_kec : smallint
+  is_kel : smallint
+  is_negara : smallint
+  is_prov : smallint
+  is_tariff_nilai_buku : boolean
+  is_updated : smallint
+  jml_lantai : character varying
+  jml_lantai_count : smallint
+  jml_lantai_mal : smallint
+  jumlah_foto : smallint
+  kd_barang : character varying
+  kd_barang_induk : character varying
+  kd_jenis_asuransi : character varying
+  kd_kelas_konstruksi : character varying
+  kd_klasifikasi : character varying
+  kd_okupasi : character varying
+  kd_pertimbangan : character varying
+  kd_pos : character varying
+  kd_risiko : character varying
+  kd_satker : character varying
+  kd_satket_induk : character varying
+  kd_sumber_dana : character varying
+  keterangan_approve_pb : text
+  kode_register : character varying
+  kondisi_barang : character varying
+  lantai_dasar : smallint
+  luas_bangunan : bigint
+  luas_dasar_bangunan : bigint
+  negara : character varying
+  nilai_buku : bigint
+  nilai_perolehan : bigint
+  nilai_pertanggungan : bigint
+  nm_barang : character varying
+  nm_barang_induk : character varying
+  nm_satker : character varying
+  no_tiket : character varying
+  nup : bigint
+  nup_induk : integer
+  persetujuan_satker_lain : smallint
+  start_at : date
+  status_bmn : character varying
+  status_pb : character varying
+  status_pengajuan : character varying
+  sumber_nilai_pertanggungan : character varying
+  sumber_usulan : character varying
+  tgl_perolehan : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kab : character varying
+  ur_kec : character varying
+  ur_kel : character varying
+  ur_kelas_konstruksi : character varying
+  ur_klasifikasi : character varying
+  ur_okupasi : character varying
+  ur_pertimbangan : character varying
+  ur_prov : character varying
+  ur_risiko : character varying
+  ur_sumber_dana : character varying
+  validasi_error_pb : text
+}
+
+entity "asuransi.t_asuransi_satker" as asuransi__t_asuransi_satker #FFFFFF {
+  id_asuransi_satker : bigint <<PK>>
+  id_asuransi : bigint
+  id_satker : integer
+  id_status : smallint
+}
+
+entity "asuransi.t_asuransi_transaksi" as asuransi__t_asuransi_transaksi #FFFFFF {
+  id_asuransi_log : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  data_log : text
+  id_kl : integer
+  id_perencanaan : bigint
+  id_status : integer
+  id_user : integer
+  kd_kl : character varying
+  keterangan : character varying
+  kode_status : character varying
+  nama : character varying
+  no_tiket : character varying
+  role : character varying
+  status_permohonan : character varying
+  tahun_anggaran : bigint
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kl : character varying
+}
+
+entity "asuransi.t_dok_asuransi" as asuransi__t_dok_asuransi #FFFFFF {
+  id_dok_asuransi : bigint <<PK>>
+  OptimisticLockField : bigint
+  asal_surat : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  file_blob : smallint
+  id_aset : bigint
+  id_asuransi : bigint
+  id_asuransi_detail : bigint
+  is_master_aset : boolean
+  jns_dokumen : character varying
+  kd_barang : character varying
+  ket_photo : character varying
+  nip_penandatanganan : character varying
+  nm_barang : character varying
+  nm_file : character varying
+  nm_penandatanganan : character varying
+  nm_photo : character varying
+  no_surat : character varying
+  no_tiket : character varying
+  nup : bigint
+  path_file : character varying
+  status_data : smallint
+  tgl_surat : timestamp without time zone
+  tujuan_surat : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "asuransi.t_dok_asuransi_penetapan" as asuransi__t_dok_asuransi_penetapan #FFFFFF {
+  id_dok_asuransi_penetapan : bigint <<PK>>
+  asal_surat : character varying
+  created_at : timestamp without time zone
+  filesize : bigint
+  id_eselon1 : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  jns_dokument : character varying
+  kd_eselon1 : character varying
+  kd_eselonkl : character varying
+  kd_kl : character varying
+  kd_korwil : character varying
+  keterangan : character varying
+  nm_file : character varying
+  no_surat : character varying
+  path_file : character varying
+  status_data : smallint
+  tahun_anggaran : bigint
+  tgl_surat : timestamp without time zone
+  updated_at : timestamp without time zone
+  updated_by : bigint
+}
+
+entity "asuransi.t_dok_asuransi_perencanaan" as asuransi__t_dok_asuransi_perencanaan #FFFFFF {
+  id_dok_asuransi_perencanaan : bigint <<PK>>
+  OptimisticLockField : bigint
+  asal_surat : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  file_blob : smallint
+  id_aset : bigint
+  id_asuransi_perencanaan : bigint
+  id_asuransi_perencanaan_detail : bigint
+  is_master_aset : boolean
+  jns_dokumen : character varying
+  kd_barang : character varying
+  ket_photo : character varying
+  nip_penandatanganan : character varying
+  nm_barang : character varying
+  nm_file : character varying
+  nm_penandatanganan : character varying
+  nm_photo : character varying
+  no_surat : character varying
+  no_tiket : character varying
+  nup : bigint
+  path_file : character varying
+  status_data : smallint
+  tgl_surat : timestamp without time zone
+  tujuan_surat : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "asuransi.t_log_api" as asuransi__t_log_api #FFFFFF {
+  id_log_api : integer <<PK>>
+  created_at : timestamp without time zone
+  flag_asuransi : character varying
+  no_tiket : character varying
+  payload : text
+  response : text
+}
+
+asuransi__t_asuransi_bayar "0..*" --> "1" asuransi__t_asuransi : id_asuransi -> id_asuransi
+asuransi__t_asuransi_detail "0..*" --> "1" asuransi__t_asuransi : id_asuransi -> id_asuransi
+asuransi__t_asuransi_detail_risiko "0..*" --> "1" asuransi__r_risiko : kd_risiko -> kd_risiko
+asuransi__t_asuransi_detail_risiko "0..*" --> "1" asuransi__t_asuransi_detail : id_asuransi_detail -> id_asuransi_detail
+asuransi__t_asuransi_perencanaan_detail "0..*" --> "1" asuransi__t_asuransi_perencanaan : id_asuransi_perencanaan -> id_asuransi_perencanaan
+asuransi__t_dok_asuransi "0..*" --> "1" asuransi__t_asuransi : id_asuransi -> id_asuransi
+asuransi__t_dok_asuransi_perencanaan "0..*" --> "1" asuransi__t_asuransi_perencanaan : id_asuransi_perencanaan -> id_asuransi_perencanaan
+asuransi__r_pokja_satker "0..*" --> "1" asuransi__r_pokja : id_kas -> id_kas
+asuransi__r_pokja_user_detail "0..*" --> "1" asuransi__r_pokja : id_kas -> id_kas
+@enduml

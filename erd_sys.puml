@@ -1,0 +1,163 @@
+@startuml
+skinparam classAttributeIconSize 0
+left to right direction
+hide circle
+scale 1.0
+
+entity "sys.callback_queue_table" as sys__callback_queue_table {
+  corrid : character varying
+  delay : integer
+  deq_tid : bigint
+  deq_time : timestamp with time zone
+  deq_uid : oid
+  enq_tid : bigint
+  enq_time : timestamp with time zone
+  enq_uid : oid
+  exception_qschema : character varying
+  exception_queue : character varying
+  expiration : integer
+  msgid : bytea
+  next_event_time : timestamp with time zone
+  priority : integer
+  q_name : name
+  retry_count : integer
+  state : smallint
+  user_data : USER-DEFINED
+}
+
+entity "sys.edb$session_wait_history" as sys__edb$session_wait_history {
+  backend_id : bigint <<PK>>
+  dbname : name <<PK>>
+  edb_id : bigint <<PK>>
+  seq : bigint <<PK>>
+  elapsed : bigint
+  p1 : bigint
+  p2 : bigint
+  p3 : bigint
+  wait_name : text
+}
+
+entity "sys.edb$session_waits" as sys__edb$session_waits {
+  avg_wait_time : numeric
+  backend_id : bigint
+  dbname : name
+  edb_id : bigint
+  max_wait_time : numeric
+  query : text
+  total_wait_time : numeric
+  usename : name
+  wait_count : bigint
+  wait_name : text
+}
+
+entity "sys.edb$snap" as sys__edb$snap {
+  edb_id : bigint <<PK>>
+  backend_id : bigint
+  baseline_ind : character
+  comment : text
+  dbname : name
+  snap_tm : timestamp without time zone
+  start_tm : timestamp without time zone
+}
+
+entity "sys.edb$stat_all_indexes" as sys__edb$stat_all_indexes {
+  dbname : name <<PK>>
+  edb_id : bigint <<PK>>
+  indexrelid : oid <<PK>>
+  relid : oid <<PK>>
+  idx_scan : bigint
+  idx_tup_fetch : bigint
+  idx_tup_read : bigint
+  indexrelname : name
+  relname : name
+  schemaname : name
+}
+
+entity "sys.edb$stat_all_tables" as sys__edb$stat_all_tables {
+  dbname : name <<PK>>
+  edb_id : bigint <<PK>>
+  relid : oid <<PK>>
+  idx_scan : bigint
+  idx_tup_fetch : bigint
+  last_analyze : timestamp with time zone
+  last_autoanalyze : timestamp with time zone
+  last_autovacuum : timestamp with time zone
+  last_vacuum : timestamp with time zone
+  n_tup_del : bigint
+  n_tup_ins : bigint
+  n_tup_upd : bigint
+  relname : name
+  schemaname : name
+  seq_scan : bigint
+  seq_tup_read : bigint
+}
+
+entity "sys.edb$stat_database" as sys__edb$stat_database {
+  datid : oid <<PK>>
+  dbname : name <<PK>>
+  edb_id : bigint <<PK>>
+  blks_hit : bigint
+  blks_read : bigint
+  datname : name
+  numbackends : integer
+  xact_commit : bigint
+  xact_rollback : bigint
+}
+
+entity "sys.edb$statio_all_indexes" as sys__edb$statio_all_indexes {
+  dbname : name <<PK>>
+  edb_id : bigint <<PK>>
+  indexrelid : oid <<PK>>
+  relid : oid <<PK>>
+  idx_blks_hit : bigint
+  idx_blks_read : bigint
+  indexrelname : name
+  relname : name
+  schemaname : name
+}
+
+entity "sys.edb$statio_all_tables" as sys__edb$statio_all_tables {
+  dbname : name <<PK>>
+  edb_id : bigint <<PK>>
+  relid : oid <<PK>>
+  heap_blks_hit : bigint
+  heap_blks_read : bigint
+  idx_blks_hit : bigint
+  idx_blks_read : bigint
+  relname : name
+  schemaname : name
+  tidx_blks_hit : bigint
+  tidx_blks_read : bigint
+  toast_blks_hit : bigint
+  toast_blks_read : bigint
+}
+
+entity "sys.edb$system_waits" as sys__edb$system_waits {
+  avg_wait : numeric
+  dbname : name
+  edb_id : bigint
+  max_wait : numeric
+  totalwait : numeric
+  wait_count : bigint
+  wait_name : text
+}
+
+entity "sys.job_run_details" as sys__job_run_details {
+  runid : bigint <<PK>>
+  endtime : timestamp with time zone
+  error : text
+  jobid : bigint
+  scheduletime : timestamp with time zone
+  starttime : timestamp with time zone
+  status : character
+  workerpid : integer
+}
+
+entity "sys.jobs" as sys__jobs {
+  jobid : bigint <<PK>>
+  jobcommand : text
+  jobnextrun : timestamp with time zone
+  jobuser : text
+}
+
+@enduml

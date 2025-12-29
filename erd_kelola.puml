@@ -1,0 +1,2630 @@
+@startuml
+skinparam classAttributeIconSize 0
+left to right direction
+hide circle
+scale 1.0
+
+entity "kelola.config_pengelolaan" as kelola__config_pengelolaan {
+  id : integer <<PK>>
+  created_at : timestamp without time zone
+  description : text
+  key : character varying
+  updated_at : timestamp without time zone
+  value : text
+  value_json : json
+}
+
+entity "kelola.error_log_kelola" as kelola__error_log_kelola {
+  id : bigint <<PK>>
+  created_at : timestamp without time zone
+  id_menu : integer
+  id_menu_detail : integer
+  id_proses : bigint
+  menu : character varying
+  menu_detail : character varying
+  message : text
+  no_tiket : character varying
+  proses : character varying
+  tab : character varying
+}
+
+entity "kelola.exports_pengelolaan" as kelola__exports_pengelolaan {
+  id : integer <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  file_id : uuid
+  file_name : character varying
+  file_url : character varying
+  id_role : integer
+  jumlah : smallint
+  keterangan : character varying
+  nip : character varying
+  no_tiket : character varying
+  status : character varying
+  tab : character varying
+  updated_at : timestamp without time zone
+}
+
+entity "kelola.jobs_kelola" as kelola__jobs_kelola {
+  id : bigint <<PK>>
+  created_at : timestamp without time zone
+  finished_at : timestamp without time zone
+  message : text
+  no_tiket : character varying
+  request_id : text
+  status : text
+}
+
+entity "kelola.log_proses" as kelola__log_proses {
+  id : bigint <<PK>>
+  created_at : timestamp without time zone
+  id_menu : integer
+  id_menu_detail : integer
+  id_proses : bigint
+  info : json
+  menu : character varying
+  menu_detail : character varying
+  message : text
+  no_tiket : character varying
+  proses : character varying
+  tab : character varying
+}
+
+entity "kelola.r_alasan_hapus" as kelola__r_alasan_hapus {
+  id_alasan_hapus : integer <<PK>>
+  kd_alasan_hapus : integer
+  keterangan : character varying
+  nm_alasan_hapus : character varying
+}
+
+entity "kelola.r_batas_pengelolaan" as kelola__r_batas_pengelolaan {
+  id : integer <<PK>>
+  id_jns_penetapan : integer
+  id_tipe_pengelolaan : smallint
+  is_bukti : boolean
+  is_tb : character varying
+  nilai_max : numeric
+  nilai_min : numeric
+}
+
+entity "kelola.r_cara" as kelola__r_cara {
+  id_cara : integer <<PK>>
+  id_tipe_pengelolaan : integer
+  nama_cara : character varying
+}
+
+entity "kelola.r_dasar_bagi_untung" as kelola__r_dasar_bagi_untung {
+  id_dasar_bagi_untung : integer
+  kd_dasar_bagi_untung : integer
+  nm_dasar_bagi_untung : character varying
+}
+
+entity "kelola.r_informasi" as kelola__r_informasi {
+  id : integer <<PK>>
+  informasi : text
+  kd_menu : character varying
+  kd_tab : character varying
+}
+
+entity "kelola.r_jenis_aset_pengganti" as kelola__r_jenis_aset_pengganti {
+  id_jenis_aset_pengganti : integer <<PK>>
+  first_kd_brg : ARRAY
+  is_tb : character varying
+  kd_jenis_aset_pengganti : character varying
+  nm_jenis_aset_pengganti : character varying
+  primary_code : ARRAY
+  show_on_code : ARRAY
+  show_when_code : ARRAY
+}
+
+entity "kelola.r_jenis_dok_rekam_tindak_lanjut" as kelola__r_jenis_dok_rekam_tindak_lanjut {
+  id_jenis_dok_rekam_tindak_lanjut : integer <<PK>>
+  id_tipe_pengelolaan : integer
+  kd_jenis_dok_rekam_tindak_lanjut : character varying
+  keterangan : character varying
+  nm_jenis_dok_rekam_tindak_lanjut : character varying
+  no_urut : smallint
+}
+
+entity "kelola.r_jenis_pejabat" as kelola__r_jenis_pejabat {
+  id : bigint
+  is_plh : boolean
+  kd_jns_pejabat : smallint
+  nm_jns_pejabat : character varying
+}
+
+entity "kelola.r_jenis_pertimbangan_hibah" as kelola__r_jenis_pertimbangan_hibah {
+  id_jenis_pertimbangan_hibah : character varying
+  nama_jenis_pertimbangan_hibah : character varying
+}
+
+entity "kelola.r_jenis_pihak_lain" as kelola__r_jenis_pihak_lain {
+  id_jenis_pihak_lain : character varying <<PK>>
+  nama_jenis_pihak_lain : character varying
+}
+
+entity "kelola.r_jns_aset_kelola" as kelola__r_jns_aset_kelola {
+  id_jns_aset_kelola : smallint <<PK>>
+  nama_aset_kelola : character varying
+  tipe_aset_kelola : character varying
+}
+
+entity "kelola.r_jns_dok" as kelola__r_jns_dok {
+  kd_dok : character varying <<PK>>
+  keterangan : character varying
+  nm_dok : character varying
+  tipe_get_dok : integer
+}
+
+entity "kelola.r_jns_dok_analisis" as kelola__r_jns_dok_analisis {
+  id : integer <<PK>>
+  kd_jns_dok : smallint
+  ket : text
+  nm_jns_dok : character varying
+}
+
+entity "kelola.r_jns_dok_bdg" as kelola__r_jns_dok_bdg {
+  id_jns_dok_bdg : integer <<PK>>
+  kd_jns_dok_bdg : character varying
+  ur_jns_dok_bdg : character varying
+}
+
+entity "kelola.r_jns_dok_tindak_lanjut" as kelola__r_jns_dok_tindak_lanjut {
+  id : bigint <<PK>>
+  kd_dok_tl : smallint
+  keterangan : text
+  nm_dok_tl : character varying
+}
+
+entity "kelola.r_jns_objek" as kelola__r_jns_objek {
+  id : integer
+  kd_jns_objek : integer
+  nm_jns_objek : character varying
+}
+
+entity "kelola.r_jns_parameter" as kelola__r_jns_parameter {
+  id_jns_parameter : smallint <<PK>>
+  jns_matrix : smallint
+  keterangan : character varying
+  nama_jns_parameter : character varying
+  nama_satuan : character varying
+}
+
+entity "kelola.r_jns_penetapan" as kelola__r_jns_penetapan {
+  id_jns_penetapan : smallint <<PK>>
+  nama_jenis_penetapan : character varying
+}
+
+entity "kelola.r_jns_pengelolaan" as kelola__r_jns_pengelolaan {
+  id_jns_pengelolaan : integer <<PK>>
+  nama_jenis_pengelolaan : character varying
+}
+
+entity "kelola.r_jns_penjualan" as kelola__r_jns_penjualan {
+  id : integer <<PK>>
+  id_tipe_pengelolaan : integer
+  nm_jns_penjualan : character varying
+}
+
+entity "kelola.r_jns_peruntukkan" as kelola__r_jns_peruntukkan {
+  id : integer
+  kd_jns_peruntukkan : integer
+  nm_jns_peruntukkan : character varying
+}
+
+entity "kelola.r_jns_tiket" as kelola__r_jns_tiket {
+  kd_jns_tiket : smallint
+  ur_jns_tiket : character varying
+}
+
+entity "kelola.r_kib_requirement" as kelola__r_kib_requirement {
+  id_kib_requirement : integer <<PK>>
+  column_type : character varying
+  kd_jns_bmn : integer
+  kib_column : character varying
+  kib_column_desc : character varying
+}
+
+entity "kelola.r_kmk" as kelola__r_kmk {
+  id_kmk : bigint <<PK>>
+  berlaku_mulai : date
+  berlaku_selesai : date
+  created_at : timestamp without time zone
+  created_by : integer
+  filename : character varying
+  id_kl : integer
+  no_kmk : character varying
+  penetapan : smallint
+  tgl_kmk : date
+}
+
+entity "kelola.r_notifikasi" as kelola__r_notifikasi {
+  durasi : smallint
+  id_role : integer
+  id_role_struktur : integer
+  id_struktur : smallint
+  informasi : text
+  jenis : character varying
+  judul : character varying
+  kode_status : character varying
+  pengirim : character varying
+  tujuan : character varying
+}
+
+entity "kelola.r_notifikasi_tl" as kelola__r_notifikasi_tl {
+  durasi : integer
+  id_role : integer
+  id_role_struktur : integer
+  id_struktur : smallint
+  informasi : character varying
+  judul : character varying
+  kode_status : character varying
+  pengirim : character varying
+  tujuan : character varying
+  version : smallint
+}
+
+entity "kelola.r_parameter_kelola" as kelola__r_parameter_kelola {
+  id : integer <<PK>>
+  berlaku_mulai : date
+  berlaku_sampai : date
+  id_jns_parameter : smallint
+  id_tipe_pengelolaan : smallint
+  keterangan : character varying
+  kolom_total : character varying
+  pembilang : character varying
+  penyebut : character varying
+}
+
+entity "kelola.r_parameter_pemohon" as kelola__r_parameter_pemohon {
+  id_kl : integer <<PK>>
+  id_tipe_pengelolaan : integer <<PK>>
+  id_jns_pemohon : smallint
+}
+
+entity "kelola.r_parameter_pemohon_khusus" as kelola__r_parameter_pemohon_khusus {
+  id_jns_pemohon : smallint <<PK>>
+  id_kl_khusus : integer <<PK>>
+  id_tipe_pengelolaan : integer <<PK>>
+}
+
+entity "kelola.r_pelimpahan_kmk" as kelola__r_pelimpahan_kmk {
+  id : smallint <<PK>>
+  nm_pelimpahan_kmk : character varying
+}
+
+entity "kelola.r_pemetaan_pengelolaan_sk" as kelola__r_pemetaan_pengelolaan_sk {
+  id_pemetaan_pengelolaan_sk : integer <<PK>>
+  id_tipe_pengelolaan : bigint
+  is_tb : character varying
+  jenis_surat : smallint
+  jns_surat : character varying
+  nama_sk : character varying
+  nm_file_sk : character varying
+  peraturan : character varying
+  perihal : character varying
+  permohonan : character varying
+  sifat_surat : character varying
+  tipe_sk : smallint
+  url_sk : character varying
+  urutan_sk : integer
+}
+
+entity "kelola.r_pengelolaan_catat_label" as kelola__r_pengelolaan_catat_label {
+  id_pengelolaan_catat_label : integer <<PK>>
+  id_tipe_pengelolaan : bigint
+  nama_kolom : character varying
+  nama_label : character varying
+  tampil : boolean
+  tipe : character varying
+}
+
+entity "kelola.r_pengelolaan_detail_label" as kelola__r_pengelolaan_detail_label {
+  id_pengelolaan_detail_label : integer <<PK>>
+  function : character varying
+  id_tipe_pengelolaan : bigint
+  input_type : character varying
+  is_tb : character varying
+  keterangan : character varying
+  nm_kolom : character varying
+  nm_label : character varying
+  no_urut : integer
+  tampil : boolean
+  tipe : integer
+}
+
+entity "kelola.r_pengelolaan_rekam_tindak_lanjut_label" as kelola__r_pengelolaan_rekam_tindak_lanjut_label {
+  id_pengelolaan_rekam_tindak_lanjut_label : integer <<PK>>
+  id_tipe_pengelolaan : bigint
+  input_type : character varying
+  nm_kolom : character varying
+  nm_label : character varying
+  tampil : boolean
+  tipe : integer
+}
+
+entity "kelola.r_pengelolaan_vb" as kelola__r_pengelolaan_vb {
+  id_ref_vb : integer <<PK>>
+  id_tipe_pengelolaan : integer
+  kd_grup_ref : character varying
+  nm_grup_ref : character varying
+  no_ref : smallint
+  ur_ref : character varying
+}
+
+entity "kelola.r_periode" as kelola__r_periode {
+  id_periode : integer <<PK>>
+  kd_periode : smallint
+  nm_periode : character varying
+}
+
+entity "kelola.r_satuan" as kelola__r_satuan {
+  id_satuan : smallint
+  kd_satuan : smallint
+  nama_satuan : character varying
+}
+
+entity "kelola.r_setting_nilai" as kelola__r_setting_nilai {
+  id : integer <<PK>>
+  kd_set_nilai : integer
+  nm_set_nilai : character varying
+}
+
+entity "kelola.r_setting_nilai_max" as kelola__r_setting_nilai_max {
+  id : integer <<PK>>
+  id_tipe_pengelolaan : integer
+  nilai_max : numeric
+}
+
+entity "kelola.r_status_disposisi" as kelola__r_status_disposisi {
+  id : integer <<PK>>
+  kd_status_disposisi : smallint
+  nama_status_disposisi : character varying
+}
+
+entity "kelola.r_status_kmk" as kelola__r_status_kmk {
+  id : smallint <<PK>>
+  kd_status_kmk : smallint
+  nm_status_kmk : character varying
+}
+
+entity "kelola.r_status_surat" as kelola__r_status_surat {
+  id_status_surat : integer <<PK>>
+  nama_status_surat : character varying
+}
+
+entity "kelola.r_status_tiket" as kelola__r_status_tiket {
+  id : smallint <<PK>>
+  kd_status_tiket : smallint
+  nm_status_tiket : character varying
+}
+
+entity "kelola.r_status_wewenang" as kelola__r_status_wewenang {
+  id : smallint <<PK>>
+  kd_status_wewenang : smallint
+  nm_status_wewenang : character varying
+}
+
+entity "kelola.r_syarat_dok" as kelola__r_syarat_dok {
+  id_syarat_dok : integer <<PK>>
+  id_order_tahap : smallint
+  id_struktur : bigint
+  id_tipe_pengelolaan : smallint
+  is_pengguna : character varying
+  is_tb : character varying
+  is_wajib : character varying
+  kd_dok : character varying
+  kd_pelayanan : character varying
+  level_user : character varying
+  no_urut : smallint
+}
+
+entity "kelola.r_syarat_dok_tindak_lanjut" as kelola__r_syarat_dok_tindak_lanjut {
+  id : integer <<PK>>
+  id_tipe_pengelolaan : smallint
+  kd_dok_tindak_lanjut : smallint
+  no_urut : smallint
+}
+
+entity "kelola.r_tipe_pengelolaan" as kelola__r_tipe_pengelolaan {
+  id_tipe_pengelolaan : integer <<PK>>
+  id_jenis_rekap : smallint
+  id_jns_parameter : integer
+  id_jns_pengelolaan : integer
+  id_jns_termohon : smallint
+  id_klasifikasi : integer
+  is_pnbp : boolean
+  is_tb : boolean
+  jenis_status : smallint
+  kd_pelayanan : character varying
+  kolom_total : character varying
+  nama_tipe_pengelolaan : character varying
+  pembilang : character varying
+  penyebut : character varying
+  satuan : smallint
+  set_pemohon : smallint
+  tl_rekap_status : smallint
+}
+
+entity "kelola.r_tujuan_penandatangan_sk" as kelola__r_tujuan_penandatangan_sk {
+  id : smallint <<PK>>
+  kd_tujuan_penandatangan_sk : smallint
+  nm_tujuan_penandatangan_sk : character varying
+}
+
+entity "kelola.r_tujuan_sk" as kelola__r_tujuan_sk {
+  id_tujuan_sk : integer <<PK>>
+  id_struktur_termohon : integer
+  id_tipe_pengelolaan : integer
+  is_tb : boolean
+  keterangan : character varying
+  nilai_max : numeric
+  nilai_min : numeric
+  satker_ln : boolean
+  tujuan : character varying
+}
+
+entity "kelola.t_akun_pnbp" as kelola__t_akun_pnbp {
+  id_akun_pnbp : integer <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_tipe_pengelolaan : bigint
+  kode_akun_pnbp : character varying
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_akun_pnbp : character varying
+}
+
+entity "kelola.t_bas" as kelola__t_bas {
+  id_bas : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_tipe_pengelolaan : integer
+  kdmakmap : character varying
+  kdperksusut : character varying
+  nmmakmap : character varying
+  status_data : smallint
+  tgl_update : date
+  tipe_belanja : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "kelola.t_daftar_sk_detail" as kelola__t_daftar_sk_detail {
+  id_sk : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  dari_tgl : date
+  file_sk : character varying
+  id_aset : bigint
+  id_satker : bigint
+  id_sk_asal : bigint
+  id_sk_utama : bigint
+  id_tipe_pengelolaan : integer
+  is_valid : character varying
+  jns_bukti_laksana : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_status : character varying
+  keterangan : character varying
+  kuantitas : integer
+  nilai_perolehan : numeric
+  nilai_persetujuan : numeric
+  nilai_pnbp : numeric
+  nm_file : character varying
+  no_bukti_laksana : character varying
+  no_sk : character varying
+  ntpn : character varying
+  nup : integer
+  ref_jangka_waktu : character varying
+  ref_nama : character varying
+  ref_periode : character varying
+  sd_tgl : date
+  status_data : smallint
+  tgl_bukti_laksana : date
+  tgl_sk : date
+  tipe_sk : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_satker : character varying
+  ur_sskel : character varying
+}
+
+entity "kelola.t_daftar_sk_file" as kelola__t_daftar_sk_file {
+  id_sk_file : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_sk_asal_utama : bigint
+  id_tipe_pengelolaan : integer
+  kd_pelayanan : character
+  nm_file : character varying
+  no_sk : character varying
+  status_data : smallint
+  tgl_upload : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  url_dok_sk_file : character varying
+}
+
+entity "kelola.t_daftar_sk_utama" as kelola__t_daftar_sk_utama {
+  id_sk_utama : bigint <<PK>>
+  alamat_kl : character varying
+  bentuk_phk_lain : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  file_sk : character varying
+  id_asal_sk_utama : bigint
+  id_kanwil : integer
+  id_kpknl : integer
+  id_pemohon : integer
+  id_satker : integer
+  id_tipe_pengelolaan : integer
+  id_user : integer
+  is_tb : character
+  jabatan_ttd : character varying
+  kd_kanwil : character varying
+  kd_kl : character varying
+  kd_kpknl : character varying
+  kd_pelayanan : character
+  kd_penerbit_sk : character varying
+  kd_penerbit_sk_dtl : character varying
+  kd_satker : character varying
+  keterangan : character varying
+  kuantitas : integer
+  nilai_persetujuan : numeric
+  nip_penandatangan : character varying
+  nm_pelayanan : character varying
+  nm_penandatangan : character varying
+  nm_penerbit_sk : character varying
+  nm_penerbit_sk_dtl : character varying
+  no_sk : character varying
+  no_sk_lama : character varying
+  peruntukan : character varying
+  ref_alamat : character varying
+  ref_jangka_waktu : bigint
+  ref_nama : character varying
+  ref_periode : character
+  status_data : smallint
+  tahun_anggaran : character varying
+  tgl_created : date
+  tgl_sk : date
+  tipe_pemohon : character varying
+  tot_bmn : numeric
+  tot_persetujuan : numeric
+  tot_status : numeric
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kanwil : character varying
+  ur_kl : character varying
+  ur_kpknl : character varying
+  ur_phk_lain : character varying
+  ur_satker : character varying
+  uraian_keputusan : character varying
+  url_dok_sk : character varying
+}
+
+entity "kelola.t_kmk" as kelola__t_kmk {
+  id_kmk : bigint <<PK>>
+  berlaku_mulai : date
+  berlaku_selesai : date
+  created_at : timestamp without time zone
+  created_by : integer
+  filename : character varying
+  id_kl : integer
+  id_kl_khusus : integer
+  id_kmk_ref : smallint
+  id_r_menu_access_state : bigint
+  kl_khusus : boolean
+  no_kmk : character varying
+  pelimpahan : smallint
+  penetapan : smallint
+  setting_tanggal : smallint
+  status : smallint
+  tgl_kmk : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "kelola.t_kmk_log" as kelola__t_kmk_log {
+  id_kmk_log : bigint <<PK>>
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  id_kmk : bigint
+  id_user : integer
+  keterangan : text
+  kmk_log_date : date
+  kmk_log_time : timestamp without time zone
+  kode_status : character varying
+  role : character varying
+  status_kmk : character varying
+}
+
+entity "kelola.t_kmk_rkm_sk" as kelola__t_kmk_rkm_sk {
+  id_kmk_rkm_sk : integer <<PK>>
+  berlaku_mulai : date
+  berlaku_selesai : date
+  created_at : timestamp without time zone
+  created_by : integer
+  filename : character varying
+  id_kl : integer
+  id_kl_khusus : integer
+  id_kmk_ref : smallint
+  id_r_menu_access_state : bigint
+  kl_khusus : boolean
+  no_kmk_rkm_sk : character varying
+  pelimpahan : smallint
+  penetapan : smallint
+  setting_tanggal : smallint
+  status : smallint
+  tgl_kmk_rkm_sk : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "kelola.t_kmk_rkm_sk_log" as kelola__t_kmk_rkm_sk_log {
+  id_kmk_rkm_sk_log : bigint <<PK>>
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  id_kmk_rkm_sk : bigint
+  id_user : integer
+  keterangan : text
+  kmk_rkm_sk_log_date : date
+  kmk_rkm_sk_log_time : timestamp without time zone
+  kode_status : character varying
+  role : character varying
+  status_kmk_rkm_sk : character varying
+}
+
+entity "kelola.t_matrix_pemohon" as kelola__t_matrix_pemohon {
+  id_matrix_pemohon : bigint <<PK>>
+  berlaku_mulai : date
+  berlaku_selesai : date
+  created_at : timestamp without time zone
+  created_by : integer
+  id_jns_penetapan : smallint
+  id_kl : integer
+  id_kl_khusus : integer
+  id_kmk : bigint
+  id_struktur_pemohon : smallint
+  id_tipe_pengelolaan : smallint
+  is_bukti : boolean
+  is_tb : character varying
+  kd_pelayanan : character varying
+  level : character varying
+  nilai_max : numeric
+  nilai_min : numeric
+  no_kmk : character varying
+  penetapan : smallint
+  satuan : smallint
+  setting_nilai : smallint
+  status_data : smallint
+  tgl_kmk : date
+  tujuan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "kelola.t_matrix_pemohon_npu" as kelola__t_matrix_pemohon_npu {
+  id_matrix_pemohon_npu : integer <<PK>>
+  berlaku_mulai : date
+  berlaku_selesai : date
+  created_at : timestamp without time zone
+  created_by : integer
+  id_jns_penetapan : smallint
+  id_kl : integer
+  id_kl_khusus : integer
+  id_kmk : bigint
+  id_struktur_pemohon : smallint
+  id_tipe_pengelolaan : smallint
+  is_bukti : boolean
+  is_tb : character varying
+  kd_pelayanan : character varying
+  level : character varying
+  nilai_max : numeric
+  nilai_min : numeric
+  no_kmk : character varying
+  penetapan : smallint
+  satuan : smallint
+  setting_nilai : smallint
+  status_data : smallint
+  tgl_kmk : date
+  tujuan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "kelola.t_matrix_termohon" as kelola__t_matrix_termohon {
+  id_matrix_termohon : bigint <<PK>>
+  berlaku_mulai : date
+  berlaku_selesai : date
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_jns_penetapan : smallint
+  id_kl : integer
+  id_kl_khusus : integer
+  id_kmk : bigint
+  id_struktur_termohon : smallint
+  id_tipe_pengelolaan : smallint
+  is_bukti : boolean
+  is_tb : character varying
+  kd_pelayanan : character varying
+  level : character varying
+  nilai_max : numeric
+  nilai_min : numeric
+  no_kmk : character varying
+  penetapan : smallint
+  satuan : smallint
+  setting_nilai : smallint
+  status_data : smallint
+  tgl_kmk : date
+  tujuan_penandatangan : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "kelola.t_matrix_termohon_npu" as kelola__t_matrix_termohon_npu {
+  id_matrix_termohon_npu : bigint <<PK>>
+  berlaku_mulai : date
+  berlaku_selesai : date
+  created_at : timestamp without time zone
+  created_by : integer
+  id_jns_penetapan : smallint
+  id_kl : integer
+  id_kl_khusus : integer
+  id_kmk : bigint
+  id_struktur_termohon : smallint
+  id_tipe_pengelolaan : smallint
+  is_bukti : boolean
+  is_tb : character varying
+  kd_pelayanan : character varying
+  level : character varying
+  nilai_max : numeric
+  nilai_min : numeric
+  no_kmk : character varying
+  penetapan : smallint
+  satuan : smallint
+  setting_nilai : smallint
+  status_data : smallint
+  tgl_kmk : date
+  tujuan_penandatangan : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "kelola.t_mtx_pmh_rkm_sk" as kelola__t_mtx_pmh_rkm_sk {
+  id_mtx_pmh_rkm_sk : integer <<PK>>
+  berlaku_mulai : date
+  berlaku_selesai : date
+  created_at : timestamp without time zone
+  created_by : integer
+  id_jns_penetapan : smallint
+  id_kl : integer
+  id_kl_khusus : integer
+  id_kmk_rkm_sk : bigint
+  id_struktur_pemohon : smallint
+  id_tipe_pengelolaan : smallint
+  is_bukti : boolean
+  is_tb : character varying
+  jns_setting : smallint
+  kd_pelayanan : character varying
+  level : character varying
+  nilai_max : numeric
+  nilai_min : numeric
+  no_kmk_rkm_sk : character varying
+  penetapan : smallint
+  satuan : smallint
+  setting_nilai : smallint
+  status_data : smallint
+  tgl_kmk_rkm_sk : date
+  tujuan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "kelola.t_mtx_tmh_rkm_sk" as kelola__t_mtx_tmh_rkm_sk {
+  id_mtx_tmh_rkm_sk : integer <<PK>>
+  berlaku_mulai : date
+  berlaku_selesai : date
+  created_at : timestamp without time zone
+  created_by : integer
+  id_jns_penetapan : smallint
+  id_kl : integer
+  id_kl_khusus : integer
+  id_kmk_rkm_sk : bigint
+  id_struktur_termohon : smallint
+  id_tipe_pengelolaan : smallint
+  is_bukti : boolean
+  is_tb : character varying
+  jns_setting : smallint
+  kd_pelayanan : character varying
+  level : character varying
+  nilai_max : numeric
+  nilai_min : numeric
+  no_kmk_rkm_sk : character varying
+  penetapan : smallint
+  satuan : smallint
+  setting_nilai : smallint
+  status_data : smallint
+  tgl_kmk_rkm_sk : date
+  tujuan_penandatangan : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "kelola.t_pengelolaan" as kelola__t_pengelolaan {
+  id_pengelolaan : bigint <<PK>>
+  alamat_kl : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  durasi_penetapan : interval
+  durasi_permohonan : interval
+  durasi_tinjut : interval
+  file_sk : character varying
+  file_sk_penolakan : character varying
+  flag_jns : smallint
+  has_eselon1 : boolean
+  has_korwil : boolean
+  id_cara_penjualan : smallint
+  id_eselon1 : integer
+  id_jns_parameter : smallint
+  id_jns_pemohon : smallint
+  id_jns_penetapan : smallint
+  id_kanwil : integer
+  id_kl : integer
+  id_kmk_pemohon : integer
+  id_kmk_termohon : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_matrix_pemohon : bigint
+  id_matrix_termohon : bigint
+  id_pengelola : integer
+  id_pengelolaan_parent : bigint
+  id_r_menu_access_state : integer
+  id_r_menu_access_state_tindak_lanjut : integer
+  id_satker : integer
+  id_satker_parent : bigint
+  id_struktur : integer
+  id_struktur_pemohon : smallint
+  id_struktur_termohon : smallint
+  id_tipe_pengelolaan : integer
+  id_user : integer
+  is_active : boolean
+  is_bukti : boolean
+  is_tb : character varying
+  jabatan_penandatangan_sk : character varying
+  jangka_waktu : numeric
+  jangka_waktu_min : numeric
+  jns_alur : smallint
+  jns_alur_sewa : smallint
+  jns_matrix_pemohon : smallint
+  jns_matrix_termohon : smallint
+  jns_permohonan : smallint
+  jns_tiket : smallint
+  kd_asal_pembuat : character varying
+  kd_kl : character varying
+  kd_pelayanan : character varying
+  kesimpulan_mtx : json
+  keterangan : character varying
+  kode_status : character varying
+  kolom_total : character varying
+  nama_asal_pembuat : character varying
+  nama_penandatangan_sk : character varying
+  nama_status : character varying
+  nilai_clawback_permohonan : numeric
+  nilai_clawback_persetujuan : numeric
+  nilai_limit : numeric
+  nilai_max_pemohon : numeric
+  nilai_max_termohon : numeric
+  nilai_min_pemohon : numeric
+  nilai_min_termohon : numeric
+  nilai_penetapan : numeric
+  nilai_permohonan : numeric
+  nilai_permohonan_min : numeric
+  nip_penandatangan_sk : character varying
+  nm_file_penolakan : character varying
+  nm_jns_bmn : character varying
+  no_kmk_pemohon : character varying
+  no_kmk_termohon : character varying
+  no_surat : character varying
+  no_surat_pelimpahan : character varying
+  no_tiket : character varying
+  open_close : character varying
+  pembilang : character varying
+  penyebut : character varying
+  periode : character varying
+  persen_permohonan : integer
+  persen_persetujuan : integer
+  revisi : smallint
+  satker_ln : character varying
+  sk_penolakan : character varying
+  status_data : smallint
+  status_flow : smallint
+  tahun_anggaran : numeric
+  tetapkan_pengguna_yn : character varying
+  tgl_created : timestamp without time zone
+  tgl_kirim_eselon : date
+  tgl_kirim_kanwil : date
+  tgl_kirim_kl : date
+  tgl_kirim_korwil : date
+  tgl_kirim_kp : date
+  tgl_kirim_kpknl : date
+  tgl_kirim_penetapan : timestamp without time zone
+  tgl_kirim_satker : date
+  tgl_sk : date
+  tgl_sk_penolakan : date
+  tgl_surat : date
+  tgl_surat_pelimpahan : date
+  tipe_pemohon : character varying
+  tipe_pengelola : character varying
+  tujuan_penandatangan : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kl : character varying
+  uraian_keputusan : character varying
+  uraian_penolakan : character varying
+  url_sk_keputusan : character varying
+  url_sk_penolakan : character varying
+}
+
+entity "kelola.t_pengelolaan_billing" as kelola__t_pengelolaan_billing {
+  trx_id_simponi : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  kd_billing : character varying
+  nama_wajib_bayar : character varying
+  status_data : smallint
+  tgl_billing : date
+  tgl_expired_billing : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "kelola.t_pengelolaan_catat" as kelola__t_pengelolaan_catat {
+  id_pengelolaan_catat : bigint <<PK>>
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  id_aset : bigint
+  id_pengelolaan_detail : bigint
+  id_tipe_pengelolaan : smallint
+  is_checked : character varying
+  is_deleted : character varying
+  ket : character varying
+  nilai_dasar : numeric
+  nilai_estimasi : numeric
+  nilai_permohonan : numeric
+  nilai_persetujuan : numeric
+  nilai_referensi : numeric
+  no_tiket : character varying
+  ref_alamat1 : character varying
+  ref_alamat2 : character varying
+  ref_jangka_waktu : character varying
+  ref_jenis : character varying
+  ref_kode : character varying
+  ref_luas : character varying
+  ref_nama : character varying
+  ref_nomor : character varying
+  ref_periode : character varying
+  ref_tanggal : character varying
+  status_data : smallint
+  tujuan_permohonan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "kelola.t_pengelolaan_detail" as kelola__t_pengelolaan_detail {
+  id_pengelolaan_detail : bigint <<PK>>
+  alamat : character varying
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  dokumen_pengganti : character varying
+  id_aset : bigint
+  id_aset_sakti : integer
+  id_data_awal : integer
+  id_jns_penjualan : smallint
+  id_pengelolaan : bigint
+  id_pengelolaan_objek : bigint
+  id_pengelolaan_sk : bigint
+  id_r_menu_access_state_detail : integer
+  id_satker : bigint
+  id_status_dok : smallint
+  id_status_sk : smallint
+  id_status_tindak_lanjut : integer
+  id_tipe_pengelolaan : integer
+  informasi : text
+  is_asuransi : boolean
+  is_bukti : boolean
+  is_checked : character varying
+  is_deleted : character varying
+  jabatan : character varying
+  jml_photo : bigint
+  jns_aset : character varying
+  jns_dok_bukti_kepemilikan : character varying
+  jns_nilai_1 : character varying
+  jns_nilai_2 : character varying
+  jns_peruntukkan : smallint
+  kab_kota : character varying
+  kd_brg : character varying
+  kd_jns_bmn : integer
+  kd_lapor : character varying
+  kd_satker : character varying
+  ket : text
+  kode_register : character varying
+  kondisi_aset_pengganti : character varying
+  kontribusi_tetap : character varying
+  kontribusi_tetap_setuju : character varying
+  luas_aset : numeric
+  merk : character varying
+  nilai_buku : numeric
+  nilai_estimasi : numeric
+  nilai_estimasi_persetujuan : numeric
+  nilai_indikatif : numeric
+  nilai_permohonan : numeric
+  nilai_perolehan : numeric
+  nilai_perolehan_proporsional : numeric
+  nilai_persetujuan : numeric
+  nilai_sewa : numeric
+  nilai_sewa_bulan : numeric
+  nilai_sewa_hari : numeric
+  nilai_sewa_jam : numeric
+  nilai_sewa_setuju_bulan : numeric
+  nilai_sewa_setuju_hari : numeric
+  nilai_sewa_setuju_jam : numeric
+  nilai_sewa_setuju_tahun : numeric
+  nilai_sewa_tahun : numeric
+  nilai_sip : numeric
+  nilai_sip_2 : numeric
+  nilai_usulan : numeric
+  nilai_wajar : numeric
+  nm_dok_tindak_lanjut : character varying
+  nm_jns_bmn : character varying
+  no_aset : bigint
+  no_dok_bukti_kepemilikan : character varying
+  no_dok_tindak_lanjut : bigint
+  no_kib : character varying
+  no_lapor : character varying
+  no_mesin : character varying
+  no_polis : character varying
+  no_polisi : character varying
+  no_psp : character varying
+  no_rangka : character varying
+  no_tiket : character varying
+  pembagian_untung : character varying
+  peminjam_pakai : smallint
+  pengecualian_kewenangan : boolean
+  penghapusan : bigint
+  penghapusan_setuju : smallint
+  periodesitas : smallint
+  periodesitas_setuju : smallint
+  persen_clawback_permohonan : numeric
+  persen_clawback_persetujuan : numeric
+  persen_kontribusi_tetap : character varying
+  persen_pembagian_untung : character varying
+  persen_permohonan : numeric
+  persen_persetujuan : numeric
+  persentase_kenaikan : numeric
+  persentase_kenaikan_persetujuan : numeric
+  persentase_kenaikan_persetujuan_2 : numeric
+  persentase_kenaikan_persetujuan_3 : numeric
+  provinsi : character varying
+  ref_alamat1 : character varying
+  ref_alamat2 : character varying
+  ref_cara : character varying
+  ref_cara_setuju : character varying
+  ref_id_satker : integer
+  ref_jangka_waktu : character varying
+  ref_jangka_waktu_setuju : character varying
+  ref_jenis : character varying
+  ref_jns_nilai_1 : smallint
+  ref_jns_nilai_2 : smallint
+  ref_jns_nilai_3 : smallint
+  ref_kode : character varying
+  ref_kode2 : character varying
+  ref_luas : numeric
+  ref_luas_setuju : numeric
+  ref_nama : character varying
+  ref_nama2 : character varying
+  ref_nomor : character varying
+  ref_periode : character varying
+  ref_periode_bulan : boolean
+  ref_periode_hari : boolean
+  ref_periode_jam : boolean
+  ref_periode_setuju : character varying
+  ref_periode_tahun : boolean
+  ref_satuan_waktu : character varying
+  ref_tanggal : character varying
+  revisi : smallint
+  rph_aset : numeric
+  rph_buku : numeric
+  rph_mutasi : numeric
+  rph_perlolehan : numeric
+  rph_perlolehan_pertama : numeric
+  rph_susut : numeric
+  status_data : smallint
+  status_kib : smallint
+  tgl_lapor : date
+  tgl_penilaian : date
+  tgl_perlh : date
+  tgl_psp : character varying
+  tipe : character varying
+  tujuan_permohonan : character varying
+  tujuan_persetujuan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kondisi : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+}
+
+entity "kelola.t_pengelolaan_detail_aset_pengganti" as kelola__t_pengelolaan_detail_aset_pengganti {
+  id_pengelolaan_detail_aset_pengganti : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  dokumen_pengganti : character varying
+  id_pengelolaan : bigint
+  id_pengelolaan_detail : bigint
+  ket : character varying
+  kode_register : character varying
+  kondisi_aset_pengganti : character varying
+  merk : character varying
+  nilai_estimasi : numeric
+  nilai_indikatif : numeric
+  no_tiket : character varying
+  ref_alamat1 : character varying
+  ref_alamat2 : character varying
+  ref_jenis : character varying
+  ref_luas : numeric
+  ref_nama : character varying
+  status_data : smallint
+  tujuan_permohonan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_sskel : character varying
+}
+
+entity "kelola.t_pengelolaan_detail_dok" as kelola__t_pengelolaan_detail_dok {
+  id_pengelolaan_detail_dok : bigint <<PK>>
+  catatan : character varying
+  catatan_kelengkapan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  id_pengelolaan_detail : bigint
+  id_user : bigint
+  is_lengkap : character varying
+  kd_dok : character varying
+  nm_file : character varying
+  no_dok : character varying
+  no_tiket : character varying
+  status_data : smallint
+  tgl_upload : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  url_dok : character varying
+}
+
+entity "kelola.t_pengelolaan_detail_permohonan" as kelola__t_pengelolaan_detail_permohonan {
+  id_detail_permohonan : bigint <<PK>>
+  id_jns_rkbmn : integer
+  id_order_tahap : bigint
+  id_status : smallint
+  id_struktur : integer
+  tiket_satker : character varying
+}
+
+entity "kelola.t_pengelolaan_detail_revisi" as kelola__t_pengelolaan_detail_revisi {
+  id_pengelolaan_detail_revisi : bigint <<PK>>
+  alamat : character varying
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  dokumen_pengganti : character varying
+  id_aset : integer
+  id_aset_sakti : integer
+  id_data_awal : integer
+  id_jns_penjualan : smallint
+  id_matrix_pemohon : smallint
+  id_pengelolaan : bigint
+  id_pengelolaan_detail : bigint
+  id_pengelolaan_sk : bigint
+  id_r_menu_access_state_detail : integer
+  id_satker : integer
+  id_status_dok : smallint
+  id_status_sk : smallint
+  id_status_tindak_lanjut : integer
+  id_struktur_pemohon : smallint
+  id_tipe_pengelolaan : integer
+  informasi : text
+  is_asuransi : boolean
+  is_bukti : boolean
+  is_checked : character varying
+  is_deleted : character varying
+  jml_photo : integer
+  jns_aset : character varying
+  jns_dok_bukti_kepemilikan : character varying
+  kd_brg : character varying
+  kd_jns_bmn : integer
+  kd_satker : character varying
+  ket : text
+  kode_register : character varying
+  kondisi_aset_pengganti : character varying
+  kontribusi_tetap : character varying
+  luas_aset : numeric
+  merk : character varying
+  nilai_buku : numeric
+  nilai_estimasi : numeric
+  nilai_estimasi_persetujuan : numeric
+  nilai_indikatif : numeric
+  nilai_permohonan : numeric
+  nilai_perolehan : numeric
+  nilai_perolehan_proporsional : numeric
+  nilai_persetujuan : numeric
+  nilai_sewa : numeric
+  nilai_sewa_bulan : numeric
+  nilai_sewa_hari : numeric
+  nilai_sewa_jam : numeric
+  nilai_sewa_setuju_bulan : numeric
+  nilai_sewa_setuju_hari : numeric
+  nilai_sewa_setuju_jam : numeric
+  nilai_sewa_setuju_tahun : numeric
+  nilai_sewa_tahun : numeric
+  nilai_sip : numeric
+  nilai_usulan : numeric
+  nm_dok_tindak_lanjut : character varying
+  nm_jns_bmn : character varying
+  no_aset : integer
+  no_dok_bukti_kepemilikan : character varying
+  no_dok_tindak_lanjut : integer
+  no_kib : character varying
+  no_mesin : character varying
+  no_polis : character varying
+  no_polisi : character varying
+  no_psp : character varying
+  no_rangka : character varying
+  no_surat : character varying
+  no_tiket : character varying
+  pembagian_untung : character varying
+  peminjam_pakai : smallint
+  penghapusan : smallint
+  penghapusan_setuju : smallint
+  periodesitas : smallint
+  periodesitas_setuju : smallint
+  persen_clawback_permohonan : numeric
+  persen_clawback_persetujuan : numeric
+  persen_kontribusi_tetap : character varying
+  persen_pembagian_untung : character varying
+  persen_permohonan : numeric
+  persen_persetujuan : numeric
+  persentase_kenaikan : numeric
+  persentase_kenaikan_persetujuan : numeric
+  ref_alamat1 : character varying
+  ref_alamat2 : character varying
+  ref_cara : character varying
+  ref_cara_setuju : character varying
+  ref_id_satker : integer
+  ref_jangka_waktu : character varying
+  ref_jangka_waktu_setuju : character varying
+  ref_jenis : character varying
+  ref_kode : character varying
+  ref_kode2 : character varying
+  ref_luas : numeric
+  ref_luas_setuju : numeric
+  ref_nama : character varying
+  ref_nama2 : character varying
+  ref_nomor : character varying
+  ref_periode : character varying
+  ref_periode_bulan : boolean
+  ref_periode_hari : boolean
+  ref_periode_jam : boolean
+  ref_periode_setuju : character varying
+  ref_periode_tahun : boolean
+  ref_satuan_waktu : character varying
+  ref_tanggal : character varying
+  rev : smallint
+  rph_aset : numeric
+  rph_buku : numeric
+  rph_mutasi : numeric
+  rph_perlolehan : numeric
+  rph_perlolehan_pertama : numeric
+  rph_susut : numeric
+  status_data : smallint
+  status_kib : smallint
+  tgl_perlh : date
+  tgl_psp : character varying
+  tipe : character varying
+  tipe_sk : smallint
+  tujuan_permohonan : character varying
+  tujuan_persetujuan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kondisi : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+}
+
+entity "kelola.t_pengelolaan_detail_sk_nadine" as kelola__t_pengelolaan_detail_sk_nadine {
+  id_pengelolaan_detail_sk_nadine : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  filename_sk : character varying
+  id_pengelolaan_sk : bigint
+  id_ttd : smallint
+  jenis_nd_id : smallint
+  jenis_nd_kode : character varying
+  jenis_nd_uraian : character varying
+  kode_penandatangan : character varying
+  konseptor : character varying
+  nip_penandatangan : character varying
+  no_tiket : character varying
+  pengirim : character varying
+  perihal_sk : character varying
+  sifat_nd_id : smallint
+  sifat_nd_uraian : character varying
+  singkatan_ttd : character varying
+  tipe_sk : smallint
+  unit_tujuan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  uraian_ttd : character varying
+}
+
+entity "kelola.t_pengelolaan_detail_tanah" as kelola__t_pengelolaan_detail_tanah {
+  id : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_aset_bangunan : bigint
+  id_aset_tanah : integer
+  id_jns_pemilik : integer
+  id_pengelolaan_detail : bigint
+  kd_brg : character varying
+  kd_pemilik : character varying
+  kode_register : character varying
+  luas : numeric
+  merk : character varying
+  nilai_aset : numeric
+  nm_pemilik : character varying
+  no_aset : integer
+  tipe : character varying
+  ur_jns_pemilik : character varying
+  ur_sskel : character varying
+}
+
+entity "kelola.t_pengelolaan_disposisi" as kelola__t_pengelolaan_disposisi {
+  id_pengelolaan_disposisi : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_pengelolaan : bigint
+  id_user : integer
+  status_data : smallint
+  tgl_batal : timestamp without time zone
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "kelola.t_pengelolaan_dok" as kelola__t_pengelolaan_dok {
+  id_pengelolaan_dok : bigint <<PK>>
+  catatan : character varying
+  catatan_kelengkapan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  id_asal : bigint
+  id_aset : bigint
+  id_pengelolaan : bigint
+  id_struktur : smallint
+  id_user : integer
+  is_checked : character varying
+  is_lengkap : boolean
+  jabatan_penandatangan : character varying
+  jns_alur : smallint
+  kd_dok : character varying
+  nm_file : character varying
+  no_dok : character varying
+  no_tiket : character varying
+  perihal : character varying
+  rev : smallint
+  role_struktur : character varying
+  status_data : smallint
+  status_dok : integer
+  tgl_dokumen : date
+  tgl_penilaian : date
+  tgl_upload : date
+  tipe_get_data : integer
+  updated_at : timestamp without time zone
+  updated_by : integer
+  url_dok : character varying
+}
+
+entity "kelola.t_pengelolaan_dok_analisis" as kelola__t_pengelolaan_dok_analisis {
+  id_pengelolaan_dok_analisis : bigint <<PK>>
+  asal_surat : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  id_pengelolaan : bigint
+  id_struktur : smallint
+  jabatan : character varying
+  kd_dok : smallint
+  kd_laporan : character varying
+  kd_mnu : character varying
+  keterangan : text
+  nm_file : character varying
+  nm_surat : character varying
+  no_surat : character varying
+  no_tiket : character varying
+  perihal_surat : character varying
+  status_data : smallint
+  tgl_penilaian : date
+  tgl_surat : date
+  tujuan_surat : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  url : character varying
+}
+
+entity "kelola.t_pengelolaan_dok_aset_pengganti" as kelola__t_pengelolaan_dok_aset_pengganti {
+  id : bigint <<PK>>
+  content_type : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  filename : character varying
+  id_aset_pengganti : bigint
+  message : text
+  size : bigint
+  status : character varying
+  url_file : character varying
+}
+
+entity "kelola.t_pengelolaan_dok_permohonan" as kelola__t_pengelolaan_dok_permohonan {
+  id_pengelolaan_dok_permohonan : bigint <<PK>>
+  asal_surat : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  id_pengelolaan : bigint
+  kd_mnu : character varying
+  keterangan : character varying
+  level_pengirim : character varying
+  nm_file : character varying
+  no_surat : character varying
+  no_tiket : character varying
+  perihal_surat : character varying
+  status_data : smallint
+  tgl_surat : date
+  tujuan_surat : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  url_surat : character varying
+}
+
+entity "kelola.t_pengelolaan_kib" as kelola__t_pengelolaan_kib {
+  id_pengelolaan_detail : bigint <<PK>>
+  aksesibilitas : character varying
+  alamat : character varying
+  asl_perlh : character varying
+  bentuk : character varying
+  bhn_bakar : character varying
+  bobot : character varying
+  bpybds_yn : character
+  brg_hilang_yn : character varying
+  brg_rusak_yn : character varying
+  bts_barat : character varying
+  bts_selatan : character varying
+  bts_timur : character varying
+  bts_utara : character varying
+  cad1 : character varying
+  cara_perlh : character varying
+  catatan : character varying
+  daya : character varying
+  dihentikan_yn : character
+  dktp_yn : character varying
+  flag_sap : character
+  gps_latitude : numeric
+  gps_longitude : numeric
+  hapus_lainnya_yn : character varying
+  id_aset : bigint
+  id_aset_ruang : bigint
+  id_aset_sakti : bigint
+  id_kel : integer
+  id_pengelolaan : bigint
+  id_satker : integer
+  id_satker_parent : integer
+  is_kib : boolean
+  is_sbsk : boolean
+  jml_bdg : integer
+  jml_bidang : bigint
+  jml_dok : bigint
+  jml_lantai : integer
+  jml_msn : bigint
+  jml_photo : integer
+  jml_sertifikat_kl : bigint
+  jml_sertifikat_pihak3 : bigint
+  jml_sertifikat_ri : bigint
+  jns_aset : character varying
+  jns_dok_bukti_kepemilikan : character varying
+  jns_pengguna : character varying
+  jns_status_hukum : character varying
+  kd_brg : character varying
+  kd_dok_milik : bigint
+  kd_dsr_hrg : character
+  kd_eselon1 : character varying
+  kd_jns_bmn : integer
+  kd_jns_idle : character varying
+  kd_kab : character varying
+  kd_kec : character varying
+  kd_kel : character varying
+  kd_kl : character varying
+  kd_kondisi : character varying
+  kd_korwil : character varying
+  kd_pos : character varying
+  kd_prov : character varying
+  kd_ref : character varying
+  kd_rtrw : character varying
+  kd_satker : character varying
+  kd_skel : character varying
+  kd_status : character varying
+  kd_status_hukum : character
+  kd_sumber_dana : character
+  kd_unit_pengguna : character varying
+  kdkppn : character varying
+  kemitraan_yn : character varying
+  ket_pengguna : character varying
+  kmk_sbsn : character varying
+  kode_register : character varying
+  komplek : character varying
+  lebar : numeric
+  luas : numeric
+  luas_tapak : numeric
+  luas_tnhb : numeric
+  luas_tnhk : numeric
+  luas_tnhl : numeric
+  merk : character varying
+  msn_gerak : character varying
+  muat : character varying
+  negara : character varying
+  negara_buat : character varying
+  nm_jns_bmn : character varying
+  nm_unit_pengguna : character varying
+  no_aset : bigint
+  no_dana : character varying
+  no_dok_bukti_kepemilikan : character varying
+  no_dok_perolehan : character varying
+  no_kib : character varying
+  no_mesin : character varying
+  no_perkara_hukum : character varying
+  no_polisi : character varying
+  no_psp : character varying
+  no_rangka : character varying
+  pabrik : character varying
+  panjang : numeric
+  peruntukan_tnh : character varying
+  rencana_hibah_yn : character
+  rph_aset : bigint
+  rph_buku : bigint
+  rph_mutasi : bigint
+  rph_susut : bigint
+  sbsk : numeric
+  stat_dok_bukti_kepemilikan : character varying
+  status_bmn_idle : text
+  status_bmn_yn : character
+  status_hukum : character varying
+  status_pengelolaan : character varying
+  status_sbsn : character varying
+  tanggal_transaksi_terakhir : date
+  tercatat : character varying
+  tgl_akhir_sbsn : date
+  tgl_dana : date
+  tgl_dok_bukti_kepemilikan : character varying
+  tgl_hapus : date
+  tgl_perlh : date
+  tgl_psp : date
+  tgl_rekam : date
+  tgl_rekam_pertama : date
+  thn_buat : character varying
+  thn_rakit : character varying
+  tipe : character varying
+  topografi_elevasi : character varying
+  topografi_kontur : character varying
+  umur_sisa : real
+  ur_bidang : character varying
+  ur_eselon1 : character varying
+  ur_kab : character varying
+  ur_kec : character varying
+  ur_kel : character varying
+  ur_kelompok : character varying
+  ur_kl : character varying
+  ur_kondisi : character varying
+  ur_korwil : character varying
+  ur_prov : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+  ur_sskel_j : character varying
+  ur_status : character varying
+  ur_sub_kelompok : character varying
+  ur_sumber_dana : character varying
+}
+
+entity "kelola.t_pengelolaan_log" as kelola__t_pengelolaan_log {
+  id_pengelolaan_log : bigint <<PK>>
+  asal : smallint
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  duration : interval
+  end_at : timestamp without time zone
+  fullname : character varying
+  id_pengelolaan : bigint
+  id_status : integer
+  id_struktur : integer
+  id_user : integer
+  keterangan : text
+  kode_status : character varying
+  modul : character varying
+  no_tiket : character varying
+  pengelolaan_log_date : date
+  pengelolaan_log_time : timestamp without time zone
+  role : character varying
+  start_at : timestamp without time zone
+  status_at : timestamp without time zone
+  status_id : smallint
+  status_permohonan : character varying
+}
+
+entity "kelola.t_pengelolaan_log_aktivitas" as kelola__t_pengelolaan_log_aktivitas {
+  id : bigint <<PK>>
+  aktivitas : character varying
+  id_menu : integer
+  id_menu_detail : integer
+  id_referensi : bigint
+  id_user : integer
+  no_referensi : character varying
+  tgl_aktivitas : timestamp without time zone
+  username : character varying
+}
+
+entity "kelola.t_pengelolaan_objek" as kelola__t_pengelolaan_objek {
+  id_pengelolaan_objek : bigint <<PK>>
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  id_pengelolaan : bigint
+  jangka_waktu : character varying
+  kd_jns_objek : smallint
+  kd_jns_peruntukkan : smallint
+  keterangan : text
+  nilai_permohonan : numeric
+  nilai_perolehan_proporsional : numeric
+  nilai_persetujuan : numeric
+  nilai_sewa_bulan : numeric
+  nilai_sewa_hari : numeric
+  nilai_sewa_jam : numeric
+  nilai_sewa_setuju_bulan : numeric
+  nilai_sewa_setuju_hari : numeric
+  nilai_sewa_setuju_jam : numeric
+  nilai_sewa_setuju_tahun : numeric
+  nilai_sewa_tahun : numeric
+  nm_jns_objek : character varying
+  no_tiket : character varying
+  periodesitas : smallint
+  ref_alamat1 : character varying
+  ref_jangka_waktu_setuju : character varying
+  ref_jenis : character varying
+  ref_nama : character varying
+  ref_periode_bulan : boolean
+  ref_periode_hari : boolean
+  ref_periode_jam : boolean
+  ref_periode_setuju : character varying
+  ref_periode_tahun : boolean
+  status_data : smallint
+  tujuan_permohonan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  uraian_peruntukkan : character varying
+}
+
+entity "kelola.t_pengelolaan_pnbp" as kelola__t_pengelolaan_pnbp {
+  id_pengelolaan_pnbp : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : bigint
+  expired_date : date
+  id_pengelolaan : bigint
+  id_satker : integer
+  id_sk : bigint
+  id_sk_wasdal : bigint
+  id_tipe_pengelolaan : bigint
+  id_tl_wasdal : bigint
+  id_wasdal_pnbp : bigint
+  jns_pnbp : character varying
+  kd_akun : character varying
+  kd_billing : character varying
+  kd_eselon : character varying
+  kd_kl : character varying
+  kd_mu : character varying
+  kd_pelayanan : character varying
+  kd_pp : character varying
+  kd_satker : character varying
+  kd_tarif : character varying
+  keterangan : character varying
+  nik : character varying
+  nilai_pnbp : numeric
+  nm_file : character varying
+  nm_penyetor : character varying
+  no_ntpn : character varying
+  npwp : character varying
+  ntb : character varying
+  ref_cara : smallint
+  satuan : character varying
+  sk_keputusan : character varying
+  status_data : bigint
+  status_sync : smallint
+  tgl_billing : timestamp without time zone
+  tgl_expired_billing : timestamp without time zone
+  tgl_setor : date
+  tgl_transaksi : date
+  trx_id_kl : character varying
+  trx_id_simponi : character varying
+  updated_at : timestamp without time zone
+  updated_by : bigint
+  ur_akun : character varying
+  url_dok : character varying
+}
+
+entity "kelola.t_pengelolaan_pnbp_detail" as kelola__t_pengelolaan_pnbp_detail {
+  id_pengelolaan_pnbp_detail : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : bigint
+  id_aset : bigint
+  id_pengelolaan_detail : bigint
+  id_pengelolaan_pnbp : bigint
+  id_sk : bigint
+  id_sk_detail : integer
+  id_sk_wasdal : bigint
+  kd_brg : character varying
+  kode_register : character varying
+  nilai_pnbp_aset : numeric
+  no_aset : bigint
+  no_sk : character varying
+  order_no : integer
+  rowid : character varying
+  status_data : bigint
+  sumber_data : smallint
+  tipe_bmn : character varying
+  updated_at : timestamp without time zone
+  updated_by : bigint
+  ur_sskel : character varying
+}
+
+entity "kelola.t_pengelolaan_pnbp_file" as kelola__t_pengelolaan_pnbp_file {
+  id_pengelolaan_pnbp_file : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_sk : bigint
+  id_wasdal_pnbp_asal : bigint
+  nm_file : character varying
+  no_ntpn : character varying
+  order_no : integer
+  sk_keputusan : character varying
+  table_asal : character varying
+  tgl_upload : date
+  updated_at : timestamp without time zone
+  url_dok : character varying
+}
+
+entity "kelola.t_pengelolaan_rekam_sk" as kelola__t_pengelolaan_rekam_sk {
+  id_pengelolaan_rekam_sk : bigint <<PK>>
+  no_tiket : character varying
+}
+
+entity "kelola.t_pengelolaan_rekam_tindak_lanjut" as kelola__t_pengelolaan_rekam_tindak_lanjut {
+  id_pengelolaan_rekam_tindak_lanjut : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : bigint
+  dari_tgl : date
+  file_bast : character varying
+  file_bukti : character varying
+  id_aset : bigint
+  id_dok_rekam_tl : bigint
+  id_pengelolaan : bigint
+  id_pengelolaan_detail : bigint
+  id_sk : bigint
+  id_tipe_pengelolaan : bigint
+  jangka_waktu : bigint
+  jns_dok : character varying
+  kd_dok_tindak_lanjut : smallint
+  keterangan : character varying
+  nm_dok_tl : character varying
+  nm_file_bast : character varying
+  nm_file_bukti : character varying
+  no_bast : character varying
+  no_bukti : character varying
+  no_perjanjian : character varying
+  no_tiket : character varying
+  no_urut_dok : bigint
+  periode : character varying
+  ref_cara_input : smallint
+  sampai_tgl : date
+  status_data : integer
+  status_perjanjian : character varying
+  tgl_bast : date
+  tgl_bukti : date
+  tgl_perjanjian : date
+  updated_at : timestamp without time zone
+  updated_by : bigint
+}
+
+entity "kelola.t_pengelolaan_rekam_tindak_lanjut_detail" as kelola__t_pengelolaan_rekam_tindak_lanjut_detail {
+  id : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_aset : bigint
+  id_pengelolaan_detail : bigint
+  id_pengelolaan_rekam_tindak_lanjut : bigint
+  id_satker : bigint
+  id_sk : bigint
+  kd_brg : character varying
+  kd_satker : character varying
+  kuantitas : numeric
+  nilai_persetujuan : numeric
+  no_aset : integer
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_satker : character varying
+  ur_sskel : character varying
+}
+
+entity "kelola.t_pengelolaan_sk" as kelola__t_pengelolaan_sk {
+  id_pengelolaan_sk : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_klasifikasi_nadine : bigint
+  id_nadine : character varying
+  id_naskah : integer
+  id_pengelolaan : bigint
+  id_tipe_pengelolaan : integer
+  id_ttd : smallint
+  id_tujuan : integer
+  is_plh : boolean
+  jabatan_penandatangan_sk : character varying
+  jenis_nd_id : integer
+  jenis_nd_kode : character varying
+  jenis_nd_uraian : character varying
+  jns_plh : integer
+  kode_penandatangan : character varying
+  konseptor : character varying
+  nama_penandatangan_sk : character varying
+  nip_penandatangan_sk : character varying
+  nm_file_sk : character varying
+  no_nd : character varying
+  no_sk : character varying
+  no_surat : character varying
+  no_tiket : character varying
+  pejabat_plh : character varying
+  pengirim : character varying
+  peraturan : character varying
+  perihal : character varying
+  permohonan : character varying
+  ref_cara_sk : smallint
+  revisi : smallint
+  sifat_nd_id : integer
+  sifat_nd_uraian : character varying
+  singkatan_ttd : character varying
+  status_data : integer
+  status_sk : integer
+  tgl_nd : timestamp without time zone
+  tgl_sk : timestamp without time zone
+  tgl_surat : date
+  tipe_sk : smallint
+  unit_tujuan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_jns_sk : character varying
+  uraian_keputusan : character varying
+  uraian_ttd : character varying
+  url_lampiran : character varying
+  url_lampiran_minio : character varying
+  url_sk : character varying
+  url_sk_minio : character varying
+  url_sk_template : character varying
+}
+
+entity "kelola.t_pengelolaan_sk_detail" as kelola__t_pengelolaan_sk_detail {
+  id : bigint <<PK>>
+  alamat : character varying
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  id_aset : bigint
+  id_pengelolaan : bigint
+  id_pengelolaan_detail : bigint
+  id_pengelolaan_sk : bigint
+  id_satker : bigint
+  jns_aset : character varying
+  kd_brg : character varying
+  kd_jns_bmn : integer
+  kd_satker : character varying
+  kd_status : character varying
+  ket : character varying
+  kode_register : character varying
+  luas_aset : numeric
+  merk : character varying
+  nilai_buku : numeric
+  nilai_permohonan : numeric
+  nilai_perolehan : numeric
+  nilai_persetujuan : numeric
+  nm_jns_bmn : character varying
+  no_aset : smallint
+  no_kib : character varying
+  no_psp : character varying
+  periodesitas : smallint
+  periodesitas_setuju : smallint
+  ref_alamat1 : character varying
+  ref_alamat2 : character varying
+  ref_cara_setuju : character varying
+  ref_jangka_waktu_setuju : character varying
+  ref_jenis : character varying
+  ref_kode : character varying
+  ref_kode2 : character varying
+  ref_luas : numeric
+  ref_nama : character varying
+  ref_nomor : character varying
+  ref_periode_setuju : character varying
+  ref_satuan_waktu : character varying
+  tgl_psp : character varying
+  tipe : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kondisi : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+}
+
+entity "kelola.t_pengelolaan_sk_lamp" as kelola__t_pengelolaan_sk_lamp {
+  id : bigint <<PK>>
+  created_at : timestamp without time zone
+  id_nadine : character varying
+  id_pengelolaan_sk : bigint
+  url_lamp : character varying
+  url_lamp_minio : character varying
+}
+
+entity "kelola.t_pengelolaan_vb" as kelola__t_pengelolaan_vb {
+  id_pengelolaan_vb : bigint <<PK>>
+  alamat_kpknl : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_kpknl : integer
+  id_pengelolaan : bigint
+  id_satker : integer
+  jns_objek : character varying
+  kab_kota : character varying
+  kd_kanwil : character varying
+  kd_kl : character varying
+  kd_kpknl : character varying
+  kd_satker : character varying
+  keterangan : text
+  nip_kpl_pejabat_pkn : character varying
+  nip_pejabat_pkn : character varying
+  nip_pejabat_sip : character varying
+  nm_kpl_pejabat_pkn : character varying
+  nm_pejabat_pkn : character varying
+  nm_pejabat_sip : character varying
+  no_nd : character varying
+  no_telp_kpknl : character varying
+  no_tiket : character varying
+  rekomendasi : character varying
+  status_data : smallint
+  tgl_disposisi : timestamp without time zone
+  tgl_diterima : timestamp without time zone
+  tgl_nd : timestamp without time zone
+  tgl_verifikasi : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kanwil : character varying
+  ur_kl : character varying
+  ur_kpknl : character varying
+  ur_satker : character varying
+}
+
+entity "kelola.t_pengelolaan_vb_aset" as kelola__t_pengelolaan_vb_aset {
+  id_pengelolaan_vb_aset : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_aset : bigint
+  id_pengelolaan_detail : bigint
+  id_pengelolaan_vb : bigint
+  jns_objek : character varying
+  kd_jns_objek : integer
+  keterangan : text
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "kelola.t_pengelolaan_vb_aset_detail" as kelola__t_pengelolaan_vb_aset_detail {
+  id_pengelolaan_vb_aset_detail : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_pengelolaan_vb_aset : bigint
+  id_pengelolaan_vb_ref : bigint
+  keterangan : text
+  ref_tidak : boolean
+  ref_ya : boolean
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "kelola.t_pengelolaan_vb_ref" as kelola__t_pengelolaan_vb_ref {
+  id_pengelolaan_vb_ref : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_pengelolaan_vb : bigint
+  id_ref_vb : bigint
+  id_tipe_pengelolaan : bigint
+  kd_grup_ref : character varying
+  nm_grup_ref : character varying
+  no_ref : smallint
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_ref : character varying
+}
+
+entity "kelola.t_rekap_aju" as kelola__t_rekap_aju {
+  created_at : timestamp without time zone
+  created_by : integer
+  id_eselon1 : integer
+  id_kl : integer
+  id_korwil : integer
+  id_r_menu_access_state : integer
+  id_rekap_aju : bigint
+  id_satker : integer
+  id_status_surat : smallint
+  id_struktur : smallint
+  no_surat : character varying
+  no_tiket : character varying
+  status_data : smallint
+  tahun_anggaran : character varying
+  tgl_surat : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "kelola.t_rekap_aju_detail" as kelola__t_rekap_aju_detail {
+  created_at : timestamp without time zone
+  created_by : integer
+  id_pengelolaan : bigint
+  id_rekap_aju : bigint
+  id_rekap_aju_detail : bigint
+  id_state_awal : integer
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "kelola.t_rekap_aju_dok" as kelola__t_rekap_aju_dok {
+  id_rekap_aju_dok : bigint <<PK>>
+  asal_surat : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  id_rekap_aju : bigint
+  kd_mnu : character varying
+  nm_file : character varying
+  no_surat : character varying
+  no_tiket : character varying
+  perihal_surat : character varying
+  status_data : smallint
+  tgl_surat : date
+  tujuan_surat : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "kelola.t_rkm_dok_anls" as kelola__t_rkm_dok_anls {
+  id_rkm_dok_anls : bigint <<PK>>
+  asal_surat : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  id_rkm_sk : bigint
+  id_struktur : smallint
+  jabatan : character varying
+  kd_dok : smallint
+  keterangan : text
+  nm_file : character varying
+  nm_surat : character varying
+  no_surat : character varying
+  no_tkt_rkm_sk : character varying
+  perihal_surat : character varying
+  status_data : smallint
+  tgl_surat : date
+  tujuan_surat : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  url : character varying
+}
+
+entity "kelola.t_rkm_log_trx" as kelola__t_rkm_log_trx {
+  id_rkm_log_trx : bigint <<PK>>
+  asal : smallint
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  duration : interval
+  end_at : timestamp without time zone
+  fullname : character varying
+  id_rkm_sk : bigint
+  id_struktur : integer
+  id_user : integer
+  keterangan : text
+  kode_status : character varying
+  modul : character varying
+  no_tkt_rkm_sk : character varying
+  rkm_log_date : date
+  rkm_log_time : timestamp without time zone
+  role : character varying
+  start_at : timestamp without time zone
+  status_at : timestamp without time zone
+  status_id : smallint
+  status_permohonan : character varying
+}
+
+entity "kelola.t_rkm_sk" as kelola__t_rkm_sk {
+  id_rkm_sk : bigint <<PK>>
+  bentuk_phk_lain : character varying
+  created_at : timestamp without time zone
+  dari_tgl : date
+  file_sk : character varying
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_pemohon : integer
+  id_r_menu_access_state : integer
+  id_satker : integer
+  id_struktur_pemohon : smallint
+  id_struktur_termohon : smallint
+  id_tipe_pengelolaan : integer
+  id_user : integer
+  is_tb : character varying
+  jabatan_ttd : character varying
+  kd_kanwil : character varying
+  kd_kl : character varying
+  kd_kpknl : character varying
+  kd_pelayanan : character varying
+  kd_penerbit_sk : character varying
+  kd_penerbit_sk_dtl : character varying
+  kd_satker : character varying
+  keterangan : character varying
+  kuantitas : numeric
+  nilai_buku : numeric
+  nilai_limit : numeric
+  nilai_perolehan : numeric
+  nilai_persetujuan : numeric
+  nip_penandatangan : character varying
+  nm_pelayanan : character varying
+  nm_penandatangan : character varying
+  nm_penerbit_sk : character varying
+  nm_penerbit_sk_dtl : character varying
+  no_sk : character varying
+  no_tiket : character varying
+  pemohon : character varying
+  peruntukan : character varying
+  ref_alamat : character varying
+  ref_alamat2 : character varying
+  ref_alamat_pengganti : character varying
+  ref_jangka_waktu : numeric
+  ref_jenis : character varying
+  ref_jenis_pengganti : character varying
+  ref_kuantitas_pengganti : numeric
+  ref_luas : numeric
+  ref_luas_pengganti : numeric
+  ref_nama : character varying
+  ref_no : character varying
+  ref_periode : character varying
+  ref_tgl : date
+  sd_tgl : date
+  status_data : smallint
+  tahun_anggaran : character varying
+  termohon : character varying
+  tgl_created : date
+  tgl_selesai_rkm_sk : date
+  tgl_sk : date
+  tipe_pemohon : character varying
+  tipe_sk : integer
+  tot_bmn : numeric
+  tot_persetujuan : numeric
+  tot_status : numeric
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kanwil : character varying
+  ur_kl : character varying
+  ur_kpknl : character varying
+  ur_phk_lain : character varying
+  ur_satker : character varying
+  uraian_keputusan : character varying
+  url_lampiran_sk : character varying
+  url_sk : character varying
+}
+
+entity "kelola.t_rkm_sk_detail" as kelola__t_rkm_sk_detail {
+  id_rkm_sk_detail : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  dari_tgl : date
+  id_aset : integer
+  id_rkm_sk : bigint
+  id_satker : bigint
+  id_tipe_pengelolaan : integer
+  jns_bukti_laksana : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_status : character varying
+  keterangan : character varying
+  kode_register : character varying
+  kuantitas : numeric
+  merk : character varying
+  nilai_buku : numeric
+  nilai_perolehan : numeric
+  nilai_persetujuan : numeric
+  no_aset : integer
+  no_bukti_laksana : character varying
+  no_sk : character varying
+  ref_jangka_waktu : character varying
+  ref_nama : character varying
+  ref_periode : character varying
+  sd_tgl : date
+  status_data : smallint
+  tgl_bukti_laksana : date
+  tgl_sk : date
+  tipe : character varying
+  tipe_sk : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_satker : character varying
+  ur_sskel : character varying
+}
+
+entity "kelola.t_sk" as kelola__t_sk {
+  id_sk : bigint <<PK>>
+  bentuk_phk_lain : character varying
+  created_at : timestamp without time zone
+  dari_tgl : date
+  file_sk : character varying
+  flag_analis : smallint
+  id_kanwil : integer
+  id_kpknl : integer
+  id_pemohon : integer
+  id_pengelolaan : bigint
+  id_r_menu_access_state_tindak_lanjut : integer
+  id_satker : integer
+  id_sk_wasdal : bigint
+  id_struktur_pemohon : smallint
+  id_struktur_termohon : smallint
+  id_tipe_pengelolaan : integer
+  id_user : integer
+  is_tb : character varying
+  jabatan_ttd : character varying
+  kd_kanwil : character varying
+  kd_kl : character varying
+  kd_kpknl : character varying
+  kd_pelayanan : character varying
+  kd_penerbit_sk : character varying
+  kd_penerbit_sk_dtl : character varying
+  kd_satker : character varying
+  keterangan : character varying
+  kuantitas : numeric
+  nilai_buku : numeric
+  nilai_limit : numeric
+  nilai_perolehan : numeric
+  nilai_persetujuan : numeric
+  nip_penandatangan : character varying
+  nm_pelayanan : character varying
+  nm_penandatangan : character varying
+  nm_penerbit_sk : character varying
+  nm_penerbit_sk_dtl : character varying
+  no_sk : character varying
+  no_sk_lama : character varying
+  peruntukan : character varying
+  ref_alamat : character varying
+  ref_alamat2 : character varying
+  ref_alamat_pengganti : character varying
+  ref_jangka_waktu : numeric
+  ref_jenis : character varying
+  ref_jenis_pengganti : character varying
+  ref_kuantitas_pengganti : numeric
+  ref_luas : numeric
+  ref_luas_pengganti : numeric
+  ref_nama : character varying
+  ref_no : character varying
+  ref_periode : character varying
+  ref_tgl : date
+  sd_tgl : date
+  status_data : smallint
+  status_sync : smallint
+  table_asal : character varying
+  tahun_anggaran : character varying
+  tgl_created : date
+  tgl_selesai_tl : date
+  tgl_sk : date
+  tipe_pemohon : character varying
+  tipe_sk : integer
+  tot_bmn : numeric
+  tot_persetujuan : numeric
+  tot_status : numeric
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kanwil : character varying
+  ur_kl : character varying
+  ur_kpknl : character varying
+  ur_phk_lain : character varying
+  ur_satker : character varying
+  uraian_keputusan : character varying
+  url_dok_lampiran_sk : character varying
+  url_dok_sk : character varying
+}
+
+entity "kelola.t_sk_detail" as kelola__t_sk_detail {
+  id_sk_detail : bigint <<PK>>
+  created_at : timestamp without time zone
+  dari_tgl : date
+  file_sk : character varying
+  id_aset : integer
+  id_aset_sakti : integer
+  id_pengelolaan : bigint
+  id_pengelolaan_detail : bigint
+  id_satker : bigint
+  id_sk : bigint
+  id_sk_wasdal : bigint
+  id_tipe_pengelolaan : integer
+  is_valid : character varying
+  jns_bukti_laksana : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_status : character varying
+  keterangan : character varying
+  kode_register : character varying
+  kuantitas : numeric
+  merk : character varying
+  nilai_buku : numeric
+  nilai_perolehan : numeric
+  nilai_persetujuan : numeric
+  nilai_pnbp : numeric
+  nm_file : character varying
+  no_bukti_laksana : character varying
+  no_sk : character varying
+  ntpn : character varying
+  nup : integer
+  order_no : integer
+  ref_jangka_waktu : character varying
+  ref_nama : character varying
+  ref_periode : character varying
+  rowid : character varying
+  sd_tgl : date
+  status_dok : smallint
+  table_asal : character varying
+  tgl_bukti_laksana : date
+  tgl_dok : date
+  tgl_sk : date
+  tipe : character varying
+  tipe_sk : smallint
+  updated_at : timestamp without time zone
+  ur_satker : character varying
+  ur_sskel : character varying
+}
+
+entity "kelola.t_sk_detail_dok" as kelola__t_sk_detail_dok {
+  id_sk_detail_dok : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  dari_tgl : date
+  file_bukti : character varying
+  id_dok_tl : integer
+  id_pengelolaan : bigint
+  id_sk : bigint
+  id_sk_detail : bigint
+  id_sk_wasdal_asal : bigint
+  id_tipe_pengelolaan : integer
+  id_tl_wasdal_asal : bigint
+  jangka_waktu : numeric
+  kd_jns_dok_tl : integer
+  keterangan : character varying
+  nm_dok_tl : character varying
+  nm_file : character varying
+  nm_file_dok : character varying
+  no_bukti : character varying
+  no_dok : character varying
+  no_perjanjian : character varying
+  no_tiket : character varying
+  no_urut_dok_tl : integer
+  periode : character varying
+  ref_cara_input : smallint
+  sampai_tgl : date
+  status_data : integer
+  status_perjanjian : character varying
+  status_sync : smallint
+  table_asal : character varying
+  tgl_dok : date
+  tgl_dok_bukti : date
+  tgl_perjanjian : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  url_dok : character varying
+}
+
+entity "kelola.t_sk_detail_dok_aset" as kelola__t_sk_detail_dok_aset {
+  id_sk_detail_dok_aset : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_aset : integer
+  id_satker : integer
+  id_sk_detail : bigint
+  id_sk_detail_dok : bigint
+  id_sk_wasdal_asal : bigint
+  id_tl_wasdal_asal : bigint
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_status : character varying
+  kuantitas : numeric
+  nilai_persetujuan : numeric
+  nup : integer
+  order_no : integer
+  table_asal : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_satker : character varying
+  ur_sskel : character varying
+}
+
+entity "kelola.t_sk_detail_dok_bast" as kelola__t_sk_detail_dok_bast {
+  id_sk_detail_dok_bast : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_sk_wasdal_asal : bigint
+  id_tl_wasdal_asal : bigint
+  nm_file : character varying
+  order_no : integer
+  status_data : integer
+  tgl_dok : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  url_dok : character varying
+}
+
+entity "kelola.t_sk_file" as kelola__t_sk_file {
+  id_sk_file : bigint <<PK>>
+  created_at : timestamp without time zone
+  id_sk : bigint
+  id_sk_wasdal : bigint
+  id_tipe_pengelolaan : integer
+  kd_pelayanan : character varying
+  nm_file : character varying
+  no_sk : character varying
+  order_no : integer
+  status_data : integer
+  tgl_upload : date
+  updated_at : timestamp without time zone
+  url_dok_sk_file : character varying
+}
+
+entity "kelola.t_sk_file_lmp" as kelola__t_sk_file_lmp {
+  id : bigint <<PK>>
+  asal : smallint
+  created_at : timestamp without time zone
+  created_by : integer
+  id_sk : bigint
+  nm_file : character varying
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+  url_lamp : character varying
+}
+
+entity "kelola.t_sk_pnbp" as kelola__t_sk_pnbp {
+  id_sk_pnbp : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_pengelolaan : bigint
+  id_satker : integer
+  id_sk : bigint
+  id_sk_wasdal : bigint
+  id_tipe_pengelolaan : integer
+  id_tl_wasdal : bigint
+  id_wasdal_pnbp : bigint
+  kd_akun : character varying
+  kd_billing : character varying
+  kd_pelayanan : character varying
+  keterangan : character varying
+  nilai_pnbp : numeric
+  nm_file : character varying
+  nm_penyetor : character varying
+  no_ntpn : character varying
+  npwp : character varying
+  ntb : character varying
+  sk_keputusan : character varying
+  status_data : integer
+  status_sync : smallint
+  tgl_billing : timestamp without time zone
+  tgl_expired_billing : timestamp without time zone
+  tgl_setor : date
+  tgl_transaksi : date
+  trx_id_simponi : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_akun : character varying
+  url_dok : character varying
+}
+
+entity "kelola.t_sk_pnbp_detail" as kelola__t_sk_pnbp_detail {
+  id_sk_pnbp_detail : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_aset : bigint
+  id_pengelolaan_detail : bigint
+  id_sk : bigint
+  id_sk_detail : bigint
+  id_sk_pnbp : bigint
+  id_sk_wasdal : bigint
+  kd_brg : character varying
+  kode_register : character varying
+  nilai_pnbp_aset : numeric
+  no_aset : bigint
+  no_sk : character varying
+  status_data : smallint
+  tipe_bmn : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_sskel : character varying
+}
+
+entity "kelola.t_sync_normalisasi_aset_tktm" as kelola__t_sync_normalisasi_aset_tktm {
+  id : bigint <<PK>>
+  end_time : timestamp with time zone
+  fetch_time : interval
+  id_satker_parent : bigint
+  remark : text
+  start_time : timestamp with time zone
+  status_data : smallint
+  total_data : integer
+}
+
+kelola__r_syarat_dok "0..*" --> "1" kelola__r_jns_dok : kd_dok -> kd_dok
+kelola__r_syarat_dok_tindak_lanjut "0..*" --> "0..1" kelola__r_jns_dok_tindak_lanjut : kd_dok_tindak_lanjut -> kd_dok_tl
+kelola__t_matrix_pemohon "0..*" --> "1" kelola__t_kmk : id_kmk -> id_kmk
+kelola__t_matrix_pemohon_npu "0..*" --> "1" kelola__t_kmk : id_kmk -> id_kmk
+kelola__t_matrix_termohon "0..*" --> "1" kelola__t_kmk : id_kmk -> id_kmk
+kelola__t_matrix_termohon_npu "0..*" --> "1" kelola__t_kmk : id_kmk -> id_kmk
+kelola__t_mtx_pmh_rkm_sk "0..*" --> "1" kelola__t_kmk_rkm_sk : id_kmk_rkm_sk -> id_kmk_rkm_sk
+kelola__t_mtx_tmh_rkm_sk "0..*" --> "1" kelola__t_kmk_rkm_sk : id_kmk_rkm_sk -> id_kmk_rkm_sk
+kelola__t_pengelolaan_detail_aset_pengganti "0..*" --> "1" kelola__t_pengelolaan : id_pengelolaan -> id_pengelolaan
+kelola__t_pengelolaan_detail_aset_pengganti "0..*" --> "1" kelola__t_pengelolaan_detail : id_pengelolaan_detail -> id_pengelolaan_detail
+kelola__t_pengelolaan_detail "0..*" --> "1" kelola__t_pengelolaan : id_pengelolaan -> id_pengelolaan
+kelola__t_pengelolaan_detail_revisi "0..*" --> "1" kelola__t_pengelolaan : id_pengelolaan -> id_pengelolaan
+kelola__t_pengelolaan_detail_tanah "0..*" --> "1" kelola__t_pengelolaan_detail : id_pengelolaan_detail -> id_pengelolaan_detail
+kelola__t_pengelolaan_disposisi "0..*" --> "1" kelola__t_pengelolaan : id_pengelolaan -> id_pengelolaan
+kelola__t_pengelolaan_dok_analisis "0..*" --> "1" kelola__t_pengelolaan : id_pengelolaan -> id_pengelolaan
+kelola__t_pengelolaan_dok_aset_pengganti "0..*" --> "1" kelola__t_pengelolaan_detail_aset_pengganti : id_aset_pengganti -> id_pengelolaan_detail_aset_pengganti
+kelola__t_pengelolaan_dok "0..*" --> "1" kelola__t_pengelolaan : id_pengelolaan -> id_pengelolaan
+kelola__t_pengelolaan_objek "0..*" --> "1" kelola__t_pengelolaan : id_pengelolaan -> id_pengelolaan
+kelola__t_pengelolaan_rekam_tindak_lanjut_detail "0..*" --> "1" kelola__t_pengelolaan_rekam_tindak_lanjut : id_pengelolaan_rekam_tindak_lanjut -> id_pengelolaan_rekam_tindak_lanjut
+kelola__t_pengelolaan_rekam_tindak_lanjut "0..*" --> "0..1" kelola__r_jns_dok_tindak_lanjut : kd_dok_tindak_lanjut -> kd_dok_tl
+kelola__t_pengelolaan_sk_lamp "0..*" --> "1" kelola__t_pengelolaan_sk : id_pengelolaan_sk -> id_pengelolaan_sk
+kelola__t_pengelolaan_vb_aset_detail "0..*" --> "1" kelola__t_pengelolaan_vb_aset : id_pengelolaan_vb_aset -> id_pengelolaan_vb_aset
+kelola__t_pengelolaan_vb_aset "0..*" --> "1" kelola__t_pengelolaan_vb : id_pengelolaan_vb -> id_pengelolaan_vb
+kelola__t_pengelolaan_vb "0..*" --> "1" kelola__t_pengelolaan : id_pengelolaan -> id_pengelolaan
+kelola__t_pengelolaan_vb_aset_detail "0..*" --> "1" kelola__t_pengelolaan_vb_ref : id_pengelolaan_vb_ref -> id_pengelolaan_vb_ref
+kelola__t_pengelolaan_vb_ref "0..*" --> "1" kelola__t_pengelolaan_vb : id_pengelolaan_vb -> id_pengelolaan_vb
+kelola__t_rkm_dok_anls "0..*" --> "1" kelola__t_rkm_sk : id_rkm_sk -> id_rkm_sk
+kelola__t_rkm_sk_detail "0..*" --> "0..1" public__m_aset : id_aset -> id_aset
+kelola__t_rkm_sk_detail "0..*" --> "1" kelola__t_rkm_sk : id_rkm_sk -> id_rkm_sk
+kelola__t_sk_detail_dok_aset "0..*" --> "1" kelola__t_sk_detail_dok : id_sk_detail_dok -> id_sk_detail_dok
+kelola__t_sk_detail_dok "0..*" --> "0..1" kelola__r_jns_dok_tindak_lanjut : kd_jns_dok_tl -> kd_dok_tl
+kelola__t_sk_detail "0..*" --> "0..1" public__m_aset : id_aset -> id_aset
+kelola__t_sk_detail "0..*" --> "1" kelola__t_sk : id_sk -> id_sk
+kelola__t_sk_file_lmp "0..*" --> "1" kelola__t_sk : id_sk -> id_sk
+kelola__t_sk_pnbp_detail "0..*" --> "1" kelola__t_sk_pnbp : id_sk_pnbp -> id_sk_pnbp
+@enduml

@@ -1,0 +1,4190 @@
+@startuml
+skinparam classAttributeIconSize 0
+left to right direction
+hide circle
+scale 1.0
+
+entity "public._aset_ids_to_process" as public___aset_ids_to_process #FFFFFF {
+  array_agg : ARRAY
+}
+
+entity "public._jml_lokasi_lain" as public___jml_lokasi_lain #FFFFFF {
+  count : bigint
+}
+
+entity "public.job_control" as public__job_control #FFFFFF {
+  id : bigint <<PK>>
+  data_date : timestamp without time zone
+  data_name : character varying
+  end_at : timestamp without time zone
+  job_master_id : bigint
+  parallel_page : bigint
+  rows_in_page : bigint
+  start_at : timestamp without time zone
+  status : character varying
+}
+
+entity "public.job_control_master" as public__job_control_master #FFFFFF {
+  id : bigint <<PK>>
+  created_at : timestamp without time zone
+  data_date : timestamp without time zone
+  end_at : timestamp without time zone
+  start_at : timestamp without time zone
+  status : character varying
+}
+
+entity "public.m_akun" as public__m_akun #FFFFFF {
+  dasar : character varying
+  id_akun : integer
+  is_active : boolean
+  kd_akun : character varying
+  ur_akun : character varying
+}
+
+entity "public.m_aset" as public__m_aset #FFFFFF {
+  id_aset : bigint <<PK>>
+  aksesibilitas : character varying
+  alamat : character varying
+  alamat_lain : character varying
+  asl_perlh : character varying
+  bentuk : character varying
+  bpybds_yn : character
+  brg_hilang_yn : character varying
+  brg_rusak_yn : character varying
+  bts_barat : character varying
+  bts_selatan : character varying
+  bts_timur : character varying
+  bts_utara : character varying
+  cara_perlh : character varying
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  dihentikan_yn : character
+  dktp_yn : character varying
+  flag_sap : character
+  gps_latitude : numeric
+  gps_longitude : numeric
+  hapus_lainnya_yn : character varying
+  id_aset_ktnh : bigint
+  id_aset_ruang : bigint
+  id_aset_ruang_lama : bigint
+  id_aset_sakti : bigint
+  id_kab : integer
+  id_kec : integer
+  id_kel : integer
+  id_prov : integer
+  id_satker : integer
+  id_trx : bigint
+  intra_extra : character varying
+  is_sync : boolean
+  is_tf_id_aset_ruang : boolean
+  jml_bdg : integer
+  jml_bidang : integer
+  jml_lantai : integer
+  jml_photo : integer
+  jns_aset : character varying
+  jns_dok_bukti_kepemilikan : character varying
+  jns_pengguna : character varying
+  jns_sertifikat : character varying
+  kapasitas : numeric
+  kd_brg : character varying
+  kd_dok_milik : bigint
+  kd_dsr_hrg : character
+  kd_jns_bmn : integer
+  kd_jns_idle : character varying
+  kd_kab : character varying
+  kd_kec : character varying
+  kd_kel : character varying
+  kd_kondisi : character varying
+  kd_pos : character varying
+  kd_prov : character varying
+  kd_rtrw : character varying
+  kd_satker : character varying
+  kd_status : character varying
+  kd_status_hukum : character
+  kd_sumber_dana : character
+  kd_unit_pengguna : character varying
+  kdkppn : character varying
+  kemitraan_yn : character varying
+  ket_pengguna : character varying
+  kmk_sbsn : character varying
+  kode_register : character varying
+  komplek : character varying
+  konjas_yn : character
+  kuantitas : numeric
+  lebar : numeric
+  lokasi_ruang : character varying
+  luas : numeric
+  luas_pemanfaatan : numeric
+  luas_tapak : numeric
+  luas_tnhb : numeric
+  luas_tnhk : numeric
+  luas_tnhl : numeric
+  merk : character varying
+  negara : character varying
+  nm_penghuni : character varying
+  nm_unit_pengguna : character varying
+  no_aset : bigint
+  no_dana : character varying
+  no_dok_bukti_kepemilikan : character varying
+  no_dok_perolehan : character varying
+  no_kib : character varying
+  no_perkara_hukum : character varying
+  no_polisi : character varying
+  no_psp : character varying
+  optimalisasi : numeric
+  panjang : numeric
+  peruntukan : character varying
+  peruntukan_tnh : character varying
+  properti_investasi_yn : character
+  proses_pmpp_yn : character
+  rencana_hibah_yn : character
+  rph_aset : bigint
+  rph_buku : bigint
+  rph_mutasi : bigint
+  rph_susut : bigint
+  sbsk : numeric
+  serial_number : character varying
+  stat_dok_bukti_kepemilikan : character varying
+  status_bmn_idle : character
+  status_bmn_yn : character
+  status_data : smallint
+  status_pengelolaan : character varying
+  status_sanksi : integer
+  status_sbsn : character varying
+  sts_ast : smallint
+  sts_his : smallint
+  tercatat : character varying
+  tgl_akhir_sbsn : date
+  tgl_buku_pertama : date
+  tgl_dana : date
+  tgl_dok_bukti_kepemilikan : character varying
+  tgl_guna : date
+  tgl_hapus : date
+  tgl_mulai_huni : date
+  tgl_perlh : date
+  tgl_psp : date
+  tgl_rekam : date
+  tgl_rekam_pertama : date
+  tgl_renov : date
+  tgl_selesai_huni : date
+  tipe : character varying
+  topografi_elevasi : character varying
+  topografi_kontur : character varying
+  umur_sisa : real
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kab : character varying
+  ur_kec : character varying
+  ur_kel : character varying
+  ur_prov : character varying
+  ur_sskel : character varying
+  ur_sumber_dana : character varying
+  vc_alamat_lengkap : text
+}
+
+entity "public.m_aset_bidang" as public__m_aset_bidang #FFFFFF {
+  id_aset_bidang : bigint <<PK>>
+  alamat : character varying
+  created_at : timestamp without time zone
+  gps_latitude : numeric
+  gps_longitude : numeric
+  has_serti : boolean
+  id_aset : bigint
+  id_permasalahan_tanah : integer
+  is_gps_bpn : boolean
+  kd_register : character varying
+  kode_kab_kota : character varying
+  kode_kec : character varying
+  kode_kel : character varying
+  kode_prov : character varying
+  nm_kab_kota : character varying
+  nm_kec : character varying
+  nm_kel : character varying
+  nm_prov : character varying
+  no_bidang : integer
+  status_data : integer
+  updated_at : timestamp without time zone
+}
+
+entity "public.m_aset_dbr_setting" as public__m_aset_dbr_setting #FFFFFF {
+  id : character varying <<PK>>
+  id_satker : bigint
+  is_lock : boolean
+}
+
+entity "public.m_aset_dok" as public__m_aset_dok #FFFFFF {
+  id_dok : bigint <<PK>>
+  atas_nama : character varying
+  atas_nama_catatan : character varying
+  atas_nama_sesuai_yn : character
+  cek_dokumen_bpn_at : timestamp without time zone
+  created_at : timestamp without time zone
+  created_by : character varying
+  created_date : date
+  dok_lengkap_yn : character
+  file_size : double precision
+  filename : character varying
+  folder : character varying
+  gps_catatan : character varying
+  gps_latitude_bpn : numeric
+  gps_longitude_bpn : numeric
+  gps_sesuai_yn : character
+  id_asal : bigint
+  id_aset : bigint
+  id_aset_bidang : bigint
+  id_status_blm_serti : integer
+  id_type : character varying
+  id_value : bigint
+  is_from_bpn : boolean
+  is_luar_negeri : boolean
+  is_luar_polygon : boolean
+  jns_sertipikat : integer
+  kanwil_bpn : character varying
+  kanwil_bpn_catatan : character varying
+  kanwil_bpn_sesuai_yn : character
+  kd_dok : character varying
+  kd_jns_serti : character varying
+  kd_smilik : character varying
+  ket : character varying
+  luas : numeric
+  luas_catatan : character varying
+  luas_sesuai_yn : character
+  nib : character varying
+  nib_el : character varying
+  no_dokumen : character varying
+  penerbit : character varying
+  penerbit_catatan : character varying
+  penerbit_sesuai_yn : character
+  polygon_data_bpn : jsonb
+  result_api_bpn : jsonb
+  status_data : smallint
+  table_type : character varying
+  tahun_serti : integer
+  terakhir_yn : character
+  tgl_mulai_berlaku : date
+  tgl_mulai_berlaku_catatan : character varying
+  tgl_mulai_berlaku_sesuai_yn : character
+  tgl_selesai_berlaku : date
+  updated_at : timestamp without time zone
+  updated_by : character varying
+  updated_date : date
+}
+
+entity "public.m_aset_dok_lainnya" as public__m_aset_dok_lainnya #FFFFFF {
+  id_aset_dok_lainnya : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  filename : character varying
+  id_aset : bigint
+  keterangan : character varying
+  nm_dokumen : character varying
+  status_data : integer
+  tgl_dokumen : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "public.m_aset_dok_tanah_not_found" as public__m_aset_dok_tanah_not_found #FFFFFF {
+  id_dok : bigint <<PK>>
+  atas_nama : character varying
+  cek_dokumen_bpn_at : timestamp without time zone
+  created_at : timestamp without time zone
+  created_by : character varying
+  created_date : date
+  dok_lengkap_yn : character
+  file_size : double precision
+  filename : character varying
+  folder : character varying
+  id_aset : bigint
+  id_aset_bidang : bigint
+  id_status_blm_serti : integer
+  is_luar_negeri : boolean
+  is_luar_polygon : boolean
+  jns_sertipikat : integer
+  kd_dok : character varying
+  kd_jns_serti : character varying
+  kd_smilik : character varying
+  ket : character varying
+  luas : numeric
+  nib : character varying
+  nib_el : character varying
+  no_dokumen : character varying
+  penerbit : character varying
+  status_data : smallint
+  tahun_serti : integer
+  terakhir_yn : character
+  tgl_mulai_berlaku : date
+  tgl_selesai_berlaku : date
+  updated_at : timestamp without time zone
+  updated_by : character varying
+  updated_date : date
+}
+
+entity "public.m_aset_fas_penunjang" as public__m_aset_fas_penunjang #FFFFFF {
+  id_aset_fas_penunjang : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_asal : bigint
+  id_aset : bigint
+  isi_fasilitas : character varying
+  kd_jns_fasilitas : bigint
+  ket : character varying
+  nm_fasilitas : character varying
+  status_data : smallint
+  updated_by : bigint
+  updated_on : timestamp without time zone
+}
+
+entity "public.m_aset_hist" as public__m_aset_hist #FFFFFF {
+  id_hist : bigint <<PK>>
+  created_at : timestamp without time zone
+  id_aset : bigint
+  id_ref : bigint
+  tipe_hist : smallint
+  trans_date : timestamp without time zone
+  user_id : integer
+  userlogin : character varying
+  username : character varying
+}
+
+entity "public.m_aset_hist_detail" as public__m_aset_hist_detail #FFFFFF {
+  id_hist_detail : bigint <<PK>>
+  created_at : timestamp without time zone
+  data_change : jsonb
+  id_hist : bigint
+  kd_kategori : character varying
+  tipe_trans : character varying
+  valid_to : date
+}
+
+entity "public.m_aset_hukum" as public__m_aset_hukum #FFFFFF {
+  id_aset_hukum : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_asal : bigint
+  id_aset : bigint
+  kd_status_hukum : character
+  nmfile : character varying
+  no_reg_perkara : character varying
+  phk_sengketa : character varying
+  status_data : smallint
+  terakhir_yn : character
+  tgl : date
+  type_doc : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  updated_on : timestamp without time zone
+  ur_masalah : character varying
+}
+
+entity "public.m_aset_hukum_new" as public__m_aset_hukum_new #FFFFFF {
+  id_aset_hukum : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : bigint
+  deskripsi : character varying
+  filename : character varying
+  hasil : character varying
+  id_aset : bigint
+  id_jns_perkara : integer
+  id_status_hukum : integer
+  id_status_perkara : integer
+  id_tahap_perkara : integer
+  status_data : integer
+  tanggal : date
+  updated_at : timestamp without time zone
+  updated_by : bigint
+}
+
+entity "public.m_aset_id_hist" as public__m_aset_id_hist #FFFFFF {
+  id_aset_original : bigint <<PK>>
+  id_aset_sekarang : bigint <<PK>>
+  created_at : timestamp without time zone
+  id_aset_asal : bigint
+  kode_register : character varying
+}
+
+entity "public.m_aset_kons_bdg" as public__m_aset_kons_bdg #FFFFFF {
+  id_m_aset_kons_bdg : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_aset : bigint
+  jns_tanggal : integer
+  kd_kondisi : character varying
+  lantai : character varying
+  material_atap : character varying
+  material_langit : character varying
+  matrial_dinding : character varying
+  nmfile : character varying
+  pagar : character varying
+  pelapis_dindin_dlm : character varying
+  pelapis_dindin_lr : character varying
+  perkerasan : character varying
+  status_data : smallint
+  str_atap : character varying
+  str_rangka : character varying
+  terakhir_yn : character
+  tgl_inv : date
+  type_doc : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "public.m_aset_konstruksi" as public__m_aset_konstruksi #FFFFFF {
+  id_aset_konstruksi : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  harga_satuan : numeric
+  id_asal : character varying
+  id_aset : bigint
+  id_kons_komponen : integer
+  id_kons_sub_komponen : integer
+  koef : numeric
+  koef_adjust : numeric
+  luas : numeric
+  nilai : numeric
+  status_data : integer
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kons_material : character varying
+}
+
+entity "public.m_aset_lantai" as public__m_aset_lantai #FFFFFF {
+  id_lantai : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  delete_at : timestamp without time zone
+  delete_by : integer
+  id_aset : bigint
+  id_aset_lantai : bigint
+  id_satker : bigint
+  is_lantai_dasar : boolean
+  jns_lantai : integer
+  kd_jns_bmn : integer
+  keterangan : character varying
+  luas : numeric
+  nm_file : character varying
+  no_lantai : character varying
+  status_data : smallint
+  status_yn : character
+  tgl_upload : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "public.m_aset_lantai_pemakai" as public__m_aset_lantai_pemakai #FFFFFF {
+  created_at : timestamp without time zone
+  id : bigint
+  id_lantai : bigint
+  id_satker : bigint
+  manager_yn : character varying
+  updated_at : timestamp without time zone
+}
+
+entity "public.m_aset_laporan_dok" as public__m_aset_laporan_dok #FFFFFF {
+  id_dok : bigint <<PK>>
+  atas_nama : character varying
+  atas_nama_catatan : character varying
+  atas_nama_sesuai_yn : character
+  cek_dokumen_bpn_at : timestamp without time zone
+  created_at : timestamp without time zone
+  created_by : character varying
+  created_date : date
+  dok_lengkap_yn : character
+  file_size : double precision
+  filename : character varying
+  folder : character varying
+  gps_catatan : character varying
+  gps_latitude_bpn : numeric
+  gps_longitude_bpn : numeric
+  gps_sesuai_yn : character
+  id_aset : bigint
+  id_aset_bidang : bigint
+  id_status_blm_serti : integer
+  is_from_bpn : boolean
+  is_luar_negeri : boolean
+  is_luar_polygon : boolean
+  jns_sertipikat : integer
+  kanwil_bpn : character varying
+  kanwil_bpn_catatan : character varying
+  kanwil_bpn_sesuai_yn : character
+  kd_dok : character varying
+  kd_jns_serti : character varying
+  kd_smilik : character varying
+  ket : character varying
+  luas : numeric
+  luas_catatan : character varying
+  luas_sesuai_yn : character
+  nib : character varying
+  nib_el : character varying
+  no_dokumen : character varying
+  penerbit : character varying
+  penerbit_catatan : character varying
+  penerbit_sesuai_yn : character
+  polygon_data_bpn : jsonb
+  result_api_bpn : jsonb
+  status_data : smallint
+  tahun_serti : integer
+  terakhir_yn : character
+  tgl_mulai_berlaku : date
+  tgl_mulai_berlaku_catatan : character varying
+  tgl_mulai_berlaku_sesuai_yn : character
+  tgl_selesai_berlaku : date
+  updated_at : timestamp without time zone
+  updated_by : character varying
+  updated_date : date
+}
+
+entity "public.m_aset_masalah_lain" as public__m_aset_masalah_lain #FFFFFF {
+  id_aset_masalah_lain : bigint <<PK>>
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  filename : character varying
+  id_aset : bigint
+  id_kategori_masalah_lain : integer
+  pihak : character varying
+  status_data : integer
+  tanggal : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  uraian_masalah_lain : character varying
+}
+
+entity "public.m_aset_njop" as public__m_aset_njop #FFFFFF {
+  id_aset_njop : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_asal : bigint
+  id_aset : bigint
+  kelas : character varying
+  luas : double precision
+  njop_meter : numeric
+  njop_nilai : numeric
+  nmfile : character varying
+  nop : character varying
+  npwp : character varying
+  status_data : smallint
+  tahun : character varying
+  terakhir_yn : character
+  tgl : date
+  type_doc : character varying
+  updated_at : timestamp without time zone
+  updated_by : bigint
+  updated_on : timestamp without time zone
+}
+
+entity "public.m_aset_nopol" as public__m_aset_nopol #FFFFFF {
+  id_aset_nopol : bigint <<PK>>
+  id_asal : bigint
+  id_aset : bigint
+  jenis_plat_nopol : character varying
+  ket : character varying
+  no_polisi : character varying
+  terakhir_yn : character
+  tgl_keluar : date
+  tgl_sd_berlaku : date
+  updated_at : timestamp without time zone
+}
+
+entity "public.m_aset_objek_bangunan_sarana" as public__m_aset_objek_bangunan_sarana #FFFFFF {
+  id_aset_objek_bangunan_sarana : bigint <<PK>>
+  id_aset : bigint
+  nm_sarana : character varying
+}
+
+entity "public.m_aset_objek_informasi" as public__m_aset_objek_informasi #FFFFFF {
+  id_aset_objek_informasi : bigint <<PK>>
+  id_aset : bigint
+  isi_informasi : character varying
+}
+
+entity "public.m_aset_objek_non_tanah" as public__m_aset_objek_non_tanah #FFFFFF {
+  id_aset_objek_non_tanah : bigint <<PK>>
+  bentuk : character varying
+  id_aset : bigint
+  is_instalasi_air : boolean
+  is_instalasi_listrik : boolean
+  jenis_barang : character varying
+  kapasitas : character varying
+  penggunaan_bangunan : character varying
+  tgl_pembuatan : date
+  tgl_renovasi : date
+  tgl_selesai_dibangun : date
+  tinggi_bangunan : character varying
+}
+
+entity "public.m_aset_objek_tanah" as public__m_aset_objek_tanah #FFFFFF {
+  id_aset_objek_tanah : bigint <<PK>>
+  id_arah : integer
+  id_arus_lalu_lintas : integer
+  id_aset : bigint
+  id_intensitas_kebisingan : integer
+  id_jaringan_listrik : integer
+  id_jaringan_telepon : integer
+  id_jenis_dokumen_kepemilikan : integer
+  id_jns_tanah : integer
+  id_kategori_kawasan : integer
+  id_kategori_lokasi : integer
+  id_kondisi_jalan : integer
+  id_konstruksi_jalan : integer
+  id_kualitas_air_tanah : integer
+  id_kualitas_udara : integer
+  id_pengukur : integer
+  id_status_jalan : integer
+  is_permasalahan_hukum : boolean
+  is_rawan_bencana : boolean
+  is_sesuai_aturan_garis_sempadan_bangunan : boolean
+  is_sesuai_aturan_garis_sempadan_jalan : boolean
+  is_sesuai_aturan_koef_dsr_bangunan : boolean
+  is_sesuai_aturan_koef_lantai_bangunan : boolean
+  jarak_cbd_terdekat : numeric
+  jarak_gardu_pln : numeric
+  jarak_jalan_utama : numeric
+  jarak_jalur_migas : numeric
+  jarak_menara : numeric
+  jarak_reaktor_nuklir : numeric
+  jarak_spbg : numeric
+  jarak_spbu : numeric
+  jarak_sutet : numeric
+  jarak_tps : numeric
+  kd_bentuk : character varying
+  kd_elevasi : character varying
+  kd_kontur : character varying
+  kode_pos : character varying
+  koordinat : character varying
+  lebar : integer
+  lebar_jalan : numeric
+  luas : numeric
+  njop : numeric
+  njop_per_meter : numeric
+  nm_cbd_terdekat : character varying
+  nm_jalan_utama : character varying
+  tahun_pajak : integer
+  ukuran : character varying
+}
+
+entity "public.m_aset_objek_tanah_peruntukan" as public__m_aset_objek_tanah_peruntukan #FFFFFF {
+  id_aset_objek_tanah_peruntukan : bigint <<PK>>
+  id_aset : bigint
+  id_sarana : integer
+  is_ada : boolean
+  kd_peruntukan : character varying
+}
+
+entity "public.m_aset_objek_tanah_sarana" as public__m_aset_objek_tanah_sarana #FFFFFF {
+  id_aset_objek_tanah_sarana : bigint <<PK>>
+  id_aset : bigint
+  id_sarana : integer
+  is_ada : boolean
+}
+
+entity "public.m_aset_pemakai" as public__m_aset_pemakai #FFFFFF {
+  id_aset_pemakai : bigint <<PK>>
+  alm_pmk : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  golongan : character varying
+  id_asal : bigint
+  id_aset : bigint
+  id_mutasi_dtl : bigint
+  id_satker : bigint
+  instansi_penerbit : character varying
+  jab_fungsional : character varying
+  jab_str : character varying
+  jabatan_penerbit : character varying
+  jns_pemakai : character varying
+  ket : character varying
+  nilai : numeric
+  nip_pmk : character varying
+  nm_pmk : character varying
+  nmfile : character varying
+  nmfile_sk : character varying
+  no_ktp : character varying
+  no_sip : character varying
+  no_sk_penetapan : character varying
+  photo : character varying
+  status_data : smallint
+  status_pmk : character varying
+  terakhir_yn : character
+  tgl_lahir : date
+  tgl_mulai : date
+  tgl_pensiun : date
+  tgl_selesai : date
+  tgl_sip : date
+  tgl_sip_akhir : date
+  tgl_sk : date
+  tmp_lahir : character varying
+  tmt_jab : date
+  type_doc : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "public.m_aset_penilaian" as public__m_aset_penilaian #FFFFFF {
+  id_laporan : bigint <<PK>>
+  id_aset : bigint
+  jns_nilai : character
+  nilai : numeric
+  no_laporan : character varying
+  tgl_laporan : date
+  tgl_penilaian : date
+}
+
+entity "public.m_aset_perlengkapan" as public__m_aset_perlengkapan #FFFFFF {
+  id_aset_perlengkapan : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_asal : bigint
+  id_aset : bigint
+  nm_perlengkapan : character varying
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_perlengkapan : character varying
+}
+
+entity "public.m_aset_photo" as public__m_aset_photo #FFFFFF {
+  id_photo : bigint <<PK>>
+  created : date
+  created_at : timestamp without time zone
+  created_by : integer
+  file_size : double precision
+  filename : character varying
+  folder : character varying
+  id_asal : bigint
+  id_aset : bigint
+  id_sedia : bigint
+  ket_photo : character varying
+  nm_photo : character varying
+  photo_utama_yn : character
+  status_data : smallint
+  tanggal : date
+  thumbnail : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "public.m_aset_rekap" as public__m_aset_rekap #FFFFFF {
+  id : bigint <<PK>>
+  buku_aktif : numeric
+  buku_tdk_aktif : numeric
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker : integer
+  id_satker_parent : bigint
+  jml_aktif : bigint
+  jml_tdk_aktif : bigint
+  kd_brg : character varying
+  kd_korwil : character varying
+  kd_satker : character varying
+  kdkategori : bigint
+  luas_aktif : numeric
+  luas_tdk_aktif : numeric
+  perolehan_aktif : numeric
+  perolehan_tdk_aktif : numeric
+  susut_aktif : numeric
+  susut_tdk_aktif : numeric
+  ur_korwil : character varying
+  ur_satker : character varying
+}
+
+entity "public.m_aset_resync" as public__m_aset_resync #FFFFFF {
+  id_aset_resync : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  finished_at : timestamp without time zone
+  id_aset : bigint
+  id_satker_resync : bigint
+  kode_register : character varying
+  raw_only : boolean
+  remark : character varying
+  started_at : timestamp without time zone
+  status : character varying
+  trans_job_code : character varying
+  type : character varying
+}
+
+entity "public.m_aset_ruang" as public__m_aset_ruang #FFFFFF {
+  id_aset_ruang : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  delete_at : timestamp without time zone
+  delete_by : integer
+  id_aset : bigint
+  id_aset_lantai : bigint
+  id_aset_ruang_asal : bigint
+  id_jns_ruang : smallint
+  id_kbdg_detail : bigint
+  id_lantai_ruang : bigint
+  id_satker : bigint
+  jabatan_penanggungjawab_ruang : character varying
+  kd_jns_bmn : integer
+  kd_ruang : character varying
+  kd_tipe_ruang : character
+  keterangan : character varying
+  luas_ruang : numeric
+  nama_penanggungjawab_ruang : character varying
+  nip_penanggungjawab_ruang : character varying
+  nm_bangunan_ruang : character varying
+  nm_file : character varying
+  nm_ruang : character varying
+  no_lantai_ruang : character varying
+  qr_code_ruang : character varying
+  status_data : smallint
+  status_yn : character varying
+  tgl_upload : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "public.m_aset_ruang_lain" as public__m_aset_ruang_lain #FFFFFF {
+  id_aset_ruang_lain : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_aset_ruang : bigint
+  id_satker : bigint
+  luas_ruang : numeric
+  status_data : smallint
+  updated_at : timestamp without time zone
+}
+
+entity "public.m_aset_rwyt_asuransi" as public__m_aset_rwyt_asuransi #FFFFFF {
+  id_aset_rwyt_asuransi : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : character varying
+  created_when : timestamp without time zone
+  id_asal : bigint
+  id_aset : bigint
+  id_satker : bigint
+  jangka_waktu : numeric
+  jmlh_premi : numeric
+  kd_jns_asuransi : character varying
+  keterangan : character varying
+  nilai_pertanggungan : numeric
+  nmfile : character varying
+  no_polis : character varying
+  status_data : smallint
+  tgl_jatuh_tempo : date
+  tgl_polis : date
+  updated_at : timestamp without time zone
+  updated_by : character varying
+  updated_when : timestamp without time zone
+}
+
+entity "public.m_aset_rwyt_mutasi" as public__m_aset_rwyt_mutasi #FFFFFF {
+  id_aset_rwyt_mutasi : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  flag_sap : character varying
+  id_asal : bigint
+  id_aset : bigint
+  id_mutasi_dtl : bigint
+  intra_extra : character varying
+  jns_trn : character varying
+  kd_akun : character varying
+  kd_kondisi : character varying
+  ket : character varying
+  kuantitas : numeric
+  nilai : numeric
+  nilai_sat : numeric
+  no_bukti : character varying
+  no_dsr_mutasi : character varying
+  satuan : character varying
+  status_data : smallint
+  terakhir_yn : character
+  tgl_buku : date
+  tgl_dsr_mutasi : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  updated_on : timestamp without time zone
+}
+
+entity "public.m_aset_rwyt_nilai" as public__m_aset_rwyt_nilai #FFFFFF {
+  id_aset_rwyt_nilai : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_asal : bigint
+  id_aset : bigint
+  id_mutasi_dtl : bigint
+  nilai_buku : numeric
+  nilai_wajar : numeric
+  nmfile : character varying
+  no_nilai : character varying
+  penilai : character varying
+  status_data : smallint
+  terakhir_yn : character
+  tgl_nilai : date
+  type_doc : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  updated_on : timestamp without time zone
+}
+
+entity "public.m_aset_rwyt_pelihara" as public__m_aset_rwyt_pelihara #FFFFFF {
+  id_aset_rwyt_pelihara : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_asal : character varying
+  id_aset : bigint
+  id_mutasi_dtl : bigint
+  id_satker : integer
+  jns_perlihara : character varying
+  kd_akun : character varying
+  ket : character varying
+  nilai : numeric
+  nilai_pelihara : numeric
+  nmfile : character varying
+  no_dipa : character varying
+  no_sp2d : character varying
+  phk_pelihara : character varying
+  status_data : smallint
+  terakhir_yn : character
+  tgl_sp2d : date
+  tipe_pelihara : integer
+  type_doc : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  updated_on : timestamp without time zone
+  ur_pelihara : character varying
+}
+
+entity "public.m_aset_sbsn" as public__m_aset_sbsn #FFFFFF {
+  id_aset : bigint <<PK>>
+  created_at : timestamp without time zone
+  no_kmk_sbsn : character varying
+  no_seri_sbsn : character varying
+  status_sbsn : character varying
+  tgl_jatuh_tempo_seri_sbsn : date
+  tgl_kmk_sbsn : date
+  tgl_terbit_kmk_sbsn : character varying
+  tgl_terbit_pertama_seri_sbsn : date
+  updated_at : timestamp without time zone
+}
+
+entity "public.m_aset_sp2d" as public__m_aset_sp2d #FFFFFF {
+  id_aset_sp2d : bigint <<PK>>
+  bkpk : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  filename : character varying
+  id_aset : bigint
+  id_satker : integer
+  jml_sp2d : numeric
+  jns_trn : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  nilai : numeric
+  nilai_pengeluaran : numeric
+  nilai_pengembangan : numeric
+  nilai_potongan : numeric
+  nilai_sppa : numeric
+  no_aset : integer
+  no_dipa : character varying
+  no_sp2d : character varying
+  no_sppa : character varying
+  status_data : integer
+  tgl_buku : date
+  tgl_sp2d : date
+  thn_ang : integer
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_satker : character varying
+}
+
+entity "public.m_aset_tanah_bangunan" as public__m_aset_tanah_bangunan #FFFFFF {
+  id_aset_tanah_bangunan : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_asal : bigint
+  id_aset_bangunan : bigint
+  id_aset_tanah : bigint
+  id_jenis_kepemilikan : integer
+  id_jenis_pemilik_bangunan : integer
+  id_jns_tanah : integer
+  id_satker : integer
+  jml_lantai : integer
+  kd_brg : character varying
+  kd_kontur : character varying
+  keterangan : character varying
+  luas_bangunan : numeric
+  luas_dasar_bangunan : numeric
+  luas_dasar_bangunan_tanah : numeric
+  merk : character varying
+  nm_pemilik_bangunan : character varying
+  no_aset : integer
+  rph_mutasi : numeric
+  status_data : integer
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_jenis_kepemilikan : character varying
+  ur_sskel : character varying
+}
+
+entity "public.m_aset_tim_penilai" as public__m_aset_tim_penilai #FFFFFF {
+  id_tim_penilai : bigint <<PK>>
+  id_aset_rwyt_nilai : bigint
+  nama : character varying
+  nip : character varying
+  unit_kerja : character varying
+}
+
+entity "public.m_aset_timeline" as public__m_aset_timeline #FFFFFF {
+  id : bigint <<PK>>
+  asal_perlh : character varying
+  created_at : timestamp without time zone
+  data_aset : jsonb
+  data_aset_change : jsonb
+  deskripsi : character varying
+  id_asal_data : bigint
+  id_aset : bigint
+  id_aset_sakti : bigint
+  id_his : bigint
+  id_satker : integer
+  id_trx : bigint
+  id_trx_asal : bigint
+  jns_trn : character varying
+  jns_ubah : integer
+  kd_barang : character varying
+  kd_jns_bmn : smallint
+  kd_satker : character varying
+  keterangan : character varying
+  kode_register : character varying
+  kond : smallint
+  na : bigint
+  nan : bigint
+  no_aset : character varying
+  no_dsr_mts : character varying
+  no_kib : character varying
+  np : bigint
+  npn : bigint
+  rph_aset : bigint
+  rph_mutasi : bigint
+  rph_sat : bigint
+  sm : numeric
+  sts_ast : smallint
+  sts_his : smallint
+  table_name : character varying
+  tanggal : date
+  tgl_buku : date
+  tgl_dsr_mts : date
+  tgl_perlh : date
+  tipe_timeline : smallint
+  updated_at : timestamp without time zone
+  userlogin : character varying
+  valid_from : timestamp without time zone
+  valid_to : timestamp without time zone
+}
+
+entity "public.m_aset_wasdal_pemanfaatan" as public__m_aset_wasdal_pemanfaatan #FFFFFF {
+  id_aset : bigint <<PK>>
+  col_11 : smallint
+  col_12 : smallint
+  col_13 : smallint
+  col_14 : smallint
+  col_15 : smallint
+  col_16 : smallint
+  col_17 : smallint
+  col_18 : smallint
+  col_19 : smallint
+  col_20 : smallint
+  col_21 : smallint
+  col_22 : smallint
+  col_23 : smallint
+  col_24 : smallint
+  col_25 : smallint
+  col_26 : smallint
+  col_27 : smallint
+  col_28 : smallint
+  col_29 : smallint
+  col_30 : smallint
+  col_31 : smallint
+  col_32 : smallint
+  col_33 : smallint
+  col_34 : smallint
+  col_35 : smallint
+  col_36 : smallint
+  col_37 : smallint
+  col_38 : smallint
+  col_39 : smallint
+  col_40 : smallint
+  col_41 : smallint
+  col_42 : smallint
+  col_43 : smallint
+  col_44 : smallint
+  col_45 : smallint
+  col_46 : smallint
+  status_id : smallint
+  updated_at : timestamp with time zone
+  val_11 : numeric
+  val_12 : numeric
+  val_13 : numeric
+  val_14 : numeric
+  val_15 : numeric
+  val_16 : numeric
+  val_17 : numeric
+  val_18 : numeric
+  val_19 : numeric
+  val_20 : numeric
+  val_21 : numeric
+  val_22 : numeric
+  val_23 : numeric
+  val_24 : numeric
+  val_25 : numeric
+}
+
+entity "public.m_aset_wasdal_pemindahtanganan" as public__m_aset_wasdal_pemindahtanganan #FFFFFF {
+  id_aset : bigint <<PK>>
+  col_47 : smallint
+  col_48 : smallint
+  col_49 : smallint
+  col_50 : smallint
+  col_51 : smallint
+  col_52 : smallint
+  col_53 : smallint
+  col_54 : smallint
+  col_55 : smallint
+  col_56 : smallint
+  col_57 : smallint
+  col_58 : smallint
+  col_59 : smallint
+  col_60 : smallint
+  col_61 : smallint
+  col_62 : smallint
+  col_63 : smallint
+  col_64 : smallint
+  col_65 : smallint
+  col_66 : smallint
+  col_67 : smallint
+  col_68 : smallint
+  col_69 : smallint
+  col_70 : smallint
+  status_id : smallint
+  updated_at : timestamp with time zone
+  val_47 : numeric
+  val_48 : numeric
+  val_49 : numeric
+  val_50 : numeric
+  val_51 : numeric
+  val_52 : numeric
+  val_53 : numeric
+  val_54 : numeric
+  val_55 : numeric
+  val_56 : numeric
+  val_57 : numeric
+}
+
+entity "public.m_aset_wasdal_penatausahaan" as public__m_aset_wasdal_penatausahaan #FFFFFF {
+  id_aset : bigint <<PK>>
+  col_71 : smallint
+  col_72 : smallint
+  col_73 : smallint
+  col_74 : smallint
+  col_75 : smallint
+  col_76 : smallint
+  col_77 : smallint
+  col_78 : smallint
+  col_79 : smallint
+  col_80 : smallint
+  col_81 : smallint
+  col_82 : smallint
+  col_83 : smallint
+  col_84 : smallint
+  col_85 : smallint
+  col_86 : smallint
+  col_87 : smallint
+  col_88 : smallint
+  col_89 : smallint
+  col_90 : smallint
+  status_id : smallint
+  updated_at : timestamp with time zone
+}
+
+entity "public.m_aset_wasdal_pengamanan_pemeliharaan" as public__m_aset_wasdal_pengamanan_pemeliharaan #FFFFFF {
+  id_aset : bigint <<PK>>
+  col_81 : smallint
+  col_82 : smallint
+  col_83 : smallint
+  col_84 : smallint
+  col_85 : smallint
+  col_86 : smallint
+  col_87 : smallint
+  col_88 : smallint
+  col_89 : smallint
+  col_90 : smallint
+  status_id : smallint
+  updated_at : timestamp with time zone
+}
+
+entity "public.m_aset_wasdal_penggunaan" as public__m_aset_wasdal_penggunaan #FFFFFF {
+  id_aset : bigint <<PK>>
+  col_1 : smallint
+  col_10 : smallint
+  col_2 : smallint
+  col_3 : smallint
+  col_4 : smallint
+  col_5 : smallint
+  col_6 : smallint
+  col_7 : smallint
+  col_8 : smallint
+  col_9 : smallint
+  status_id : smallint
+  updated_at : timestamp with time zone
+}
+
+entity "public.m_kangk" as public__m_kangk #FFFFFF {
+  id_kangk : bigint <<PK>>
+  bhn_bakar : character varying
+  bobot : character varying
+  cad1 : character varying
+  daya : character varying
+  id_asal : bigint
+  id_aset : bigint
+  jml_msn : bigint
+  msn_gerak : character varying
+  muat : character varying
+  negara : character varying
+  no_mesin : character varying
+  no_polisi : character varying
+  no_rangka : character varying
+  pabrik : character varying
+  rphwajar : numeric
+  thn_buat : character varying
+  thn_rakit : character varying
+  updated_at : timestamp without time zone
+}
+
+entity "public.m_kbdg_sbsk_existing" as public__m_kbdg_sbsk_existing #FFFFFF {
+  id_sbsk_existing_bdg : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_asal : bigint
+  id_aset : bigint
+  jml_lantai : integer
+  kdb : integer
+  lbb : bigint
+  lbb_lantai : integer
+  luas_00 : numeric
+  luas_01 : numeric
+  luas_02 : numeric
+  luas_03 : numeric
+  luas_04 : numeric
+  luas_05 : numeric
+  luas_06 : numeric
+  luas_07 : numeric
+  luas_08 : numeric
+  luas_09 : numeric
+  luas_10 : numeric
+  luas_11 : numeric
+  luas_12 : numeric
+  luas_13 : numeric
+  luas_14 : numeric
+  luas_15 : numeric
+  luas_16 : numeric
+  luas_17 : numeric
+  luas_171 : numeric
+  luas_18 : numeric
+  luas_brutto : numeric
+  luas_lobby : numeric
+  luas_max_kdb : numeric
+  luas_max_kdb_sbsk : numeric
+  luas_min_kdb : numeric
+  luas_netto : numeric
+  luas_r_arsip : numeric
+  luas_r_fungsional : numeric
+  luas_server : numeric
+  luas_toilet : numeric
+  luas_tot_00 : numeric
+  luas_tot_01 : numeric
+  luas_tot_02 : numeric
+  luas_tot_03 : numeric
+  luas_tot_04 : numeric
+  luas_tot_05 : numeric
+  luas_tot_06 : numeric
+  luas_tot_07 : numeric
+  luas_tot_08 : numeric
+  luas_tot_09 : numeric
+  luas_tot_10 : numeric
+  luas_tot_11 : numeric
+  luas_tot_12 : numeric
+  luas_tot_13 : numeric
+  luas_tot_14 : numeric
+  luas_tot_15 : numeric
+  luas_tot_16 : numeric
+  luas_tot_17 : numeric
+  luas_tot_171 : numeric
+  luas_tot_18 : numeric
+  luas_tot_18_22 : numeric
+  luas_tot_1_17 : numeric
+  neto_sblm_lobby : numeric
+  nisbah_luas : bigint
+  nm_file : character varying
+  optimalisasi : bigint
+  orang_00 : integer
+  orang_01 : integer
+  orang_02 : integer
+  orang_03 : integer
+  orang_04 : integer
+  orang_05 : integer
+  orang_06 : integer
+  orang_07 : integer
+  orang_08 : integer
+  orang_09 : integer
+  orang_10 : integer
+  orang_11 : integer
+  orang_12 : integer
+  orang_13 : integer
+  orang_14 : integer
+  orang_15 : integer
+  orang_16 : integer
+  orang_17 : integer
+  orang_171 : integer
+  orang_18 : numeric
+  orang_r_pelayanan : integer
+  sbsk : bigint
+  status_data : smallint
+  thn : character varying
+  tot_pegawai : integer
+  tot_staff : integer
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "public.m_kbdg_sbsk_profil_ged" as public__m_kbdg_sbsk_profil_ged #FFFFFF {
+  id_profil_ged : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_asal : bigint
+  id_aset : bigint
+  id_pengadaan : bigint
+  id_satker : integer
+  is_pelayanan_publik : character
+  jml_00 : numeric
+  jml_01 : numeric
+  jml_02 : numeric
+  jml_03 : numeric
+  jml_04 : numeric
+  jml_05 : numeric
+  jml_06 : numeric
+  jml_07 : numeric
+  jml_08 : numeric
+  jml_09 : numeric
+  jml_10 : numeric
+  jml_11 : numeric
+  jml_12 : numeric
+  jml_13 : numeric
+  jml_14 : numeric
+  jml_15 : numeric
+  jml_16 : numeric
+  jml_17 : numeric
+  jml_171 : numeric
+  jml_18 : numeric
+  jml_lantai : integer
+  jml_layanan_perhari : integer
+  jml_rpelayanan : integer
+  jns_ruang_pelayanan : integer
+  kd_brg : character varying
+  kd_lokasi : character varying
+  kd_satker : character varying
+  kdb : numeric
+  lrp : numeric
+  luas_bdg : numeric
+  luas_tapak : numeric
+  nisbah_luas_netto : numeric
+  nm_lokasi : character varying
+  no_aset : character varying
+  nomor_perda : character varying
+  status_data : smallint
+  tgl_perda : date
+  thn : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_satker : character varying
+  ur_sskel : character varying
+}
+
+entity "public.m_kdp" as public__m_kdp #FFFFFF {
+  id_kdp : bigint <<PK>>
+  alm_kontrak : character varying
+  cr_bangun : character varying
+  fungsi : character varying
+  id_aset : bigint
+  kdgiat : character varying
+  kdprog : character varying
+  nm_kontrak : character varying
+  no_kontrak : character varying
+  sfungsi : character varying
+  tgl_akhir : date
+  tgl_mulai : date
+}
+
+entity "public.m_kdp_resync" as public__m_kdp_resync #FFFFFF {
+  id_kdp_resync : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  finished_at : timestamp without time zone
+  id_aset : bigint
+  id_satker_resync : bigint
+  is_dif : boolean
+  remark : character varying
+  started_at : timestamp without time zone
+  status : character varying
+  trans_job_code : character varying
+}
+
+entity "public.m_kktik" as public__m_kktik #FFFFFF {
+  id_kktik : bigint <<PK>>
+  hdd : character varying
+  id_asal : bigint
+  id_aset : bigint
+  id_aset_bdg : bigint
+  id_aset_ruang : bigint
+  jns_processor : character varying
+  monitor : character varying
+  panjang : numeric
+  processor : character varying
+  ram : character varying
+  spek_lain : character varying
+  updated_at : timestamp without time zone
+}
+
+entity "public.m_krmh_neg_info" as public__m_krmh_neg_info #FFFFFF {
+  id_krmh_neg_info : bigint <<PK>>
+  bentuk_bangunan : integer
+  created_by : integer
+  hdno : character varying
+  id_aset : bigint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "public.m_krmh_neg_sbsk_existing" as public__m_krmh_neg_sbsk_existing #FFFFFF {
+  id_sbsk_existing : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  gol1_a : integer
+  gol1_b : integer
+  gol1_c : integer
+  gol1_d : integer
+  gol1_dapur : integer
+  gol1_e : integer
+  gol1_garasi : integer
+  gol1_gudang : integer
+  gol1_khusus : integer
+  gol1_kmpramuwisma : integer
+  gol1_kmwc : integer
+  gol1_rcuci : integer
+  gol1_rduduk : integer
+  gol1_rfungsional : integer
+  gol1_rkerja : integer
+  gol1_rmakan : integer
+  gol1_rtamu : integer
+  gol1_rtidur : integer
+  gol1_rtpramuwisma : integer
+  gol2_a : integer
+  gol2_b : integer
+  gol2_c : integer
+  gol2_d : integer
+  gol2_dapur : integer
+  gol2_e : integer
+  gol2_garasi : integer
+  gol2_gudang : integer
+  gol2_khusus : integer
+  gol2_kmpramuwisma : integer
+  gol2_kmwc : integer
+  gol2_rcuci : integer
+  gol2_rduduk : integer
+  gol2_rfungsional : integer
+  gol2_rkerja : integer
+  gol2_rmakan : integer
+  gol2_rtamu : integer
+  gol2_rtidur : integer
+  gol2_rtpramuwisma : integer
+  gol3_a : integer
+  gol3_b : integer
+  gol3_c : integer
+  gol3_d : integer
+  gol3_dapur : integer
+  gol3_e : integer
+  gol3_garasi : integer
+  gol3_gudang : integer
+  gol3_khusus : integer
+  gol3_kmpramuwisma : integer
+  gol3_kmwc : integer
+  gol3_rcuci : integer
+  gol3_rduduk : integer
+  gol3_rfungsional : integer
+  gol3_rkerja : integer
+  gol3_rmakan : integer
+  gol3_rtamu : integer
+  gol3_rtidur : integer
+  gol3_rtpramuwisma : integer
+  id_asal : bigint
+  id_aset : bigint
+  jml_lantai : integer
+  kd_brg : character varying
+  lokasi_alamat : character varying
+  luas_bdg : numeric
+  luas_sbsk : numeric
+  luas_tapak : numeric
+  nm_file : character varying
+  no_aset : numeric
+  optimalisasi : numeric
+  sbsk : numeric
+  status_data : smallint
+  tgl_sbsk : date
+  thn : character varying
+  tipe_rmh : character varying
+  tot_dapur : numeric
+  tot_garasi : numeric
+  tot_gudang : numeric
+  tot_kmpramuwisma : numeric
+  tot_kmwc : numeric
+  tot_luas : numeric
+  tot_luas_a : numeric
+  tot_luas_b : numeric
+  tot_luas_c : numeric
+  tot_luas_d : numeric
+  tot_luas_e : numeric
+  tot_luas_khusus : numeric
+  tot_rcuci : numeric
+  tot_rduduk : numeric
+  tot_rfungsional : numeric
+  tot_rkerja : numeric
+  tot_rmakan : numeric
+  tot_rtamu : numeric
+  tot_rtidur : numeric
+  tot_rtpramuwisma : numeric
+  tot_ruangan_all : numeric
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_sskel : character varying
+}
+
+entity "public.m_ksenj" as public__m_ksenj #FFFFFF {
+  id_ksenj : bigint <<PK>>
+  id_asal : bigint
+  id_aset : bigint
+  kaliber : character varying
+  nama : character varying
+  nama_pabrik : character varying
+  negara_pembuat : character varying
+  no_pabrik : character varying
+  no_senjata : character varying
+  rphwajar : numeric
+  surat : character varying
+  tgl_surat : date
+  thn_buat : character varying
+  updated_at : timestamp without time zone
+}
+
+entity "public.m_ktnh_sbsk_existing_ged" as public__m_ktnh_sbsk_existing_ged #FFFFFF {
+  id_sbsk_existing : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_asal : bigint
+  id_aset : bigint
+  id_sbsk_kdb : bigint
+  jml_bdg : integer
+  kd_brg : character varying
+  kdb : numeric
+  lahan_ksg : numeric
+  luas_max : numeric
+  luas_min : numeric
+  luas_srn_lingkungan : numeric
+  luas_tnh : numeric
+  luas_tnh_bangunan : numeric
+  luas_tnh_terbuka : numeric
+  no_aset : numeric
+  no_perda : character varying
+  optimalisasi : numeric
+  sbsk : numeric
+  status_data : smallint
+  tgl_perda : date
+  thn : character varying
+  updated_at : timestamp without time zone
+  updated_by : bigint
+  updated_on : timestamp without time zone
+  ur_sskel : character varying
+}
+
+entity "public.m_ktnh_sbsk_existing_rneg" as public__m_ktnh_sbsk_existing_rneg #FFFFFF {
+  id_sbsk_existing : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  gol1_a : integer
+  gol1_b : integer
+  gol1_c : integer
+  gol1_d : integer
+  gol1_e : integer
+  gol1_khusus : integer
+  gol2_a : integer
+  gol2_b : integer
+  gol2_c : integer
+  gol2_d : integer
+  gol2_e : integer
+  gol2_khusus : integer
+  gol3_a : integer
+  gol3_b : integer
+  gol3_c : integer
+  gol3_d : integer
+  gol3_e : integer
+  gol3_khusus : integer
+  id_asal : bigint
+  id_aset : bigint
+  id_tol_rneg : bigint
+  jml_bdg : integer
+  kat_lokasi : character varying
+  kd_brg : character varying
+  lahan_ksg : numeric
+  lokasi_alamat : character varying
+  luas_max : numeric
+  luas_min : numeric
+  luas_riil : integer
+  luas_srn_lingkungan : numeric
+  luas_tnh : numeric
+  luas_tnh_bangunan : numeric
+  no_aset : integer
+  optimalisasi : numeric
+  sbsk : numeric
+  status_data : smallint
+  thn : character varying
+  toleransi : numeric
+  tot_luas_a : numeric
+  tot_luas_b : numeric
+  tot_luas_c : numeric
+  tot_luas_d : numeric
+  tot_luas_e : numeric
+  tot_luas_khusus : numeric
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_sskel : character varying
+}
+
+entity "public.m_ktnh_sbsk_kdb" as public__m_ktnh_sbsk_kdb #FFFFFF {
+  id_sbsk_kdb : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_asal : bigint
+  id_aset : bigint
+  kd_brg : character varying
+  kdb : numeric
+  luas_max : numeric
+  luas_min : numeric
+  luas_riil : numeric
+  no_aset : integer
+  no_perda : character varying
+  status_data : smallint
+  tgl_perda : date
+  thn : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_sskel : character varying
+}
+
+entity "public.m_ktnh_sbsk_toleransi_rneg" as public__m_ktnh_sbsk_toleransi_rneg #FFFFFF {
+  id_tol_rneg : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_asal : bigint
+  id_aset : bigint
+  kat_lokasi : character
+  kd_brg : character varying
+  lokasi_alamat : character varying
+  luas_max : integer
+  luas_min : integer
+  luas_riil : integer
+  no_aset : integer
+  status_data : smallint
+  thn : character varying
+  toleransi : numeric
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_sskel : character varying
+}
+
+entity "public.m_satker_resync" as public__m_satker_resync #FFFFFF {
+  id_satker_resync : bigint <<PK>>
+  clean_bmn : integer
+  clean_kdp : integer
+  created_at : timestamp without time zone
+  created_by : integer
+  failed_bmn : integer
+  failed_kdp : integer
+  finished_at : timestamp without time zone
+  id_satker : bigint
+  kd_satker : character varying
+  resync_bmn : integer
+  resync_kdp : integer
+  started_at : timestamp without time zone
+  status : character varying
+  status_aset : character varying
+  total_bmn : integer
+  total_kdp : integer
+}
+
+entity "public.m_tarif_pnbp" as public__m_tarif_pnbp #FFFFFF {
+  id : bigint <<PK>>
+  jml_tarif : smallint
+  kd_akun : character varying
+  kd_mu : character varying
+  kd_pp : character varying
+  kd_tarif : character varying
+  psn_tarif : smallint
+  satuan : character varying
+  ur_tarif : character varying
+}
+
+entity "public.m_video_panduan" as public__m_video_panduan #FFFFFF {
+  id_video_panduan : bigint <<PK>>
+  created_at : timestamp without time zone
+  deskripsi : character varying
+  id_menu : integer
+  id_menu_detail : integer
+  url_embed : character varying
+  url_video : character varying
+}
+
+entity "public.r_akun" as public__r_akun #FFFFFF {
+  kd_akun : character varying <<PK>>
+  aktif_yn : character varying
+  jenis_pengelolaan : character varying
+  jns_akun : character varying
+  ur_akun : character varying
+}
+
+entity "public.r_akun_pemeliharaan" as public__r_akun_pemeliharaan #FFFFFF {
+  kd_akun_pemeliharaan : character varying <<PK>>
+  nm_akun_pemeliharaan : character varying
+}
+
+entity "public.r_arah" as public__r_arah #FFFFFF {
+  id_arah : integer <<PK>>
+  ur_arah : character varying
+}
+
+entity "public.r_arus_lalu_lintas" as public__r_arus_lalu_lintas #FFFFFF {
+  id_arus_lalu_lintas : integer <<PK>>
+  ur_arus_lalu_lintas : character varying
+}
+
+entity "public.r_asal_data" as public__r_asal_data #FFFFFF {
+  id_asal_data : integer <<PK>>
+  ur_asal_data : character varying
+}
+
+entity "public.r_bank_persepsi" as public__r_bank_persepsi #FFFFFF {
+  id_bank_persepsi : character varying <<PK>>
+  nama_bank_persepsi : character varying
+}
+
+entity "public.r_bid" as public__r_bid #FFFFFF {
+  kd_bidbrg : character <<PK>>
+  kd_bid : character
+  kd_gol : character
+  ur_bid : character varying
+}
+
+entity "public.r_channel_pembayaran" as public__r_channel_pembayaran #FFFFFF {
+  id_channel_pembayaran : character varying <<PK>>
+  nama_channel_pembayaran : character varying
+}
+
+entity "public.r_dashboard" as public__r_dashboard #FFFFFF {
+  id : integer <<PK>>
+  id_tabel : integer
+  kd_dashboard : integer
+  kdkategori : integer
+  nama_dashboard : character varying
+}
+
+entity "public.r_dcp_kode_wilayah" as public__r_dcp_kode_wilayah #FFFFFF {
+  id : integer <<PK>>
+  kab_name : character varying
+  kec_name : character varying
+  kel_name : character varying
+  no_kab : integer
+  no_kec : integer
+  no_kel : integer
+  no_prop : integer
+  prop_name : character varying
+}
+
+entity "public.r_dinding" as public__r_dinding #FFFFFF {
+  id_dinding : integer <<PK>>
+  ur_dinding : character varying
+}
+
+entity "public.r_dok_milik" as public__r_dok_milik #FFFFFF {
+  kd_dok_milik : smallint <<PK>>
+  rekap_status : character varying
+  status : character varying
+}
+
+entity "public.r_eselon1" as public__r_eselon1 #FFFFFF {
+  id_eselon1 : integer <<PK>>
+  alamat_e1 : character varying
+  created_at : timestamp without time zone
+  email_kantor : character varying
+  email_valid : character
+  filename_logo : character varying
+  id_kanwil : integer
+  id_kl : integer
+  id_kpknl : integer
+  jabatan : character varying
+  jns_id_jbt : character varying
+  kd_eselon1 : character varying
+  kd_eselonkl : character varying
+  kd_kld : character varying
+  kd_ver_email : character varying
+  kode_kab_kota : character varying
+  kode_kec : character varying
+  kode_kel : character varying
+  kode_neg : character varying
+  kode_prov : character varying
+  nama : character varying
+  nip : character varying
+  nm_kab_kota : character varying
+  nm_kec : character varying
+  nm_kel : character varying
+  nm_neg : character varying
+  nm_prov : character varying
+  no_fax_kantor : character varying
+  no_telp_kantor : character varying
+  pengelolaan_bypass_e1 : character
+  rencana_bypass_e1 : character varying
+  status_eselon1 : character varying
+  status_jabatan : character varying
+  updated_at : timestamp without time zone
+  ur_eselon1 : character varying
+  wasdal_bypass_e1 : character
+}
+
+entity "public.r_gol" as public__r_gol #FFFFFF {
+  kd_gol : character varying <<PK>>
+  ur_gol : character varying
+}
+
+entity "public.r_hist_kategori" as public__r_hist_kategori #FFFFFF {
+  kd_kategori : character varying <<PK>>
+  nm_kategori : character varying
+}
+
+entity "public.r_intensitas_kebisingan" as public__r_intensitas_kebisingan #FFFFFF {
+  id_intensitas_kebisingan : smallint <<PK>>
+  ur_intensitas_kebisingan : character varying
+}
+
+entity "public.r_jabatan" as public__r_jabatan #FFFFFF {
+  kd_jabatan : character <<PK>>
+  ur_jabatan : character varying
+}
+
+entity "public.r_jenis_doc_nadine" as public__r_jenis_doc_nadine #FFFFFF {
+  id_jenis_doc_nadine : smallint
+  id_module : smallint
+  nama_doc : character varying
+}
+
+entity "public.r_jns_bmn" as public__r_jns_bmn #FFFFFF {
+  kd_jns_bmn : integer <<PK>>
+  aktif_yn : boolean
+  dbl : boolean
+  kib : boolean
+  nm_jns_bmn : character varying
+  order_no : integer
+}
+
+entity "public.r_jns_dok" as public__r_jns_dok #FFFFFF {
+  kd_dok : character varying <<PK>>
+  keterangan : character varying
+  nm_dok : character varying
+  tipe_get_dok : integer
+}
+
+entity "public.r_jns_dok_bdg" as public__r_jns_dok_bdg #FFFFFF {
+  kd_jns_dok_bdg : character varying <<PK>>
+  jns_bmn : ARRAY
+  ur_jns_dok_bdg : character varying
+}
+
+entity "public.r_jns_dokumen_kepemilikan" as public__r_jns_dokumen_kepemilikan #FFFFFF {
+  id_jns_dokumen_kepemilikan : smallint <<PK>>
+  ur_jns_dokumen_kepemilikan : character varying
+}
+
+entity "public.r_jns_fasilitas" as public__r_jns_fasilitas #FFFFFF {
+  kd_jns_fasilitas : integer <<PK>>
+  ur_jns_fasilitas : character varying
+}
+
+entity "public.r_jns_kantor" as public__r_jns_kantor #FFFFFF {
+  id_jns_kantor : smallint <<PK>>
+  kd_jk : character varying
+  nm_jns_kantor : character varying
+}
+
+entity "public.r_jns_kirim" as public__r_jns_kirim #FFFFFF {
+  jns_kirim : character varying <<PK>>
+  ur_kirim : character varying
+}
+
+entity "public.r_jns_lantai" as public__r_jns_lantai #FFFFFF {
+  id_jns_lantai : smallint <<PK>>
+  ur_jns_lantai : character varying
+}
+
+entity "public.r_jns_mitra" as public__r_jns_mitra #FFFFFF {
+  kd_jns_mitra : character <<PK>>
+  nm_jns_mitra : character varying
+}
+
+entity "public.r_jns_pemilik_tanah" as public__r_jns_pemilik_tanah #FFFFFF {
+  id_jns_pemilik_tanah : integer <<PK>>
+  is_domestic : boolean
+  ur_jns_pemilik_tanah : character varying
+}
+
+entity "public.r_jns_peraturan" as public__r_jns_peraturan #FFFFFF {
+  kd_jns_peraturan : character <<PK>>
+  ur_jns_peraturan : character varying
+}
+
+entity "public.r_jns_perkara" as public__r_jns_perkara #FFFFFF {
+  id_jns_perkara : smallint <<PK>>
+  ur_jns_perkara : character varying
+}
+
+entity "public.r_jns_pmk" as public__r_jns_pmk #FFFFFF {
+  kd_pmk : character varying <<PK>>
+  jns_pmk : character varying
+}
+
+entity "public.r_jns_serti" as public__r_jns_serti #FFFFFF {
+  kd_jns_serti : character varying <<PK>>
+  mapping_to_reval : character varying
+  nm_jns_serti : character varying
+}
+
+entity "public.r_jns_tanah" as public__r_jns_tanah #FFFFFF {
+  id_jns_tanah : smallint <<PK>>
+  ur_jns_tanah : character varying
+}
+
+entity "public.r_jnstransaksi" as public__r_jnstransaksi #FFFFFF {
+  jns_trn : character varying <<PK>>
+  bmn_aktif_yn : character
+  bmn_baru_yn : character varying
+  bpybds_yn : character varying
+  brg_hilang_yn : character varying
+  brg_rusak_yn : character varying
+  dihentikan_yn : character varying
+  dktp_yn : character varying
+  kemitraan_yn : character varying
+  ur_trn : character varying
+}
+
+entity "public.r_kanwil" as public__r_kanwil #FFFFFF {
+  id_kanwil : integer <<PK>>
+  alamat_kanwil : character varying
+  created_at : timestamp without time zone
+  email_kantor : character varying
+  email_valid : character varying
+  jabatan : character varying
+  jns_id_jbt : character varying
+  kd_eselon1 : character varying
+  kd_eselonkl : character varying
+  kd_kanwil : character varying
+  kd_kl : character varying
+  kd_kleselonkanwil : character varying
+  kd_lokasi : character varying
+  kd_ver_email : character varying
+  kode_kab_kota : character varying
+  kode_kec : character varying
+  kode_kel : character varying
+  kode_neg : character varying
+  kode_prov : character varying
+  nama : character varying
+  nip : character varying
+  nm_kab_kota : character varying
+  nm_kec : character varying
+  nm_kel : character varying
+  nm_neg : character varying
+  nm_prov : character varying
+  no_fax_kantor : character varying
+  no_telp_kantor : character varying
+  status_jabatan : character varying
+  updated_at : timestamp without time zone
+  ur_kanwil : character varying
+}
+
+entity "public.r_kategori_jenis_aset" as public__r_kategori_jenis_aset #FFFFFF {
+  id : smallint <<PK>>
+  kode_barang : integer <<PK>>
+  jenis_aset : character varying
+  uraian_barang : character varying
+}
+
+entity "public.r_kategori_kawasan" as public__r_kategori_kawasan #FFFFFF {
+  id_kategori_kawasan : smallint <<PK>>
+  ur_kategori_kawasan : character varying
+}
+
+entity "public.r_kategori_lokasi" as public__r_kategori_lokasi #FFFFFF {
+  id_kategori_lokasi : smallint <<PK>>
+  ur_kategori_lokasi : character varying
+}
+
+entity "public.r_kategori_masalah_lain" as public__r_kategori_masalah_lain #FFFFFF {
+  id_kategori_masalah_lain : smallint <<PK>>
+  ur_kategori_masalah_lain : character varying
+}
+
+entity "public.r_kel" as public__r_kel #FFFFFF {
+  kd_kelbrg : character varying <<PK>>
+  created_at : timestamp without time zone
+  kd_bidbrg : character varying
+  kd_kel : character varying
+  updated_at : timestamp without time zone
+  ur_kel : character varying
+}
+
+entity "public.r_kl" as public__r_kl #FFFFFF {
+  id_kl : integer <<PK>>
+  aktif_modul : character varying
+  alamat_kl : character varying
+  created_at : timestamp without time zone
+  dit_bmn : character varying
+  dit_pknsi : character varying
+  email_kantor : character varying
+  email_valid : character
+  filename_logo : character varying
+  id_kanwil : integer
+  id_kpknl : integer
+  jabatan : character varying
+  jns_id_jbt : character varying
+  kd_kab_kota : character varying
+  kd_kl : character varying
+  kd_ver_email : character varying
+  kode_kab_kota : character varying
+  kode_kec : character varying
+  kode_kel : character varying
+  kode_neg : character varying
+  kode_prov : character varying
+  nama : character varying
+  nama_jabatan_kl : character varying
+  nama_kab_kota : character varying
+  nip : character varying
+  nm_kab_kota : character varying
+  nm_kec : character varying
+  nm_kel : character varying
+  nm_neg : character varying
+  nm_prov : character varying
+  no_fax_kantor : character varying
+  no_telp_kantor : character varying
+  status_jabatan : character varying
+  status_kl : character varying
+  updated_at : timestamp without time zone
+  ur_kl : character varying
+}
+
+entity "public.r_kl_khusus" as public__r_kl_khusus #FFFFFF {
+  id_kl_khusus : integer <<PK>>
+  alamat_kl_khusus : character varying
+  email_kantor : character varying
+  id_kanwil : integer
+  id_kpknl : integer
+  jabatan : character varying
+  kd_kab_kota : character varying
+  kd_kl_khusus : character varying
+  nama : character varying
+  nip : character varying
+  nm_kab_kota : character varying
+  no_fax_kantor : character varying
+  no_telp_kantor : character varying
+  ur_kl_khusus : character varying
+}
+
+entity "public.r_kl_logo" as public__r_kl_logo #FFFFFF {
+  id_kl : integer <<PK>>
+  keterangan : character varying
+  logo : bytea
+  nm_file_logo : character varying
+  size_file_logo : double precision
+  updated_at : timestamp without time zone
+}
+
+entity "public.r_kl_riwayat" as public__r_kl_riwayat #FFFFFF {
+  id_kl_riwayat : integer <<PK>>
+  aktif_modul : character varying
+  alamat_kl : character varying
+  dit_bmn : character varying
+  dit_pknsi : character varying
+  email_kantor : character varying
+  email_valid : character varying
+  id_kanwil : integer
+  id_kl : integer
+  id_kpknl : integer
+  jabatan : character varying
+  jns_id_jbt : character varying
+  kd_kl : character varying
+  kd_ver_email : character varying
+  kode_kab_kota : character varying
+  nama : character varying
+  nama_kab_kota : character varying
+  nip : character varying
+  no_fax_kantor : character varying
+  no_telp_kantor : character varying
+  tgl_perubahan : date
+  updated_at : timestamp without time zone
+  ur_kl : character varying
+}
+
+entity "public.r_kodepos" as public__r_kodepos #FFFFFF {
+  id : integer <<PK>>
+  kabupaten : character varying
+  kecamatan : character varying
+  kelurahan : character varying
+  kodepos : character varying
+  provinsi : character varying
+  rowid : character varying
+}
+
+entity "public.r_kondisi" as public__r_kondisi #FFFFFF {
+  kd_kondisi : character varying <<PK>>
+  ur_kondisi : character varying
+}
+
+entity "public.r_kondisi_jalan" as public__r_kondisi_jalan #FFFFFF {
+  id_kondisi_jalan : smallint <<PK>>
+  ur_kondisi_jalan : character varying
+}
+
+entity "public.r_kons_komponen" as public__r_kons_komponen #FFFFFF {
+  id_kons_komponen : smallint <<PK>>
+  ur_kons_komponen : character varying
+}
+
+entity "public.r_kons_material" as public__r_kons_material #FFFFFF {
+  id_kons_material : smallint <<PK>>
+  ur_kons_material : character varying
+}
+
+entity "public.r_kons_sub_komponen" as public__r_kons_sub_komponen #FFFFFF {
+  id_kons_sub_komponen : integer <<PK>>
+  id_komponen : smallint
+  ur_kons_sub_komponen : character varying
+}
+
+entity "public.r_konstruksi_jalan" as public__r_konstruksi_jalan #FFFFFF {
+  id_konstruksi_jalan : smallint <<PK>>
+  ur_konstruksi_jalan : character varying
+}
+
+entity "public.r_korwil" as public__r_korwil #FFFFFF {
+  id_korwil : integer <<PK>>
+  alamat_korwil : character varying
+  created_at : timestamp without time zone
+  email_kantor : character varying
+  email_valid : character
+  filename_logo : character varying
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_kpknl : integer
+  jabatan : character varying
+  jns_id_jbt : character varying
+  kd_eselonkl_d : character varying
+  kd_jk : character varying
+  kd_korwil : character varying
+  kd_ver_email : character varying
+  kd_wileselon : character varying
+  kode_kab_kota : character varying
+  kode_kec : character varying
+  kode_kel : character varying
+  kode_neg : character varying
+  kode_prov : character varying
+  nama : character varying
+  nip : character varying
+  nm_kab_kota : character varying
+  nm_kec : character varying
+  nm_kel : character varying
+  nm_neg : character varying
+  nm_prov : character varying
+  no_fax_kantor : character varying
+  no_telp_kantor : character varying
+  pengelolaan_bypass_e1 : character
+  rencana_bypass_e1 : character
+  status_jabatan : character varying
+  status_korwil : character varying
+  updated_at : timestamp without time zone
+  ur_korwil : character varying
+  w_rekon : character
+  wasdal_bypass_e1 : character
+}
+
+entity "public.r_korwil_riwayat" as public__r_korwil_riwayat #FFFFFF {
+  id_korwil_riwayat : integer <<PK>>
+  alamat_korwil : character varying
+  created_at : timestamp without time zone
+  email_kantor : character varying
+  email_valid : character varying
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  jabatan : character varying
+  jns_id_jbt : character varying
+  kd_eselonkl_d : character varying
+  kd_jk : character varying
+  kd_korwil : character varying
+  kd_ver_email : character varying
+  kd_wileselon : character varying
+  kode_kab_kota : character varying
+  nama : character varying
+  nip : character varying
+  nm_kab_kota : character varying
+  no_fax_kantor : character varying
+  no_telp_kantor : character varying
+  pengelolaan_bypass_e1 : character varying
+  rencana_bypass_e1 : character varying
+  status_korwil : character varying
+  tgl_perubahan : date
+  updated_at : timestamp without time zone
+  ur_korwil : character varying
+  w_rekon : character varying
+}
+
+entity "public.r_kpdjkn" as public__r_kpdjkn #FFFFFF {
+  id_kpdjkn : integer <<PK>>
+  alamat_kpdjkn : character varying
+  created_at : timestamp without time zone
+  email_kpdjkn : character varying
+  email_valid : character varying
+  jabatan : character varying
+  kd_kpdjkn : character varying
+  kd_ver_email : character varying
+  kode_kab_kota : character varying
+  nama : character varying
+  nip : character varying
+  nm_kab_kota : character varying
+  no_fax_kpdjkn : character varying
+  no_telp_kpdjkn : character varying
+  tgl_created : timestamp without time zone
+  updated_at : timestamp without time zone
+  ur_kpdjkn : character varying
+}
+
+entity "public.r_kpdjkn_e2" as public__r_kpdjkn_e2 #FFFFFF {
+  id_kpdjkn_e2 : integer <<PK>>
+  alamat : character varying
+  created_at : timestamp without time zone
+  email : character varying
+  id_kpdjkn : integer
+  jabatan : character varying
+  kd_kpdjkn_e2 : character varying
+  kode_kab_kota : character varying
+  nama_pejabat : character varying
+  nip_pejabat : character varying
+  nm_kab_kota : character varying
+  no_fax : character varying
+  no_telp : character varying
+  tgl_created : timestamp without time zone
+  updated_at : timestamp without time zone
+  ur_kpdjkn_e2 : character varying
+}
+
+entity "public.r_kpdjkn_e3" as public__r_kpdjkn_e3 #FFFFFF {
+  id_kpdjkn_e3 : integer <<PK>>
+  alamat : character varying
+  created_at : timestamp without time zone
+  email : character varying
+  id_kpdjkn_e2 : integer
+  jabatan : character varying
+  kd_kpdjkn_e3 : character varying
+  kode_kab_kota : character varying
+  nama_pejabat : character varying
+  nip_pejabat : character varying
+  nm_kab_kota : character varying
+  no_fax : character varying
+  no_telp : character varying
+  tgl_created : timestamp without time zone
+  updated_at : timestamp without time zone
+  ur_kpdjkn_e3 : character varying
+}
+
+entity "public.r_kpdjkn_e4" as public__r_kpdjkn_e4 #FFFFFF {
+  id_kpdjkn_e4 : integer <<PK>>
+  alamat : character varying
+  created_at : timestamp without time zone
+  email : character varying
+  id_kpdjkn_e3 : integer
+  jabatan : character varying
+  kd_kpdjkn_e4 : character varying
+  kode_kab_kota : character varying
+  nama_pejabat : character varying
+  nip_pejabat : character varying
+  nm_kab_kota : character varying
+  no_fax : character varying
+  no_telp : character varying
+  tgl_created : timestamp without time zone
+  updated_at : timestamp without time zone
+  ur_kpdjkn_e4 : character varying
+}
+
+entity "public.r_kpknl" as public__r_kpknl #FFFFFF {
+  id_kpknl : integer <<PK>>
+  alamat : character varying
+  created_at : timestamp without time zone
+  email_kantor : character varying
+  email_valid : character varying
+  id_kanwil : integer
+  jabatan : character varying
+  jns_id_jbt : character varying
+  kd_kab_kota : character varying
+  kd_ver_email : character varying
+  kdkpknl : character varying
+  kdlokasi : character varying
+  kode_kec : character varying
+  kode_kel : character varying
+  kode_neg : character varying
+  kode_prov : character varying
+  nama : character varying
+  nip : character varying
+  nm_kab_kota : character varying
+  nm_kec : character varying
+  nm_kel : character varying
+  nm_neg : character varying
+  nm_prov : character varying
+  no_fax_kantor : character varying
+  no_telp_kantor : character varying
+  status_jabatan : character varying
+  updated_at : timestamp without time zone
+  urkpknl : character varying
+}
+
+entity "public.r_kppn" as public__r_kppn #FFFFFF {
+  kdkppn : character varying <<PK>>
+  alamat : character varying
+  id_kppn : integer
+  id_kppn_wil : integer
+  kdlokasi : character varying
+  urkppn : character varying
+}
+
+entity "public.r_kppnwil" as public__r_kppnwil #FFFFFF {
+  kdkankppnwil : character varying <<PK>>
+  alamat : character varying
+  id_kppn_wil : integer
+  kdlokasi : character varying
+  urkppnwil : character varying
+}
+
+entity "public.r_kualitas_air_tanah" as public__r_kualitas_air_tanah #FFFFFF {
+  id_kualitas_air_tanah : smallint <<PK>>
+  ur_kualitas_air_tanah : character varying
+}
+
+entity "public.r_kualitas_udara" as public__r_kualitas_udara #FFFFFF {
+  id_kualitas_udara : smallint <<PK>>
+  ur_kualitas_udara : character varying
+}
+
+entity "public.r_langit_langit" as public__r_langit_langit #FFFFFF {
+  id_langit_langit : smallint <<PK>>
+  ur_langit_langit : character varying
+}
+
+entity "public.r_lok_akses" as public__r_lok_akses #FFFFFF {
+  kd_akses : character varying <<PK>>
+  ur_akses : character varying
+}
+
+entity "public.r_lok_bentuk" as public__r_lok_bentuk #FFFFFF {
+  kd_bentuk : character varying <<PK>>
+  ur_bentuk : character varying
+}
+
+entity "public.r_lok_elevasi" as public__r_lok_elevasi #FFFFFF {
+  kd_elevasi : character varying <<PK>>
+  ur_elevasi : character varying
+}
+
+entity "public.r_lok_kontur" as public__r_lok_kontur #FFFFFF {
+  kd_kontur : character varying <<PK>>
+  ur_kontur : character varying
+}
+
+entity "public.r_lok_peruntukan" as public__r_lok_peruntukan #FFFFFF {
+  kd_peruntukan : character varying <<PK>>
+  ur_peruntukan : character varying
+}
+
+entity "public.r_mapping_jns_serti" as public__r_mapping_jns_serti #FFFFFF {
+  id_mapping_jns_serti : integer <<PK>>
+  jns_serti : jsonb
+  kd_smilik : character
+}
+
+entity "public.r_matrix_detil_aset" as public__r_matrix_detil_aset #FFFFFF {
+  id : bigint <<PK>>
+  Asuransi : character varying
+  Bangunan : character varying
+  Batas dan GPS : character varying
+  Cetak KIB : character varying
+  Cetak Label BMN : character varying
+  Cetak Profil Aset : character varying
+  Daftar Aset : character varying
+  Detil Aset : character varying
+  Dokumen / Dokumen Kepemilikan : character varying
+  Dokumen KIB : character varying
+  Dokumen Lainnya : character varying
+  Dokumen NJOP : character varying
+  Fasilitas : character varying
+  Foto : character varying
+  Jenis Aset : character varying
+  Konstruksi : character varying
+  Lantai dan Ruangan : character varying
+  Lokasi Aset : character varying
+  No Polisi : character varying
+  Pemakai / Penghuni / Pengguna : character varying
+  Pemeliharaan : character varying
+  Pengelolaan : character varying
+  Penilaian : character varying
+  Perlengkapan : character varying
+  Riwayat (Pembangunan dan Renovasi) : character varying
+  Riwayat Mutasi dan Penyusutan : character varying
+  SBSK : character varying
+  SPM : character varying
+  Status Hukum : character varying
+  Timeline Aset : character varying
+}
+
+entity "public.r_matrix_grid_column" as public__r_matrix_grid_column #FFFFFF {
+  id : bigint <<PK>>
+  Alamat : character varying
+  Alamat Lainnya : character varying
+  Intra / Ekstra : character varying
+  Jenis Aset : character varying
+  Jenis Dokumen : character varying
+  Jenis Sertifikat : character varying
+  Jumlah Foto : character varying
+  Jumlah KIB : character varying
+  Jumlah Lantai : character varying
+  Kab/Kota : character varying
+  Kecamatan : character varying
+  Kelurahan/Desa : character varying
+  Kepemilikan : character varying
+  Kode Barang : character varying
+  Kode KPKNL : character varying
+  Kode Kab/Kota : character varying
+  Kode Pos : character varying
+  Kode Provinsi : character varying
+  Kode Satker : character varying
+  Kondisi : character varying
+  Kuantitas : character varying
+  Luas Bangunan : character varying
+  Luas Lahan Kosong : character varying
+  Luas Tanah Seluruhnya : character varying
+  Luas Tanah Untuk Bangunan : character varying
+  Luas Tanah Untuk Sarana Lingkungan : character varying
+  Luas Tapak Bangunan : character varying
+  Merk : character varying
+  NUP : character varying
+  Nama : character varying
+  Nama Barang : character varying
+  Nama E1 : character varying
+  Nama KL : character varying
+  Nama Korwil : character varying
+  Nama Satker : character varying
+  Nilai Buku : character varying
+  Nilai Mutasi : character varying
+  Nilai Penyusutan : character varying
+  Nilai Perolehan : character varying
+  Nilai Perolehan Pertama : character varying
+  No : character varying
+  No KIB : character varying
+  No PSP : character varying
+  No Register Aset : character varying
+  Nomor BPKB : character varying
+  Nomor Dokumen : character varying
+  Nomor Polisi : character varying
+  Nomor Sertifikat : character varying
+  Optimalisasi : character varying
+  Pemakai / Pengguna / Penghuni : character varying
+  Provinsi : character varying
+  RT/RW : character varying
+  SBSK : character varying
+  Status BMN Idle : character varying
+  Status Kemitraan : character varying
+  Status Pengelolaan : character varying
+  Status Penggunaan : character varying
+  Status Penghentian Penggunaan : character varying
+  Status SBSN : character varying
+  Tanggal Buku Pertama : character varying
+  Tanggal PSP : character varying
+  Tanggal Pengapusan : character varying
+  Tanggal Perolehan : character varying
+  Tanggal Rekam Pertama : character varying
+  Tipe : character varying
+  Umur Aset : character varying
+  Uraian KPKNL : character varying
+  Uraian Kanwil DJKN : character varying
+}
+
+entity "public.r_module_nadine" as public__r_module_nadine #FFFFFF {
+  id_module : smallint
+  nama : character varying
+}
+
+entity "public.r_output" as public__r_output #FFFFFF {
+  id_output : integer <<PK>>
+  id_kegiatan : integer
+  kd_output : character varying
+  nm_output : character varying
+  satuan : character varying
+}
+
+entity "public.r_pagar" as public__r_pagar #FFFFFF {
+  id_pagar : integer <<PK>>
+  ur_pagar : character varying
+}
+
+entity "public.r_pangkat_gol" as public__r_pangkat_gol #FFFFFF {
+  kd_pangkat_gol : character varying <<PK>>
+  ur_pangkat_gol : character varying
+}
+
+entity "public.r_pelapis_dinding" as public__r_pelapis_dinding #FFFFFF {
+  id_pelapis_dinding : integer <<PK>>
+  ur_pelapis_dinding : character varying
+}
+
+entity "public.r_pelapis_lantai" as public__r_pelapis_lantai #FFFFFF {
+  id_pelapis_lantai : integer <<PK>>
+  ur_pelapis_lantai : character varying
+}
+
+entity "public.r_pelayanan" as public__r_pelayanan #FFFFFF {
+  kd_pelayanan : character varying <<PK>>
+  nm_pelayanan : character varying
+  sla : integer
+}
+
+entity "public.r_pemilik" as public__r_pemilik #FFFFFF {
+  kd_pemilik : character varying <<PK>>
+  ur_pemilik : character varying
+  ur_pemilik_bdg : character varying
+}
+
+entity "public.r_pengukur" as public__r_pengukur #FFFFFF {
+  id_pengukur : integer <<PK>>
+  ur_pengukur : character varying
+}
+
+entity "public.r_penutup_atap" as public__r_penutup_atap #FFFFFF {
+  id_penutup_atap : integer <<PK>>
+  ur_penutup_atap : character varying
+}
+
+entity "public.r_perkerasan" as public__r_perkerasan #FFFFFF {
+  id_perkerasan : integer <<PK>>
+  ur_perkerasan : character varying
+}
+
+entity "public.r_permasalahan_tanah" as public__r_permasalahan_tanah #FFFFFF {
+  id_permasalahan_tanah : integer <<PK>>
+  kategori_masalah : character varying
+  showed : boolean
+  uraian_masalah : character varying
+}
+
+entity "public.r_posisi_jaringan" as public__r_posisi_jaringan #FFFFFF {
+  id_posisi_jaringan : integer <<PK>>
+  ur_posisi_jaringan : character varying
+}
+
+entity "public.r_postas" as public__r_postas #FFFFFF {
+  kd_bkpk : character varying <<PK>>
+  kddk : character varying <<PK>>
+  kdperk : character varying
+  nmperk : character varying
+}
+
+entity "public.r_rekap_status" as public__r_rekap_status #FFFFFF {
+  id_jns_rekap : integer <<PK>>
+  id_jns_rekap_detail : integer <<PK>>
+  id_status : integer <<PK>>
+  ket_jns_rekap : character varying
+  ur_status : character varying
+}
+
+entity "public.r_ruang" as public__r_ruang #FFFFFF {
+  id_satker : integer <<PK>>
+  kd_lokruang : character varying <<PK>>
+  kd_tipe_ruang : character varying <<PK>>
+  kd_ruang : character varying
+  nip_pjrug : character varying
+  pj_ruang : character varying
+  ur_ruang : character varying
+}
+
+entity "public.r_sarana" as public__r_sarana #FFFFFF {
+  id_sarana : integer <<PK>>
+  is_aktif : boolean
+  ur_sarana : character varying
+}
+
+entity "public.r_satker" as public__r_satker #FFFFFF {
+  id_satker : integer <<PK>>
+  alamat_satker : character varying
+  besar_yn : character
+  created_at : timestamp without time zone
+  email_kantor : character varying
+  email_valid : character
+  eselon_pj : character varying
+  filename_logo : character varying
+  gps : character varying
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_kppn : integer
+  id_satker_parent : integer
+  jabatan : character varying
+  jabatan2 : character varying
+  jml_org_layanan : integer
+  jns_id_jbt : character varying
+  jns_kntr_layanan : character
+  kd_jk : character
+  kd_satker : character varying
+  kd_ver_email : character varying
+  kode_kab_kota : character varying
+  kode_kabkota : character varying
+  kode_kec : character varying
+  kode_kel : character varying
+  kode_neg : character varying
+  kode_prov : character varying
+  last_login : date
+  luar_negeri : character
+  nama : character varying
+  nama2 : character varying
+  nip : character varying
+  nip2 : character varying
+  nm_kab_kota : character varying
+  nm_kec : character varying
+  nm_kel : character varying
+  nm_neg : character varying
+  nm_prov : character varying
+  no_fax_kantor : character varying
+  no_telp_kantor : character varying
+  sakti_yn : character varying
+  satker_blu_yn : character varying
+  status_jabatan : character varying
+  status_uakpb : character varying
+  tgl_dibuat : date
+  tgl_status_uakpb : date
+  type_kantor : character varying
+  uakpb : character
+  uapb : character
+  uapkpb : character
+  uappbe1 : character
+  uappbw : character
+  updated_at : timestamp without time zone
+  ur_satker : character varying
+}
+
+entity "public.r_satker_history" as public__r_satker_history #FFFFFF {
+  id_satker_history : integer <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_satker : integer
+  ur_history : character varying
+}
+
+entity "public.r_satker_komposisi_skema" as public__r_satker_komposisi_skema #FFFFFF {
+  id_satker_komposisi : integer <<PK>>
+  created_at : timestamp without time zone
+  id_satker : integer
+  jbt1 : integer
+  jbt10 : integer
+  jbt11 : integer
+  jbt12 : integer
+  jbt13 : integer
+  jbt14 : integer
+  jbt15 : integer
+  jbt16 : integer
+  jbt17 : integer
+  jbt18 : integer
+  jbt19 : integer
+  jbt2 : integer
+  jbt20 : integer
+  jbt21 : integer
+  jbt3 : integer
+  jbt4 : integer
+  jbt5 : integer
+  jbt6 : integer
+  jbt7 : integer
+  jbt8 : integer
+  jbt9 : integer
+  jml_pengunjung_hari : integer
+  jns_kntr_layanan : character varying
+  skema : character varying
+  thn_anggaran : integer
+  type_kantor : character varying
+  updated_at : timestamp without time zone
+}
+
+entity "public.r_satker_log" as public__r_satker_log #FFFFFF {
+  id : bigint
+  id_kpknl_asal : integer
+  id_kpnl_tujuan : integer
+  id_satker : integer
+  id_user : bigint
+  remark : text
+  tgl_berlaku : date
+  waktu_proses : timestamp without time zone
+}
+
+entity "public.r_sbsk_jabatan" as public__r_sbsk_jabatan #FFFFFF {
+  id_jabatan : smallint <<PK>>
+  sbsk_luas_ruang : integer
+  sbsk_rmh_negara : integer
+  sbsk_tnh_rmh_negara : integer
+  ud_jabatan : character varying
+}
+
+entity "public.r_sbsk_jabatan_tahun" as public__r_sbsk_jabatan_tahun #FFFFFF {
+  id : integer <<PK>>
+  id_jabatan : integer
+  kd_jabatan : character
+  luas_aula : numeric
+  luas_rapat_khusus : numeric
+  luas_ruang : numeric
+  luas_ruang_kerja : numeric
+  nm_jabatan : character varying
+  tahun : character varying
+}
+
+entity "public.r_sbsk_knt" as public__r_sbsk_knt #FFFFFF {
+  type_kantor : character varying <<PK>>
+  fungsi_khusus : character varying
+  jml_bangunan : integer
+  ketinggian : integer
+  ur_type_knt : character varying
+}
+
+entity "public.r_sbsk_nisbah" as public__r_sbsk_nisbah #FFFFFF {
+  id_nisbah : integer <<PK>>
+  percen_nisbah : double precision
+  ur_nisbah : character varying
+}
+
+entity "public.r_sbsk_rmh_neg" as public__r_sbsk_rmh_neg #FFFFFF {
+  id_type_rmh_neg : integer <<PK>>
+  golongan : integer
+  jml_dapur : integer
+  jml_garasi : integer
+  jml_gudang : integer
+  jml_kmr_mandi : integer
+  jml_kmr_mandi_pramuwisma : integer
+  jml_r_cuci : integer
+  jml_r_duduk : integer
+  jml_r_fungsional : integer
+  jml_r_kerja : integer
+  jml_r_makan : integer
+  jml_r_tamu : integer
+  jml_r_tidur : integer
+  jml_rtdr_pramuwisma : integer
+  kd_brg : character varying
+  luas_rmh : integer
+  luas_tnh : integer
+  type_rmh_neg : character varying
+  ur_type_rmh_neg : character varying
+}
+
+entity "public.r_sbsk_ruangkerja_dtl" as public__r_sbsk_ruangkerja_dtl #FFFFFF {
+  id_std_ruang_jbt : integer <<PK>>
+  id_jabatan : integer
+  jml_sekretaris : integer
+  rg_istirahat : integer
+  rg_kerja : integer
+  rg_rapat_b : integer
+  rg_rapat_k : integer
+  rg_sekretaris : integer
+  rg_tamu : integer
+  rg_tunggu : integer
+  rgl_toilet : integer
+}
+
+entity "public.r_sbsk_std_ruang_kerja" as public__r_sbsk_std_ruang_kerja #FFFFFF {
+  id_std_ruang : integer <<PK>>
+  jbt1 : integer
+  jbt10 : integer
+  jbt11 : integer
+  jbt12 : integer
+  jbt13 : integer
+  jbt14 : integer
+  jbt15 : integer
+  jbt16 : integer
+  jbt2 : integer
+  jbt3 : integer
+  jbt4 : integer
+  jbt5 : integer
+  jbt6 : integer
+  jbt7 : integer
+  jbt8 : integer
+  jbt9 : integer
+  keterangan : character varying
+}
+
+entity "public.r_sbsk_std_ruang_pelayanan" as public__r_sbsk_std_ruang_pelayanan #FFFFFF {
+  id_std_ruang_pelayanan : integer <<PK>>
+  luas : integer
+  max_pengunjung : integer
+  min_pengunjung : integer
+}
+
+entity "public.r_sbsk_std_ruang_penunjang" as public__r_sbsk_std_ruang_penunjang #FFFFFF {
+  id_std_ruang_penunjang : integer <<PK>>
+  keterangan : character varying
+  r_arsip : integer
+  r_faslain : integer
+  r_fungsi : integer
+  r_lyn_100 : integer
+  r_lyn_25 : integer
+  r_lyn_25_100 : integer
+  r_server : integer
+  r_toilet : integer
+}
+
+entity "public.r_skel" as public__r_skel #FFFFFF {
+  kd_skelbrg : character varying <<PK>>
+  created_at : timestamp without time zone
+  kd_kelbrg : character varying
+  kd_skel : character varying
+  updated_at : timestamp without time zone
+  ur_skel : character varying
+}
+
+entity "public.r_smilik" as public__r_smilik #FFFFFF {
+  kd_smilik : character varying <<PK>>
+  kd_dashboard1 : integer
+  kd_dashboard2 : integer
+  mapping_to_reval : character varying
+  mapping_to_reval_serti : character varying
+  nama_dashboard1 : character varying
+  nama_dashboard2 : character varying
+  ur_dok : character varying
+  ur_smilik : character varying
+}
+
+entity "public.r_sp2d" as public__r_sp2d #FFFFFF {
+  id_sp2d : bigint <<PK>>
+  kd_akun : character varying
+  kd_satker : character varying
+  nilai : numeric
+  no_dipa : character varying
+  no_sp2d : character varying
+  tgl_sp2d : date
+  thn_ang : integer
+}
+
+entity "public.r_sskel" as public__r_sskel #FFFFFF {
+  kd_brg : character varying <<PK>>
+  created_at : timestamp without time zone
+  dasar : character varying
+  is_bukti : boolean
+  is_sbsk : boolean
+  is_tb : boolean
+  kd_dashboard : integer
+  kd_perk : character varying
+  kd_ref : character varying
+  kd_skelbrg : character varying
+  kd_sskel : character varying
+  kd_status : character varying
+  kdkategori : integer
+  kdperkbr : character varying
+  nama_dashboard : character varying
+  satuan : character varying
+  updated_at : timestamp without time zone
+  ur_sskel : character varying
+}
+
+entity "public.r_status" as public__r_status #FFFFFF {
+  kd_status : character varying <<PK>>
+  guna_wasdal : character varying
+  id_status_guna : smallint
+  kd_dashboard : integer
+  nama_dashboard : character varying
+  status_penggunaan : character varying
+  ur_status : character varying
+}
+
+entity "public.r_status_blm_serti" as public__r_status_blm_serti #FFFFFF {
+  id_status_blm_serti : integer <<PK>>
+  is_selectable : boolean
+  kd_status : integer
+  tahun_yn : boolean
+  ur_status_blm_serti : character varying
+}
+
+entity "public.r_status_hukum" as public__r_status_hukum #FFFFFF {
+  kd_status_hukum : character <<PK>>
+  jns_status_hukum : character varying
+  kd_dashboard : integer
+  level : smallint
+  nama_dashboard : character varying
+  status_hukum : character varying
+}
+
+entity "public.r_status_hukum_new" as public__r_status_hukum_new #FFFFFF {
+  id_status_hukum : integer <<PK>>
+  kd_status_hukum : character
+  label : character varying
+  ur_status_hukum : character varying
+}
+
+entity "public.r_status_hunian" as public__r_status_hunian #FFFFFF {
+  kd_status_hunian : integer <<PK>>
+  ur_status_hunian : character varying
+}
+
+entity "public.r_status_jalan" as public__r_status_jalan #FFFFFF {
+  id_status_jalan : integer <<PK>>
+  ur_status_jalan : character varying
+}
+
+entity "public.r_status_perkara" as public__r_status_perkara #FFFFFF {
+  id_status_perkara : integer <<PK>>
+  label : character varying
+  ur_status_perkara : character varying
+}
+
+entity "public.r_status_rekap_valserah" as public__r_status_rekap_valserah #FFFFFF {
+  kd_status : smallint <<PK>>
+  is_selectable : character varying
+  order_col : smallint
+  ur_status : character varying
+}
+
+entity "public.r_status_sanksi" as public__r_status_sanksi #FFFFFF {
+  id_status_sanksi : integer <<PK>>
+  ur_status_sanksi : character varying
+}
+
+entity "public.r_status_valserah" as public__r_status_valserah #FFFFFF {
+  kd_aksi : smallint <<PK>>
+  kd_status : character varying
+  keterangan : character varying
+  keterangan_notifikasi : character varying
+  status : character varying
+  ur_aksi : character varying
+}
+
+entity "public.r_status_valserah_kanwil" as public__r_status_valserah_kanwil #FFFFFF {
+  kd_status : smallint
+  ur_status : character varying
+}
+
+entity "public.r_status_valserah_kpknl" as public__r_status_valserah_kpknl #FFFFFF {
+  kd_status : smallint
+  keterangan : character varying
+  ur_status : character varying
+}
+
+entity "public.r_struktur_atap" as public__r_struktur_atap #FFFFFF {
+  id_struktur_atap : integer <<PK>>
+  ur_struktur_atap : character varying
+}
+
+entity "public.r_struktur_rangka" as public__r_struktur_rangka #FFFFFF {
+  id_struktur_rangka : integer <<PK>>
+  ur_struktur_rangka : character varying
+}
+
+entity "public.r_sts_rule" as public__r_sts_rule #FFFFFF {
+  kode : integer <<PK>>
+  bpybds_yn : character varying
+  bpybds_yn_135 : character varying
+  brg_hilang_yn : character varying
+  brg_hilang_yn_135 : character varying
+  brg_rusak_yn : character varying
+  brg_rusak_yn_135 : character varying
+  dihentikan_yn : character varying
+  dihentikan_yn_135 : character varying
+  dktp_yn : character varying
+  dktp_yn_135 : character varying
+  hapus_lainnya_yn : character varying
+  hapus_lainnya_yn_135 : character varying
+  id_aset : character varying
+  kemitraan_yn : character varying
+  kemitraan_yn_135 : character varying
+  konjas_yn : character varying
+  konjas_yn_135 : character varying
+  properti_investasi_yn : character varying
+  properti_investasi_yn_135 : character varying
+  proses_pmpp_yn : character varying
+  proses_pmpp_yn_135 : character varying
+  status_bmn_yn : character varying
+  status_bmn_yn_135 : character varying
+  ur_sts : character varying
+}
+
+entity "public.r_sumber_dana" as public__r_sumber_dana #FFFFFF {
+  kd_sumber_dana : character <<PK>>
+  ur_sumber_dana : character varying
+}
+
+entity "public.r_susut" as public__r_susut #FFFFFF {
+  kd_jns_susut : character <<PK>>
+  ur_susut : character varying
+}
+
+entity "public.r_syarat_dok" as public__r_syarat_dok #FFFFFF {
+  id_syarat_dok : integer <<PK>>
+  id_struktur : integer
+  id_tipe_pengelolaan : smallint
+  is_pengguna : character varying
+  is_tb : character varying
+  is_wajib : character varying
+  kd_dok : character varying
+  kd_pelayanan : character varying
+  level_user : character varying
+  no_urut : smallint
+}
+
+entity "public.r_tahap_perkara" as public__r_tahap_perkara #FFFFFF {
+  id_tahap_perkara : integer <<PK>>
+  id_status_perkara : integer
+  label : character varying
+  ur_tahap_perkara : character varying
+}
+
+entity "public.r_tbmn_rule" as public__r_tbmn_rule #FFFFFF {
+  id : integer <<PK>>
+  bpybds_yn : character varying
+  brg_hilang_yn : character varying
+  brg_rusak_yn : character varying
+  dihentikan_yn : character varying
+  dktp_yn : character varying
+  id_aset : character varying
+  id_satker : character varying
+  jns_trn : character varying
+  kd_brg : character varying
+  kemitraan_yn : character varying
+  kuantitas : character varying
+  no_aset : character varying
+  rph_na : character varying
+  rph_nan : character varying
+  status_bmn_idle : character varying
+  status_bmn_yn : character varying
+  ur_trn : character varying
+}
+
+entity "public.r_tipe_rmh_neg" as public__r_tipe_rmh_neg #FFFFFF {
+  kd_tipe_rmh_neg : character varying <<PK>>
+  ur_tipe_rmh_neg : character varying
+}
+
+entity "public.r_tipe_ruang" as public__r_tipe_ruang #FFFFFF {
+  kd_tipe_ruang : character varying <<PK>>
+  sbsk_rmh_yn : character varying
+  ur_tipe_ruang : character varying
+}
+
+entity "public.r_tkdp_rule" as public__r_tkdp_rule #FFFFFF {
+  id : integer <<PK>>
+  bpybds_yn : character varying
+  brg_hilang_yn : character varying
+  brg_rusak_yn : character varying
+  dihentikan_yn : character varying
+  dktp_yn : character varying
+  id_aset : character varying
+  id_satker : character varying
+  jns_trn : character varying
+  kd_brg : character varying
+  kemitraan_yn : character varying
+  kuantitas : character varying
+  no_aset : character varying
+  rph_na : character varying
+  rph_nan : character varying
+  status_bmn_idle : character varying
+  status_bmn_yn : character varying
+  ur_trn : character varying
+}
+
+entity "public.r_tugas" as public__r_tugas #FFFFFF {
+  kd_tugas : character varying <<PK>>
+  tipe_inv : character varying
+  ur_tugas : character varying
+  urutan : integer
+}
+
+entity "public.r_umur" as public__r_umur #FFFFFF {
+  kd_kondisi : character varying <<PK>>
+  kd_skel : character varying <<PK>>
+  ref_umur : integer
+}
+
+entity "public.r_unit_history" as public__r_unit_history #FFFFFF {
+  id_unit_history : integer <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  data_change : jsonb
+  id_unit : integer
+  type_unit : character varying
+  ur_history : character varying
+}
+
+entity "public.r_urut_satker" as public__r_urut_satker #FFFFFF {
+  id_urut_satker : integer <<PK>>
+  id_satker : integer
+  kd_satker : character varying
+  ur_satker : character varying
+}
+
+entity "public.r_valserah_validation" as public__r_valserah_validation #FFFFFF {
+  attr : character varying
+  input_key : character varying
+  key : character varying
+  kode : character varying
+  name : character varying
+  order_no : smallint
+}
+
+entity "public.r_wil_kabkota" as public__r_wil_kabkota #FFFFFF {
+  kd_kabkota : character varying <<PK>>
+  created_at : timestamp without time zone
+  created_by : smallint
+  is_ibukota_prov : boolean
+  kd_prov : character varying
+  kd_wilayah : character varying
+  kdb : numeric
+  updated_at : timestamp without time zone
+  updated_by : smallint
+  ur_kabkota : character varying
+}
+
+entity "public.r_wil_kabkota_old" as public__r_wil_kabkota_old #FFFFFF {
+  kd_kabkota : character varying <<PK>>
+  created_at : timestamp without time zone
+  created_by : smallint
+  is_ibukota_prov : boolean
+  kd_prov : character varying
+  kd_wilayah : character varying
+  kdb : numeric
+  updated_at : timestamp without time zone
+  updated_by : smallint
+  ur_kabkota : character varying
+}
+
+entity "public.r_wil_kec" as public__r_wil_kec #FFFFFF {
+  kd_kec : character varying <<PK>>
+  is_ibukota_kabkota : boolean
+  kd_kabkota : character varying
+  ur_kec : character varying
+}
+
+entity "public.r_wil_kec_old" as public__r_wil_kec_old #FFFFFF {
+  kd_kec : character varying <<PK>>
+  is_ibukota_kabkota : boolean
+  kd_kabkota : character varying
+  ur_kec : character varying
+}
+
+entity "public.r_wil_kel" as public__r_wil_kel #FFFFFF {
+  kd_kel : character varying <<PK>>
+  kd_kec : character varying
+  ur_kel : character varying
+}
+
+entity "public.r_wil_kel_old" as public__r_wil_kel_old #FFFFFF {
+  kd_kel : character varying <<PK>>
+  kd_kec : character varying
+  ur_kel : character varying
+}
+
+entity "public.r_wil_neg" as public__r_wil_neg #FFFFFF {
+  kd_neg : character varying <<PK>>
+  is_domestic : boolean
+  ur_neg : character varying
+}
+
+entity "public.r_wil_prov" as public__r_wil_prov #FFFFFF {
+  kd_prov : character varying <<PK>>
+  is_ibukota_neg : boolean
+  kd_neg : character varying
+  ur_prov : character varying
+}
+
+entity "public.r_wil_prov_old" as public__r_wil_prov_old #FFFFFF {
+  kd_prov : character varying <<PK>>
+  is_ibukota_neg : boolean
+  kd_neg : character varying
+  ur_prov : character varying
+}
+
+entity "public.r_wilayah" as public__r_wilayah #FFFFFF {
+  kd_wilayah : character varying <<PK>>
+  kdb : numeric
+  ur_wilayah : character varying
+}
+
+entity "public.referensi_resiko_asuransi_temp" as public__referensi_resiko_asuransi_temp #FFFFFF {
+  alamat : character varying
+  banjir : character varying
+  banjir_bandang : character varying
+  cuaca_ekstrim : character varying
+  field26 : character varying
+  gelombang_ekstrim_dan_abrasi : character varying
+  gempabumi : character varying
+  jalan : character varying
+  jumlah_lantai : integer
+  kab_kota : character varying
+  kd_kab_kota : double precision
+  kd_kanwil : integer
+  kd_kecamatan : character varying
+  kd_kelurahan : character varying
+  kd_kpknl : integer
+  kd_okupasi : character varying
+  kd_pos : integer
+  kd_prov : integer
+  kd_register : character varying
+  kebakaran_hutan_dan_lahan : character varying
+  kec : character varying
+  kel : character varying
+  kls_konstruksi : character varying
+  kode : character varying
+  kondisi : integer
+  lat : double precision
+  letusan_gunung_api : character varying
+  likuefaksi : character varying
+  lokasi : character varying
+  long : double precision
+  luas_bangunan : integer
+  nilai_buku : character varying
+  nilai_perolehan : character varying
+  nm_kanwil : character varying
+  nm_kpknl : character varying
+  no_polis : character varying
+  okupasi : character varying
+  prov : character varying
+  rph_pertanggungan : character varying
+  rph_premi : double precision
+  tahun : integer
+  tanah_longsor : character varying
+  tgl_akhir : integer
+  tgl_mulai : integer
+  tgl_perolehan : character varying
+  thn_bangun : integer
+  tsunami : character varying
+  ur_barang : character varying
+  ur_kl : character varying
+  ur_satker : character varying
+}
+
+entity "public.t_dash_wasdal_pemanfaatan" as public__t_dash_wasdal_pemanfaatan #FFFFFF {
+  id_satker : integer <<PK>>
+  jml_d : numeric
+  jml_e : numeric
+  jml_f : numeric
+  jml_g : numeric
+  jml_h : numeric
+  jml_i : numeric
+  jml_j : numeric
+  jml_k : numeric
+  jml_l : numeric
+  jml_m : numeric
+  jml_n : numeric
+  jml_o : numeric
+  jml_p : numeric
+  jml_q : numeric
+  jml_r : numeric
+  jml_s : numeric
+  jml_t : numeric
+  nilai_d : numeric
+  nilai_e : numeric
+  nilai_f : numeric
+  nilai_g : numeric
+  nilai_h : numeric
+  nilai_i : numeric
+  nilai_j : numeric
+  nilai_k : numeric
+  nilai_l : numeric
+  nilai_m : numeric
+  nilai_n : numeric
+  nilai_o : numeric
+  nilai_p : numeric
+  nilai_q : numeric
+  nilai_r : numeric
+  nilai_s : numeric
+  nilai_t : numeric
+  updated_at : timestamp with time zone
+}
+
+entity "public.t_dash_wasdal_pemindahtanganan" as public__t_dash_wasdal_pemindahtanganan #FFFFFF {
+  id_satker : integer <<PK>>
+  jml_d : numeric
+  jml_e : numeric
+  jml_f : numeric
+  jml_g : numeric
+  jml_h : numeric
+  jml_i : numeric
+  jml_j : numeric
+  jml_k : numeric
+  jml_l : numeric
+  jml_m : numeric
+  jml_n : numeric
+  jml_o : numeric
+  jml_p : numeric
+  nilai_d : numeric
+  nilai_e : numeric
+  nilai_f : numeric
+  nilai_g : numeric
+  nilai_h : numeric
+  nilai_i : numeric
+  nilai_j : numeric
+  nilai_k : numeric
+  nilai_l : numeric
+  nilai_m : numeric
+  nilai_n : numeric
+  nilai_o : numeric
+  nilai_p : numeric
+  updated_at : timestamp with time zone
+}
+
+entity "public.t_dash_wasdal_penatausahaan" as public__t_dash_wasdal_penatausahaan #FFFFFF {
+  id_satker : integer <<PK>>
+  jml_d : numeric
+  jml_e : numeric
+  jml_f : numeric
+  jml_g : numeric
+  jml_h : numeric
+  jml_i : numeric
+  jml_j : numeric
+  jml_k : numeric
+  jml_l : numeric
+  jml_m : numeric
+  jml_n : numeric
+  jml_o : numeric
+  jml_p : numeric
+  jml_q : numeric
+  jml_r : numeric
+  jml_s : numeric
+  jml_t : numeric
+  jml_u : numeric
+  jml_v : numeric
+  jml_w : numeric
+  jml_x : numeric
+  nilai_d : numeric
+  nilai_e : numeric
+  nilai_f : numeric
+  nilai_g : numeric
+  nilai_h : numeric
+  nilai_i : numeric
+  nilai_j : numeric
+  nilai_k : numeric
+  nilai_l : numeric
+  nilai_m : numeric
+  nilai_n : numeric
+  nilai_o : numeric
+  nilai_p : numeric
+  nilai_q : numeric
+  nilai_r : numeric
+  nilai_s : numeric
+  nilai_t : numeric
+  nilai_u : numeric
+  nilai_v : numeric
+  nilai_w : numeric
+  nilai_x : numeric
+  updated_at : timestamp with time zone
+}
+
+entity "public.t_dash_wasdal_pengamanan_pemeliharaan" as public__t_dash_wasdal_pengamanan_pemeliharaan #FFFFFF {
+  id_satker : integer <<PK>>
+  jml_d : numeric
+  jml_e : numeric
+  jml_f : numeric
+  jml_g : numeric
+  jml_h : numeric
+  jml_i : numeric
+  jml_j : numeric
+  jml_k : numeric
+  jml_l : numeric
+  jml_m : numeric
+  jml_n : numeric
+  jml_o : numeric
+  nilai_d : numeric
+  nilai_e : numeric
+  nilai_f : numeric
+  nilai_g : numeric
+  nilai_h : numeric
+  nilai_i : numeric
+  nilai_j : numeric
+  nilai_k : numeric
+  nilai_l : numeric
+  nilai_m : numeric
+  nilai_n : numeric
+  nilai_o : numeric
+  updated_at : timestamp with time zone
+}
+
+entity "public.t_dash_wasdal_penggunaan" as public__t_dash_wasdal_penggunaan #FFFFFF {
+  id_satker : integer <<PK>>
+  jml_bmn : numeric
+  jml_d : numeric
+  jml_e : numeric
+  jml_f : numeric
+  jml_g : numeric
+  jml_h : numeric
+  jml_i : numeric
+  jml_j : numeric
+  jml_k : numeric
+  jml_l : numeric
+  jml_m : numeric
+  jml_n : numeric
+  jml_o : numeric
+  nilai_d : numeric
+  nilai_e : numeric
+  nilai_f : numeric
+  nilai_g : numeric
+  nilai_h : numeric
+  nilai_i : numeric
+  nilai_j : numeric
+  nilai_k : numeric
+  nilai_l : numeric
+  nilai_m : numeric
+  nilai_n : numeric
+  nilai_o : numeric
+  updated_at : timestamp with time zone
+}
+
+entity "public.t_dmaster" as public__t_dmaster #FFFFFF {
+  id_t_dmaster : bigint <<PK>>
+  asal_perlh : character varying
+  created_at : timestamp without time zone
+  flag_proses : character
+  flag_sap : character
+  id_aset : bigint
+  id_aset_asal : bigint
+  id_trx : bigint
+  id_trx_asal : bigint
+  jns_trn : character varying
+  kd_brg : character varying
+  kd_lokasi : character varying
+  keterangan : character varying
+  kode_register : character varying
+  kondisi : character
+  kuantitas : numeric
+  merk : character varying
+  nilai_asal : numeric
+  no_aset : bigint
+  no_dsr_mts : character varying
+  rph_aset : numeric
+  rph_sat : numeric
+  sisaumur : bigint
+  status_akun : character varying
+  tercatat : character
+  tgl_awal_pakai : date
+  tgl_buku : date
+  tgl_dsr_mts : date
+  tgl_perlh : date
+  tgl_system : date
+  thn_ang : bigint
+  type : character varying
+  updated_at : timestamp without time zone
+}
+
+entity "public.t_download_header_config" as public__t_download_header_config #FFFFFF {
+  id : bigint <<PK>>
+  header_key : character varying
+  header_value : character varying
+  is_write : boolean
+  order_no : smallint
+  template_id : bigint
+  width : double precision
+}
+
+entity "public.t_download_log" as public__t_download_log #FFFFFF {
+  id : bigint <<PK>>
+  completed_at : timestamp without time zone
+  created_at : timestamp without time zone
+  error_msg : character varying
+  filename : character varying
+  filesize : character varying
+  level : character varying
+  notes : character varying
+  parameters : jsonb
+  status : character varying
+  tipe_download : character varying
+  uker_id : integer
+  user_id : integer
+}
+
+entity "public.t_download_log_detail" as public__t_download_log_detail #FFFFFF {
+  id : bigint <<PK>>
+  created_at : timestamp without time zone
+  download_id : bigint
+  id_aset_max : integer
+  part : integer
+  partial_data : jsonb
+  queries : jsonb
+  status : character varying
+  updated_at : timestamp without time zone
+}
+
+entity "public.t_download_log_temp" as public__t_download_log_temp #FFFFFF {
+  aksesibilitas : character varying
+  alamat : character varying
+  alamat_lain : character varying
+  asl_perlh : character varying
+  bentuk : character varying
+  bpybds_yn : character
+  brg_hilang_yn : character varying
+  brg_rusak_yn : character varying
+  bts_barat : character varying
+  bts_selatan : character varying
+  bts_timur : character varying
+  bts_utara : character varying
+  cara_perlh : character varying
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  dihentikan_yn : character
+  dktp_yn : character varying
+  download_id : bigint
+  flag_sap : character
+  gps_latitude : numeric
+  gps_longitude : numeric
+  hapus_lainnya_yn : character varying
+  id_aset : bigint
+  id_aset_ktnh : bigint
+  id_aset_ruang : bigint
+  id_aset_ruang_lama : bigint
+  id_aset_sakti : bigint
+  id_eselon1 : integer
+  id_kab : integer
+  id_kanwil : integer
+  id_kec : integer
+  id_kel : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_prov : integer
+  id_satker : integer
+  id_satker_parent : integer
+  id_trx : bigint
+  intra_extra : character varying
+  is_bukti : boolean
+  is_sbsk : boolean
+  is_sync : boolean
+  is_tb : boolean
+  jml_bdg : integer
+  jml_bidang : integer
+  jml_lantai : integer
+  jml_photo : integer
+  jns_aset : character varying
+  jns_dok_bukti_kepemilikan : character varying
+  jns_pengguna : character varying
+  jns_sertifikat : character varying
+  kapasitas : numeric
+  kd_brg : character varying
+  kd_dashboard : integer
+  kd_dok_milik : bigint
+  kd_dsr_hrg : character
+  kd_jns_bmn : integer
+  kd_jns_idle : character varying
+  kd_kab : character varying
+  kd_kec : character varying
+  kd_kel : character varying
+  kd_kondisi : character varying
+  kd_pos : character varying
+  kd_prov : character varying
+  kd_rtrw : character varying
+  kd_satker : character varying
+  kd_status : character varying
+  kd_status_hukum : character
+  kd_sumber_dana : character
+  kd_unit_pengguna : character varying
+  kdkppn : character varying
+  kemitraan_yn : character varying
+  ket_pengguna : character varying
+  kmk_sbsn : character varying
+  kode_register : character varying
+  komplek : character varying
+  konjas_yn : character
+  kuantitas : numeric
+  lebar : numeric
+  lokasi_ruang : character varying
+  luas : numeric
+  luas_pemanfaatan : numeric
+  luas_tapak : numeric
+  luas_tnhb : numeric
+  luas_tnhk : numeric
+  luas_tnhl : numeric
+  merk : character varying
+  negara : character varying
+  nm_penghuni : character varying
+  nm_unit_pengguna : character varying
+  no_aset : bigint
+  no_dana : character varying
+  no_dok_bukti_kepemilikan : character varying
+  no_dok_perolehan : character varying
+  no_kib : character varying
+  no_perkara_hukum : character varying
+  no_polisi : character varying
+  no_psp : character varying
+  optimalisasi : numeric
+  panjang : numeric
+  peruntukan : character varying
+  peruntukan_tnh : character varying
+  properti_investasi_yn : character
+  proses_pmpp_yn : character
+  rencana_hibah_yn : character
+  rph_aset : bigint
+  rph_buku : bigint
+  rph_mutasi : bigint
+  rph_susut : bigint
+  sbsk : numeric
+  serial_number : character varying
+  stat_dok_bukti_kepemilikan : character varying
+  status_bmn_idle : character
+  status_bmn_yn : character
+  status_data : smallint
+  status_pengelolaan : character varying
+  status_sanksi : integer
+  status_sbsn : character varying
+  sts_ast : smallint
+  sts_his : smallint
+  tercatat : character varying
+  tgl_akhir_sbsn : date
+  tgl_buku_pertama : date
+  tgl_dana : date
+  tgl_dok_bukti_kepemilikan : character varying
+  tgl_guna : date
+  tgl_hapus : date
+  tgl_mulai_huni : date
+  tgl_perlh : date
+  tgl_psp : date
+  tgl_rekam : date
+  tgl_rekam_pertama : date
+  tgl_renov : date
+  tgl_selesai_huni : date
+  tipe : character varying
+  topografi_elevasi : character varying
+  topografi_kontur : character varying
+  umur_sisa : real
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kab : character varying
+  ur_kec : character varying
+  ur_kel : character varying
+  ur_prov : character varying
+  ur_sskel : character varying
+  ur_sumber_dana : character varying
+}
+
+entity "public.t_download_template" as public__t_download_template #FFFFFF {
+  id : bigint <<PK>>
+  code : character varying
+  created_at : timestamp without time zone
+  file_input : text
+  filter_end_row : integer
+  filter_start_row : smallint
+  filter_style_cell : character
+  header_start_row : smallint
+  sheet_name : text
+  source_style_cell : character
+  start_write_col : smallint
+}
+
+entity "public.t_error_log" as public__t_error_log #FFFFFF {
+  created_at : timestamp without time zone
+  error_message : text
+  id : bigint
+  id_menu : integer
+  id_menu_detail : integer
+  menu : character varying
+  menu_detail : character varying
+  no_tiket : character varying
+  proses : text
+  user_id : integer
+}
+
+entity "public.t_es_ctrl" as public__t_es_ctrl #FFFFFF {
+  id : bigint <<PK>>
+  created_at : timestamp without time zone
+  finished_at : timestamp without time zone
+  id_aset : bigint
+  status : character varying
+}
+
+entity "public.t_kesesuaian_sbsk" as public__t_kesesuaian_sbsk #FFFFFF {
+  id_aset_kesesuaian_sbsk : bigint <<PK>>
+  created_at : timestamp without time zone
+  id_aset : bigint
+  id_kanwil : bigint
+  id_kpknl : bigint
+  kd_status_hunian : integer
+  persentase_kesesuaian : numeric
+  tahun_pengukuran : smallint
+  updated_at : timestamp without time zone
+}
+
+entity "public.t_mon_serah" as public__t_mon_serah #FFFFFF {
+  id_satker : integer <<PK>>
+  data_dok_tdk_ditemukan : integer
+  data_dok_tdk_sesuai : integer
+  jml_bid : numeric
+  jml_bid_serti : numeric
+  jml_tnh : integer
+  luas_bid_serti : numeric
+  luas_blm_serti : numeric
+  luas_tnh : numeric
+  status_1 : integer
+  status_2 : integer
+  status_3 : integer
+  status_4 : integer
+  status_5 : integer
+  status_6 : integer
+  status_7 : integer
+  updated_at : timestamp with time zone
+}
+
+entity "public.t_nadine" as public__t_nadine #FFFFFF {
+  id_nadine : bigint <<PK>>
+  id_modul : smallint
+  id_surat_nadine : bigint
+  jenis_doc : smallint
+  keterangan : character varying
+  no_dokumen : character varying
+  no_tiket : character varying
+  signed_lampiran : boolean
+  signed_surat : boolean
+  tgl_dokumen : character varying
+  url_lampiran_nadine : character varying
+  url_surat_nadine : character varying
+}
+
+entity "public.t_redmine_changelog" as public__t_redmine_changelog #FFFFFF {
+  id : bigint <<PK>>
+  assigned_to : character varying
+  attachments : jsonb
+  author : character varying
+  category : character varying
+  closed_on : timestamp without time zone
+  created_at : timestamp without time zone
+  created_on : timestamp without time zone
+  custom_fields : jsonb
+  description : text
+  done_ratio : integer
+  due_date : date
+  fixed_version : character varying
+  priority : character varying
+  project : character varying
+  start_date : date
+  status : character varying
+  subject : character varying
+  tracker : character varying
+  updated_at : timestamp without time zone
+  updated_on : timestamp without time zone
+}
+
+entity "public.t_rekap_monserah_igt" as public__t_rekap_monserah_igt #FFFFFF {
+  id_kpknl : integer <<PK>>
+  kuartal : numeric <<PK>>
+  tahun : numeric <<PK>>
+  belum_serti : bigint
+  belum_validasi : bigint
+  capaian_igt : numeric
+  created_at : timestamp without time zone
+  id_kanwil : integer
+  jml_bid : numeric
+  jml_bid_serti : numeric
+  jml_satker : bigint
+  jml_tnh : bigint
+  kd_kpknl : character varying
+  luas_bid_serti : numeric
+  luas_blm_serti : numeric
+  luas_tnh : numeric
+  progress_validasi : bigint
+  serti_lainya : bigint
+  serti_sebagian : bigint
+  serti_seluruh : bigint
+  serti_tidak_sesuai : bigint
+  target_igt : bigint
+  tgl_created : date
+  tidak_ada_inputan : bigint
+  tidak_lengkap : bigint
+  tidak_valid : bigint
+  updated_at : timestamp without time zone
+  ur_kpknl : character varying
+  valid_igt : bigint
+  valid_sebagian : bigint
+  valid_seluruhnya : bigint
+}
+
+entity "public.t_rekap_status" as public__t_rekap_status #FFFFFF {
+  id_rekap_status : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  flg_hist_aset : boolean
+  id_aset : bigint
+  id_jns_rekap : smallint
+  id_jns_rekap_detail : smallint
+  id_jns_status : smallint
+  id_status : smallint
+  ket_status : character varying
+  luas : numeric
+  nilai_status : numeric
+  no_surat : character varying
+  no_tiket : character varying
+  sd_tanggal : character varying
+  status_data : smallint
+  tahun : integer
+  tgl_surat : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "public.t_rekap_status_antrian" as public__t_rekap_status_antrian #FFFFFF {
+  id_rekap_status_antrian : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  exec_count : integer
+  exec_end : timestamp without time zone
+  exec_notes : character varying
+  exec_start : timestamp without time zone
+  id_jns_rekap : integer
+  id_jns_status : integer
+  id_menu : integer
+  id_menu_detail : integer
+  id_status : integer
+  id_tiket : bigint
+  kd_status_akhir : character varying
+  kd_status_awal : character varying
+  nm_column_pk : character varying
+  nm_schema : character varying
+  nm_table_child_transaction : character varying
+  nm_table_parent_transaction : character varying
+  no_tiket : character varying
+  ss_menu : character varying
+  status_antrian : integer
+  tahun : integer
+  updated_at : timestamp without time zone
+}
+
+entity "public.t_rekap_status_log" as public__t_rekap_status_log #FFFFFF {
+  id_rekap_status_log : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_aset : bigint
+  id_jns_rekap : smallint
+  id_jns_status : smallint
+  id_rekap_status : bigint
+  id_status : smallint
+  ket_status : character varying
+  log_date : date
+  log_time : timestamp without time zone
+  luas : numeric
+  nilai_status : numeric
+  no_surat : character varying
+  no_tiket : character varying
+  sd_tanggal : character varying
+  status_data : smallint
+  tahun : integer
+  tgl_surat : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "public.t_rekap_status_rekap" as public__t_rekap_status_rekap #FFFFFF {
+  id_aset : bigint <<PK>>
+  jns_1 : smallint
+  jns_10 : smallint
+  jns_11 : smallint
+  jns_12 : smallint
+  jns_13 : smallint
+  jns_14 : smallint
+  jns_15 : smallint
+  jns_16 : smallint
+  jns_17 : smallint
+  jns_18 : smallint
+  jns_19 : smallint
+  jns_2 : smallint
+  jns_3 : smallint
+  jns_4 : smallint
+  jns_5 : smallint
+  jns_6 : smallint
+  jns_7 : smallint
+  jns_8 : smallint
+  jns_9 : smallint
+  luas_18 : numeric
+  luas_8 : numeric
+  tahun : integer
+  updated_at : timestamp with time zone
+}
+
+entity "public.t_rekap_valserah" as public__t_rekap_valserah #FFFFFF {
+  id_satker : integer <<PK>>
+  status_1 : integer
+  status_2 : integer
+  status_3 : integer
+  status_4 : integer
+  status_5 : integer
+  updated_at : timestamp with time zone
+}
+
+entity "public.t_req_download_config" as public__t_req_download_config #FFFFFF {
+  code : character varying <<PK>>
+  created_at : timestamp without time zone
+  deskripsi : text
+  life_time : integer
+  sql_string : character varying
+}
+
+entity "public.t_serah_ctrl" as public__t_serah_ctrl #FFFFFF {
+  id : bigint <<PK>>
+  code : character varying
+  created_at : timestamp without time zone
+  finished_at : timestamp without time zone
+  id_satker : bigint
+  status : character varying
+}
+
+entity "public.t_serah_struktur_pengguna" as public__t_serah_struktur_pengguna #FFFFFF {
+  id : bigint <<PK>>
+  id_role_struktur_admin : ARRAY
+  id_role_struktur_kanwil : ARRAY
+  id_role_struktur_kpknl : ARRAY
+  id_struktur : ARRAY
+  is_primary : boolean
+  module : character varying
+  order_no : smallint
+  submodule : character varying
+}
+
+entity "public.t_simponi_billing" as public__t_simponi_billing #FFFFFF {
+  id_simponi_billing : bigint <<PK>>
+  bank_persepsi : character varying
+  channel_pembayaran : character varying
+  id_menu_detail : integer
+  kd_billing : character varying
+  module : character varying
+  nama_bank_persepsi : character varying
+  nama_channel_pembayaran : character varying
+  nama_wajib_bayar : character varying
+  nik : character varying
+  ntb : character varying
+  ntpn : character varying
+  row_child_id : bigint
+  row_parent_id : bigint
+  tgl_billing : date
+  tgl_buku : timestamp without time zone
+  tgl_expired_billing : date
+  tgl_jam_pembayaran : timestamp without time zone
+  trx_id_kl : character varying
+  trx_id_simponi : character varying
+}
+
+entity "public.t_sync_es_job" as public__t_sync_es_job #FFFFFF {
+  id : bigint <<PK>>
+  created_at : timestamp without time zone
+  id_asets : ARRAY
+  remark : jsonb
+  server_num : smallint
+  status : character varying
+  updated_at : timestamp without time zone
+}
+
+entity "public.t_valserah" as public__t_valserah #FFFFFF {
+  id : bigint <<PK>>
+  created_at : timestamp without time zone
+  id_dok : bigint
+  is_valid : boolean
+  is_valid_atas_nama : boolean
+  is_valid_dok_milik : boolean
+  is_valid_file_dok : boolean
+  is_valid_gps : boolean
+  is_valid_jns_dok : boolean
+  is_valid_jns_serti : boolean
+  is_valid_keterangan : boolean
+  is_valid_luas_bidang : boolean
+  is_valid_no_bidang : boolean
+  is_valid_no_dok : boolean
+  is_valid_penerbit : boolean
+  is_valid_status : boolean
+  is_valid_tahun_target : boolean
+  is_valid_tgl_berlaku : boolean
+  is_valid_tgl_dok : boolean
+  kategori : smallint
+  last_approval_id : bigint
+  updated_at : timestamp without time zone
+}
+
+entity "public.t_valserah_approval" as public__t_valserah_approval #FFFFFF {
+  id : bigint <<PK>>
+  action_at : timestamp without time zone
+  catatan : character varying
+  catatan_atas_nama : character varying
+  catatan_dok_milik : character varying
+  catatan_file_dok : character varying
+  catatan_gps : character varying
+  catatan_jns_dok : character varying
+  catatan_jns_serti : character varying
+  catatan_keterangan : character varying
+  catatan_luas_bidang : character varying
+  catatan_no_bidang : character varying
+  catatan_no_dok : character varying
+  catatan_penerbit : character varying
+  catatan_status : character varying
+  catatan_tahun_target : character varying
+  catatan_tgl_berlaku : character varying
+  catatan_tgl_dok : character varying
+  created_at : timestamp without time zone
+  id_asal : bigint
+  id_role_struktur : bigint
+  id_user : bigint
+  id_valserah : bigint
+  is_valid_atas_nama : boolean
+  is_valid_dok_milik : boolean
+  is_valid_file_dok : boolean
+  is_valid_gps : boolean
+  is_valid_jns_dok : boolean
+  is_valid_jns_serti : boolean
+  is_valid_keterangan : boolean
+  is_valid_luas_bidang : boolean
+  is_valid_no_bidang : boolean
+  is_valid_no_dok : boolean
+  is_valid_penerbit : boolean
+  is_valid_status : boolean
+  is_valid_tahun_target : boolean
+  is_valid_tgl_berlaku : boolean
+  is_valid_tgl_dok : boolean
+  nm_user : character varying
+  status_dok : smallint
+  status_validasi : smallint
+  status_workflow : character varying
+  updated_at : timestamp without time zone
+}
+
+entity "public.t_valserah_monitoring_igt" as public__t_valserah_monitoring_igt #FFFFFF {
+  id : bigint <<PK>>
+  created_at : timestamp without time zone
+  id_kanwil : bigint
+  id_kpknl : bigint
+  kuartal : smallint
+  tahun : smallint
+  target : integer
+  updated_at : timestamp without time zone
+}
+
+entity "public.t_valserah_notifikasi" as public__t_valserah_notifikasi #FFFFFF {
+  id_dok : bigint <<PK>>
+  id_role_struktur : integer <<PK>>
+  aksi : character varying
+  barang : text
+  catatan : character varying
+  dokumen : text
+  id_aset : bigint
+  id_kanwil : integer
+  id_kpknl : integer
+  id_role : integer
+  id_satker : integer
+  id_struktur : integer
+  last_pop : timestamp without time zone
+  last_update : timestamp without time zone
+  nm_user : text
+  nomor_tanggal : text
+  satker : text
+  tanggal : text
+  ur_kanwil : character varying
+  ur_kpknl : character varying
+  ur_satker : character varying
+}
+
+entity "public.t_valserah_validation_option" as public__t_valserah_validation_option #FFFFFF {
+  id : bigint <<PK>>
+  kd_jns_serti : character varying
+  kd_smilik : character varying
+  opt : ARRAY
+  req : ARRAY
+}
+
+entity "public.total_data" as public__total_data #FFFFFF {
+  total : bigint
+}
+
+public__r_wil_kabkota_old "0..*" --> "1" public__r_wil_prov_old : kd_prov -> kd_prov
+public__r_wil_kec_old "0..*" --> "1" public__r_wil_kabkota_old : kd_kabkota -> kd_kabkota
+public__r_wil_kel_old "0..*" --> "1" public__r_wil_kec_old : kd_kec -> kd_kec
+public__r_wil_prov_old "0..*" --> "1" public__r_wil_neg : kd_neg -> kd_neg
+public__m_aset_bidang "0..*" --> "1" public__m_aset : id_aset -> id_aset
+public__m_aset_dok "0..*" --> "1" public__m_aset_bidang : id_aset_bidang -> id_aset_bidang
+public__m_aset_dok "0..*" --> "1" public__m_aset : id_aset -> id_aset
+public__m_aset_dok_tanah_not_found "0..*" --> "1" public__m_aset_bidang : id_aset_bidang -> id_aset_bidang
+public__m_aset_dok_tanah_not_found "0..*" --> "1" public__m_aset : id_aset -> id_aset
+public__m_aset_hist_detail "0..*" --> "1" public__m_aset_hist : id_hist -> id_hist
+public__m_aset "0..*" --> "1" public__m_aset_ruang : id_aset_ruang -> id_aset_ruang
+public__m_aset_lantai "0..*" --> "1" public__m_aset : id_aset -> id_aset
+public__m_aset_lantai_pemakai "0..*" --> "1" public__m_aset_lantai : id_lantai -> id_lantai
+public__m_aset_lantai_pemakai "0..*" --> "1" public__r_satker : id_satker -> id_satker
+public__m_aset_laporan_dok "0..*" --> "1" public__m_aset_bidang : id_aset_bidang -> id_aset_bidang
+public__m_aset_laporan_dok "0..*" --> "1" public__m_aset : id_aset -> id_aset
+public__m_aset_resync "0..*" --> "1" public__m_satker_resync : id_satker_resync -> id_satker_resync
+public__m_aset_ruang_lain "0..*" --> "1" public__m_aset_ruang : id_aset_ruang -> id_aset_ruang
+public__m_aset_ruang "0..*" --> "1" public__m_aset : id_aset -> id_aset
+public__m_aset_ruang "0..*" --> "1" public__m_aset_lantai : id_lantai_ruang -> id_lantai
+public__m_aset_sbsn "0..*" --> "1" public__m_aset : id_aset -> id_aset
+public__m_aset_tanah_bangunan "0..*" --> "1" public__m_aset : id_aset_bangunan -> id_aset
+public__m_aset_tanah_bangunan "0..*" --> "1" public__m_aset : id_aset_tanah -> id_aset
+public__m_aset_wasdal_pemanfaatan "0..*" --> "1" public__m_aset : id_aset -> id_aset
+public__m_aset_wasdal_pemindahtanganan "0..*" --> "1" public__m_aset : id_aset -> id_aset
+public__m_aset_wasdal_penatausahaan "0..*" --> "1" public__m_aset : id_aset -> id_aset
+public__m_aset_wasdal_pengamanan_pemeliharaan "0..*" --> "1" public__m_aset : id_aset -> id_aset
+public__m_aset_wasdal_penggunaan "0..*" --> "1" public__m_aset : id_aset -> id_aset
+public__m_kdp_resync "0..*" --> "1" public__m_satker_resync : id_satker_resync -> id_satker_resync
+public__r_eselon1 "0..*" --> "1" public__r_kl : id_kl -> id_kl
+public__r_korwil "0..*" --> "1" public__r_eselon1 : id_eselon1 -> id_eselon1
+public__r_korwil "0..*" --> "1" public__r_kl : id_kl -> id_kl
+public__r_kpknl "0..*" --> "1" public__r_kanwil : id_kanwil -> id_kanwil
+public__r_satker_komposisi_skema "0..*" --> "1" public__r_satker : id_satker -> id_satker
+public__r_satker "0..*" --> "1" public__r_eselon1 : id_eselon1 -> id_eselon1
+public__r_satker "0..*" --> "1" public__r_kanwil : id_kanwil -> id_kanwil
+public__r_satker "0..*" --> "1" public__r_kl : id_kl -> id_kl
+public__r_satker "0..*" --> "1" public__r_korwil : id_korwil -> id_korwil
+public__r_satker "0..*" --> "0..1" public__r_kpknl : id_kanwil -> id_kanwil
+public__r_satker "0..*" --> "1" public__r_kpknl : id_kpknl -> id_kpknl
+public__r_satker "0..*" --> "1" public__r_wil_kabkota : kode_kabkota -> kd_kabkota
+public__r_satker "0..*" --> "1" public__r_wil_kec : kode_kec -> kd_kec
+public__r_satker "0..*" --> "1" public__r_wil_kel : kode_kel -> kd_kel
+public__r_satker "0..*" --> "1" public__r_wil_neg : kode_neg -> kd_neg
+public__r_satker "0..*" --> "1" public__r_wil_prov : kode_prov -> kd_prov
+public__r_wil_kabkota "0..*" --> "1" public__r_wil_prov : kd_prov -> kd_prov
+public__r_wil_kec "0..*" --> "1" public__r_wil_kabkota : kd_kabkota -> kd_kabkota
+public__r_wil_kel "0..*" --> "1" public__r_wil_kec : kd_kec -> kd_kec
+public__r_wil_prov "0..*" --> "1" public__r_wil_neg : kd_neg -> kd_neg
+public__t_dash_wasdal_pemanfaatan "0..*" --> "1" public__r_satker : id_satker -> id_satker
+public__t_dash_wasdal_pemindahtanganan "0..*" --> "1" public__r_satker : id_satker -> id_satker
+public__t_dash_wasdal_penatausahaan "0..*" --> "1" public__r_satker : id_satker -> id_satker
+public__t_dash_wasdal_pengamanan_pemeliharaan "0..*" --> "1" public__r_satker : id_satker -> id_satker
+public__t_dash_wasdal_penggunaan "0..*" --> "1" public__r_satker : id_satker -> id_satker
+public__t_download_log_detail "0..*" --> "1" public__t_download_log : download_id -> id
+public__t_download_log_temp "0..*" --> "1" public__t_download_log : download_id -> id
+public__t_kesesuaian_sbsk "0..*" --> "1" public__m_aset : id_aset -> id_aset
+public__t_kesesuaian_sbsk "0..*" --> "1" public__r_status_hunian : kd_status_hunian -> kd_status_hunian
+public__t_kesesuaian_sbsk "0..*" --> "0..1" public__r_kpknl : id_kanwil -> id_kanwil
+public__t_kesesuaian_sbsk "0..*" --> "1" public__r_kpknl : id_kpknl -> id_kpknl
+public__t_rekap_status_log "0..*" --> "1" public__m_aset : id_aset -> id_aset
+public__t_rekap_status "0..*" --> "1" public__m_aset : id_aset -> id_aset
+public__t_rekap_status_rekap "0..*" --> "1" public__m_aset : id_aset -> id_aset
+public__t_valserah_approval "0..*" --> "1" public__t_valserah : id_valserah -> id
+public__t_valserah "0..*" --> "1" public__m_aset_dok : id_dok -> id_dok
+public__t_valserah "0..*" --> "1" public__t_valserah_approval : last_approval_id -> id
+@enduml

@@ -1,0 +1,741 @@
+@startuml
+skinparam classAttributeIconSize 0
+left to right direction
+hide circle
+scale 1.0
+
+entity "bmnidle.r_access_delete_tiket_bmnidle" as bmnidle__r_access_delete_tiket_bmnidle {
+  can_delete : boolean
+  flow : text
+  id_access_delete_tiket_bmnidle : bigint
+  id_r_menu_access_state : integer
+  kode_status : text
+  nama_state : character varying
+}
+
+entity "bmnidle.r_counter" as bmnidle__r_counter {
+  id_counter : integer <<PK>>
+  counter_days : numeric
+  counter_name : character varying
+}
+
+entity "bmnidle.r_jns_dokumen_bmnidle" as bmnidle__r_jns_dokumen_bmnidle {
+  id_jns_dokumen_bmnidle : integer <<PK>>
+  flow : character varying
+  id_struktur : integer
+  is_mandatory : boolean
+  nm_jns_dokumen : character varying
+}
+
+entity "bmnidle.r_jns_info_penelusuran_bmnidle" as bmnidle__r_jns_info_penelusuran_bmnidle {
+  id_jns_info_penelusuran_bmnidle : integer <<PK>>
+  is_penelusuran : boolean
+  nm_jns_info : character varying
+  option_list : ARRAY
+  subtitle_no : integer
+}
+
+entity "bmnidle.r_status_idle" as bmnidle__r_status_idle {
+  id_status_idle : integer <<PK>>
+  ur_status_idle : character varying
+}
+
+entity "bmnidle.r_status_penguasaan" as bmnidle__r_status_penguasaan {
+  id_status_penguasaan : integer <<PK>>
+  ur_status_penguasaan : character varying
+}
+
+entity "bmnidle.r_sumber_informasi" as bmnidle__r_sumber_informasi {
+  id_sumber_informasi : integer <<PK>>
+  ur_sumber_informasi : character varying
+}
+
+entity "bmnidle.t_bmnidle_indikasi" as bmnidle__t_bmnidle_indikasi {
+  id_bmnidle_indikasi : bigint <<PK>>
+  alamat_aset : character varying
+  alamat_bumn : character varying
+  alamat_kl : character varying
+  alamat_mitra : character varying
+  alamat_pemda : character varying
+  alamat_penerima_hibah : character varying
+  alamat_penyewa : character varying
+  alasan_pemusnahan : character varying
+  alasan_penghapusan : character varying
+  batasan_waktu_yn : character varying
+  bkn_bmn_satker_yn : character
+  bypass_e1 : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  file_draft_sk : character varying
+  file_sk : character varying
+  file_sk_penolakan : character varying
+  id_analis : integer
+  id_jns_penetapan : smallint
+  id_kanwil : integer
+  id_kpknl : integer
+  id_pemohon : integer
+  id_pengelola : integer
+  id_r_menu_access_state : integer
+  id_r_menu_access_state_bkn_idle : integer
+  id_r_menu_access_state_penelitian : integer
+  id_r_menu_access_state_penelusuran : integer
+  id_r_menu_access_state_penyerahan : integer
+  id_satker : integer
+  id_status_klarifikasi : integer
+  id_struktur : smallint
+  id_struktur_pemohon : smallint
+  id_struktur_termohon : smallint
+  id_sumber_informasi : integer
+  id_tipe_bmnidle : integer
+  id_user : integer
+  is_tb : character varying
+  jabatan_penandatangan_sk : character varying
+  jangka_waktu : numeric
+  jangka_waktu_pengelola : numeric
+  jangka_waktu_pengguna : numeric
+  jns_aset_pengganti : character varying
+  kd_instansi : character varying
+  kd_jns_mitra : character varying
+  kd_kl : character varying
+  kd_pelayanan : character varying
+  keterangan : character varying
+  keterangan_bkn_bmn_satker : character varying
+  keterangan_penelitian : character varying
+  keterangan_penelusuran : character varying
+  kuantitas : numeric
+  kuantitas_aset_pengganti : numeric
+  kuantitas_ditolak : numeric
+  lokasi_aset_pengganti : character varying
+  luas_aset : numeric
+  luas_aset_pengganti : numeric
+  luas_dimanfaatkan : numeric
+  luas_disewa : numeric
+  luas_ditolak : numeric
+  nama_penandatangan_sk : character varying
+  nilai_aset_pengganti : numeric
+  nilai_buku : numeric
+  nilai_ditolak : numeric
+  nilai_kontribusi_tahunan : numeric
+  nilai_limit : numeric
+  nilai_penetapan : numeric
+  nilai_wajar : numeric
+  nip_penandatangan_sk : character varying
+  nm_bumn : character varying
+  nm_file_penolakan : character varying
+  nm_jns_bmn : character varying
+  nm_mitra : character varying
+  nm_pemda : character varying
+  nm_penerima_hibah : character varying
+  nm_pengadilan : character varying
+  nm_penyewa : character varying
+  no_sk_penelitian : character varying
+  no_sk_penelusuran : character varying
+  no_surat : character varying
+  no_surat_pelimpahan : character varying
+  no_tiket : character varying
+  open_close : character varying
+  periode : character varying
+  peruntukan : character varying
+  sk_penolakan : character varying
+  status_data : smallint
+  status_permohonan : character varying
+  tahun_anggaran : numeric
+  tetapkan_pengguna_yn : character varying
+  tgl_created : timestamp without time zone
+  tgl_kirim_eselon : date
+  tgl_kirim_kanwil : date
+  tgl_kirim_kl : date
+  tgl_kirim_korwil : date
+  tgl_kirim_kp : date
+  tgl_kirim_kpknl : date
+  tgl_kirim_satker : date
+  tgl_sk : date
+  tgl_sk_penelitian : date
+  tgl_sk_penelusuran : date
+  tgl_sk_penolakan : date
+  tgl_surat : date
+  tgl_surat_pelimpahan : date
+  tipe_pemohon : character varying
+  tipe_pengelola : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kl : character varying
+  uraian_keputusan : character varying
+  uraian_penolakan : character varying
+  url_sk_keputusan : character varying
+  url_sk_penolakan : character varying
+  url_surat_klarifikasi : character varying
+}
+
+entity "bmnidle.t_bmnidle_indikasi_aset" as bmnidle__t_bmnidle_indikasi_aset {
+  id_bmnidle_indikasi_aset : bigint <<PK>>
+  alamat : character varying
+  catatan : character varying
+  catatan_masalah : character varying
+  catatan_realisasi : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  filename_bukti_realisasi : character varying
+  filename_hasil_penelusuran : character varying
+  hasil_penelusuran : character varying
+  id_aset : bigint
+  id_bmnidle_indikasi : bigint
+  id_data_awal : integer
+  id_r_menu_access_state_detail : integer
+  id_satker : integer
+  id_status_idle : integer
+  id_status_indikasi : integer
+  id_status_klarifikasi : integer
+  id_status_masalah : integer
+  id_status_pemantauan : integer
+  id_tipe_bmnidle : smallint
+  idle_jawaban_yn : character
+  idle_penelitian_yn : character
+  idle_penelusuran_yn : character
+  is_checked : character varying
+  is_deleted : character varying
+  is_penggunaan : character varying
+  isi_klarifikasi : character varying
+  jml_photo : integer
+  jns_aset : character varying
+  jns_dok_bukti_kepemilikan : character varying
+  kd_brg : character varying
+  kd_jns_bmn : integer
+  kd_satker : character varying
+  kesimpulan_indikasi : character varying
+  ket : character varying
+  keterangan_masalah_penelitian : character varying
+  masalah_yn : character
+  masalah_yn_penelitian : character varying
+  merk : character varying
+  nilai_estimasi : numeric
+  nilai_permohonan : numeric
+  nilai_persetujuan : numeric
+  nilai_sewa : numeric
+  nilai_usulan : numeric
+  nm_jns_bmn : character varying
+  no_aset : integer
+  no_dok_bukti_kepemilikan : character varying
+  no_kib : character varying
+  no_psp : character varying
+  no_surat_klarifikasi : character varying
+  no_surat_masalah : character varying
+  no_surat_penelitian : character varying
+  no_surat_penelusuran : character varying
+  no_tiket : character varying
+  realisasi_yn : character
+  ref_alamat1 : character varying
+  ref_alamat2 : character varying
+  ref_jenis : character varying
+  ref_kode : character varying
+  ref_luas : character varying
+  ref_nama : character varying
+  ref_nomor : character varying
+  ref_periode : character varying
+  ref_tanggal : character varying
+  rencana : character varying
+  rph_aset : numeric
+  rph_buku : numeric
+  rph_mutasi : numeric
+  rph_perlolehan : numeric
+  rph_perlolehan_pertama : numeric
+  rph_susut : numeric
+  status_data : smallint
+  tahun_realisasi : character varying
+  tgl_info_surat_klarifikasi : date
+  tgl_kirim_satker : date
+  tgl_psp : date
+  tgl_realisasi : date
+  tgl_surat_klarifikasi : date
+  tgl_surat_masalah : date
+  tgl_surat_penelitian : date
+  tgl_surat_penelusuran : date
+  tipe : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kondisi : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+  url_surat_klarifikasi : character varying
+  url_surat_masalah_penelitian : character varying
+}
+
+entity "bmnidle.t_bmnidle_log" as bmnidle__t_bmnidle_log {
+  id : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_status : integer
+  id_user : integer
+  keterangan : character varying
+  kode_status : character varying
+  no_tiket : character varying
+  status_permohonan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "bmnidle.t_bmnidle_penetapan" as bmnidle__t_bmnidle_penetapan {
+  id_bmnidle_penetapan : bigint <<PK>>
+  alamat_aset : character varying
+  alamat_bumn : character varying
+  alamat_kl : character varying
+  alamat_mitra : character varying
+  alamat_pemda : character varying
+  alamat_penerima_hibah : character varying
+  alamat_penyewa : character varying
+  alasan_pemusnahan : character varying
+  alasan_penghapusan : character varying
+  batasan_waktu_yn : character varying
+  bypass_e1 : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  file_draft_sk : character varying
+  file_sk : character varying
+  file_sk_penolakan : character varying
+  has_bast : boolean
+  has_sp1 : boolean
+  has_sp2 : boolean
+  has_surat_sanksi : boolean
+  id_analis : integer
+  id_jns_penetapan : smallint
+  id_kanwil : integer
+  id_kpknl : integer
+  id_pemohon : integer
+  id_pengelola : integer
+  id_r_menu_access_state : integer
+  id_r_menu_access_state_penelusuran : integer
+  id_struktur : smallint
+  id_struktur_pemohon : smallint
+  id_struktur_termohon : smallint
+  id_tipe_bmnidle : integer
+  id_user : integer
+  is_sanksi : boolean
+  is_sp1 : boolean
+  is_sp2 : boolean
+  is_tb : character varying
+  jabatan_penandatangan_sk : character varying
+  jangka_waktu : numeric
+  jangka_waktu_pengelola : numeric
+  jangka_waktu_pengguna : numeric
+  jns_aset_pengganti : character varying
+  kd_instansi : character varying
+  kd_jns_mitra : character varying
+  kd_kl : character varying
+  kd_pelayanan : character varying
+  kd_satker : character varying
+  keterangan : character varying
+  kuantitas : numeric
+  kuantitas_aset_pengganti : numeric
+  kuantitas_ditolak : numeric
+  lokasi_aset_pengganti : character varying
+  luas_aset : numeric
+  luas_aset_pengganti : numeric
+  luas_dimanfaatkan : numeric
+  luas_disewa : numeric
+  luas_ditolak : numeric
+  nama_penandatangan_sk : character varying
+  nilai_aset_pengganti : numeric
+  nilai_buku : numeric
+  nilai_ditolak : numeric
+  nilai_kontribusi_tahunan : numeric
+  nilai_limit : numeric
+  nilai_penetapan : numeric
+  nilai_wajar : numeric
+  nip_penandatangan_sk : character varying
+  nm_bumn : character varying
+  nm_file_penolakan : character varying
+  nm_jns_bmn : character varying
+  nm_mitra : character varying
+  nm_pemda : character varying
+  nm_penerima_hibah : character varying
+  nm_pengadilan : character varying
+  nm_penyewa : character varying
+  no_surat : character varying
+  no_surat_pelimpahan : character varying
+  no_tiket : character varying
+  open_close : character varying
+  periode : character varying
+  peruntukan : character varying
+  sk_penolakan : character varying
+  status_data : smallint
+  status_permohonan : character varying
+  tahun_anggaran : numeric
+  tetapkan_pengguna_yn : character varying
+  tgl_created : timestamp without time zone
+  tgl_kirim_eselon : date
+  tgl_kirim_kanwil : date
+  tgl_kirim_kl : date
+  tgl_kirim_korwil : date
+  tgl_kirim_kp : date
+  tgl_kirim_kpknl : date
+  tgl_kirim_satker : date
+  tgl_sk : date
+  tgl_sk_penolakan : date
+  tgl_sp1 : date
+  tgl_sp2 : date
+  tgl_surat : date
+  tgl_surat_pelimpahan : date
+  tgl_surat_sanksi : date
+  tipe_pemohon : character varying
+  tipe_pengelola : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kl : character varying
+  ur_satker : character varying
+  uraian_keputusan : character varying
+  uraian_penolakan : character varying
+  url_sk_keputusan : character varying
+  url_sk_penolakan : character varying
+}
+
+entity "bmnidle.t_bmnidle_penetapan_aset" as bmnidle__t_bmnidle_penetapan_aset {
+  id_bmnidle_penetapan_aset : bigint <<PK>>
+  alamat : character varying
+  bmnidle_yn : character
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  filename_penelitian : character varying
+  filename_sk_bast : character varying
+  filename_sk_penetapan : character varying
+  filename_surat_pemberitahuan : character varying
+  id_aset : integer
+  id_bmnidle_penetapan : integer
+  id_data_awal : integer
+  id_r_menu_access_state_detail : integer
+  id_satker : integer
+  id_status_idle : integer
+  id_tipe_bmnidle : smallint
+  is_checked : character varying
+  is_deleted : character varying
+  isi_klarifikasi : character varying
+  jml_photo : integer
+  jns_aset : character varying
+  jns_dok_bukti_kepemilikan : character varying
+  kd_brg : character varying
+  kd_jns_bmn : integer
+  kd_satker : character varying
+  ket : character varying
+  keterangan_masalah_penelitian : character varying
+  masalah_yn : character varying
+  merk : character varying
+  nilai_estimasi : numeric
+  nilai_permohonan : numeric
+  nilai_persetujuan : numeric
+  nilai_sewa : numeric
+  nilai_usulan : numeric
+  nm_jns_bmn : character varying
+  no_aset : integer
+  no_dok_bukti_kepemilikan : character varying
+  no_kib : character varying
+  no_psp : character varying
+  no_sp1 : character varying
+  no_sp2 : character varying
+  no_surat_bast : character varying
+  no_surat_klarifikasi : character varying
+  no_surat_masalah : character varying
+  no_surat_penelitian : character varying
+  no_surat_penelusuran : character varying
+  no_surat_penetapan : character varying
+  no_surat_sanksi : character varying
+  no_tiket : character varying
+  no_tiket_aset_indikasi : character varying
+  ref_alamat1 : character varying
+  ref_alamat2 : character varying
+  ref_jenis : character varying
+  ref_kode : character varying
+  ref_luas : character varying
+  ref_nama : character varying
+  ref_nomor : character varying
+  ref_periode : character varying
+  ref_tanggal : character varying
+  rph_aset : numeric
+  rph_buku : numeric
+  rph_mutasi : numeric
+  rph_perlolehan : numeric
+  rph_perlolehan_pertama : numeric
+  rph_susut : numeric
+  sp1_at : date
+  sp2_at : date
+  status_data : smallint
+  tgl_psp : date
+  tgl_psp_idle : date
+  tgl_sp1 : date
+  tgl_sp2 : date
+  tgl_surat_bast : date
+  tgl_surat_klarifikasi : date
+  tgl_surat_masalah : date
+  tgl_surat_penelitian : date
+  tgl_surat_penelusuran : date
+  tgl_surat_penetapan : date
+  tgl_surat_sanksi : date
+  tipe : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kondisi : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+  url_surat_klarifikasi : character varying
+  url_surat_masalah_penelitian : character varying
+}
+
+entity "bmnidle.t_bmnidle_penetapan_dokumen" as bmnidle__t_bmnidle_penetapan_dokumen {
+  id_bmnidle_penetapan_dokumen : bigint <<PK>>
+  asal_surat : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  dihentikan_pemeliharaan_yn : boolean
+  id_bmnidle_penetapan : integer
+  nm_file : character varying
+  no_surat : character varying
+  no_tiket : character varying
+  perihal_surat : character varying
+  status_data : smallint
+  tahap : character varying
+  tgl_surat : date
+  tujuan_surat : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "bmnidle.t_bmnidle_penyerahan" as bmnidle__t_bmnidle_penyerahan {
+  id_bmnidle_penyerahan : bigint <<PK>>
+  alamat_aset : character varying
+  alamat_bumn : character varying
+  alamat_kl : character varying
+  alamat_mitra : character varying
+  alamat_pemda : character varying
+  alamat_penerima_hibah : character varying
+  alamat_penyewa : character varying
+  alasan_pemusnahan : character varying
+  alasan_penghapusan : character varying
+  batasan_waktu_yn : character varying
+  bypass_e1 : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  file_draft_sk : character varying
+  file_sk : character varying
+  file_sk_penolakan : character varying
+  id_analis : integer
+  id_jns_penyerahan : smallint
+  id_kanwil : integer
+  id_kpknl : integer
+  id_pemohon : integer
+  id_pengelola : integer
+  id_r_menu_access_state : integer
+  id_struktur : smallint
+  id_struktur_pemohon : smallint
+  id_struktur_termohon : smallint
+  id_tipe_bmnidle : integer
+  id_user : integer
+  is_tb : character varying
+  jabatan_penandatangan_sk : character varying
+  jangka_waktu : numeric
+  jangka_waktu_pengelola : numeric
+  jangka_waktu_pengguna : numeric
+  jns_aset_pengganti : character varying
+  kd_instansi : character varying
+  kd_jns_mitra : character varying
+  kd_kl : character varying
+  kd_pelayanan : character varying
+  keterangan : character varying
+  kuantitas : numeric
+  kuantitas_aset_pengganti : numeric
+  kuantitas_ditolak : numeric
+  lokasi_aset_pengganti : character varying
+  luas_aset : numeric
+  luas_aset_pengganti : numeric
+  luas_dimanfaatkan : numeric
+  luas_disewa : numeric
+  luas_ditolak : numeric
+  nama_penandatangan_sk : character varying
+  nilai_aset_pengganti : numeric
+  nilai_buku : numeric
+  nilai_ditolak : numeric
+  nilai_kontribusi_tahunan : numeric
+  nilai_limit : numeric
+  nilai_penyerahan : numeric
+  nilai_wajar : numeric
+  nip_penandatangan_sk : character varying
+  nm_bumn : character varying
+  nm_file_penolakan : character varying
+  nm_jns_bmn : character varying
+  nm_mitra : character varying
+  nm_pemda : character varying
+  nm_penerima_hibah : character varying
+  nm_pengadilan : character varying
+  nm_penyewa : character varying
+  no_surat : character varying
+  no_surat_pelimpahan : character varying
+  no_tiket : character varying
+  open_close : character varying
+  periode : character varying
+  peruntukan : character varying
+  sk_penolakan : character varying
+  status_data : smallint
+  status_permohonan : character varying
+  tahun_anggaran : numeric
+  tetapkan_pengguna_yn : character varying
+  tgl_created : timestamp without time zone
+  tgl_kirim_eselon : date
+  tgl_kirim_kanwil : date
+  tgl_kirim_kl : date
+  tgl_kirim_korwil : date
+  tgl_kirim_kp : date
+  tgl_kirim_kpknl : date
+  tgl_kirim_satker : date
+  tgl_sk : date
+  tgl_sk_penolakan : date
+  tgl_surat : date
+  tgl_surat_pelimpahan : date
+  tipe_pemohon : character varying
+  tipe_pengelola : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kl : character varying
+  uraian_keputusan : character varying
+  uraian_penolakan : character varying
+  url_sk_keputusan : character varying
+  url_sk_penolakan : character varying
+}
+
+entity "bmnidle.t_bmnidle_penyerahan_aset" as bmnidle__t_bmnidle_penyerahan_aset {
+  id_bmnidle_penyerahan_aset : bigint <<PK>>
+  alamat : character varying
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  filename_dok_bast_ex_bmnidle : character varying
+  id_aset : integer
+  id_bmnidle_penyerahan : integer
+  id_data_awal : integer
+  id_r_menu_access_state_detail : integer
+  id_satker : integer
+  id_satker_move : integer
+  id_status_idle : integer
+  id_tipe_bmnidle : smallint
+  is_checked : character varying
+  is_deleted : character varying
+  isi_klarifikasi : character varying
+  jml_photo : integer
+  jns_aset : character varying
+  jns_dok_bukti_kepemilikan : character varying
+  kd_brg : character varying
+  kd_jns_bmn : integer
+  kd_satker : character varying
+  kd_satker_move : character varying
+  ket : character varying
+  merk : character varying
+  nilai_estimasi : numeric
+  nilai_permohonan : numeric
+  nilai_persetujuan : numeric
+  nilai_sewa : numeric
+  nilai_usulan : numeric
+  nm_jns_bmn : character varying
+  no_aset : integer
+  no_dok_bukti_kepemilikan : character varying
+  no_kib : character varying
+  no_psp : character varying
+  no_surat_bast : character varying
+  no_surat_klarifikasi : character varying
+  no_surat_penelitian : character varying
+  no_surat_penetapan : character varying
+  no_tiket : character varying
+  ref_alamat1 : character varying
+  ref_alamat2 : character varying
+  ref_jenis : character varying
+  ref_kode : character varying
+  ref_luas : character varying
+  ref_nama : character varying
+  ref_nomor : character varying
+  ref_periode : character varying
+  ref_tanggal : character varying
+  rph_aset : numeric
+  rph_buku : numeric
+  rph_mutasi : numeric
+  rph_perlolehan : numeric
+  rph_perlolehan_pertama : numeric
+  rph_susut : numeric
+  status_data : smallint
+  tgl_psp : date
+  tgl_surat_bast : date
+  tgl_surat_klarifikasi : date
+  tgl_surat_penelitian : date
+  tgl_surat_penetapan : date
+  tipe : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kondisi : character varying
+  ur_satker : character varying
+  ur_satker_move : character varying
+  ur_sskel : character varying
+}
+
+entity "bmnidle.t_bmnidle_penyerahan_dokumen" as bmnidle__t_bmnidle_penyerahan_dokumen {
+  id_bmnidle_penyerahan_dokumen : bigint <<PK>>
+  asal_surat : character varying
+  column1 : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  id_bmnidle_penyerahan : integer
+  nm_file : character varying
+  no_surat : character varying
+  no_tiket : character varying
+  perihal_surat : character varying
+  status_data : smallint
+  tgl_surat : date
+  tujuan_surat : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "bmnidle.t_dokumen_bmnidle" as bmnidle__t_dokumen_bmnidle {
+  id_dokumen_bmnidle : integer <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  filename : character varying
+  flow : character varying
+  flow_order_no : integer
+  id_jns_dokumen_bmnidle : integer
+  id_struktur_login : integer
+  keterangan : character varying
+  no_dokumen : character varying
+  no_tiket_indikasi : character varying
+  no_tiket_penelitian : character varying
+  no_tiket_penelusuran : character varying
+  no_tiket_penyerahan : character varying
+  tgl_dokumen : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "bmnidle.t_info_penelusuran_bmnidle" as bmnidle__t_info_penelusuran_bmnidle {
+  id_info_penelusuran_bmnidle : integer <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_jns_info : integer
+  is_penelusuran : boolean
+  keterangan : character varying
+  no_tiket : character varying
+  status_penguasaan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "bmnidle.t_tim_penelusuran_bmnidle" as bmnidle__t_tim_penelusuran_bmnidle {
+  id_tim_penelusuran_bmnidle : integer <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  flow : character varying
+  is_penelusuran : boolean
+  is_pihak : boolean
+  jabatan : character varying
+  nama : character varying
+  nip : character varying
+  no_tiket : character varying
+  peran : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+@enduml

@@ -1,0 +1,900 @@
+@startuml
+skinparam classAttributeIconSize 0
+left to right direction
+hide circle
+scale 1.0
+
+entity "persediaan.m_persediaan" as persediaan__m_persediaan {
+  kode_persediaan : uuid <<PK>>
+  created_at : timestamp without time zone
+  harga : numeric
+  id_detail : bigint
+  jml_layer : bigint
+  jml_trx : bigint
+  jns_persediaan : smallint
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kuantitas : bigint
+  kuantitas_keluar : bigint
+  kuantitas_masuk : bigint
+  nm_brg : text
+  nm_jns_persediaan : character varying
+  saldo : numeric
+  satuan : character varying
+  tahun : smallint
+  tgl_buku : date
+  thn_perolehan : ARRAY
+  updated_at : timestamp without time zone
+}
+
+entity "persediaan.m_persediaan_timeline" as persediaan__m_persediaan_timeline {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2015_s1" as persediaan__m_persediaan_timeline_2015_s1 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2015_s2" as persediaan__m_persediaan_timeline_2015_s2 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2016_s1" as persediaan__m_persediaan_timeline_2016_s1 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2016_s2" as persediaan__m_persediaan_timeline_2016_s2 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2017_s1" as persediaan__m_persediaan_timeline_2017_s1 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2017_s2" as persediaan__m_persediaan_timeline_2017_s2 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2018_s1" as persediaan__m_persediaan_timeline_2018_s1 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2018_s2" as persediaan__m_persediaan_timeline_2018_s2 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2019_s1" as persediaan__m_persediaan_timeline_2019_s1 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2019_s2" as persediaan__m_persediaan_timeline_2019_s2 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2020_s1" as persediaan__m_persediaan_timeline_2020_s1 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2020_s2" as persediaan__m_persediaan_timeline_2020_s2 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2021_s1" as persediaan__m_persediaan_timeline_2021_s1 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2021_s2" as persediaan__m_persediaan_timeline_2021_s2 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2022_s1" as persediaan__m_persediaan_timeline_2022_s1 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2022_s2" as persediaan__m_persediaan_timeline_2022_s2 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2023_s1" as persediaan__m_persediaan_timeline_2023_s1 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2023_s2" as persediaan__m_persediaan_timeline_2023_s2 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2024_s1" as persediaan__m_persediaan_timeline_2024_s1 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2024_s2" as persediaan__m_persediaan_timeline_2024_s2 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2025_s1" as persediaan__m_persediaan_timeline_2025_s1 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2025_s2" as persediaan__m_persediaan_timeline_2025_s2 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2026_s1" as persediaan__m_persediaan_timeline_2026_s1 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2026_s2" as persediaan__m_persediaan_timeline_2026_s2 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2027_s1" as persediaan__m_persediaan_timeline_2027_s1 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2027_s2" as persediaan__m_persediaan_timeline_2027_s2 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2028_s1" as persediaan__m_persediaan_timeline_2028_s1 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2028_s2" as persediaan__m_persediaan_timeline_2028_s2 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2029_s1" as persediaan__m_persediaan_timeline_2029_s1 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2029_s2" as persediaan__m_persediaan_timeline_2029_s2 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2030_s1" as persediaan__m_persediaan_timeline_2030_s1 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.m_persediaan_timeline_2030_s2" as persediaan__m_persediaan_timeline_2030_s2 {
+  faktor : smallint
+  harga : numeric
+  id_detail : bigint
+  id_header : bigint
+  jns_persediaan : smallint
+  jns_trx : character varying
+  kd_brg : character varying
+  kd_satker : character varying
+  kd_sskel : character varying
+  kode_persediaan : uuid
+  kuantitas : integer
+  layer : smallint
+  nm_brg : text
+  no_bukti : character varying
+  no_dok : character varying
+  prd_tutup : numeric
+  satuan : character varying
+  semester_perolehan : smallint
+  tahun : smallint
+  tahun_perolehan : smallint
+  tgl_buku : date
+  tgl_dok : date
+  ur_trx : character varying
+}
+
+entity "persediaan.r_jenis_trx" as persediaan__r_jenis_trx {
+  kd_referensi : character varying <<PK>>
+  faktor : smallint
+  ur_referensi : character varying
+}
+
+entity "persediaan.r_jns_persediaan" as persediaan__r_jns_persediaan {
+  jns_persediaan : smallint <<PK>>
+  nm_jns_persediaan : character varying
+}
+
+@enduml

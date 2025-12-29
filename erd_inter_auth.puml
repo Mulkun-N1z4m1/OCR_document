@@ -1,0 +1,926 @@
+@startuml
+skinparam classAttributeIconSize 0
+left to right direction
+hide circle
+scale 1.0
+
+entity "auth._backup_t_user_detail_modul_detail_access" as auth___backup_t_user_detail_modul_detail_access #FFFFFF {
+  id_menu_detail : integer
+  id_modul_detail_access : integer
+  id_user_detail : integer
+  u_view : boolean
+}
+
+entity "auth.m_akun" as auth__m_akun #FFFFFF {
+  dasar : character varying
+  id_akun : integer
+  is_active : boolean
+  kd_akun : character varying
+  ur_akun : character varying
+}
+
+entity "auth.r_activity_user_detail_log" as auth__r_activity_user_detail_log #FFFFFF {
+  id_activity : smallint <<PK>>
+  ur_activity : character varying
+}
+
+entity "auth.r_be_scope" as auth__r_be_scope #FFFFFF {
+  id : bigint <<PK>>
+  be_url_list : jsonb
+  kode_aksi : character varying
+  kode_menu_detail : character varying
+  service : character varying
+}
+
+entity "auth.r_button_access" as auth__r_button_access #FFFFFF {
+  id_button_access : integer <<PK>>
+  color : character varying
+  id_role : integer
+  id_status_current : integer
+  id_status_goal : integer
+  modul : character varying
+  nm_button : character varying
+}
+
+entity "auth.r_change_log_modul" as auth__r_change_log_modul #FFFFFF {
+  id_modul : smallint
+  modul : character varying
+}
+
+entity "auth.r_change_log_type" as auth__r_change_log_type #FFFFFF {
+  id : integer <<PK>>
+  name : character varying
+}
+
+entity "auth.r_config" as auth__r_config #FFFFFF {
+  code : character varying <<PK>>
+  description : character varying
+  type : character varying
+  value : text
+}
+
+entity "auth.r_jns_akses" as auth__r_jns_akses #FFFFFF {
+  id_jns_akses : integer <<PK>>
+  nama_jns_akses : character varying
+}
+
+entity "auth.r_jns_role" as auth__r_jns_role #FFFFFF {
+  id_jns_role : integer <<PK>>
+  nama_jns_role : character varying
+}
+
+entity "auth.r_menu" as auth__r_menu #FFFFFF {
+  id_menu : integer <<PK>>
+  active : boolean
+  kode_menu : character varying
+  kode_tiket : character
+  nama_menu : character varying
+}
+
+entity "auth.r_menu_access" as auth__r_menu_access #FFFFFF {
+  id_menu_access : integer <<PK>>
+  id_menu_detail : integer
+  id_order_tahap : smallint
+  id_role_struktur : integer
+  id_status : integer
+  keterangan : character varying
+  u_close : boolean
+  u_insert_detail : boolean
+  u_print1 : boolean
+  u_print2 : boolean
+  u_proses : boolean
+  u_revise : boolean
+  u_send_otp : boolean
+  u_update : boolean
+}
+
+entity "auth.r_menu_access_flow" as auth__r_menu_access_flow #FFFFFF {
+  id_menu_access_flow : integer <<PK>>
+  action_type : character varying
+  has_korwil : boolean
+  id_kl : integer
+  id_menu : bigint
+  id_menu_detail : integer
+  id_role : integer
+  id_role_struktur : bigint
+  id_struktur : integer
+  source_state_id : bigint
+  target_state_id : bigint
+}
+
+entity "auth.r_menu_access_flow_detail" as auth__r_menu_access_flow_detail #FFFFFF {
+  id_menu_access_flow_detail : integer <<PK>>
+  action_type : character varying
+  has_korwil : boolean
+  id_kl : integer
+  id_menu_detail : integer
+  id_role : integer
+  id_role_struktur : bigint
+  id_struktur : integer
+  source_state_id : bigint
+  target_state_id : bigint
+}
+
+entity "auth.r_menu_access_flow_detail_input_value" as auth__r_menu_access_flow_detail_input_value #FFFFFF {
+  id_menu_access_flow_detail_input_value : integer <<PK>>
+  id_menu_access_flow_detail : integer
+  id_menu_access_input_value : integer
+}
+
+entity "auth.r_menu_access_flow_input_value" as auth__r_menu_access_flow_input_value #FFFFFF {
+  id_menu_access_flow_input_value : integer <<PK>>
+  id_menu_access_flow : integer
+  id_menu_access_input_value : integer
+}
+
+entity "auth.r_menu_access_input" as auth__r_menu_access_input #FFFFFF {
+  id_menu_access_input : integer <<PK>>
+  input_name : character varying
+  input_type : character varying
+}
+
+entity "auth.r_menu_access_input_value" as auth__r_menu_access_input_value #FFFFFF {
+  id_menu_access_input_value : integer <<PK>>
+  id_menu_access_input : integer
+  input_value : character varying
+  input_value_operator : character varying
+}
+
+entity "auth.r_menu_access_state" as auth__r_menu_access_state #FFFFFF {
+  id_r_menu_access_state : integer <<PK>>
+  final_state : boolean
+  id_kl : integer
+  id_menu_detail : integer
+  id_menu_tahap : bigint
+  id_status : bigint
+  id_struktur : bigint
+  initial_state : boolean
+  nama_state : character varying
+  nama_tombol : character varying
+  x : real
+  y : real
+}
+
+entity "auth.r_menu_access_state_detail" as auth__r_menu_access_state_detail #FFFFFF {
+  id_r_menu_access_state_detail : integer <<PK>>
+  final_state : boolean
+  id_kl : integer
+  id_menu_detail : integer
+  id_menu_tahap : integer
+  id_status : smallint
+  id_struktur : integer
+  initial_state : boolean
+  x : real
+  y : real
+}
+
+entity "auth.r_menu_detail" as auth__r_menu_detail #FFFFFF {
+  id_menu_detail : integer <<PK>>
+  access_enabled : jsonb
+  id_menu : integer
+  is_workflow : boolean
+  is_workflow_detail : boolean
+  kode_menu_detail : character varying
+  kode_tiket : character
+  nama_menu_detail : character varying
+  url_menu_detail : character varying
+  urut : smallint
+}
+
+entity "auth.r_menu_detail_access" as auth__r_menu_detail_access #FFFFFF {
+  id_menu_detail_access : integer <<PK>>
+  id_menu_detail : integer
+  id_order_tahap : smallint
+  id_role_struktur : integer
+  id_status : integer
+  keterangan : character varying
+  u_delete : boolean
+  u_proses : boolean
+  u_reject : boolean
+  u_revise : boolean
+  u_update : boolean
+  u_upload_1 : boolean
+  u_upload_2 : boolean
+}
+
+entity "auth.r_menu_tahap" as auth__r_menu_tahap #FFFFFF {
+  id_menu_tahap : integer <<PK>>
+  id_menu : integer
+  id_menu_detail : integer
+  id_order_tahap : smallint
+  nama_tahap : character varying
+  urut : smallint
+}
+
+entity "auth.r_modul_access" as auth__r_modul_access #FFFFFF {
+  id_modul_access : integer <<PK>>
+  id_menu : integer
+  id_role_struktur : integer
+  u_delete : boolean
+  u_insert : boolean
+  u_proses : boolean
+  u_update : boolean
+  u_view : boolean
+}
+
+entity "auth.r_modul_access_kl" as auth__r_modul_access_kl #FFFFFF {
+  id_modul_access_kl : integer <<PK>>
+  id_kl : integer
+  id_menu : integer
+  u_view : boolean
+}
+
+entity "auth.r_modul_detail_access" as auth__r_modul_detail_access #FFFFFF {
+  id_modul_detail_access : integer <<PK>>
+  id_menu_detail : integer
+  id_role_struktur : integer
+  u_delete : boolean
+  u_insert : boolean
+  u_proses : boolean
+  u_send_otp : boolean
+  u_update : boolean
+  u_view : boolean
+}
+
+entity "auth.r_role" as auth__r_role #FFFFFF {
+  id_role : integer <<PK>>
+  nama_role : character varying
+  status_role : character varying
+}
+
+entity "auth.r_role_struktur" as auth__r_role_struktur #FFFFFF {
+  id_role_struktur : integer <<PK>>
+  filter_column : character varying
+  id_jns_role : integer
+  id_role : integer
+  id_role_struktur_approver : integer
+  id_struktur : integer
+  nama_role_struktur : character varying
+}
+
+entity "auth.r_status" as auth__r_status #FFFFFF {
+  id_status : smallint <<PK>>
+  nama_status : character varying
+}
+
+entity "auth.r_status_jawaban" as auth__r_status_jawaban #FFFFFF {
+  id_status_jawaban : smallint <<PK>>
+  ur_status_jawaban : character varying
+}
+
+entity "auth.r_status_mytask" as auth__r_status_mytask #FFFFFF {
+  id_status_mytask : smallint <<PK>>
+  ur_status_mytask : character varying
+}
+
+entity "auth.r_status_surat" as auth__r_status_surat #FFFFFF {
+  id_status_surat : smallint <<PK>>
+  nama_status_surat : character varying
+}
+
+entity "auth.r_struktur" as auth__r_struktur #FFFFFF {
+  id_struktur : integer <<PK>>
+  filter_column : character varying
+  id_jns_role : smallint
+  level : smallint
+  nama_alias : character varying
+  nama_level : character varying
+  penetapan : character varying
+}
+
+entity "auth.r_todolist" as auth__r_todolist #FFFFFF {
+  id_jns : smallint <<PK>>
+  id_menu_detail : integer
+  id_struktur_tujuan : ARRAY
+  informasi_due : integer
+  informasi_prefix : text
+  informasi_suffix : text
+  jns_tiket : character varying
+  judul : character varying
+  kd_status_syarat : ARRAY
+}
+
+entity "auth.r_unit_pengelola" as auth__r_unit_pengelola #FFFFFF {
+  kode_organisasi : character <<PK>>
+  eselon : integer
+  id_struktur : integer
+  id_unit : integer
+  kode_indukorganisasi : character
+  kode_surat : character varying
+  kode_unit : character varying
+  nama_jabatan : character varying
+  nama_organisasi : character varying
+}
+
+entity "auth.r_unit_pengelola_copy" as auth__r_unit_pengelola_copy #FFFFFF {
+  eselon : integer
+  id_struktur : integer
+  kode_indukorganisasi : character
+  kode_organisasi : character
+  kode_surat : character varying
+  nama_jabatan : character varying
+  nama_organisasi : character varying
+}
+
+entity "auth.t_change_log" as auth__t_change_log #FFFFFF {
+  changes : smallint
+  created_at : timestamp without time zone
+  dev : boolean
+  id_change_log : smallint
+  kd_backlog : character varying
+  keterangan : character varying
+  modul : smallint
+  prod : boolean
+  testing : boolean
+  training : boolean
+  updated_at : timestamp without time zone
+}
+
+entity "auth.t_devices" as auth__t_devices #FFFFFF {
+  id : bigint <<PK>>
+  created_at : timestamp without time zone
+  fcm_token : text
+  user_id : bigint
+}
+
+entity "auth.t_klarifikasi" as auth__t_klarifikasi #FFFFFF {
+  id_klarifikasi : bigint <<PK>>
+  alamat : character varying
+  catatan : character varying
+  created_at : timestamp with time zone
+  created_by : integer
+  id_aset : bigint
+  id_eselon1 : integer
+  id_jns_bmn : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_menu : integer
+  id_menu_detail : integer
+  id_modul_klarifikasi : bigint
+  id_satker : integer
+  id_status_indikasi : bigint
+  id_status_jawaban : integer
+  id_status_mytask : integer
+  id_struktur : integer
+  is_penggunaan : character varying
+  is_updated : boolean
+  isi_klarifikasi : character varying
+  kd_brg : character varying
+  kesimpulan_indikasi : character varying
+  kondisi : character varying
+  merk : character varying
+  nilai_buku : numeric
+  nilai_perolehan : numeric
+  nm_jns_bmn : character varying
+  nm_menu : character varying
+  nm_menu_detail : character varying
+  no_aset : integer
+  no_kib : character varying
+  no_surat_klarifikasi : character varying
+  no_tiket : character varying
+  rencana : character varying
+  status_data : smallint
+  tgl_info_surat_klarifikasi : date
+  tgl_surat_jawaban : date
+  tgl_surat_klarifikasi : date
+  updated_at : timestamp with time zone
+  updated_by : integer
+  ur_eselon1 : character varying
+  ur_kanwil : character varying
+  ur_kl : character varying
+  ur_korwil : character varying
+  ur_kpknl : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+  ur_struktur : character varying
+  url_surat_klarifikasi : character varying
+}
+
+entity "auth.t_klarifikasi_dokumen" as auth__t_klarifikasi_dokumen #FFFFFF {
+  id_klarifikasi_dokumen : bigint <<PK>>
+  created_at : timestamp with time zone
+  created_by : integer
+  filename : character varying
+  id_aset : bigint
+  id_modul_klarifikasi_dokumen : bigint
+  is_updated : boolean
+  nama_dokumen : character varying
+  no_dokumen : character varying
+  no_tiket : character varying
+  status_data : smallint
+  tgl_dokumen : date
+  updated_at : timestamp with time zone
+  updated_by : integer
+}
+
+entity "auth.t_konfirmasi" as auth__t_konfirmasi #FFFFFF {
+  id_konfirmasi : bigint <<PK>>
+  catatan : character varying
+  created_at : timestamp with time zone
+  created_by : integer
+  id_aset : bigint
+  id_eselon1 : integer
+  id_jns_bmn : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_menu : integer
+  id_menu_detail : integer
+  id_row : bigint
+  id_satker : integer
+  id_status_jawaban : integer
+  id_status_mytask : integer
+  id_struktur : integer
+  id_struktur_pengirim : integer
+  id_sub_menu_detail : integer
+  id_user_pengirim : integer
+  kd_brg : character varying
+  kd_pengirim : character varying
+  keterangan_konfirmasi : integer
+  kondisi : character varying
+  luas_aset : integer
+  luas_konfirmasi : numeric
+  merk : character varying
+  nama_user_pengirim : character varying
+  nilai_buku : numeric
+  nilai_konfirmasi : numeric
+  nilai_perolehan : numeric
+  nm_jns_bmn : character varying
+  nm_menu : character varying
+  nm_menu_detail : character varying
+  nm_sub_menu_detail : character varying
+  no_aset : character varying
+  no_kib : character varying
+  no_tiket : character varying
+  status_data : smallint
+  updated_at : timestamp with time zone
+  updated_by : integer
+  ur_eselon1 : character varying
+  ur_kanwil : character varying
+  ur_kl : character varying
+  ur_korwil : character varying
+  ur_kpknl : character varying
+  ur_pengirim : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+  ur_struktur : character varying
+}
+
+entity "auth.t_notifikasi" as auth__t_notifikasi #FFFFFF {
+  id_notifikasi : bigint <<PK>>
+  additional_button : json
+  additional_info : json
+  catatan : character varying
+  created_at : timestamp with time zone
+  created_by : integer
+  has_read : boolean
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : smallint
+  id_korwil : integer
+  id_kpknl : integer
+  id_role : integer
+  id_role_struktur : integer
+  id_satker : integer
+  id_struktur : smallint
+  judul : character varying
+  kd_kl : character varying
+  module : character varying
+  name_url2 : character varying
+  name_url3 : character varying
+  nm_file : character varying
+  no_tiket : character varying
+  pengirim : character varying
+  status_data : smallint
+  status_kirim : character varying
+  submodule : character varying
+  tgl_kirim : date
+  tujuan : character varying
+  updated_at : timestamp with time zone
+  updated_by : integer
+}
+
+entity "auth.t_notifikasi_pengguna" as auth__t_notifikasi_pengguna #FFFFFF {
+  id : bigint <<PK>>
+  has_read : boolean
+  id_notifikasi : bigint
+  id_user : bigint
+  read_at : timestamp without time zone
+  send_at : timestamp without time zone
+}
+
+entity "auth.t_pengelolaan_sk" as auth__t_pengelolaan_sk #FFFFFF {
+  created_at : timestamp without time zone
+  created_by : integer
+  id_aset : bigint
+  id_nadine : character varying
+  id_pengelolaan : bigint
+  id_pengelolaan_detail : bigint
+  id_pengelolaan_sk : bigint
+  id_tipe_pengelolaan : bigint
+  id_ttd : smallint
+  jabatan_penandatangan_sk : character varying
+  jenis_nd_id : bigint
+  jenis_nd_kode : character varying
+  jenis_nd_uraian : character varying
+  kode_penandatangan : character varying
+  konseptor : character varying
+  nama_penandatangan_sk : character varying
+  nip_penandatangan_sk : character varying
+  nm_file_sk : character varying
+  no_sk : character varying
+  no_surat : character varying
+  no_tiket : character varying
+  pengirim : character varying
+  peraturan : character varying
+  perihal : character varying
+  permohonan : character varying
+  sifat_nd_id : bigint
+  sifat_nd_uraian : character varying
+  singkatan_ttd : character varying
+  status_data : integer
+  status_sk : integer
+  tgl_sk : timestamp without time zone
+  tgl_surat : date
+  tipe_sk : smallint
+  unit_tujuan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_jns_sk : character varying
+  uraian_keputusan : character varying
+  uraian_ttd : character varying
+  url_lampiran : text
+  url_sk : character varying
+  url_sk_template : character varying
+}
+
+entity "auth.t_user" as auth__t_user #FFFFFF {
+  id_user : integer <<PK>>
+  created_at : timestamp with time zone
+  created_by : integer
+  email : character varying
+  gravatar : character varying
+  gravatar2 : character varying
+  id_sso : bigint
+  jabatan : character varying
+  jenis_jabatan : character varying
+  kode_organisasi : character varying
+  kode_satker : character varying
+  logging_in : boolean
+  name : character varying
+  nip : character varying
+  preferred_username : character varying
+  status_data : smallint
+  status_user : character varying
+  sub : character varying
+  updated_at : timestamp with time zone
+  updated_by : integer
+}
+
+entity "auth.t_user_detail" as auth__t_user_detail #FFFFFF {
+  id_user_detail : integer <<PK>>
+  approve : boolean
+  created_at : timestamp without time zone
+  created_by : integer
+  date_end : date
+  date_start : date
+  enabled : boolean
+  id_eselon1 : integer
+  id_jns_akses : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_role_struktur : integer
+  id_role_struktur_detail_approver : integer
+  id_satker : integer
+  id_satker_parent : integer
+  id_user : integer
+  id_user_registration : bigint
+  is_multi_filter_detail : boolean
+  keterangan : character varying
+  last_used : timestamp without time zone
+  logging_in : boolean
+  updated_at : timestamp without time zone
+}
+
+entity "auth.t_user_detail_filter" as auth__t_user_detail_filter #FFFFFF {
+  id_user_detail_filler : bigint <<PK>>
+  filter_column : character varying
+  id_filter : character varying
+  id_user_detail : integer
+  is_active : boolean
+}
+
+entity "auth.t_user_detail_log" as auth__t_user_detail_log #FFFFFF {
+  id_user_detail_log : integer <<PK>>
+  activity : smallint
+  created_at : timestamp without time zone
+  created_by : integer
+  id_user_detail : integer
+  note : character varying
+}
+
+entity "auth.t_user_detail_modul_access" as auth__t_user_detail_modul_access #FFFFFF {
+  id_modul_access : integer <<PK>>
+  id_menu : integer
+  id_user_detail : integer
+  u_view : boolean
+}
+
+entity "auth.t_user_detail_modul_access_error_log" as auth__t_user_detail_modul_access_error_log #FFFFFF {
+  id_modul_access_error_log : integer <<PK>>
+  created_at : timestamp without time zone
+  error_msg : character varying
+  id_menu_detail : integer
+  id_user_detail : integer
+}
+
+entity "auth.t_user_detail_modul_detail_access" as auth__t_user_detail_modul_detail_access #FFFFFF {
+  id_modul_detail_access : integer <<PK>>
+  id_menu_detail : integer
+  id_user_detail : integer
+  u_view : boolean
+}
+
+entity "auth.t_user_detail_modul_detail_access_error_log" as auth__t_user_detail_modul_detail_access_error_log #FFFFFF {
+  id_modul_detail_access_error_log : integer <<PK>>
+  created_at : timestamp without time zone
+  error_msg : character varying
+  id_menu_detail : integer
+  id_user_detail : integer
+}
+
+entity "auth.t_user_hris" as auth__t_user_hris #FFFFFF {
+  created_at : timestamp without time zone
+  created_by : integer
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_role_struktur : integer
+  id_satker : integer
+  id_satker_parent : integer
+  id_user : integer
+  id_user_hris : bigint
+  jenis_jabatan : character varying
+  kode_organisasi : character varying
+  kode_satker : character varying
+}
+
+entity "auth.t_user_log" as auth__t_user_log #FFFFFF {
+  id_user_log : bigint <<PK>>
+  aktivitas : character varying
+  data : jsonb
+  id_menu : integer
+  id_menu_detail : integer
+  id_user : bigint
+  id_user_detail : bigint
+  ip_address : character varying
+  no_tiket : character varying
+  tgl_aktivitas : timestamp without time zone
+  username : character varying
+}
+
+entity "auth.t_user_registration" as auth__t_user_registration #FFFFFF {
+  id_user_registration : bigint <<PK>>
+  approved_by : integer
+  created_at : timestamp without time zone
+  date_end : date
+  date_start : date
+  id_eselon : bigint
+  id_jns_akses : bigint
+  id_jns_role : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  id_role_struktur : integer
+  id_role_struktur_approver : integer
+  id_satker : bigint
+  id_sso : bigint
+  id_user : integer
+  is_multi_filter : boolean
+  jabatan : character varying
+  jenis_jabatan : character varying
+  kode_organisasi : character varying
+  kode_satker : character varying
+  name : character varying
+  nip : character varying
+  prefered_username : character varying
+  reject_reason : character varying
+  sk_file : character varying
+  status_registrasi : character varying
+}
+
+entity "auth.t_user_registration_detail" as auth__t_user_registration_detail #FFFFFF {
+  id_user_registration_detail : bigint <<PK>>
+  filter_column : character varying
+  id_filter : character varying
+  id_user_registration : bigint
+  is_active : boolean
+}
+
+entity "auth.t_user_registration_modul_access" as auth__t_user_registration_modul_access #FFFFFF {
+  id_modul_access : bigint <<PK>>
+  id_menu : integer
+  id_user_registration : bigint
+  u_view : boolean
+}
+
+entity "auth.t_user_registration_modul_access_error_log" as auth__t_user_registration_modul_access_error_log #FFFFFF {
+  id_modul_access_error_log : bigint <<PK>>
+  created_at : timestamp without time zone
+  error_msg : character varying
+  id_menu : integer
+  id_user_registration : bigint
+}
+
+entity "auth.t_user_registration_modul_detail_access" as auth__t_user_registration_modul_detail_access #FFFFFF {
+  id_modul_detail_access : bigint <<PK>>
+  id_menu_detail : integer
+  id_user_registration : bigint
+  u_view : boolean
+}
+
+entity "auth.t_user_registration_modul_detail_access_error_log" as auth__t_user_registration_modul_detail_access_error_log #FFFFFF {
+  id_modul_detail_access_error_log : bigint <<PK>>
+  created_at : timestamp without time zone
+  error_msg : character varying
+  id_menu_detail : integer
+  id_user_registration : bigint
+}
+
+entity "auth.t_user_session" as auth__t_user_session #FFFFFF {
+  id_user_session : integer <<PK>>
+  ip_address : character varying
+  is_active : boolean
+  login_at : timestamp without time zone
+  login_type : smallint
+  preferred_username : character varying
+}
+
+entity "auth.temp_t_user_detail" as auth__temp_t_user_detail #FFFFFF {
+  created_at : timestamp without time zone
+  created_by : integer
+  date_end : date
+  date_start : date
+  enabled : boolean
+  id_eselon1 : integer
+  id_jns_akses : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_role_struktur : integer
+  id_role_struktur_detail_approver : integer
+  id_satker : integer
+  id_satker_parent : integer
+  id_user : integer
+  id_user_detail : integer
+  is_multi_filter_detail : boolean
+  keterangan : character varying
+  logging_in : boolean
+}
+
+entity "auth.temp_t_user_detail_filter" as auth__temp_t_user_detail_filter #FFFFFF {
+  filter_column : character varying
+  id_filter : character varying
+  id_user_detail : integer
+  id_user_detail_filler : integer
+  is_active : boolean
+}
+
+entity "auth.temp_t_user_detail_modul_access" as auth__temp_t_user_detail_modul_access #FFFFFF {
+  id_menu : integer
+  id_modul_access : integer
+  id_user_detail : integer
+  u_view : boolean
+}
+
+entity "auth.temp_t_user_detail_modul_detail_access" as auth__temp_t_user_detail_modul_detail_access #FFFFFF {
+  id_menu_detail : integer
+  id_modul_detail_access : integer
+  id_user_detail : integer
+  u_view : boolean
+}
+
+entity "auth.temp_unit_pengelola" as auth__temp_unit_pengelola #FFFFFF {
+  column9 : character varying
+  eselon : integer
+  id_stuktur : integer
+  kode_indukorganisasi : character
+  kode_organisasi : character
+  kode_surat : character varying
+  nama_eselon_2 : character varying
+  nama_eselon_3 : character varying
+  nama_jabatan : character varying
+  nama_organisasi : character varying
+}
+
+entity "auth.x_temp_t_user_insert" as auth__x_temp_t_user_insert #FFFFFF {
+  id_menu : integer
+  id_menu_detail : integer
+  id_role_struktur : integer
+  id_user : integer
+  id_user_detail : integer
+}
+
+entity "public.r_kl" as public__r_kl #E0E0E0 {
+  id_kl : integer <<PK>>
+  aktif_modul : character varying
+  alamat_kl : character varying
+  created_at : timestamp without time zone
+  dit_bmn : character varying
+  dit_pknsi : character varying
+  email_kantor : character varying
+  email_valid : character
+  filename_logo : character varying
+  id_kanwil : integer
+  id_kpknl : integer
+  jabatan : character varying
+  jns_id_jbt : character varying
+  kd_kab_kota : character varying
+  kd_kl : character varying
+  kd_ver_email : character varying
+  kode_kab_kota : character varying
+  kode_kec : character varying
+  kode_kel : character varying
+  kode_neg : character varying
+  kode_prov : character varying
+  nama : character varying
+  nama_jabatan_kl : character varying
+  nama_kab_kota : character varying
+  nip : character varying
+  nm_kab_kota : character varying
+  nm_kec : character varying
+  nm_kel : character varying
+  nm_neg : character varying
+  nm_prov : character varying
+  no_fax_kantor : character varying
+  no_telp_kantor : character varying
+  status_jabatan : character varying
+  status_kl : character varying
+  updated_at : timestamp without time zone
+  ur_kl : character varying
+}
+
+auth__r_menu_detail "0..*" --> "1" auth__r_menu : id_menu -> id_menu
+auth__r_menu_access "0..*" --> "1" auth__r_menu_detail : id_menu_detail -> id_menu_detail
+auth__r_menu_access "0..*" --> "1" auth__r_role_struktur : id_role_struktur -> id_role_struktur
+auth__r_menu_access "0..*" --> "1" auth__r_status : id_status -> id_status
+auth__r_menu_access_flow "0..*" --> "1" auth__r_menu_detail : id_menu_detail -> id_menu_detail
+auth__r_menu_access_flow_detail "0..*" --> "1" auth__r_menu_detail : id_menu_detail -> id_menu_detail
+auth__r_menu_access_flow_detail_input_value "0..*" --> "1" auth__r_menu_access_flow_detail : id_menu_access_flow_detail -> id_menu_access_flow_detail
+auth__r_menu_access_flow_detail "0..*" --> "1" auth__r_role : id_role -> id_role
+auth__r_menu_access_flow_detail "0..*" --> "1" auth__r_menu_access_state_detail : source_state_id -> id_r_menu_access_state_detail
+auth__r_menu_access_flow_detail "0..*" --> "1" auth__r_struktur : id_struktur -> id_struktur
+auth__r_menu_access_flow_detail "0..*" --> "1" auth__r_menu_access_state_detail : target_state_id -> id_r_menu_access_state_detail
+auth__r_menu_access_flow "0..*" --> "1" auth__r_role : id_role -> id_role
+auth__r_menu_access_flow_input_value "0..*" --> "1" auth__r_menu_access_flow : id_menu_access_flow -> id_menu_access_flow
+auth__r_menu_access_flow "0..*" --> "1" auth__r_menu_access_state : source_state_id -> id_r_menu_access_state
+auth__r_menu_access_flow "0..*" --> "1" auth__r_struktur : id_struktur -> id_struktur
+auth__r_menu_access_flow "0..*" --> "1" auth__r_menu_access_state : target_state_id -> id_r_menu_access_state
+auth__r_menu_access_state_detail "0..*" --> "1" auth__r_menu_detail : id_menu_detail -> id_menu_detail
+auth__r_menu_access_state "0..*" --> "1" auth__r_menu_detail : id_menu_detail -> id_menu_detail
+auth__r_menu_detail_access "0..*" --> "1" auth__r_menu_detail : id_menu_detail -> id_menu_detail
+auth__r_menu_detail_access "0..*" --> "1" auth__r_status : id_status -> id_status
+auth__r_menu_detail_access "0..*" --> "1" auth__r_role_struktur : id_role_struktur -> id_role_struktur
+auth__r_menu_tahap "0..*" --> "1" auth__r_menu_detail : id_menu_detail -> id_menu_detail
+auth__r_menu_tahap "0..*" --> "1" auth__r_menu : id_menu -> id_menu
+auth__r_modul_detail_access "0..*" --> "1" auth__r_role_struktur : id_role_struktur -> id_role_struktur
+auth__r_modul_access "0..*" --> "1" auth__r_role_struktur : id_role_struktur -> id_role_struktur
+auth__r_modul_access "0..*" --> "1" auth__r_menu : id_menu -> id_menu
+auth__r_modul_access_kl "0..*" --> "1" public__r_kl : id_kl -> id_kl
+auth__r_modul_access_kl "0..*" --> "1" auth__r_menu : id_menu -> id_menu
+auth__r_modul_detail_access "0..*" --> "1" auth__r_menu_detail : id_menu_detail -> id_menu_detail
+auth__r_role_struktur "0..*" --> "1" auth__r_role : id_role -> id_role
+auth__r_role_struktur "0..*" --> "1" auth__r_jns_role : id_jns_role -> id_jns_role
+auth__r_role_struktur "0..*" --> "1" auth__r_struktur : id_struktur -> id_struktur
+auth__r_struktur "0..*" --> "1" auth__r_jns_role : id_jns_role -> id_jns_role
+auth__r_todolist "0..*" --> "1" auth__r_menu_detail : id_menu_detail -> id_menu_detail
+auth__t_change_log "0..*" --> "0..1" auth__r_change_log_modul : modul -> id_modul
+auth__t_change_log "0..*" --> "1" auth__r_change_log_type : changes -> id
+auth__t_notifikasi_pengguna "0..*" --> "1" auth__t_notifikasi : id_notifikasi -> id_notifikasi
+auth__t_user_detail_filter "0..*" --> "1" auth__t_user_detail : id_user_detail -> id_user_detail
+auth__t_user_detail "0..*" --> "1" auth__t_user : id_user -> id_user
+auth__t_user_detail "0..*" --> "1" auth__r_role_struktur : id_role_struktur -> id_role_struktur
+auth__t_user_detail_log "0..*" --> "1" auth__t_user_detail : id_user_detail -> id_user_detail
+auth__t_user_detail_modul_access "0..*" --> "1" auth__t_user_detail : id_user_detail -> id_user_detail
+auth__t_user_detail_modul_access "0..*" --> "1" auth__r_menu : id_menu -> id_menu
+auth__t_user_detail_modul_detail_access "0..*" --> "1" auth__r_menu_detail : id_menu_detail -> id_menu_detail
+auth__t_user_detail_modul_detail_access "0..*" --> "1" auth__t_user_detail : id_user_detail -> id_user_detail
+auth__t_user_detail "0..*" --> "1" auth__r_jns_akses : id_jns_akses -> id_jns_akses
+auth__t_user_registration_detail "0..*" --> "1" auth__t_user_registration : id_user_registration -> id_user_registration
+auth__t_user_registration "0..*" --> "1" auth__r_role_struktur : id_role_struktur -> id_role_struktur
+auth__t_user_registration "0..*" --> "1" auth__r_jns_akses : id_jns_akses -> id_jns_akses
+auth__t_user_registration_modul_access "0..*" --> "1" auth__t_user_registration : id_user_registration -> id_user_registration
+auth__t_user_registration_modul_access "0..*" --> "1" auth__r_menu : id_menu -> id_menu
+auth__t_user_registration_modul_detail_access "0..*" --> "1" auth__t_user_registration : id_user_registration -> id_user_registration
+auth__t_user_registration_modul_detail_access "0..*" --> "1" auth__r_menu_detail : id_menu_detail -> id_menu_detail
+auth__t_user_registration "0..*" --> "1" auth__t_user : id_user -> id_user
+@enduml

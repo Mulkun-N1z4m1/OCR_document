@@ -1,0 +1,3015 @@
+@startuml
+skinparam classAttributeIconSize 0
+left to right direction
+hide circle
+scale 1.0
+
+entity "wasdal._mon_aset" as wasdal___mon_aset {
+  id : bigint <<PK>>
+  fetch_time : date
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker : integer
+  id_satker_parent : integer
+  jml_aset : numeric
+  kd_brg : character varying
+  kd_dashbrg : smallint
+  kd_kondisi : character varying
+  kd_korwil : character varying
+  kd_satker : character varying
+  kd_status : character varying
+  kdkategori : smallint
+  luas_aset : numeric
+  nilai_buku : numeric
+  nilai_penyusutan : numeric
+  nilai_perolehan : numeric
+  nilai_perolehan_pertama : numeric
+  psp : smallint
+  rph_buku2 : numeric
+  sengketa : smallint
+  tdk_ada_bukti : smallint
+  ur_korwil : character varying
+  ur_satker : character varying
+}
+
+entity "wasdal._temp_perbaikan_data_kdperkbr" as wasdal___temp_perbaikan_data_kdperkbr {
+  id_wasdal_pemantauan_periodik : bigint
+  jml_data_diperbaiki : bigint
+  kd_menu_state : character varying
+  kd_satker : character varying
+  no_tiket : character varying
+  ur_satker : character varying
+}
+
+entity "wasdal.m_aset_penertiban" as wasdal__m_aset_penertiban {
+  id_aset : bigint <<PK>>
+  catatan_adm : character varying
+  catatan_lap : character varying
+  id_r_menu_access_state : character varying
+  keterangan_adm : character varying
+  keterangan_lap : character varying
+  status_adm : character varying
+  status_akhir : character varying
+  status_at : timestamp without time zone
+  status_data : smallint
+  status_lap : character varying
+  ttl_blm_selesai : integer
+  ttl_dlm_proses : integer
+  ttl_sdh_selesai : integer
+  ttl_tdk_sesuai : integer
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.m_aset_penertiban_detail" as wasdal__m_aset_penertiban_detail {
+  id_aset_penertiban_detail : bigint <<PK>>
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_aset : bigint
+  id_bentuk_penertiban : smallint
+  id_jns : integer
+  id_menu_penertiban : smallint
+  id_menu_penertiban_detail : smallint
+  id_tipe_pengelolaan : smallint
+  id_wasdal_pemantauan : bigint
+  id_wasdal_pemantauan_aset : bigint
+  id_wasdal_permintaan_penertiban : bigint
+  id_wasdal_permintaan_penertiban_aset : bigint
+  is_lengkap : integer
+  ket_penertiban : character varying
+  keterangan_pemanfaatan : character varying
+  keterangan_pemindah_tanganan : character varying
+  keterangan_penggunaan : character varying
+  no_bast : character varying
+  no_penertiban : character varying
+  no_surat_pembatalan : character varying
+  no_surat_usulan_pemanfaatan : character varying
+  no_tiket : character varying
+  status_data : smallint
+  tanggal : timestamp without time zone
+  tgl_approval : timestamp with time zone
+  tgl_bast : character varying
+  tgl_penertiban : character varying
+  tgl_surat_pembatalan : character varying
+  tgl_surat_usulan_pemanfaatan : character varying
+  tindak_lanjut_pemantauan : character varying
+  tindak_lanjut_penertiban : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.m_jns_investigasi_tindak_lanjut" as wasdal__m_jns_investigasi_tindak_lanjut {
+  id_jns_investigasi_tindak_lanjut : bigint <<PK>>
+  nama : character varying
+}
+
+entity "wasdal.m_jns_pemantauan" as wasdal__m_jns_pemantauan {
+  id_jns_pemantauan : bigint <<PK>>
+  nama : character varying
+}
+
+entity "wasdal.m_jns_pemantauan_insidentil_tulis" as wasdal__m_jns_pemantauan_insidentil_tulis {
+  id : integer <<PK>>
+  nama : character varying
+}
+
+entity "wasdal.m_jns_pemantauan_periodik" as wasdal__m_jns_pemantauan_periodik {
+  id_jns_pemantauan_periodik : bigint <<PK>>
+  nama : character varying
+}
+
+entity "wasdal.m_jns_penertiban" as wasdal__m_jns_penertiban {
+  id_jns_penertiban : bigint <<PK>>
+  nama : character varying
+}
+
+entity "wasdal.m_jns_penertiban_upload" as wasdal__m_jns_penertiban_upload {
+  id_jns_penertiban_upload : bigint <<PK>>
+  nama : character varying
+}
+
+entity "wasdal.m_menu_penertiban" as wasdal__m_menu_penertiban {
+  id_menu_penertiban : bigint <<PK>>
+  nama : character varying
+}
+
+entity "wasdal.m_menu_penertiban_detail" as wasdal__m_menu_penertiban_detail {
+  id_menu_penertiban_detail : bigint <<PK>>
+  id_menu_penertiban : bigint
+  id_monitoring : smallint
+  keterangan : character varying
+  nama : character varying
+}
+
+entity "wasdal.mon_aset_insidentil" as wasdal__mon_aset_insidentil {
+  bmn_hilang : smallint <<PK>>
+  bmn_hilang_usul_hapus : smallint <<PK>>
+  bpyds : smallint <<PK>>
+  bpyds_usul_pindah : smallint <<PK>>
+  henti_guna : smallint <<PK>>
+  henti_guna_usul_hapus : smallint <<PK>>
+  henti_guna_usul_pindah : smallint <<PK>>
+  id_satker : integer <<PK>>
+  id_satker_parent : integer <<PK>>
+  id_struktur : integer <<PK>>
+  id_unit : integer <<PK>>
+  kd_jns_bmn : smallint <<PK>>
+  periode : integer <<PK>>
+  psp : smallint <<PK>>
+  rusak_berat : smallint <<PK>>
+  rusak_berat_usul_pindah : smallint <<PK>>
+  sppa : smallint <<PK>>
+  status_akhir : smallint <<PK>>
+  usul_hapus : smallint <<PK>>
+  fetch_time : date
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  jml_aset : numeric
+  kd_satker : character varying
+  luas_aset : numeric
+  nilai_buku : numeric
+  nilai_penyusutan : numeric
+  nilai_perolehan : numeric
+  nilai_perolehan_pertama : numeric
+  ur_satker : character varying
+}
+
+entity "wasdal.mon_aset_lk" as wasdal__mon_aset_lk {
+  id_satker : integer <<PK>>
+  kd_akun : character varying <<PK>>
+  kd_brg : character varying <<PK>>
+  fetch_time : date
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker_parent : integer
+  jml_aset : numeric
+  kd_satker : character varying
+  kuantitas : numeric
+  luas_aset : numeric
+  nilai_buku : numeric
+  nilai_penyusutan : numeric
+  nilai_perolehan : numeric
+  periode : smallint
+  satuan : character varying
+  ur_brg : character varying
+  ur_satker : character varying
+}
+
+entity "wasdal.mon_aset_penertiban" as wasdal__mon_aset_penertiban {
+  bmn_hilang : smallint <<PK>>
+  bmn_hilang_usul_hapus : smallint <<PK>>
+  bpyds : smallint <<PK>>
+  bpyds_usul_pindah : smallint <<PK>>
+  henti_guna : smallint <<PK>>
+  henti_guna_usul_hapus : smallint <<PK>>
+  henti_guna_usul_pindah : smallint <<PK>>
+  id_satker : integer <<PK>>
+  id_satker_parent : integer <<PK>>
+  kd_jns_bmn : smallint <<PK>>
+  periode : integer <<PK>>
+  psp : smallint <<PK>>
+  rusak_berat : smallint <<PK>>
+  rusak_berat_usul_pindah : smallint <<PK>>
+  sppa : smallint <<PK>>
+  status_akhir : smallint <<PK>>
+  usul_hapus : smallint <<PK>>
+  fetch_time : date
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  jml_aset : numeric
+  kd_satker : character varying
+  luas_aset : numeric
+  nilai_buku : numeric
+  nilai_penyusutan : numeric
+  nilai_perolehan : numeric
+  nilai_perolehan_pertama : numeric
+  ur_satker : character varying
+}
+
+entity "wasdal.mon_aset_periodik" as wasdal__mon_aset_periodik {
+  bmn_hilang : smallint <<PK>>
+  bmn_hilang_usul_hapus : smallint <<PK>>
+  bpyds : smallint <<PK>>
+  bpyds_usul_pindah : smallint <<PK>>
+  henti_guna : smallint <<PK>>
+  henti_guna_usul_hapus : smallint <<PK>>
+  henti_guna_usul_pindah : smallint <<PK>>
+  id_satker : integer <<PK>>
+  id_satker_parent : integer <<PK>>
+  kd_jns_bmn : smallint <<PK>>
+  periode : integer <<PK>>
+  psp : smallint <<PK>>
+  rusak_berat : smallint <<PK>>
+  rusak_berat_usul_pindah : smallint <<PK>>
+  sppa : smallint <<PK>>
+  status_akhir : smallint <<PK>>
+  usul_hapus : smallint <<PK>>
+  fetch_time : date
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  jml_aset : numeric
+  kd_satker : character varying
+  luas_aset : numeric
+  nilai_buku : numeric
+  nilai_penyusutan : numeric
+  nilai_perolehan : numeric
+  nilai_perolehan_pertama : numeric
+  persen_sbsk : numeric
+  tusi : smallint
+  ur_satker : character varying
+}
+
+entity "wasdal.mon_aset_renovasi_periodik" as wasdal__mon_aset_renovasi_periodik {
+  id_jns_ketidaksesuaian : integer <<PK>>
+  id_satker : integer <<PK>>
+  id_satker_parent : integer <<PK>>
+  kd_brg : character varying <<PK>>
+  periode : integer <<PK>>
+  fetch_time : date
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  jml_aset : numeric
+  kd_satker : character varying
+  luas_aset : numeric
+  nilai_buku : numeric
+  nilai_penyusutan : numeric
+  nilai_perolehan : numeric
+  nilai_perolehan_pertama : numeric
+  ur_satker : character varying
+}
+
+entity "wasdal.mon_aset_satker" as wasdal__mon_aset_satker {
+  id_satker : integer <<PK>>
+  kdkategori : bigint <<PK>>
+  buku_aktif : numeric
+  buku_tdk_aktif : numeric
+  fetch_time : timestamp with time zone
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker_parent : bigint
+  jml_aktif : bigint
+  jml_tdk_aktif : bigint
+  kd_satker : character varying
+  luas_aktif : numeric
+  luas_tdk_aktif : numeric
+  perolehan_aktif : numeric
+  perolehan_tdk_aktif : numeric
+  susut_aktif : numeric
+  susut_tdk_aktif : numeric
+  ur_satker : character varying
+}
+
+entity "wasdal.mon_hapus_periodik" as wasdal__mon_hapus_periodik {
+  id_satker : bigint <<PK>>
+  id_struktur_termohon : smallint <<PK>>
+  jns_penetapan : smallint <<PK>>
+  kd_jns_bmn : smallint <<PK>>
+  kd_penerbit_sk : character <<PK>>
+  semester : smallint <<PK>>
+  tahun : integer <<PK>>
+  fetch_time : date
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  jml_hapus : numeric
+  nilai_hapus : numeric
+  periode : integer
+}
+
+entity "wasdal.mon_invent_periodik" as wasdal__mon_invent_periodik {
+  id_satker : bigint <<PK>>
+  kd_jns_bmn : smallint <<PK>>
+  periode : integer <<PK>>
+  tahun : integer <<PK>>
+  fetch_time : date
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  jml_blm : numeric
+  jml_rencana : numeric
+  jml_sudah : numeric
+  nilai_blm : numeric
+  nilai_rencana : numeric
+  nilai_sudah : numeric
+}
+
+entity "wasdal.mon_investigasi_periodik" as wasdal__mon_investigasi_periodik {
+  id_satker : bigint <<PK>>
+  id_struktur : smallint <<PK>>
+  jns_penyimpangan : smallint <<PK>>
+  jns_permintaan : smallint <<PK>>
+  periode : integer <<PK>>
+  fetch_time : date
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  jml_aset : numeric
+  jml_tiket : numeric
+  luas_aset : numeric
+  nilai_buku : numeric
+  nilai_kerugian : numeric
+  nilai_perolehan : numeric
+}
+
+entity "wasdal.mon_kdp_periodik" as wasdal__mon_kdp_periodik {
+  id_progres_wasdal : integer <<PK>>
+  id_satker : integer <<PK>>
+  id_satker_parent : integer <<PK>>
+  kd_brg : character varying <<PK>>
+  periode : integer <<PK>>
+  fetch_time : date
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  jml_aset : numeric
+  kd_satker : character varying
+  luas_aset : numeric
+  nilai_buku : numeric
+  nilai_penyusutan : numeric
+  nilai_perolehan : numeric
+  nilai_perolehan_pertama : numeric
+  ur_satker : character varying
+}
+
+entity "wasdal.mon_manfaat" as wasdal__mon_manfaat {
+  id_satker : integer <<PK>>
+  semester : smallint <<PK>>
+  tahun : integer <<PK>>
+  bgs_jml_aset : numeric
+  bgs_jml_laksana : numeric
+  bgs_jml_sk : numeric
+  bgs_laksana : numeric
+  bgs_sk : numeric
+  bsg_jml_aset : numeric
+  bsg_jml_laksana : numeric
+  bsg_jml_sk : numeric
+  bsg_laksana : numeric
+  bsg_sk : numeric
+  fetch_time : date
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  id_satker_parent : integer
+  kd_korwil : character varying
+  kd_satker : character varying
+  ketupi_jml_aset : numeric
+  ketupi_jml_laksana : numeric
+  ketupi_jml_sk : numeric
+  ketupi_laksana : numeric
+  ketupi_sk : numeric
+  ksp_jml_aset : numeric
+  ksp_jml_laksana : numeric
+  ksp_jml_sk : numeric
+  ksp_laksana : numeric
+  ksp_sk : numeric
+  kspi_jml_aset : numeric
+  kspi_jml_laksana : numeric
+  kspi_jml_sk : numeric
+  kspi_laksana : numeric
+  kspi_sk : numeric
+  pinjam_jml_aset : numeric
+  pinjam_jml_laksana : numeric
+  pinjam_jml_sk : numeric
+  pinjam_laksana : numeric
+  pinjam_sk : numeric
+  sewa_jml_aset : numeric
+  sewa_jml_laksana : numeric
+  sewa_jml_sk : numeric
+  sewa_laksana : numeric
+  sewa_sk : numeric
+  ur_korwil : character varying
+  ur_satker : character varying
+}
+
+entity "wasdal.mon_manfaat_periodik" as wasdal__mon_manfaat_periodik {
+  id_satker : bigint <<PK>>
+  id_struktur_termohon : smallint <<PK>>
+  jns_penetapan : smallint <<PK>>
+  kd_jns_bmn : smallint <<PK>>
+  kd_penerbit_sk : character <<PK>>
+  semester : smallint <<PK>>
+  tahun : integer <<PK>>
+  bgs_jml_aset : numeric
+  bgs_jml_laksana : numeric
+  bgs_laksana : numeric
+  bgs_pnbp : numeric
+  bgs_sk : numeric
+  bsg_jml_aset : numeric
+  bsg_jml_laksana : numeric
+  bsg_laksana : numeric
+  bsg_pnbp : numeric
+  bsg_sk : numeric
+  fetch_time : date
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  ketupi_jml_aset : numeric
+  ketupi_jml_laksana : numeric
+  ketupi_laksana : numeric
+  ketupi_pnbp : numeric
+  ketupi_sk : numeric
+  ksp_jml_aset : numeric
+  ksp_jml_laksana : numeric
+  ksp_laksana : numeric
+  ksp_pnbp : numeric
+  ksp_sk : numeric
+  kspi_jml_aset : numeric
+  kspi_jml_laksana : numeric
+  kspi_laksana : numeric
+  kspi_pnbp : numeric
+  kspi_sk : numeric
+  pinjam_jml_aset : numeric
+  pinjam_jml_laksana : numeric
+  pinjam_laksana : numeric
+  pinjam_pnbp : numeric
+  pinjam_sk : numeric
+  sewa_jml_aset : numeric
+  sewa_jml_laksana : numeric
+  sewa_laksana : numeric
+  sewa_pnbp : numeric
+  sewa_sk : numeric
+}
+
+entity "wasdal.mon_penertiban_periodik" as wasdal__mon_penertiban_periodik {
+  fetch_time : timestamp with time zone
+  id_bentuk_penertiban : integer
+  id_eselon1 : integer
+  id_jns : smallint
+  id_jns_ketidaksesuaian : integer
+  id_jns_pengelolaan : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker : integer
+  id_struktur : integer
+  id_tipe_pengelolaan : integer
+  jml_nup : numeric
+  kd_jns_bmn : smallint
+  kd_satker : character varying
+  luas_nup : numeric
+  nilai_buku : numeric
+  nilai_perolehan : numeric
+  nilai_susut : numeric
+  periode : integer
+  status : boolean
+  ur_satker : character varying
+}
+
+entity "wasdal.mon_penertiban_periodik_rekap" as wasdal__mon_penertiban_periodik_rekap {
+  belum_selesai : integer
+  fetch_time : timestamp with time zone
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker : integer
+  id_wasdal_penertiban : bigint
+  kd_satker : character varying
+  kode_status : character varying
+  nama_status : character varying
+  no_tiket : character varying
+  periode : integer
+  selesai : integer
+  tanggal : date
+  total : integer
+  ur_satker : character varying
+}
+
+entity "wasdal.mon_penggunaan" as wasdal__mon_penggunaan {
+  id_satker : bigint <<PK>>
+  jns_penetapan : smallint <<PK>>
+  kd_jns_bmn : smallint <<PK>>
+  semester : smallint <<PK>>
+  tahun : integer <<PK>>
+  a_stat_jml_aset : numeric
+  a_stat_jml_sk : numeric
+  a_stat_laksana : numeric
+  a_stat_luas_aset : numeric
+  a_stat_sk : numeric
+  fetch_time : date
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  p_lain_jml_aset : numeric
+  p_lain_jml_sk : numeric
+  p_lain_laksana : numeric
+  p_lain_luas_aset : numeric
+  p_lain_sk : numeric
+  p_sem_jml_aset : numeric
+  p_sem_jml_sk : numeric
+  p_sem_laksana : numeric
+  p_sem_luas_aset : numeric
+  p_sem_sk : numeric
+}
+
+entity "wasdal.mon_penggunaan_periodik" as wasdal__mon_penggunaan_periodik {
+  id_satker : bigint <<PK>>
+  id_struktur_termohon : smallint <<PK>>
+  jns_penetapan : smallint <<PK>>
+  kd_jns_bmn : smallint <<PK>>
+  kd_penerbit_sk : character <<PK>>
+  semester : smallint <<PK>>
+  tahun : integer <<PK>>
+  a_stat_jml_aset : numeric
+  a_stat_laksana : numeric
+  a_stat_luas_aset : numeric
+  a_stat_sk : numeric
+  fetch_time : date
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  p_lain_jml_aset : numeric
+  p_lain_laksana : numeric
+  p_lain_luas_aset : numeric
+  p_lain_sk : numeric
+  p_sem_jml_aset : numeric
+  p_sem_laksana : numeric
+  p_sem_luas_aset : numeric
+  p_sem_sk : numeric
+}
+
+entity "wasdal.mon_pindah" as wasdal__mon_pindah {
+  id_satker : integer <<PK>>
+  semester : smallint <<PK>>
+  tahun : integer <<PK>>
+  fetch_time : date
+  hibah_jml_aset : numeric
+  hibah_jml_laksana : numeric
+  hibah_jml_sk : numeric
+  hibah_laksana : numeric
+  hibah_pnbp : numeric
+  hibah_sk : numeric
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  id_satker_parent : integer
+  jual_jml_aset : numeric
+  jual_jml_laksana : numeric
+  jual_jml_sk : numeric
+  jual_laksana : numeric
+  jual_pnbp : numeric
+  jual_sk : numeric
+  kd_korwil : character varying
+  kd_satker : character varying
+  pmpp_jml_aset : numeric
+  pmpp_jml_laksana : numeric
+  pmpp_jml_sk : numeric
+  pmpp_laksana : numeric
+  pmpp_pnbp : numeric
+  pmpp_sk : numeric
+  tukar_jml_aset : numeric
+  tukar_jml_laksana : numeric
+  tukar_jml_sk : numeric
+  tukar_laksana : numeric
+  tukar_pnbp : numeric
+  tukar_sk : numeric
+  ur_korwil : character varying
+  ur_satker : character varying
+}
+
+entity "wasdal.mon_pindah_periodik" as wasdal__mon_pindah_periodik {
+  id_satker : bigint <<PK>>
+  id_struktur_termohon : smallint <<PK>>
+  jns_penetapan : smallint <<PK>>
+  kd_jns_bmn : smallint <<PK>>
+  kd_penerbit_sk : character <<PK>>
+  semester : smallint <<PK>>
+  tahun : integer <<PK>>
+  fetch_time : date
+  hibah_jml_aset : numeric
+  hibah_jml_laksana : numeric
+  hibah_laksana : numeric
+  hibah_pnbp : numeric
+  hibah_sk : numeric
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  jual_jml_aset : numeric
+  jual_jml_laksana : numeric
+  jual_laksana : numeric
+  jual_lelang : numeric
+  jual_limit : numeric
+  jual_pnbp : numeric
+  jual_sk : numeric
+  pmpp_jml_aset : numeric
+  pmpp_jml_laksana : numeric
+  pmpp_laksana : numeric
+  pmpp_pnbp : numeric
+  pmpp_pp_jml : numeric
+  pmpp_pp_nilai : numeric
+  pmpp_sk : numeric
+  tukar_jml_aset : numeric
+  tukar_jml_laksana : numeric
+  tukar_laksana : numeric
+  tukar_pnbp : numeric
+  tukar_setuju : numeric
+  tukar_sk : numeric
+}
+
+entity "wasdal.mon_pnbp" as wasdal__mon_pnbp {
+  fetch_time : date
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  id_satker : integer
+  id_satker_parent : integer
+  jml : numeric
+  jml_aset : numeric
+  jml_sk : numeric
+  kd_akun : character varying
+  kd_korwil : character varying
+  kd_satker : character varying
+  pnbp : numeric
+  semester : smallint
+  tahun : integer
+  ur_korwil : character varying
+  ur_satker : character varying
+}
+
+entity "wasdal.mon_pnbp_periodik" as wasdal__mon_pnbp_periodik {
+  id_satker : bigint <<PK>>
+  kd_akun : character varying <<PK>>
+  semester : smallint <<PK>>
+  tahun : integer <<PK>>
+  fetch_time : date
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  jml : numeric
+  jml_aset : numeric
+  pnbp : numeric
+}
+
+entity "wasdal.mon_rkbmn_periodik" as wasdal__mon_rkbmn_periodik {
+  id_satker : bigint <<PK>>
+  kd_jns_bmn : smallint <<PK>>
+  tahun : integer <<PK>>
+  tahun_rkbmn : integer <<PK>>
+  asuransi : numeric
+  bgs_bsg : numeric
+  fetch_time : date
+  hibah : numeric
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  jml_aset : numeric
+  jml_bgs_bsg : numeric
+  jml_hibah : numeric
+  jml_ketupi : numeric
+  jml_ksp : numeric
+  jml_kspi : numeric
+  jml_penjualan : numeric
+  jml_pinjam_pakai : numeric
+  jml_pmpp : numeric
+  jml_rkakl : numeric
+  jml_sewa : numeric
+  jml_sppa : numeric
+  jml_tukar_menukar : numeric
+  ketupi : numeric
+  ksp : numeric
+  kspi : numeric
+  luas_aset : numeric
+  nilai_buku : numeric
+  nilai_penyusutan : numeric
+  nilai_perolehan : numeric
+  nilai_rkakl : numeric
+  nilai_sppa : numeric
+  pemanfaatan : numeric
+  pemeliharaan : numeric
+  pemindahtanganan : numeric
+  penghapusan : numeric
+  penjualan : numeric
+  pinjam_pakai : numeric
+  pmpp : numeric
+  sewa : numeric
+  tukar_menukar : numeric
+}
+
+entity "wasdal.mon_rn3_insidentil" as wasdal__mon_rn3_insidentil {
+  id_struktur : smallint <<PK>>
+  id_unit : integer <<PK>>
+  periode : integer <<PK>>
+  fetch_time : date
+  id_eselon1 : integer
+  id_jns_ketidaksesuaian : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker : integer
+  id_satker_parent : integer
+  jml_aset : numeric
+  kd_brg : character varying
+  kd_satker : character varying
+  luas_aset : numeric
+  nilai_buku : numeric
+  nilai_penyusutan : numeric
+  nilai_perolehan : numeric
+  nilai_perolehan_pertama : numeric
+  ur_satker : character varying
+}
+
+entity "wasdal.mon_rn3_periodik" as wasdal__mon_rn3_periodik {
+  id_jns_ketidaksesuaian : integer <<PK>>
+  id_satker : integer <<PK>>
+  id_satker_parent : integer <<PK>>
+  kd_brg : character varying <<PK>>
+  periode : integer <<PK>>
+  fetch_time : date
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  jml_aset : numeric
+  kd_satker : character varying
+  luas_aset : numeric
+  nilai_buku : numeric
+  nilai_penyusutan : numeric
+  nilai_perolehan : numeric
+  nilai_perolehan_pertama : numeric
+  ur_satker : character varying
+}
+
+entity "wasdal.permohonan" as wasdal__permohonan {
+  id : bigint <<PK>>
+  jenis_permohonan : character varying
+  jumlah : bigint
+  pp : character varying
+  skl : character varying
+}
+
+entity "wasdal.progress_psp" as wasdal__progress_psp {
+  id : bigint <<PK>>
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  id_satker : bigint
+  id_satker_parent : bigint
+  jumlah : bigint
+  kd_jns_bmn : bigint
+  luas : bigint
+  nilai_perolehan : bigint
+  no_psp : character varying
+}
+
+entity "wasdal.r_bentuk_penertiban" as wasdal__r_bentuk_penertiban {
+  id_bentuk_penertiban : integer <<PK>>
+  bentuk_penertiban : character varying
+  id_jns_ketidaksesuaian : integer
+  keterangan : character varying
+}
+
+entity "wasdal.r_jns_bmn" as wasdal__r_jns_bmn {
+  kd_jns_bmn : integer <<PK>>
+  aktif_yn : boolean
+  is_psp : boolean
+  nm_jns_bmn : character varying
+  order_no : integer
+}
+
+entity "wasdal.r_jns_dokumen" as wasdal__r_jns_dokumen {
+  id_jns_dokumen : bigint <<PK>>
+  jenis_dokumen : character varying
+  keterangan : character varying
+  status_data : smallint
+}
+
+entity "wasdal.r_jns_ketidaksesuaian" as wasdal__r_jns_ketidaksesuaian {
+  id_jns_ketidaksesuaian : integer <<PK>>
+  a1 : smallint
+  a2 : smallint
+  a3 : smallint
+  a4 : smallint
+  a52 : smallint
+  a62 : smallint
+  a7 : smallint
+  a8 : smallint
+  b11 : smallint
+  b12 : smallint
+  b21 : smallint
+  b22 : smallint
+  b31 : smallint
+  b32 : smallint
+  b41 : smallint
+  b42 : smallint
+  b51 : smallint
+  b52 : smallint
+  b61 : smallint
+  b62 : smallint
+  b7 : smallint
+  b8 : smallint
+  bentuk_penggunaan : character varying
+  c11 : smallint
+  c12 : smallint
+  c21 : smallint
+  c22 : smallint
+  c31 : smallint
+  c32 : smallint
+  c41 : smallint
+  c42 : smallint
+  c5 : smallint
+  c6 : smallint
+  d1 : smallint
+  d1_1 : smallint
+  d1_2 : smallint
+  d1_3 : smallint
+  d2 : smallint
+  d20 : smallint
+  d21 : smallint
+  d2_1 : smallint
+  d2_2 : smallint
+  d2_3 : smallint
+  d3 : smallint
+  d4 : smallint
+  d5 : smallint
+  d6 : smallint
+  e1 : smallint
+  e2 : smallint
+  e3 : smallint
+  e3_1 : smallint
+  e3_2 : smallint
+  e3_3 : smallint
+  e3_4 : smallint
+  e4 : smallint
+  e5 : smallint
+  f2 : smallint
+  f3 : smallint
+  f4 : smallint
+  id_bentuk_penggunaan : smallint
+  id_jns_pengelolaan : smallint
+  in_kanwil : boolean
+  in_kpknl : boolean
+  in_satker : boolean
+  is_apip : boolean
+  is_bpk : boolean
+  jns_ketidaksesuaian : character varying
+  m_c2 : smallint
+  m_d2 : smallint
+  m_e1 : smallint
+  m_h : smallint
+  m_kpknl_b2 : smallint
+  nama_kolom : text
+  nama_modul : character varying
+  nama_tabel : character varying
+  status_data : smallint
+  sumber_data : character varying
+}
+
+entity "wasdal.r_jns_monev" as wasdal__r_jns_monev {
+  id_jns_monev : integer <<PK>>
+  keterangan : character varying
+  nama_jns_monev : character varying
+  nama_sp : character varying
+}
+
+entity "wasdal.r_jns_monev_detail" as wasdal__r_jns_monev_detail {
+  id : integer <<PK>>
+  id_jns_monev : integer
+  id_jns_user : smallint
+}
+
+entity "wasdal.r_jns_pengelolaan" as wasdal__r_jns_pengelolaan {
+  id_jns_pengelolaan : integer <<PK>>
+  jns_pengelolaan : character varying
+}
+
+entity "wasdal.r_menu_monev" as wasdal__r_menu_monev {
+  id : integer <<PK>>
+  name : character varying
+}
+
+entity "wasdal.r_penggunaan" as wasdal__r_penggunaan {
+  id : integer <<PK>>
+  name : character varying
+}
+
+entity "wasdal.r_penggunaan_jns" as wasdal__r_penggunaan_jns {
+  id : integer <<PK>>
+  name : character varying
+}
+
+entity "wasdal.r_progres_wasdal" as wasdal__r_progres_wasdal {
+  id_progres_wasdal : integer <<PK>>
+  a3 : smallint
+  a4 : smallint
+  a5 : smallint
+  a51 : smallint
+  a6 : smallint
+  a61 : smallint
+  a7 : smallint
+  a8 : smallint
+  b7 : smallint
+  b8 : smallint
+  c5 : smallint
+  c6 : smallint
+  d10 : smallint
+  d20 : smallint
+  d21 : smallint
+  d7 : smallint
+  e4 : smallint
+  e5 : smallint
+  f3 : smallint
+  f4 : smallint
+  h1 : smallint
+  id_jns_pengelolaan : smallint
+  is_apip : boolean
+  is_bpk : boolean
+  is_kanwil : boolean
+  is_kpknl : boolean
+  is_satker : boolean
+  m_kpknl_b2 : smallint
+  nama_kolom : text
+  nama_modul : character varying
+  nama_progres_wasdal : character varying
+  nama_tabel : character varying
+  status_data : smallint
+  sumber_data : character varying
+}
+
+entity "wasdal.r_rekap" as wasdal__r_rekap {
+  id : integer <<PK>>
+  name : character varying
+}
+
+entity "wasdal.r_struktur_laporan" as wasdal__r_struktur_laporan {
+  filter_column : character varying
+  id_jns_role : smallint
+  id_struktur : integer
+  level : smallint
+  nama_alias : character varying
+  nama_level : character varying
+  penetapan : character varying
+}
+
+entity "wasdal.r_struktur_monev" as wasdal__r_struktur_monev {
+  id : integer <<PK>>
+  id_jns_user : smallint
+  id_struktur : integer
+}
+
+entity "wasdal.r_struktur_monev_detail" as wasdal__r_struktur_monev_detail {
+  id : integer <<PK>>
+  id_struktur : integer
+  id_struktur_monev : integer
+}
+
+entity "wasdal.r_wasdal_batas_lapor" as wasdal__r_wasdal_batas_lapor {
+  id_jns_laporan : bigint <<PK>>
+  kode_status : character varying <<PK>>
+  batas_akhir : character varying
+  batas_awal : character varying
+  batas_kirim : character varying
+  bln : smallint
+  id_struktur : smallint
+  kd_sts_1 : character varying
+  kd_sts_2 : character varying
+  tgl : smallint
+}
+
+entity "wasdal.status_penggunaan" as wasdal__status_penggunaan {
+  id : bigint <<PK>>
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  id_satker : bigint
+  id_satker_parent : bigint
+  kd_jns_bmn : bigint
+  kd_status : character varying
+  kuantitas : bigint
+  luas : bigint
+}
+
+entity "wasdal.t_sync_dash_wasdal" as wasdal__t_sync_dash_wasdal {
+  id : bigint <<PK>>
+  date_fetch : date
+  end_time : timestamp with time zone
+  fetch_time : interval
+  id_jns : smallint
+  id_kl : integer
+  id_satker : integer
+  remark : text
+  start_time : timestamp with time zone
+  status_data : smallint
+}
+
+entity "wasdal.t_sync_insert_periodik" as wasdal__t_sync_insert_periodik {
+  id : bigint <<PK>>
+  end_time : timestamp with time zone
+  fetch_time : interval
+  id_periodik : bigint
+  nama_proses : text
+  periode : integer
+  remark : text
+  start_time : timestamp with time zone
+  status_data : smallint
+}
+
+entity "wasdal.t_sync_mon_aset" as wasdal__t_sync_mon_aset {
+  id : bigint <<PK>>
+  end_time : timestamp with time zone
+  fetch_time : interval
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker : integer
+  remark : text
+  start_time : timestamp with time zone
+  status_data : smallint
+  tahun : integer
+}
+
+entity "wasdal.t_sync_mon_kl" as wasdal__t_sync_mon_kl {
+  id : integer <<PK>>
+  end_time : timestamp with time zone
+  fetch_time : interval
+  id_kl : integer
+  remark : text
+  start_time : timestamp with time zone
+  status_data : smallint
+  tahun : integer
+}
+
+entity "wasdal.t_sync_mon_periodik" as wasdal__t_sync_mon_periodik {
+  id : bigint <<PK>>
+  end_time : timestamp with time zone
+  fetch_time : interval
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker : integer
+  periode : integer
+  remark : text
+  start_time : timestamp with time zone
+  status_data : smallint
+}
+
+entity "wasdal.t_sync_perbaikan_data_periodik" as wasdal__t_sync_perbaikan_data_periodik {
+  id : bigint <<PK>>
+  end_time : timestamp with time zone
+  fetch_time : interval
+  id_periodik : bigint
+  remark : text
+  start_time : timestamp with time zone
+  status_data : smallint
+}
+
+entity "wasdal.t_sync_perbaikan_rekap_periodik" as wasdal__t_sync_perbaikan_rekap_periodik {
+  id : bigint <<PK>>
+  end_time : timestamp with time zone
+  fetch_time : interval
+  id_periodik : bigint
+  remark : text
+  start_time : timestamp with time zone
+  status_data : smallint
+}
+
+entity "wasdal.t_sync_rekap_periodik" as wasdal__t_sync_rekap_periodik {
+  id : bigint <<PK>>
+  end_time : timestamp with time zone
+  fetch_time : interval
+  id_periodik : bigint
+  remark : text
+  start_time : timestamp with time zone
+  status_data : smallint
+}
+
+entity "wasdal.t_sync_update_data_periodik" as wasdal__t_sync_update_data_periodik {
+  id : bigint <<PK>>
+  end_time : timestamp with time zone
+  fetch_time : interval
+  id_periodik : bigint
+  remark : text
+  start_time : timestamp with time zone
+  status_data : smallint
+  total_data : integer
+}
+
+entity "wasdal.t_sync_update_penertiban" as wasdal__t_sync_update_penertiban {
+  id : bigint <<PK>>
+  end_time : timestamp with time zone
+  fetch_time : interval
+  id_wasdal_penertiban : bigint
+  remark : text
+  start_time : timestamp with time zone
+  status_data : smallint
+}
+
+entity "wasdal.t_sync_update_periodik" as wasdal__t_sync_update_periodik {
+  id : bigint <<PK>>
+  end_time : timestamp with time zone
+  fetch_time : interval
+  id_periodik : bigint
+  remark : text
+  start_time : timestamp with time zone
+  status_data : smallint
+  status_insidentil : smallint
+  status_penertiban : smallint
+  status_periodik : smallint
+}
+
+entity "wasdal.t_wasdal_dokumen" as wasdal__t_wasdal_dokumen {
+  id_wasdal_dokumen : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_aset : bigint
+  id_jns_dokumen : integer
+  id_user : bigint
+  id_wasdal_menu : bigint
+  is_detail_aset : boolean
+  jenis_dokumen : character varying
+  keterangan : character varying
+  nama_dokumen : character varying
+  nama_user : character varying
+  no_tiket : character varying
+  nomor_dokumen : character varying
+  status_data : smallint
+  status_lap : integer
+  tanggal_dokumen : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  url : character varying
+}
+
+entity "wasdal.t_wasdal_investigasi" as wasdal__t_wasdal_investigasi {
+  id_wasdal_investigasi : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_eselon1 : integer
+  id_jns : character varying
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_r_menu_state : bigint
+  id_satker : integer
+  id_struktur : integer
+  kd_menu_state : character varying
+  kd_satker : character varying
+  kd_unit : character varying
+  nama_menu_state : character varying
+  no_surat : character varying
+  no_tiket : character varying
+  status_data : smallint
+  tanggal : timestamp without time zone
+  tgl_approval : timestamp without time zone
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_satker : character varying
+  ur_unit : character varying
+}
+
+entity "wasdal.t_wasdal_investigasi_aset" as wasdal__t_wasdal_investigasi_aset {
+  id_wasdal_investigasi_aset : bigint <<PK>>
+  alamat : character varying
+  catatan_adm : character varying
+  catatan_lap : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  hasil_investigasi : character varying
+  id_aset : integer
+  id_kanwil_djkn : integer
+  id_kl : integer
+  id_kpknl : integer
+  id_m_jns_investigasi_tindak_lanjut : integer
+  id_r_menu_access_state : character varying
+  id_satker : integer
+  id_wasdal_investigasi : bigint
+  indikasi_penyimpangan : character varying
+  is_tb : boolean
+  jns_dok_bukti_kepemilikan : character varying
+  kd_brg : character varying
+  kd_jns_bmn : integer
+  kd_kab : character varying
+  kd_kanwil_djkn : integer
+  kd_kl : character varying
+  kd_kpknl : character varying
+  kd_prov : character varying
+  kd_satker : character varying
+  kd_status : character varying
+  keterangan_lap : character varying
+  luas : integer
+  merk : character varying
+  nama_m_jns_investigasi_tindak_lanjut : character varying
+  nama_status : character varying
+  nilai_kerugian : numeric
+  nm_jns_bmn : character varying
+  no_aset : integer
+  no_dok_bukti_kepemilikan : character varying
+  no_kerugian : character varying
+  no_kib : character varying
+  no_srt_permintaan_penertiban : character varying
+  rph_aset : numeric
+  rph_buku : numeric
+  rph_mutasi : numeric
+  rph_susut : numeric
+  status_adm : character varying
+  status_data : smallint
+  status_hukum : character varying
+  status_lap : character varying
+  status_pengelolaan : character varying
+  tgl_dok_bukti_kepemilikan : character varying
+  tgl_laporan_kerugian : character varying
+  tgl_perlh : character varying
+  tgl_srt_permintaan_penertiban : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kab : character varying
+  ur_kanwil_djkn : character varying
+  ur_kl : character varying
+  ur_kondisi : character varying
+  ur_kpknl : character varying
+  ur_prov : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+  ur_status : character varying
+  uraian : character varying
+  uraian_tindak_lanjut : character varying
+}
+
+entity "wasdal.t_wasdal_investigasi_log" as wasdal__t_wasdal_investigasi_log {
+  id_wasdal_investigasi_log : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_status : integer
+  id_user : integer
+  id_wasdal_investigasi : bigint
+  keterangan : character varying
+  kode_status : character varying
+  no_tiket : character varying
+  role : character varying
+  status_data : smallint
+  status_permohonan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.t_wasdal_investigasi_pihak" as wasdal__t_wasdal_investigasi_pihak {
+  id_wasdal_investigasi_pihak : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_wasdal_investigasi : bigint
+  keterangan : character varying
+  nama : character varying
+  perusahaan : character varying
+  status_data : smallint
+  status_jabatan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.t_wasdal_investigasi_tim" as wasdal__t_wasdal_investigasi_tim {
+  id_wasdal_investigasi_tim : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_wasdal_investigasi : bigint
+  jabatan : character varying
+  nama : character varying
+  nip : character varying
+  status : character varying
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.t_wasdal_laporan_insidentil_aset" as wasdal__t_wasdal_laporan_insidentil_aset {
+  id_wasdal_laporan_insidentil_aset : bigint <<PK>>
+  alamat : character varying
+  catatan_adm : character varying
+  catatan_lap : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_aset : bigint
+  id_kanwil_djkn : integer
+  id_kl : integer
+  id_kpknl : integer
+  id_menu_penertiban : integer
+  id_menu_penertiban_detail : integer
+  id_r_menu_access_state : character varying
+  id_satker : integer
+  id_tipe_pengelolaan : integer
+  id_wasdal_pemantauan : bigint
+  id_wasdal_pemantauan_periodik : bigint
+  is_tb : boolean
+  jns_dok_bukti_kepemilikan : character varying
+  kd_brg : character varying
+  kd_jns_bmn : integer
+  kd_kab : character varying
+  kd_kanwil_djkn : character varying
+  kd_kl : character varying
+  kd_kpknl : character varying
+  kd_prov : character varying
+  kd_satker : character varying
+  kd_status : character varying
+  kdperkbr : character varying
+  kemitraan_yn : character varying
+  keterangan_adm : character varying
+  keterangan_lap : character varying
+  luas : integer
+  merk : character varying
+  nm_jns_bmn : character varying
+  no_aset : integer
+  no_dok_bukti_kepemilikan : character varying
+  no_kib : character varying
+  no_psp : character varying
+  no_tiket : character varying
+  rph_aset : numeric
+  rph_buku : numeric
+  rph_mutasi : numeric
+  rph_susut : numeric
+  status_adm : character varying
+  status_akhir : character varying
+  status_data : smallint
+  status_hukum : character varying
+  status_lap : character varying
+  status_pengelolaan : character varying
+  tanggal : timestamp without time zone
+  tgl_approval : timestamp without time zone
+  tgl_dok_bukti_kepemilikan : character varying
+  tgl_perlh : character varying
+  tgl_psp : date
+  tgl_surat : timestamp without time zone
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kab : character varying
+  ur_kanwil_djkn : character varying
+  ur_kl : character varying
+  ur_kondisi : character varying
+  ur_kpknl : character varying
+  ur_prov : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+  ur_status : character varying
+}
+
+entity "wasdal.t_wasdal_laporan_insidentil_detail" as wasdal__t_wasdal_laporan_insidentil_detail {
+  id_wasdal_laporan_insidentil_detail : bigint <<PK>>
+  catatan_lap : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_bentuk_penggunaan : integer
+  id_jns_ketidaksesuaian : integer
+  id_jns_pengelolaan : integer
+  id_wasdal_laporan_insidentil_aset : bigint
+  id_wasdal_pemantauan_periodik : bigint
+  keterangan_lap : character varying
+  no_tiket : character varying
+  status_data : smallint
+  tanggal : timestamp without time zone
+  tgl_approval : timestamp without time zone
+  tgl_surat : timestamp without time zone
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.t_wasdal_laporan_insidentil_progres" as wasdal__t_wasdal_laporan_insidentil_progres {
+  id_wasdal_laporan_insidentil_progres : bigint <<PK>>
+  catatan_lap : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_jns_pengelolaan : integer
+  id_progres_wasdal : integer
+  id_wasdal_laporan_insidentil_aset : bigint
+  id_wasdal_pemantauan_periodik : bigint
+  keterangan_lap : character varying
+  nilai_progres : integer
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.t_wasdal_laporan_insidentil_rekap" as wasdal__t_wasdal_laporan_insidentil_rekap {
+  id_wasdal_laporan_insidentil_rekap : bigint <<PK>>
+  id_eselon1 : integer
+  id_jns : smallint
+  id_jns_ketidaksesuaian : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker : integer
+  id_struktur : integer
+  id_wasdal_pemantauan_periodik : bigint
+  jml_nup : numeric
+  kd_jns_bmn : bigint
+  luas_nup : numeric
+  nilai_buku : numeric
+  nilai_perolehan : numeric
+  nilai_susut : numeric
+  nm_jns_bmn : character varying
+  status : character varying
+  tahun : smallint
+}
+
+entity "wasdal.t_wasdal_laporan_insidentil_rekap_gh" as wasdal__t_wasdal_laporan_insidentil_rekap_gh {
+  id_wasdal_laporan_insidentil_rekap_gh : bigint <<PK>>
+  fetch_time : date
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker : integer
+  id_struktur : smallint
+  id_wasdal_pemantauan_periodik : bigint
+  kd_jns_bmn : smallint
+  nilai_sesuai : numeric
+  nilai_tdk_blm_tl : numeric
+  nilai_tdk_sdh_tl : numeric
+  nilai_tdk_sesuai : numeric
+  nm_jns_bmn : character varying
+  qty_sesuai : numeric
+  qty_tdk_blm_tl : numeric
+  qty_tdk_sdh_tl : numeric
+  qty_tdk_sesuai : numeric
+}
+
+entity "wasdal.t_wasdal_laporan_insidentil_rekap_per_jns" as wasdal__t_wasdal_laporan_insidentil_rekap_per_jns {
+  id_wasdal_laporan_insidentil_rekap_per_jns : bigint <<PK>>
+  id_eselon1 : integer
+  id_jns : smallint
+  id_jns_pengelolaan : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker : integer
+  id_struktur : integer
+  id_wasdal_pemantauan_periodik : bigint
+  jml_nup : numeric
+  kd_jns_bmn : bigint
+  luas_nup : numeric
+  nilai_buku : numeric
+  nilai_perolehan : numeric
+  nilai_susut : numeric
+  nm_jns_bmn : character varying
+  status : character varying
+  tahun : smallint
+}
+
+entity "wasdal.t_wasdal_laporan_insidentil_rekap_progres" as wasdal__t_wasdal_laporan_insidentil_rekap_progres {
+  id_wasdal_laporan_insidentil_rekap_progres : bigint <<PK>>
+  id_eselon1 : integer
+  id_jns : smallint
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_progres_wasdal : integer
+  id_satker : integer
+  id_struktur : integer
+  id_wasdal_pemantauan_periodik : bigint
+  jml_nup : numeric
+  kd_jns_bmn : bigint
+  luas_nup : numeric
+  nilai_buku : numeric
+  nilai_perolehan : numeric
+  nilai_susut : numeric
+  nm_jns_bmn : character varying
+  status : character varying
+  tahun : smallint
+}
+
+entity "wasdal.t_wasdal_laporan_insidentil_tiket" as wasdal__t_wasdal_laporan_insidentil_tiket {
+  id_wasdal_laporan_insidentil_tiket : bigint <<PK>>
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_eselon1 : integer
+  id_jns : integer
+  id_jns_detail : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_r_menu_state : integer
+  id_satker : integer
+  id_struktur : integer
+  id_wasdal_pemantauan : bigint
+  id_wasdal_pemantauan_periodik : bigint
+  jml_data : integer
+  kd_menu_state : character varying
+  kd_satker : character varying
+  kd_unit : character varying
+  nama_menu_state : character varying
+  no_ba : character varying
+  no_tiket : character varying
+  sesuai_akhir : integer
+  status_data : smallint
+  tanggal : timestamp without time zone
+  tanggal_laporan : character varying
+  tempat : character varying
+  tgl_approval : timestamp without time zone
+  tgl_surat : timestamp without time zone
+  unit_kerja : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_satker : character varying
+  ur_unit : character varying
+}
+
+entity "wasdal.t_wasdal_laporan_investigasi_aset" as wasdal__t_wasdal_laporan_investigasi_aset {
+  id_wasdal_laporan_investigasi_aset : bigint <<PK>>
+  alamat : character varying
+  catatan_adm : character varying
+  catatan_lap : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  hasil_investigasi : character varying
+  id_aset : integer
+  id_kanwil_djkn : integer
+  id_kl : integer
+  id_kpknl : integer
+  id_m_jns_investigasi_tindak_lanjut : integer
+  id_r_menu_access_state : character varying
+  id_satker : integer
+  id_wasdal_investigasi : bigint
+  id_wasdal_pemantauan_periodik : bigint
+  indikasi_penyimpangan : character varying
+  is_tb : boolean
+  jns_dok_bukti_kepemilikan : character varying
+  kd_brg : character varying
+  kd_jns_bmn : integer
+  kd_kab : character varying
+  kd_kanwil_djkn : integer
+  kd_kl : character varying
+  kd_kpknl : character varying
+  kd_prov : character varying
+  kd_satker : character varying
+  kd_status : character varying
+  keterangan_lap : character varying
+  luas : integer
+  merk : character varying
+  nama_m_jns_investigasi_tindak_lanjut : character varying
+  nama_status : character varying
+  nilai_kerugian : numeric
+  nm_jns_bmn : character varying
+  no_aset : integer
+  no_dok_bukti_kepemilikan : character varying
+  no_kerugian : character varying
+  no_kib : character varying
+  no_srt_permintaan_penertiban : character varying
+  no_surat : character varying
+  no_tiket : character varying
+  rph_aset : numeric
+  rph_buku : numeric
+  rph_mutasi : numeric
+  rph_susut : numeric
+  status_adm : character varying
+  status_data : smallint
+  status_hukum : character varying
+  status_lap : character varying
+  status_pengelolaan : character varying
+  tanggal : timestamp without time zone
+  tgl_dok_bukti_kepemilikan : character varying
+  tgl_laporan_kerugian : character varying
+  tgl_perlh : character varying
+  tgl_srt_permintaan_penertiban : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kab : character varying
+  ur_kanwil_djkn : character varying
+  ur_kl : character varying
+  ur_kondisi : character varying
+  ur_kpknl : character varying
+  ur_prov : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+  ur_status : character varying
+  uraian : character varying
+  uraian_tindak_lanjut : character varying
+}
+
+entity "wasdal.t_wasdal_laporan_penertiban_aset" as wasdal__t_wasdal_laporan_penertiban_aset {
+  id_wasdal_laporan_penertiban_aset : bigint <<PK>>
+  alamat : character varying
+  catatan_adm : character varying
+  catatan_lap : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_aset : bigint
+  id_kanwil_djkn : integer
+  id_kl : integer
+  id_kpknl : integer
+  id_menu_penertiban : integer
+  id_menu_penertiban_detail : integer
+  id_r_menu_access_state : character varying
+  id_satker : integer
+  id_tipe_pengelolaan : integer
+  id_wasdal_pemantauan_periodik : bigint
+  id_wasdal_penertiban : bigint
+  is_tb : boolean
+  jns_dok_bukti_kepemilikan : character varying
+  kd_brg : character varying
+  kd_jns_bmn : integer
+  kd_kab : character varying
+  kd_kanwil_djkn : character varying
+  kd_kl : character varying
+  kd_kpknl : character varying
+  kd_prov : character varying
+  kd_satker : character varying
+  kd_status : character varying
+  kdperkbr : character varying
+  kemitraan_yn : character varying
+  ket_penertiban : character varying
+  keterangan_adm : character varying
+  keterangan_lap : character varying
+  keterangan_pemanfaatan : character varying
+  keterangan_pemindah_tanganan : character varying
+  keterangan_penggunaan : character varying
+  luas : integer
+  merk : character varying
+  nm_jns_bmn : character varying
+  no_aset : integer
+  no_bast : character varying
+  no_dok_bukti_kepemilikan : character varying
+  no_kib : character varying
+  no_penertiban : character varying
+  no_psp : character varying
+  no_surat_pembatalan : character varying
+  no_surat_usulan_pemanfaatan : character varying
+  no_surat_usulan_penetapan : character varying
+  no_tiket : character varying
+  rph_aset : numeric
+  rph_buku : numeric
+  rph_mutasi : numeric
+  rph_susut : numeric
+  status_adm : character varying
+  status_akhir : character varying
+  status_data : smallint
+  status_hukum : character varying
+  status_lap : character varying
+  status_pengelolaan : character varying
+  tanggal : timestamp without time zone
+  tgl_approval : timestamp without time zone
+  tgl_bast : character varying
+  tgl_dok_bukti_kepemilikan : character varying
+  tgl_penertiban : character varying
+  tgl_perlh : character varying
+  tgl_psp : character varying
+  tgl_surat_pembatalan : character varying
+  tgl_surat_usulan_pemanfaatan : character varying
+  tgl_surat_usulan_penetapan : character varying
+  tindak_lanjut_pemantauan : character varying
+  tindak_lanjut_penertiban : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kab : character varying
+  ur_kanwil_djkn : character varying
+  ur_kl : character varying
+  ur_kondisi : character varying
+  ur_kpknl : character varying
+  ur_prov : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+  ur_status : character varying
+}
+
+entity "wasdal.t_wasdal_laporan_penertiban_detail" as wasdal__t_wasdal_laporan_penertiban_detail {
+  id_wasdal_laporan_penertiban_detail : bigint <<PK>>
+  catatan_lap : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_bentuk_penggunaan : integer
+  id_jns_ketidaksesuaian : integer
+  id_jns_pengelolaan : integer
+  id_wasdal_laporan_penertiban_aset : bigint
+  id_wasdal_pemantauan_periodik : bigint
+  ket_penertiban : character varying
+  keterangan_lap : character varying
+  no_penertiban : character varying
+  no_tiket : character varying
+  status_data : smallint
+  status_penertiban : character varying
+  tanggal : timestamp without time zone
+  tgl_approval : timestamp without time zone
+  tgl_penertiban : character varying
+  tgl_surat : timestamp without time zone
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.t_wasdal_laporan_penertiban_rekap" as wasdal__t_wasdal_laporan_penertiban_rekap {
+  id_wasdal_laporan_penertiban_rekap : bigint <<PK>>
+  id_eselon1 : integer
+  id_jns : smallint
+  id_jns_ketidaksesuaian : integer
+  id_jns_penertiban : integer
+  id_jns_pengelolaan : integer
+  id_jns_permintaan : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker : integer
+  id_struktur : integer
+  id_wasdal_pemantauan_periodik : bigint
+  jml_nup : numeric
+  kd_jns_bmn : bigint
+  luas_nup : numeric
+  nilai_buku : numeric
+  nilai_perolehan : numeric
+  nilai_susut : numeric
+  nm_jns_bmn : character varying
+  status : character varying
+  tahun : smallint
+}
+
+entity "wasdal.t_wasdal_laporan_permintaan_penertiban_rekap" as wasdal__t_wasdal_laporan_permintaan_penertiban_rekap {
+  id_wasdal_laporan_permintaan_penertiban_rekap : bigint <<PK>>
+  id_eselon1 : integer
+  id_jns : smallint
+  id_jns_penertiban : integer
+  id_jns_pengelolaan : integer
+  id_jns_permintaan : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker : integer
+  id_struktur : integer
+  id_wasdal_pemantauan_periodik : bigint
+  jml_nup : numeric
+  kd_jns_bmn : bigint
+  luas_nup : numeric
+  nilai_buku : numeric
+  nilai_perolehan : numeric
+  nilai_susut : numeric
+  nm_jns_bmn : character varying
+  status : character varying
+  tahun : smallint
+}
+
+entity "wasdal.t_wasdal_log" as wasdal__t_wasdal_log {
+  id_wasdal_log : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_status : integer
+  id_user : character varying
+  id_wasdal : character varying
+  jenis_wasdal : character varying
+  keterangan : character varying
+  kode_status : character varying
+  no_tiket : character varying
+  status_permohonan : character varying
+  updated_at : timestamp without time zone
+}
+
+entity "wasdal.t_wasdal_pemantauan" as wasdal__t_wasdal_pemantauan {
+  id_wasdal_pemantauan : bigint <<PK>>
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_eselon1 : integer
+  id_jns : integer
+  id_jns_detail : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_r_menu_state : integer
+  id_satker : integer
+  id_struktur : integer
+  kd_menu_state : character varying
+  kd_satker : character varying
+  kd_unit : character varying
+  nama_menu_state : character varying
+  no_ba : character varying
+  no_tiket : character varying
+  status_data : smallint
+  tanggal : timestamp without time zone
+  tanggal_laporan : character varying
+  tempat : character varying
+  tgl_approval : timestamp without time zone
+  tgl_surat : timestamp without time zone
+  unit_kerja : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_satker : character varying
+  ur_unit : character varying
+}
+
+entity "wasdal.t_wasdal_pemantauan_aset" as wasdal__t_wasdal_pemantauan_aset {
+  id_wasdal_pemantauan_aset : bigint <<PK>>
+  alamat : character varying
+  catatan_adm : character varying
+  catatan_lap : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_aset : bigint
+  id_kanwil_djkn : integer
+  id_kl : integer
+  id_kpknl : integer
+  id_menu_penertiban : integer
+  id_menu_penertiban_detail : integer
+  id_r_menu_access_state : character varying
+  id_satker : integer
+  id_tipe_pengelolaan : integer
+  id_wasdal_pemantauan : bigint
+  is_tb : boolean
+  jns_dok_bukti_kepemilikan : character varying
+  kd_brg : character varying
+  kd_jns_bmn : integer
+  kd_kab : character varying
+  kd_kanwil_djkn : character varying
+  kd_kl : character varying
+  kd_kpknl : character varying
+  kd_prov : character varying
+  kd_satker : character varying
+  kd_status : character varying
+  keterangan_adm : character varying
+  keterangan_lap : character varying
+  luas : integer
+  merk : character varying
+  nm_jns_bmn : character varying
+  no_aset : integer
+  no_dok_bukti_kepemilikan : character varying
+  no_kib : character varying
+  rph_aset : numeric
+  rph_buku : numeric
+  rph_mutasi : numeric
+  rph_susut : numeric
+  status_adm : character varying
+  status_akhir : character varying
+  status_data : smallint
+  status_hukum : character varying
+  status_lap : character varying
+  status_pengelolaan : character varying
+  tgl_dok_bukti_kepemilikan : character varying
+  tgl_perlh : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kab : character varying
+  ur_kanwil_djkn : character varying
+  ur_kl : character varying
+  ur_kondisi : character varying
+  ur_kpknl : character varying
+  ur_prov : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+  ur_status : character varying
+}
+
+entity "wasdal.t_wasdal_pemantauan_aset_detail" as wasdal__t_wasdal_pemantauan_aset_detail {
+  id_wasdal_pemantauan_aset_detail : bigint <<PK>>
+  catatan_lap : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_menu_penertiban : integer
+  id_menu_penertiban_detail : integer
+  id_tipe_pengelolaan : integer
+  id_wasdal_pemantauan_aset : bigint
+  keterangan_lap : character varying
+  status_adm : boolean
+  status_data : smallint
+  status_lap : boolean
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.t_wasdal_pemantauan_insidentil_log" as wasdal__t_wasdal_pemantauan_insidentil_log {
+  id_wasdal_pemantauan_insidentil_log : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_status : integer
+  id_user : integer
+  id_wasdal_pemantauan_insidentil : bigint
+  keterangan : character varying
+  kode_status : character varying
+  no_tiket : character varying
+  role : character varying
+  status_data : smallint
+  status_permohonan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik" as wasdal__t_wasdal_pemantauan_periodik {
+  id_wasdal_pemantauan_periodik : bigint <<PK>>
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  flag_generate : smallint
+  flag_generate2 : smallint
+  flag_generate3 : smallint
+  flag_generate4 : smallint
+  flag_rekap : smallint
+  flag_rekap2 : smallint
+  flag_rekap3 : smallint
+  flag_rekap4 : smallint
+  has_korwil : boolean
+  id_eselon1 : integer
+  id_jns : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_r_menu_state : integer
+  id_satker : integer
+  id_struktur : integer
+  jabatan : character varying
+  jml_auto : integer
+  jml_tiket_eselon1 : integer
+  jml_tiket_korwil : integer
+  jml_tiket_satker : integer
+  kd_menu_state : character varying
+  kd_satker : character varying
+  kd_unit : character varying
+  nama_menu_state : character varying
+  nilai_blm_tl : numeric
+  nilai_sesuai : numeric
+  nilai_tdk_sesuai : numeric
+  nip : character varying
+  nip_anggota1 : character varying
+  nip_anggota2 : character varying
+  nm_anggota1 : character varying
+  nm_anggota2 : character varying
+  nm_ketua_tim : character varying
+  no_ba : character varying
+  no_tiket : character varying
+  status_data : smallint
+  tahun : smallint
+  tanggal : timestamp without time zone
+  tanggal_laporan : character varying
+  tempat : character varying
+  tgl_cutoff : timestamp with time zone
+  tgl_generate : timestamp with time zone
+  tgl_generate2 : timestamp with time zone
+  tgl_generate3 : timestamp with time zone
+  tgl_generate4 : timestamp with time zone
+  tgl_kirim : date
+  tgl_rekap : timestamp with time zone
+  ttl_blm_tl : numeric
+  ttl_sesuai : numeric
+  ttl_tdk_sesuai : numeric
+  unit_kerja : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_satker : character varying
+  ur_unit : character varying
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik_aset" as wasdal__t_wasdal_pemantauan_periodik_aset {
+  id_wasdal_pemantauan_periodik_aset : bigint <<PK>>
+  alamat : character varying
+  bmn_hilang_yn : character
+  bpyds_yn : character
+  catatan_adm : character varying
+  catatan_lap : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  henti_guna_yn : character
+  id_aset : integer
+  id_kanwil_djkn : integer
+  id_kl : integer
+  id_kpknl : integer
+  id_menu_penertiban : integer
+  id_menu_penertiban_detail : integer
+  id_r_menu_access_state : character varying
+  id_satker : integer
+  id_tipe_pengelolaan : integer
+  id_wasdal_pemantauan_periodik : bigint
+  is_tb : boolean
+  jml_blm_tl : numeric
+  jml_tdk_sesuai : numeric
+  jns_dok_bukti_kepemilikan : character varying
+  kd_brg : character varying
+  kd_jns_bmn : integer
+  kd_kab : character varying
+  kd_kanwil_djkn : character varying
+  kd_kl : character varying
+  kd_kpknl : character varying
+  kd_prov : character varying
+  kd_satker : character varying
+  kd_status : character varying
+  kdperkbr : character varying
+  kemitraan_yn : character varying
+  keterangan_adm : character varying
+  keterangan_lap : character varying
+  kuantitas : numeric
+  luas : numeric
+  merk : character varying
+  nilai_blm_tl : numeric
+  nm_jns_bmn : character varying
+  no_aset : integer
+  no_dok_bukti_kepemilikan : character varying
+  no_kib : character varying
+  no_psp : character varying
+  rph_aset : numeric
+  rph_buku : numeric
+  rph_mutasi : numeric
+  rph_susut : numeric
+  rusak_berat_yn : character
+  status_adm : character varying
+  status_akhir : character varying
+  status_data : smallint
+  status_hukum : character varying
+  status_lap : character varying
+  status_pengelolaan : character varying
+  tgl_dok_bukti_kepemilikan : character varying
+  tgl_perlh : date
+  tgl_psp : date
+  tgl_rekam : date
+  tindak_lanjut_yn : character
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kab : character varying
+  ur_kanwil_djkn : character varying
+  ur_kl : character varying
+  ur_kondisi : character varying
+  ur_kpknl : character varying
+  ur_prov : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+  ur_status : character varying
+  usul_hapus_yn : character
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik_detail" as wasdal__t_wasdal_pemantauan_periodik_detail {
+  id_wasdal_pemantauan_periodik_detail : bigint <<PK>>
+  catatan_lap : text
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_bentuk_penggunaan : integer
+  id_jns_ketidaksesuaian : integer
+  id_jns_pengelolaan : integer
+  id_wasdal_pemantauan_periodik : bigint
+  id_wasdal_pemantauan_periodik_aset : bigint
+  keterangan_lap : text
+  status_adm : boolean
+  status_data : smallint
+  status_lap : boolean
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik_join" as wasdal__t_wasdal_pemantauan_periodik_join {
+  id_wasdal_pemantauan_periodik_join : bigint <<PK>>
+  id_struktur : integer
+  id_wasdal_pemantauan_periodik_child : bigint
+  id_wasdal_pemantauan_periodik_parent : bigint
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik_lap_brg" as wasdal__t_wasdal_pemantauan_periodik_lap_brg {
+  id_wasdal_pemantauan_periodik_lap_brg : bigint <<PK>>
+  fetch_time : date
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  id_struktur : smallint
+  id_wasdal_pemantauan_periodik : bigint
+  nomor_lap : character varying
+  periode_lap : character varying
+  status_sampai : character varying
+  tgl_sampai_pb : date
+  tgl_sampai_pl : date
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik_lap_invent" as wasdal__t_wasdal_pemantauan_periodik_lap_invent {
+  id_wasdal_pemantauan_periodik_lap_invent : bigint <<PK>>
+  fetch_time : date
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  id_struktur : smallint
+  id_wasdal_pemantauan_periodik : bigint
+  nomor_lap : character varying
+  periode_lap : character varying
+  status_sampai : character varying
+  tgl_lap : date
+  tgl_sampai_pb : date
+  tgl_sampai_pl : date
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik_log" as wasdal__t_wasdal_pemantauan_periodik_log {
+  id_wasdal_pemantauan_periodik_log : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_status : integer
+  id_user : integer
+  id_wasdal_pemantauan_periodik : bigint
+  keterangan : character varying
+  kode_status : character varying
+  no_tiket : character varying
+  role : character varying
+  status_data : smallint
+  status_permohonan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik_opname" as wasdal__t_wasdal_pemantauan_periodik_opname {
+  id_wasdal_pemantauan_periodik_opname : bigint <<PK>>
+  fetch_time : date
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  id_satker : integer
+  id_wasdal_pemantauan_periodik : bigint
+  jml_blm : numeric
+  jml_sdh : numeric
+  kd_jns_bmn : smallint
+  nilai_blm : numeric
+  nilai_sdh : numeric
+  nm_jns_bmn : character varying
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik_progres" as wasdal__t_wasdal_pemantauan_periodik_progres {
+  id_wasdal_pemantauan_periodik_progres : bigint <<PK>>
+  catatan_lap : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_jns_pengelolaan : integer
+  id_progres_wasdal : integer
+  id_wasdal_pemantauan_periodik : bigint
+  id_wasdal_pemantauan_periodik_aset : bigint
+  keterangan_lap : character varying
+  nilai_progres : numeric
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik_rekap" as wasdal__t_wasdal_pemantauan_periodik_rekap {
+  id_wasdal_pemantauan_periodik_rekap : bigint <<PK>>
+  id_eselon1 : integer
+  id_jns : smallint
+  id_jns_ketidaksesuaian : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker : integer
+  id_struktur : integer
+  id_wasdal_pemantauan_periodik : bigint
+  jml_nup : numeric
+  kd_jns_bmn : smallint
+  luas_nup : numeric
+  nilai_buku : numeric
+  nilai_perolehan : numeric
+  nilai_susut : numeric
+  nm_jns_bmn : character varying
+  status : character varying
+  tahun : smallint
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik_rekap_gh" as wasdal__t_wasdal_pemantauan_periodik_rekap_gh {
+  id_wasdal_pemantauan_periodik_rekap_gh : bigint <<PK>>
+  fetch_time : date
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker : integer
+  id_struktur : smallint
+  id_wasdal_pemantauan_periodik : bigint
+  kd_jns_bmn : smallint
+  nilai_buku_sesuai : numeric
+  nilai_buku_tdk_blm_tl : numeric
+  nilai_buku_tdk_sdh_tl : numeric
+  nilai_buku_tdk_sesuai : numeric
+  nilai_sesuai : numeric
+  nilai_tdk_blm_tl : numeric
+  nilai_tdk_sdh_tl : numeric
+  nilai_tdk_sesuai : numeric
+  nm_jns_bmn : character varying
+  qty_sesuai : numeric
+  qty_tdk_blm_tl : numeric
+  qty_tdk_sdh_tl : numeric
+  qty_tdk_sesuai : numeric
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik_rekap_per_jns" as wasdal__t_wasdal_pemantauan_periodik_rekap_per_jns {
+  id_wasdal_pemantauan_periodik_rekap_per_jns : bigint <<PK>>
+  id_eselon1 : integer
+  id_jns : smallint
+  id_jns_pengelolaan : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker : integer
+  id_struktur : integer
+  id_wasdal_pemantauan_periodik : bigint
+  jml_nup : numeric
+  kd_jns_bmn : smallint
+  luas_nup : numeric
+  nilai_buku : numeric
+  nilai_perolehan : numeric
+  nilai_susut : numeric
+  nm_jns_bmn : character varying
+  status : character varying
+  tahun : smallint
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik_rekap_progres" as wasdal__t_wasdal_pemantauan_periodik_rekap_progres {
+  id_wasdal_pemantauan_periodik_rekap_progres : bigint <<PK>>
+  id_eselon1 : integer
+  id_jns : smallint
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_progres_wasdal : integer
+  id_satker : integer
+  id_struktur : integer
+  id_wasdal_pemantauan_periodik : bigint
+  jml_nup : numeric
+  kd_jns_bmn : bigint
+  luas_nup : numeric
+  nilai_buku : numeric
+  nilai_perolehan : numeric
+  nilai_susut : numeric
+  nm_jns_bmn : character varying
+  status : character varying
+  tahun : smallint
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik_rekap_progres_per_jns" as wasdal__t_wasdal_pemantauan_periodik_rekap_progres_per_jns {
+  id_wasdal_pemantauan_periodik_rekap_progres_per_jns : bigint <<PK>>
+  id_eselon1 : integer
+  id_jns : smallint
+  id_jns_pengelolaan : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker : integer
+  id_struktur : integer
+  id_wasdal_pemantauan_periodik : bigint
+  jml_nup : numeric
+  kd_jns_bmn : bigint
+  luas_nup : numeric
+  nilai_buku : numeric
+  nilai_perolehan : numeric
+  nilai_susut : numeric
+  nm_jns_bmn : character varying
+  status : character varying
+  tahun : smallint
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik_rekap_tl" as wasdal__t_wasdal_pemantauan_periodik_rekap_tl {
+  id_wasdal_pemantauan_periodik_rekap_tl : bigint <<PK>>
+  id_eselon1 : integer
+  id_jns : smallint
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_progres_wasdal : integer
+  id_satker : integer
+  id_struktur : integer
+  id_wasdal_pemantauan_periodik : bigint
+  jml_nup : numeric
+  kd_jns_bmn : bigint
+  luas_nup : numeric
+  nilai_buku : numeric
+  nilai_perolehan : numeric
+  nilai_susut : numeric
+  nm_jns_bmn : character varying
+  status : character varying
+  tahun : smallint
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik_rekap_tl_per_jns" as wasdal__t_wasdal_pemantauan_periodik_rekap_tl_per_jns {
+  id_wasdal_pemantauan_periodik_rekap_tl_per_jns : bigint <<PK>>
+  id_eselon1 : integer
+  id_jns : smallint
+  id_jns_pengelolaan : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_satker : integer
+  id_struktur : integer
+  id_wasdal_pemantauan_periodik : bigint
+  jml_nup : numeric
+  kd_jns_bmn : bigint
+  luas_nup : numeric
+  nilai_buku : numeric
+  nilai_perolehan : numeric
+  nilai_susut : numeric
+  nm_jns_bmn : character varying
+  status : character varying
+  tahun : smallint
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik_rkakl" as wasdal__t_wasdal_pemantauan_periodik_rkakl {
+  id_wasdal_pemantauan_periodik_rkakl : bigint <<PK>>
+  fetch_time : date
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  id_satker : integer
+  id_wasdal_pemantauan_periodik : bigint
+  kd_jns_bmn : smallint
+  nilai_rencana : numeric
+  nilai_rkakl : numeric
+  nm_jns_bmn : character varying
+  qty_rencana : numeric
+  qty_rkakl : numeric
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik_tl_masy" as wasdal__t_wasdal_pemantauan_periodik_tl_masy {
+  id_wasdal_pemantauan_periodik_tl_masy : bigint <<PK>>
+  fetch_time : date
+  id_eselon1 : bigint
+  id_kanwil : bigint
+  id_kl : bigint
+  id_korwil : bigint
+  id_kpknl : bigint
+  id_satker : integer
+  id_wasdal_pemantauan_periodik : bigint
+  jml_bmn : numeric
+  jml_usul : numeric
+  kd_jns_bmn : smallint
+  nilai_bmn : numeric
+  nilai_usul : numeric
+  nm_jns_bmn : character varying
+}
+
+entity "wasdal.t_wasdal_pemantauan_periodik_upload" as wasdal__t_wasdal_pemantauan_periodik_upload {
+  id_wasdal_pemantauan_periodik_upload : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_wasdal_pemantauan_periodik_aset : bigint
+  jenis : character varying
+  nama : character varying
+  no_doc : character varying
+  status_data : smallint
+  tanggal : timestamp without time zone
+  updated_at : timestamp without time zone
+  updated_by : integer
+  url_upload : character varying
+}
+
+entity "wasdal.t_wasdal_pemantauan_upload" as wasdal__t_wasdal_pemantauan_upload {
+  id_wasdal_pemantauan_upload : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_wasdal_pemantauan_aset : bigint
+  jenis : character varying
+  nama : character varying
+  no_doc : character varying
+  status_data : smallint
+  tanggal : timestamp without time zone
+  updated_at : timestamp without time zone
+  updated_by : integer
+  url_upload : character varying
+}
+
+entity "wasdal.t_wasdal_penertiban" as wasdal__t_wasdal_penertiban {
+  id_wasdal_penertiban : bigint <<PK>>
+  catatan : character varying
+  created_at : timestamp with time zone
+  created_by : integer
+  edited_by : integer
+  hasil_pemantauan_pengelola : character varying
+  hasil_pemantauan_pengguna : character varying
+  id_eselon1 : integer
+  id_jns : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_r_menu_state : integer
+  id_satker : integer
+  id_struktur : integer
+  id_wasdal_pemantauan : bigint
+  id_wasdal_permintaan_penertiban : bigint
+  kd_menu_state : character varying
+  kd_satker : character varying
+  kd_unit : character varying
+  nama_menu_state : character varying
+  no_tiket : character varying
+  nup : character varying
+  permintaan_penertiban_bmn : character varying
+  status_data : smallint
+  tanggal : timestamp without time zone
+  tgl_approval : timestamp with time zone
+  updated_at : timestamp with time zone
+  updated_by : integer
+  ur_satker : character varying
+  ur_unit : character varying
+}
+
+entity "wasdal.t_wasdal_penertiban_aset" as wasdal__t_wasdal_penertiban_aset {
+  id_wasdal_penertiban_aset : bigint <<PK>>
+  alamat : character varying
+  catatan_adm : character varying
+  catatan_lap : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_aset : bigint
+  id_bentuk_penertiban : bigint
+  id_kanwil_djkn : integer
+  id_kl : integer
+  id_kpknl : integer
+  id_menu_penertiban : integer
+  id_menu_penertiban_detail : integer
+  id_r_menu_access_state : character varying
+  id_satker : integer
+  id_tipe_pengelolaan : integer
+  id_wasdal_pemantauan : bigint
+  id_wasdal_pemantauan_aset : bigint
+  id_wasdal_penertiban : bigint
+  id_wasdal_permintaan_penertiban : bigint
+  id_wasdal_permintaan_penertiban_aset : bigint
+  is_lengkap : integer
+  is_tb : boolean
+  jns_dok_bukti_kepemilikan : character varying
+  kd_brg : character varying
+  kd_jns_bmn : integer
+  kd_kab : character varying
+  kd_kanwil_djkn : character varying
+  kd_kl : character varying
+  kd_kpknl : character varying
+  kd_prov : character varying
+  kd_satker : character varying
+  kd_status : character varying
+  ket_penertiban : character varying
+  keterangan_adm : character varying
+  keterangan_lap : character varying
+  keterangan_pemanfaatan : character varying
+  keterangan_pemindah_tanganan : character varying
+  keterangan_penggunaan : character varying
+  luas : numeric
+  merk : character varying
+  nm_jns_bmn : character varying
+  no_aset : integer
+  no_bast : character varying
+  no_dok_bukti_kepemilikan : character varying
+  no_kib : character varying
+  no_penertiban : character varying
+  no_psp : character varying
+  no_surat_pembatalan : character varying
+  no_surat_usulan_pemanfaatan : character varying
+  no_surat_usulan_penetapan : character varying
+  rph_aset : numeric
+  rph_buku : numeric
+  rph_mutasi : numeric
+  rph_susut : numeric
+  status_adm : character varying
+  status_akhir : character varying
+  status_data : smallint
+  status_hukum : character varying
+  status_lap : character varying
+  status_pengelolaan : character varying
+  tgl_bast : character varying
+  tgl_dok_bukti_kepemilikan : character varying
+  tgl_penertiban : character varying
+  tgl_perlh : character varying
+  tgl_psp : character varying
+  tgl_surat_pembatalan : character varying
+  tgl_surat_usulan_pemanfaatan : character varying
+  tgl_surat_usulan_penetapan : character varying
+  tindak_lanjut_pemantauan : character varying
+  tindak_lanjut_penertiban : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kab : character varying
+  ur_kanwil_djkn : character varying
+  ur_kl : character varying
+  ur_kondisi : character varying
+  ur_kpknl : character varying
+  ur_prov : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+  ur_status : character varying
+}
+
+entity "wasdal.t_wasdal_penertiban_aset_detail" as wasdal__t_wasdal_penertiban_aset_detail {
+  id_wasdal_penertiban_aset_detail : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_bentuk_penertiban : smallint
+  id_menu_penertiban : smallint
+  id_menu_penertiban_detail : smallint
+  id_tipe_pengelolaan : smallint
+  id_wasdal_pemantauan_aset : bigint
+  id_wasdal_penertiban_aset : bigint
+  id_wasdal_permintaan_penertiban_aset : bigint
+  ket_penertiban : character varying
+  no_penertiban : character varying
+  status_data : smallint
+  tgl_penertiban : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.t_wasdal_penertiban_aset_detail_temp" as wasdal__t_wasdal_penertiban_aset_detail_temp {
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_bentuk_penertiban : smallint
+  id_menu_penertiban : smallint
+  id_menu_penertiban_detail : smallint
+  id_tipe_pengelolaan : smallint
+  id_wasdal_pemantauan_aset : bigint
+  id_wasdal_penertiban_aset : bigint
+  id_wasdal_penertiban_aset_detail : bigint
+  id_wasdal_permintaan_penertiban_aset : bigint
+  ket_penertiban : character varying
+  no_penertiban : character varying
+  status_data : smallint
+  tgl_penertiban : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.t_wasdal_penertiban_dok" as wasdal__t_wasdal_penertiban_dok {
+  id_penertiban_aset_dok : bigint <<PK>>
+  created_at : timestamp with time zone
+  created_by : integer
+  edited_by : integer
+  id_penertiban_aset : bigint
+  jenis_doc : character varying
+  nama : character varying
+  no_doc : character varying
+  status_data : smallint
+  tgl_upload : timestamp with time zone
+  updated_at : timestamp with time zone
+  updated_by : integer
+  url : character varying
+}
+
+entity "wasdal.t_wasdal_penertiban_log" as wasdal__t_wasdal_penertiban_log {
+  id_wasdal_penertiban_log : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_status : integer
+  id_user : integer
+  id_wasdal_penertiban : bigint
+  keterangan : character varying
+  kode_status : character varying
+  no_tiket : character varying
+  role : character varying
+  status_data : smallint
+  status_permohonan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.t_wasdal_penertiban_upload" as wasdal__t_wasdal_penertiban_upload {
+  id_wasdal_penertiban_upload : bigint <<PK>>
+  asal_dokumen : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_jns : character varying
+  id_wasdal_penertiban : bigint
+  nama_file : character varying
+  nip : character varying
+  no_doc : character varying
+  penanda_tangan : character varying
+  status_data : smallint
+  tanggal : character varying
+  tujuan_dokumen : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  url_upload : character varying
+}
+
+entity "wasdal.t_wasdal_permintaan_penertiban" as wasdal__t_wasdal_permintaan_penertiban {
+  id_wasdal_permintaan_penertiban : bigint <<PK>>
+  created_at : timestamp with time zone
+  created_by : integer
+  edited_by : integer
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_r_menu_state : integer
+  id_satker : integer
+  id_struktur : integer
+  id_wasdal_pemantauan : bigint
+  jawaban : character varying
+  jenis_bmn : integer
+  jenis_wawancara : character varying
+  jumlah_bmn : numeric
+  kd_menu_state : character varying
+  kd_satker : character varying
+  kd_unit : character varying
+  kesesuaian : numeric
+  ketidaksesuaian : numeric
+  nama_menu_state : character varying
+  no_surat : character varying
+  no_tiket : character varying
+  status_data : smallint
+  tanggal : timestamp without time zone
+  tgl_approval : timestamp with time zone
+  updated_at : timestamp with time zone
+  updated_by : integer
+  ur_eselon1 : character varying
+  ur_kanwil : character varying
+  ur_kl : character varying
+  ur_korwil : character varying
+  ur_kpknl : character varying
+  ur_satker : character varying
+  ur_unit : character varying
+}
+
+entity "wasdal.t_wasdal_permintaan_penertiban_aset" as wasdal__t_wasdal_permintaan_penertiban_aset {
+  id_wasdal_permintaan_penertiban_aset : bigint <<PK>>
+  alamat : character varying
+  catatan_adm : character varying
+  catatan_lap : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_aset : bigint
+  id_bentuk_penertiban : bigint
+  id_kanwil_djkn : integer
+  id_kl : bigint
+  id_kpknl : integer
+  id_menu_penertiban : integer
+  id_menu_penertiban_detail : integer
+  id_r_menu_access_state : character varying
+  id_satker : bigint
+  id_tipe_pengelolaan : integer
+  id_wasdal_pemantauan : bigint
+  id_wasdal_pemantauan_aset : bigint
+  id_wasdal_permintaan_penertiban : bigint
+  is_lengkap : integer
+  is_tb : boolean
+  jns_dok_bukti_kepemilikan : character varying
+  kd_brg : character varying
+  kd_jns_bmn : integer
+  kd_kab : character varying
+  kd_kanwil_djkn : character varying
+  kd_kl : character varying
+  kd_kpknl : character varying
+  kd_prov : character varying
+  kd_satker : character varying
+  kd_status : character varying
+  keterangan_adm : character varying
+  keterangan_lap : character varying
+  keterangan_pemanfaatan : character varying
+  keterangan_pemindah_tanganan : character varying
+  keterangan_penggunaan : character varying
+  luas : integer
+  merk : character varying
+  nm_jns_bmn : character varying
+  no_aset : integer
+  no_bast : character varying
+  no_dok_bukti_kepemilikan : character varying
+  no_kib : character varying
+  no_psp : character varying
+  no_surat_pembatalan : character varying
+  no_surat_usulan_pemanfaatan : character varying
+  no_surat_usulan_penetapan : character varying
+  no_tiket : character varying
+  rph_aset : numeric
+  rph_buku : numeric
+  rph_mutasi : numeric
+  rph_susut : numeric
+  status_adm : character varying
+  status_akhir : character varying
+  status_data : smallint
+  status_hukum : character varying
+  status_lap : character varying
+  status_pengelolaan : character varying
+  tgl_bast : character varying
+  tgl_dok_bukti_kepemilikan : character varying
+  tgl_perlh : character varying
+  tgl_psp : character varying
+  tgl_surat_pembatalan : character varying
+  tgl_surat_usulan_pemanfaatan : character varying
+  tgl_surat_usulan_penetapan : character varying
+  tindak_lanjut_pemantauan : character varying
+  tindak_lanjut_penertiban : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_kab : character varying
+  ur_kanwil_djkn : character varying
+  ur_kl : character varying
+  ur_kondisi : character varying
+  ur_kpknl : character varying
+  ur_prov : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+  ur_status : character varying
+}
+
+entity "wasdal.t_wasdal_permintaan_penertiban_log" as wasdal__t_wasdal_permintaan_penertiban_log {
+  id_wasdal_permintaan_penertiban_log : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_status : integer
+  id_user : integer
+  id_wasdal_permintaan_penertiban : bigint
+  keterangan : character varying
+  kode_status : character varying
+  no_tiket : character varying
+  status_data : smallint
+  status_permohonan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.t_wasdal_tim_pemantauan" as wasdal__t_wasdal_tim_pemantauan {
+  id_wasdal_tim_pemantauan : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_wasdal_pemantauan : bigint
+  id_wasdal_pemantauan_periodik : bigint
+  jabatan : character varying
+  nama : character varying
+  nip : character varying
+  status : character varying
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.t_wasdal_wawancara_pihak" as wasdal__t_wasdal_wawancara_pihak {
+  id_wasdal_wawancara_pihak : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_wasdal_wawancara : bigint
+  nama : character varying
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.t_wasdal_wawancara_tim" as wasdal__t_wasdal_wawancara_tim {
+  id_wasdal_wawancara_tim : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  edited_by : integer
+  id_wasdal_wawancara : bigint
+  jabatan : character varying
+  nama : character varying
+  nip : character varying
+  status : character varying
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "wasdal.temp_ketidaksesuaian" as wasdal__temp_ketidaksesuaian {
+  a1 : integer
+  a2 : integer
+  a3 : integer
+  a4 : integer
+  a52 : integer
+  a62 : integer
+  a7 : integer
+  a8 : integer
+  b11 : integer
+  b12 : integer
+  b21 : integer
+  b22 : integer
+  b31 : integer
+  b32 : integer
+  b41 : integer
+  b42 : integer
+  b51 : integer
+  b52 : integer
+  b61 : integer
+  b62 : integer
+  bentuk_penggunaan : character varying
+  c11 : integer
+  c12 : integer
+  c2 : integer
+  c21 : integer
+  c22 : integer
+  c31 : integer
+  c32 : integer
+  c41 : integer
+  c42 : integer
+  d1 : integer
+  d2 : integer
+  d3 : integer
+  d4 : integer
+  d5 : integer
+  d6 : integer
+  e1 : integer
+  e2 : integer
+  e3 : integer
+  f2 : integer
+  h : integer
+  id : integer
+  id_jns_pengelolaan : integer
+  jns_ketidakseusaian : character varying
+  jns_pengelolaan : character varying
+  nama_kolom : text
+  nama_modul : character varying
+  nama_tabel : character varying
+  sumber_data : character varying
+}
+
+wasdal__m_aset_penertiban_detail "0..*" --> "1" wasdal__t_wasdal_permintaan_penertiban_aset : id_wasdal_permintaan_penertiban_aset -> id_wasdal_permintaan_penertiban_aset
+wasdal__m_aset_penertiban_detail "0..*" --> "1" wasdal__r_jns_ketidaksesuaian : id_menu_penertiban_detail -> id_jns_ketidaksesuaian
+wasdal__m_aset_penertiban_detail "0..*" --> "1" wasdal__r_jns_pengelolaan : id_menu_penertiban -> id_jns_pengelolaan
+wasdal__m_aset_penertiban_detail "0..*" --> "1" wasdal__m_aset_penertiban : id_aset -> id_aset
+wasdal__r_bentuk_penertiban "0..*" --> "1" wasdal__r_jns_ketidaksesuaian : id_jns_ketidaksesuaian -> id_jns_ketidaksesuaian
+wasdal__r_jns_ketidaksesuaian "0..*" --> "1" wasdal__r_jns_pengelolaan : id_jns_pengelolaan -> id_jns_pengelolaan
+wasdal__r_progres_wasdal "0..*" --> "1" wasdal__r_jns_pengelolaan : id_jns_pengelolaan -> id_jns_pengelolaan
+wasdal__t_wasdal_laporan_insidentil_aset "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_laporan_insidentil_aset "0..*" --> "1" wasdal__t_wasdal_pemantauan : id_wasdal_pemantauan -> id_wasdal_pemantauan
+wasdal__t_wasdal_laporan_insidentil_detail "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_laporan_insidentil_detail "0..*" --> "1" wasdal__t_wasdal_laporan_insidentil_aset : id_wasdal_laporan_insidentil_aset -> id_wasdal_laporan_insidentil_aset
+wasdal__t_wasdal_laporan_insidentil_detail "0..*" --> "1" wasdal__r_jns_ketidaksesuaian : id_jns_ketidaksesuaian -> id_jns_ketidaksesuaian
+wasdal__t_wasdal_laporan_insidentil_detail "0..*" --> "1" wasdal__r_jns_pengelolaan : id_jns_pengelolaan -> id_jns_pengelolaan
+wasdal__t_wasdal_laporan_insidentil_progres "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_laporan_insidentil_progres "0..*" --> "1" wasdal__t_wasdal_laporan_insidentil_aset : id_wasdal_laporan_insidentil_aset -> id_wasdal_laporan_insidentil_aset
+wasdal__t_wasdal_laporan_insidentil_progres "0..*" --> "1" wasdal__r_progres_wasdal : id_progres_wasdal -> id_progres_wasdal
+wasdal__t_wasdal_laporan_insidentil_progres "0..*" --> "1" wasdal__r_jns_pengelolaan : id_jns_pengelolaan -> id_jns_pengelolaan
+wasdal__t_wasdal_laporan_insidentil_rekap "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_laporan_insidentil_rekap "0..*" --> "1" wasdal__r_jns_ketidaksesuaian : id_jns_ketidaksesuaian -> id_jns_ketidaksesuaian
+wasdal__t_wasdal_laporan_insidentil_rekap_gh "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_laporan_insidentil_rekap_per_jns "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_laporan_insidentil_rekap_per_jns "0..*" --> "1" wasdal__r_jns_pengelolaan : id_jns_pengelolaan -> id_jns_pengelolaan
+wasdal__t_wasdal_laporan_insidentil_rekap_progres "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_laporan_insidentil_rekap_progres "0..*" --> "1" wasdal__r_progres_wasdal : id_progres_wasdal -> id_progres_wasdal
+wasdal__t_wasdal_laporan_insidentil_tiket "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_laporan_investigasi_aset "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_laporan_penertiban_aset "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_laporan_penertiban_aset "0..*" --> "1" wasdal__t_wasdal_penertiban : id_wasdal_penertiban -> id_wasdal_penertiban
+wasdal__t_wasdal_laporan_penertiban_detail "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_laporan_penertiban_detail "0..*" --> "1" wasdal__r_jns_ketidaksesuaian : id_jns_ketidaksesuaian -> id_jns_ketidaksesuaian
+wasdal__t_wasdal_laporan_penertiban_detail "0..*" --> "1" wasdal__r_jns_pengelolaan : id_jns_pengelolaan -> id_jns_pengelolaan
+wasdal__t_wasdal_laporan_penertiban_rekap "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_laporan_permintaan_penertiban_rekap "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_pemantauan_aset_detail "0..*" --> "1" wasdal__t_wasdal_pemantauan_aset : id_wasdal_pemantauan_aset -> id_wasdal_pemantauan_aset
+wasdal__t_wasdal_pemantauan_aset_detail "0..*" --> "1" wasdal__r_jns_ketidaksesuaian : id_menu_penertiban_detail -> id_jns_ketidaksesuaian
+wasdal__t_wasdal_pemantauan_aset_detail "0..*" --> "1" wasdal__r_jns_pengelolaan : id_menu_penertiban -> id_jns_pengelolaan
+wasdal__t_wasdal_pemantauan_aset "0..*" --> "1" wasdal__t_wasdal_pemantauan : id_wasdal_pemantauan -> id_wasdal_pemantauan
+wasdal__t_wasdal_pemantauan_periodik_aset "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_pemantauan_periodik_detail "0..*" --> "1" wasdal__r_jns_ketidaksesuaian : id_jns_ketidaksesuaian -> id_jns_ketidaksesuaian
+wasdal__t_wasdal_pemantauan_periodik_detail "0..*" --> "1" wasdal__r_jns_pengelolaan : id_jns_pengelolaan -> id_jns_pengelolaan
+wasdal__t_wasdal_pemantauan_periodik_detail "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik_aset : id_wasdal_pemantauan_periodik_aset -> id_wasdal_pemantauan_periodik_aset
+wasdal__t_wasdal_pemantauan_periodik_lap_brg "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_pemantauan_periodik_lap_invent "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_pemantauan_periodik_log "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_pemantauan_periodik_opname "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_pemantauan_periodik_progres "0..*" --> "1" wasdal__r_progres_wasdal : id_progres_wasdal -> id_progres_wasdal
+wasdal__t_wasdal_pemantauan_periodik_progres "0..*" --> "1" wasdal__r_jns_pengelolaan : id_jns_pengelolaan -> id_jns_pengelolaan
+wasdal__t_wasdal_pemantauan_periodik_progres "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik_aset : id_wasdal_pemantauan_periodik_aset -> id_wasdal_pemantauan_periodik_aset
+wasdal__t_wasdal_pemantauan_periodik_rekap "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_pemantauan_periodik_rekap "0..*" --> "1" wasdal__r_jns_ketidaksesuaian : id_jns_ketidaksesuaian -> id_jns_ketidaksesuaian
+wasdal__t_wasdal_pemantauan_periodik_rekap_gh "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_pemantauan_periodik_rekap_per_jns "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_pemantauan_periodik_rekap_per_jns "0..*" --> "1" wasdal__r_jns_pengelolaan : id_jns_pengelolaan -> id_jns_pengelolaan
+wasdal__t_wasdal_pemantauan_periodik_rekap_progres "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_pemantauan_periodik_rekap_progres "0..*" --> "1" wasdal__r_progres_wasdal : id_progres_wasdal -> id_progres_wasdal
+wasdal__t_wasdal_pemantauan_periodik_rekap_progres_per_jns "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_pemantauan_periodik_rekap_progres_per_jns "0..*" --> "1" wasdal__r_jns_pengelolaan : id_jns_pengelolaan -> id_jns_pengelolaan
+wasdal__t_wasdal_pemantauan_periodik_rekap_tl "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_pemantauan_periodik_rekap_tl "0..*" --> "1" wasdal__r_progres_wasdal : id_progres_wasdal -> id_progres_wasdal
+wasdal__t_wasdal_pemantauan_periodik_rekap_tl_per_jns "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_pemantauan_periodik_rekap_tl_per_jns "0..*" --> "1" wasdal__r_jns_pengelolaan : id_jns_pengelolaan -> id_jns_pengelolaan
+wasdal__t_wasdal_pemantauan_periodik_rkakl "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_pemantauan_periodik_tl_masy "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik : id_wasdal_pemantauan_periodik -> id_wasdal_pemantauan_periodik
+wasdal__t_wasdal_pemantauan_periodik_upload "0..*" --> "1" wasdal__t_wasdal_pemantauan_periodik_aset : id_wasdal_pemantauan_periodik_aset -> id_wasdal_pemantauan_periodik_aset
+wasdal__t_wasdal_penertiban_aset_detail "0..*" --> "1" wasdal__t_wasdal_permintaan_penertiban_aset : id_wasdal_permintaan_penertiban_aset -> id_wasdal_permintaan_penertiban_aset
+wasdal__t_wasdal_penertiban_aset_detail "0..*" --> "1" wasdal__t_wasdal_penertiban_aset : id_wasdal_penertiban_aset -> id_wasdal_penertiban_aset
+wasdal__t_wasdal_penertiban_aset_detail "0..*" --> "1" wasdal__t_wasdal_pemantauan_aset : id_wasdal_pemantauan_aset -> id_wasdal_pemantauan_aset
+wasdal__t_wasdal_penertiban_aset_detail "0..*" --> "1" wasdal__r_jns_ketidaksesuaian : id_menu_penertiban_detail -> id_jns_ketidaksesuaian
+wasdal__t_wasdal_penertiban_aset_detail "0..*" --> "1" wasdal__r_jns_pengelolaan : id_menu_penertiban -> id_jns_pengelolaan
+wasdal__t_wasdal_penertiban_aset "0..*" --> "1" wasdal__t_wasdal_penertiban : id_wasdal_penertiban -> id_wasdal_penertiban
+wasdal__t_wasdal_penertiban_log "0..*" --> "1" wasdal__t_wasdal_penertiban : id_wasdal_penertiban -> id_wasdal_penertiban
+wasdal__t_wasdal_permintaan_penertiban_aset "0..*" --> "1" wasdal__t_wasdal_permintaan_penertiban : id_wasdal_permintaan_penertiban -> id_wasdal_permintaan_penertiban
+wasdal__t_wasdal_permintaan_penertiban_log "0..*" --> "1" wasdal__t_wasdal_permintaan_penertiban : id_wasdal_permintaan_penertiban -> id_wasdal_permintaan_penertiban
+@enduml

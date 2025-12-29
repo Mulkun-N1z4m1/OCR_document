@@ -1,0 +1,1020 @@
+@startuml
+skinparam classAttributeIconSize 0
+left to right direction
+hide circle
+scale 1.0
+
+entity "inventarisasi.r_config" as inventarisasi__r_config {
+  code : character varying <<PK>>
+  description : character varying
+  type : character varying
+  value : text
+}
+
+entity "inventarisasi.r_file_inventarisasi" as inventarisasi__r_file_inventarisasi {
+  kd_file : character varying <<PK>>
+  aktif_yn : character varying
+  jns_file : character varying
+  kategori : character varying
+}
+
+entity "inventarisasi.r_inv_jns_file" as inventarisasi__r_inv_jns_file {
+  kd_file : character varying <<PK>>
+  aktif_yn : character varying
+  nama_file : character varying
+  nama_report : character varying
+  nm_file : character varying
+  path_file : character varying
+  status_file : character varying
+  tipe_inv : character varying
+  urutan : numeric
+}
+
+entity "inventarisasi.r_kodetifikasi" as inventarisasi__r_kodetifikasi {
+  kd_kodetifikas : character varying <<PK>>
+  ur_kodetifikasi : character varying
+}
+
+entity "inventarisasi.r_pihaksengketa" as inventarisasi__r_pihaksengketa {
+  kd_pihaksengketa : character varying <<PK>>
+  ur_pihaksengketa : character varying
+}
+
+entity "inventarisasi.r_ruang" as inventarisasi__r_ruang {
+  id : bigint <<PK>>
+  id_satker : integer
+  jenis_ruang : character varying
+  kd_ruang : character varying
+  keterangan : character varying
+  status_yn : character varying
+  uraian : character varying
+}
+
+entity "inventarisasi.r_rule_bmn" as inventarisasi__r_rule_bmn {
+  id_rule_bmn : bigint <<PK>>
+  aktif : boolean
+  kriteria : character varying
+  nm_bmn : character varying
+}
+
+entity "inventarisasi.r_sengketa" as inventarisasi__r_sengketa {
+  kd_sengketa : character varying
+  ur_sengketa : character varying
+}
+
+entity "inventarisasi.r_tipe_ruang" as inventarisasi__r_tipe_ruang {
+  rowid : bigint <<PK>>
+  kd_tipe_ruang : character varying
+  sbsk_rmh_yn : character varying
+  ur_tipe_ruang : character varying
+}
+
+entity "inventarisasi.r_ver_mobile" as inventarisasi__r_ver_mobile {
+  id_versi_mobile : bigint <<PK>>
+  sts_cek_bmn : boolean
+  sts_dev : boolean
+  sts_hide_dev : boolean
+  sts_hide_prod : boolean
+  sts_hide_testing : boolean
+  sts_hide_training : boolean
+  sts_pindah_bmn : boolean
+  sts_prod : boolean
+  sts_sensus : boolean
+  sts_testing : boolean
+  sts_training : boolean
+  versi_mobile : character varying
+}
+
+entity "inventarisasi.t_inv_bangunan" as inventarisasi__t_inv_bangunan {
+  id_inv_bangunan : bigint <<PK>>
+  alamat : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  gps_latitude : numeric
+  gps_longitude : numeric
+  hrg_brg : double precision
+  hrg_sat : numeric
+  id_aset : bigint
+  id_aset_ruang : integer
+  id_inv_aset : integer
+  id_inven : character varying
+  id_inventarisasi : bigint
+  id_kbdg : integer
+  id_satker : integer
+  inv_hrg_brg : double precision
+  inv_hrg_sat : numeric
+  inv_kondisi : character varying
+  inv_kuantitas : double precision
+  inv_luas : double precision
+  inv_ur_kondisi : character varying
+  jenis_pemilik : smallint
+  jenis_ruangan : numeric
+  jns_aset : character varying
+  kd_brg : character varying
+  kd_jns_bmn : numeric
+  kd_kab : character varying
+  kd_kec : character varying
+  kd_kel : character varying
+  kd_kondisi : character varying
+  kd_pos : character varying
+  kd_prov : character varying
+  kd_rtrw : character varying
+  kd_satker : character varying
+  kd_status_inv : character varying
+  keterangan : character varying
+  komplek : character varying
+  kuantitas : double precision
+  lokasi : character varying
+  luas : double precision
+  luas_bdg : numeric
+  merk : character varying
+  no_aset : numeric
+  no_ba : character varying
+  no_bukti_pemilik : character varying
+  nup : integer
+  status_data : smallint
+  status_delete_yn : character varying
+  status_penggunaan : character varying
+  status_tidak_ditemukan : character varying
+  status_update_yn : character varying
+  tab_num : smallint
+  tgl_generate : date
+  tgl_peroleh : date
+  tgl_rekam : date
+  tgl_update : date
+  tipe : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_brg : character varying
+  ur_kab : character varying
+  ur_kec : character varying
+  ur_kel : character varying
+  ur_kondisi : character varying
+  ur_prov : character varying
+  ur_satker : character varying
+  ur_sskel : character varying
+  ur_status_inv : character varying
+}
+
+entity "inventarisasi.t_inv_detail" as inventarisasi__t_inv_detail {
+  id_inv_detail : bigint <<PK>>
+  adm_kondisi : character varying
+  adm_kuantitas : numeric
+  adm_luas : numeric
+  adm_nilai : numeric
+  adm_sts_guna : character varying
+  adm_sts_sengketa : character varying
+  create_by : character varying
+  create_date : timestamp without time zone
+  created_at : timestamp without time zone
+  created_by : integer
+  hp_no_lap : character varying
+  hp_tgl_lap : timestamp without time zone
+  id_aset : integer
+  id_eselon1 : integer
+  id_file : numeric
+  id_inv_ruang : integer
+  id_inventarisasi : integer
+  id_inventarisasi_bmn : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_ruang : integer
+  id_satker : integer
+  inv_ket : character varying
+  inv_kondisi : character varying
+  inv_kuantitas : numeric
+  inv_luas : numeric
+  inv_nilai : numeric
+  inv_sts_guna : character varying
+  inv_sts_sengketa : character varying
+  jns_ruang : numeric
+  kd_brg : character varying
+  kd_eselon1 : character varying
+  kd_jns_bmn_inv : integer
+  kd_kanwil : character varying
+  kd_kl : character varying
+  kd_korwil : character varying
+  kd_kpknl : character varying
+  kd_satker : character varying
+  latitude : character varying
+  lokasi_bmn : character varying
+  longitude : character varying
+  merk : character varying
+  no_aset : numeric
+  no_bukti : character varying
+  status_data : smallint
+  sts_inv1 : character varying
+  sts_inv2 : character varying
+  sts_kd_brg : numeric
+  tercatat : numeric
+  tgl_perlh : timestamp without time zone
+  update_date : timestamp without time zone
+  update_yn : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_brg : character varying
+  ur_satker : character varying
+}
+
+entity "inventarisasi.t_inv_kbdg_lantai" as inventarisasi__t_inv_kbdg_lantai {
+  id_inv_kbdg_lantai : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  file_upload : character varying
+  id_inv_bangunan : integer
+  id_inv_lantai : integer
+  id_kbdg : integer
+  id_kbdg_lantai : integer
+  keterangan : character varying
+  luas : numeric
+  nm_file : character varying
+  no_lantai : integer
+  status_data : smallint
+  status_delete_yn : character varying
+  status_update_yn : character varying
+  tgl_generate : date
+  tgl_update : date
+  tgl_upload : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "inventarisasi.t_inv_kbdg_ruang" as inventarisasi__t_inv_kbdg_ruang {
+  id_inv_kbdg_ruang : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  file_upload : character varying
+  id_inv_lantai : integer
+  id_inv_ruang : integer
+  id_kbdg : integer
+  id_kbdg_detail : integer
+  id_kbdg_lantai : integer
+  id_kbdg_ruang : integer
+  kd_ruang : character varying
+  kd_tipe_ruang : character varying
+  keterangan : character varying
+  luas_ruang : numeric
+  nm_file : character varying
+  nm_ruang : character varying
+  status_data : smallint
+  status_delete_yn : character varying
+  status_update_yn : character varying
+  tgl_generate : date
+  tgl_update : date
+  tgl_upload : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "inventarisasi.t_inv_krmh_neg_lantai" as inventarisasi__t_inv_krmh_neg_lantai {
+  id_inv_krmh_neg_lantai : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  file_upload : character varying
+  id_inv_bangunan : integer
+  id_inv_lantai : integer
+  id_krmh_neg : integer
+  id_krmh_neg_lantai : integer
+  keterangan : character varying
+  luas : numeric
+  nm_file : character varying
+  no_lantai : integer
+  status_data : smallint
+  status_delete_yn : character varying
+  status_update_yn : character varying
+  tgl_generate : date
+  tgl_update : date
+  tgl_upload : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "inventarisasi.t_inv_krmh_neg_ruang" as inventarisasi__t_inv_krmh_neg_ruang {
+  id_inv_krmh_neg_ruang : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  file_upload : character varying
+  id_inv_lantai : integer
+  id_inv_ruang : integer
+  id_krmh_neg : integer
+  id_krmh_neg_detail : integer
+  id_krmh_neg_lantai : integer
+  id_krmh_neg_ruang : integer
+  kd_ruang : character varying
+  kd_tipe_ruang : character varying
+  keterangan : character varying
+  luas_ruang : numeric
+  nm_file : character varying
+  nm_ruang : character varying
+  status_data : smallint
+  status_delete_yn : character varying
+  status_update_yn : character varying
+  tgl_generate : date
+  tgl_update : date
+  tgl_upload : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "inventarisasi.t_inv_laksana" as inventarisasi__t_inv_laksana {
+  id_inv_laksana : bigint <<PK>>
+  ada_ijin : character varying
+  catatan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  dasar_kuasa : character varying
+  id_inventarisasi : bigint
+  id_inventarisasi_bmn : integer
+  kd_brg_bl : character varying
+  kd_brg_lama : character varying
+  kd_ruang : character varying
+  kd_satker_lama : character varying
+  ket_sengketa : character varying
+  no_aset_lama : numeric
+  no_ijin_sk_kelola : character varying
+  no_mesin : character varying
+  no_polisi : character varying
+  no_rangka : character varying
+  nup_otomatis : numeric
+  pihak_bersengketa : character varying
+  pihak_ke3 : character varying
+  status_data : smallint
+  status_kuasa : character varying
+  sts_td : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_ruang : character varying
+}
+
+entity "inventarisasi.t_inv_lantai" as inventarisasi__t_inv_lantai {
+  id_inv_lantai : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  file_upload : character varying
+  flag : character varying
+  flag_jns_bmn : character varying
+  flag_milik : character varying
+  id_aset : bigint
+  id_inv_bangunan : bigint
+  id_inventarisasi : bigint
+  id_lantai : bigint
+  keterangan : character varying
+  luas : numeric
+  nm_file : character varying
+  no_ba : character varying
+  no_lantai : character varying
+  status_data : smallint
+  status_delete_yn : character varying
+  status_update_yn : character varying
+  tgl_generate : date
+  tgl_update : date
+  tgl_upload : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "inventarisasi.t_inv_log" as inventarisasi__t_inv_log {
+  aktivitas : character varying
+  data : jsonb
+  id_menu : integer
+  id_menu_detail : integer
+  id_user : bigint
+  id_user_detail : bigint
+  id_user_log : bigint
+  ip_address : character varying
+  nama : character varying
+  no_tiket : character varying
+  role : character varying
+  tgl_aktivitas : timestamp without time zone
+  username : character varying
+}
+
+entity "inventarisasi.t_inv_log_status" as inventarisasi__t_inv_log_status {
+  created_at : timestamp without time zone
+  created_by : integer
+  data_log : text
+  id_inven_log : bigint
+  id_status : integer
+  id_user : integer
+  keterangan : character varying
+  kode_status : character varying
+  nama : character varying
+  no_tiket : character varying
+  role : character varying
+  status_permohonan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "inventarisasi.t_inv_perencanaan" as inventarisasi__t_inv_perencanaan {
+  id_inv_perencanaan : bigint <<PK>>
+  alm_satker : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  hrg_b : integer
+  hrg_lebih : integer
+  hrg_rb : integer
+  hrg_rr : integer
+  hrg_tdk_ketemu : integer
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_r_menu_access_state : integer
+  id_satker : integer
+  id_struktur : integer
+  is_dbl : boolean
+  is_dbr : boolean
+  is_kib : boolean
+  jenis_tiket : character varying
+  jml_b : integer
+  jml_lebih : integer
+  jml_rb : integer
+  jml_rr : integer
+  jml_tdk_ketemu : integer
+  jns_plugin : character varying
+  kd_eselon1 : character varying
+  kd_kanwil : character varying
+  kd_kl : character varying
+  kd_korwil : character varying
+  kd_kpknl : character varying
+  kd_satker : character varying
+  kd_status_state : character varying
+  luas_b : integer
+  luas_lebih : bigint
+  luas_rb : integer
+  luas_rr : integer
+  luas_tdk_ketemu : integer
+  nm_eselon1 : character varying
+  nm_kanwil : character varying
+  nm_kl : character varying
+  nm_korwil : character varying
+  nm_kpknl : character varying
+  no_ba : character varying
+  no_ba_new : character varying
+  no_surat : character varying
+  periode : date
+  status_data : smallint
+  status_inv : character varying
+  status_state : character varying
+  sts_inv : character varying
+  tahun : character varying
+  tgl_ba : date
+  tgl_created : date
+  tgl_mulai : date
+  tgl_selesai : date
+  tgl_surat : date
+  tot_hrg : integer
+  tot_jml : integer
+  tot_luas : integer
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_satker : character varying
+}
+
+entity "inventarisasi.t_inv_pindahbmn_log" as inventarisasi__t_inv_pindahbmn_log {
+  id_inv_pindahbmn_log : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  id_aset : bigint
+  id_aset_ruang_asal : bigint
+  id_aset_ruang_baru : bigint
+  id_inventarisasi : bigint
+  kd_brg : character varying
+  keterangan : character varying
+  no_ba : character varying
+  nup : integer
+  tgl_pindah : timestamp without time zone
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_brg : character varying
+}
+
+entity "inventarisasi.t_inv_ruang" as inventarisasi__t_inv_ruang {
+  id_inv_ruang : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  file_upload : character varying
+  flag_jns_bmn : character varying
+  flag_milik : character varying
+  id_aset : bigint
+  id_aset_detail : integer
+  id_inv_lantai : bigint
+  id_inventarisasi : bigint
+  id_jns_ruang : smallint
+  id_lantai : integer
+  id_ruang : integer
+  id_satker : integer
+  kd_jns_bmn : integer
+  kd_ruang : character varying
+  kd_tipe_ruang : character varying
+  keterangan : character varying
+  luas_ruang : numeric
+  nm_file : character varying
+  nm_ruang : character varying
+  no_ba : character varying
+  qr_code_ruang : character varying
+  status_data : smallint
+  status_delete_yn : character varying
+  status_update_yn : character varying
+  tgl_generate : timestamp without time zone
+  tgl_update : date
+  tgl_upload : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "inventarisasi.t_inv_workflow_penyusunan" as inventarisasi__t_inv_workflow_penyusunan {
+  id : integer <<PK>>
+  action_type : character varying
+  deskripsi_workflow : character varying
+  id_menu_detail : integer
+  id_role_struktur : integer
+  is_double : smallint
+  jenis_tiket : character varying
+  kode_status : character varying
+  status : smallint
+  type_workflow : character varying
+  workflow_now : character varying
+}
+
+entity "inventarisasi.t_inventarisasi" as inventarisasi__t_inventarisasi {
+  id_inventarisasi : bigint <<PK>>
+  alm_satker : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  generate_bmn : boolean
+  generate_bmn_at : timestamp without time zone
+  generate_ruang : boolean
+  generate_ruang_at : timestamp without time zone
+  hrg_b : integer
+  hrg_lebih : integer
+  hrg_rb : integer
+  hrg_rr : integer
+  hrg_tdk_ketemu : integer
+  id_eselon1 : integer
+  id_kanwil : integer
+  id_kl : integer
+  id_korwil : integer
+  id_kpknl : integer
+  id_r_menu_access_state : integer
+  id_satker : integer
+  id_struktur : integer
+  is_dbl : boolean
+  is_dbr : boolean
+  is_kib : boolean
+  jenis_tiket : character varying
+  jml_b : integer
+  jml_lebih : integer
+  jml_rb : integer
+  jml_rr : integer
+  jml_tdk_ketemu : integer
+  jns_plugin : character varying
+  kd_eselon1 : character varying
+  kd_kanwil : character varying
+  kd_kl : character varying
+  kd_korwil : character varying
+  kd_kpknl : character varying
+  kd_satker : character varying
+  kd_status_state : character varying
+  luas_b : integer
+  luas_lebih : bigint
+  luas_rb : integer
+  luas_rr : integer
+  luas_tdk_ketemu : integer
+  nm_eselon1 : character varying
+  nm_kanwil : character varying
+  nm_kl : character varying
+  nm_korwil : character varying
+  nm_kpknl : character varying
+  no_ba : character varying
+  no_ba_new : character varying
+  no_ba_perencanaan : character varying
+  no_bai : character varying
+  no_surat : character varying
+  periode : timestamp without time zone
+  status_data : smallint
+  status_delete : smallint
+  status_inv : character varying
+  status_state : character varying
+  sts_inv : character varying
+  tahun : character varying
+  tgl_ba : timestamp without time zone
+  tgl_bai : timestamp without time zone
+  tgl_created : timestamp without time zone
+  tgl_mulai : timestamp without time zone
+  tgl_selesai : timestamp without time zone
+  tgl_surat : timestamp without time zone
+  tot_hrg : integer
+  tot_jml : integer
+  tot_luas : integer
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_satker : character varying
+}
+
+entity "inventarisasi.t_inventarisasi_angk" as inventarisasi__t_inventarisasi_angk {
+  id_inventarisasi_angk : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  hrg_brg : numeric
+  hrg_sat : numeric
+  id_aset : bigint
+  id_inventarisasi_bmn : integer
+  id_satker : integer
+  inv_hrg_brg : numeric
+  inv_hrg_sat : numeric
+  inv_kondisi : character varying
+  inv_kuantitas : numeric
+  inv_ur_kondisi : character varying
+  kd_brg : character varying
+  kd_kondisi : character varying
+  kd_satker : character varying
+  kd_status_inv : character varying
+  keterangan : character varying
+  kuantitas : numeric
+  merk : character varying
+  no_ba : character varying
+  no_mesin : character varying
+  no_polisi : character varying
+  no_rangka : character varying
+  nup : integer
+  status_data : smallint
+  tgl_peroleh : date
+  tgl_rekam : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_brg : character varying
+  ur_kondisi : character varying
+  ur_satker : character varying
+  ur_status_inv : character varying
+}
+
+entity "inventarisasi.t_inventarisasi_bmn" as inventarisasi__t_inventarisasi_bmn {
+  id_inventarisasi_bmn : bigint <<PK>>
+  ada_izin : character varying
+  bukti_kepemilikan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  dasar_penguasaan : character varying
+  hrg_brg : double precision
+  hrg_sat : numeric
+  id_aset : bigint
+  id_aset_ruang : integer
+  id_aset_ruang_inv : integer
+  id_inventarisasi : bigint
+  id_lantai : integer
+  id_satker : integer
+  inv_hrg_brg : double precision
+  inv_hrg_sat : numeric
+  inv_kondisi : character varying
+  inv_kuantitas : double precision
+  inv_luas : double precision
+  inv_ur_kondisi : character varying
+  is_dbl : boolean
+  is_dbr : boolean
+  is_kib : boolean
+  izin_kelola : character varying
+  jns_aset : character varying
+  kd_brg : character varying
+  kd_brg_koreksi : character varying
+  kd_jns_bmn : smallint
+  kd_kodetifikasi : character varying
+  kd_kondisi : character varying
+  kd_pihak_sengekta : character varying
+  kd_ruang : character varying
+  kd_satker : character varying
+  kd_sengketa : character varying
+  kd_status : character varying
+  kd_status_inv : character varying
+  kd_status_pengguna : character varying
+  ket_sengketa : character varying
+  keterangan : character varying
+  keterangan_bmn : text
+  kode_register : character varying
+  kuantitas : double precision
+  lokasi : character varying
+  luas : double precision
+  merk : character varying
+  nm_ruang : character varying
+  no_ba : character varying
+  no_bukti_pemilik : character varying
+  nup : integer
+  pihak_ketiga : character varying
+  pihak_sengketa : character varying
+  satuan : character varying
+  status_data : smallint
+  status_delete : smallint
+  status_kki : character varying
+  status_kodetifikasi : character varying
+  status_penggunaan : character varying
+  status_penguasaan : character varying
+  status_sengketa : character varying
+  status_tidak_ditemukan : character varying
+  tab_num : smallint
+  tercatat_adm : character varying
+  tercatat_inv : character varying
+  tgl_peroleh : date
+  tgl_rekam : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_brg : character varying
+  ur_kab : character varying
+  ur_kec : character varying
+  ur_kel : character varying
+  ur_kondisi : character varying
+  ur_prov : character varying
+  ur_satker : character varying
+  ur_status : character varying
+  ur_status_inv : character varying
+  ur_status_pengguna : character varying
+}
+
+entity "inventarisasi.t_inventarisasi_doc_inv" as inventarisasi__t_inventarisasi_doc_inv {
+  id_doc_inv : character varying <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  hrg_b : numeric
+  hrg_berlebih : numeric
+  hrg_rb : numeric
+  hrg_rr : numeric
+  hrg_tdk_ketemu : numeric
+  id_file_lhi : character varying
+  id_unit : integer
+  jml_b : numeric
+  jml_berlebih : numeric
+  jml_rb : numeric
+  jml_rr : numeric
+  jml_tdk_ketemu : numeric
+  kd_unit : character varying
+  luas_b : numeric
+  luas_berlebih : numeric
+  luas_rb : numeric
+  luas_rr : numeric
+  luas_tdk_ketemu : numeric
+  no_dok : character varying
+  status_data : smallint
+  tahun : character varying
+  tgl_dok : date
+  tipe_tingkatan : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_unit : character varying
+}
+
+entity "inventarisasi.t_inventarisasi_dok" as inventarisasi__t_inventarisasi_dok {
+  no_ba : character varying <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  dok_ba : smallint
+  dok_baik : smallint
+  dok_berlebih : smallint
+  dok_lain : smallint
+  dok_rb : smallint
+  dok_rr : smallint
+  dok_tdk_ketemu : smallint
+  id_inventarisasi : bigint
+  status_data : smallint
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "inventarisasi.t_inventarisasi_file" as inventarisasi__t_inventarisasi_file {
+  id_inventarisasi_file : bigint <<PK>>
+  category_file : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  data_file : character varying
+  file_path : character varying
+  id_file : character varying
+  id_inventarisasi : bigint
+  id_inventarisasi_bmn : bigint
+  id_user : integer
+  kd_file : character varying
+  nm_file : character varying
+  status_data : smallint
+  tgl_upload : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+}
+
+entity "inventarisasi.t_inventarisasi_lainnya" as inventarisasi__t_inventarisasi_lainnya {
+  id_aset : bigint <<PK>>
+  no_ba : character varying <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  hrg_oleh : integer
+  hrg_sat : integer
+  id_inventarisasi : bigint
+  id_satker : integer
+  inv_hrg_oleh : integer
+  inv_hrg_sat : integer
+  inv_kondisi : character varying
+  inv_kuantitas : double precision
+  inv_ur_kondisi : character varying
+  kd_brg : character varying
+  kd_kondisi : character varying
+  kd_satker : character varying
+  kd_status_inv : character varying
+  keterangan : character varying
+  kuantitas : double precision
+  merk : character varying
+  nup : integer
+  status_data : smallint
+  tgl_peroleh : date
+  tgl_rekam : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_brg : character varying
+  ur_kondisi : character varying
+  ur_satker : character varying
+  ur_status_inv : character varying
+}
+
+entity "inventarisasi.t_inventarisasi_lainnya_ybt" as inventarisasi__t_inventarisasi_lainnya_ybt {
+  id_inventarisasi_lainnya_ybt : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  hrg_oleh : numeric
+  hrg_sat : numeric
+  id_aset : integer
+  id_inventarisasi : bigint
+  id_satker : integer
+  inv_hrg_oleh : numeric
+  inv_hrg_sat : numeric
+  inv_kondisi : character varying
+  inv_kuantitas : double precision
+  inv_luas : numeric
+  inv_ur_kondisi : character varying
+  kd_brg : character varying
+  kd_kondisi : character varying
+  kd_satker : character varying
+  kd_status_inv : character varying
+  keterangan : character varying
+  kuantitas : double precision
+  luas : numeric
+  merk : character varying
+  no_ba : character varying
+  nup : integer
+  status_data : smallint
+  tgl_peroleh : date
+  tgl_rekam : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_brg : character varying
+  ur_kondisi : character varying
+  ur_satker : character varying
+  ur_status_inv : character varying
+}
+
+entity "inventarisasi.t_inventarisasi_ruang" as inventarisasi__t_inventarisasi_ruang {
+  id_aset : bigint <<PK>>
+  no_ba : character varying <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  hrg_oleh : integer
+  hrg_sat : integer
+  id_inventarisasi : bigint
+  id_satker : integer
+  inv_hrg_oleh : integer
+  inv_hrg_sat : integer
+  inv_kondisi : character varying
+  inv_kuantitas : double precision
+  inv_ur_kondisi : character varying
+  kd_brg : character varying
+  kd_jns_bmn : smallint
+  kd_kondisi : character varying
+  kd_ruang : character varying
+  kd_satker : character varying
+  kd_status : character varying
+  kd_status_inv : character varying
+  keterangan : character varying
+  luas : double precision
+  merk : character varying
+  nup : integer
+  status_data : smallint
+  tgl_peroleh : date
+  tgl_rekam : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_brg : character varying
+  ur_kondisi : character varying
+  ur_ruang : character varying
+  ur_satker : character varying
+  ur_status : character varying
+  ur_status_inv : character varying
+}
+
+entity "inventarisasi.t_inventarisasi_tim" as inventarisasi__t_inventarisasi_tim {
+  id_inventarisasi_tim : bigint <<PK>>
+  created_at : timestamp without time zone
+  created_by : integer
+  email : character varying
+  gol : character varying
+  id_invent_tim : character varying
+  id_inventarisasi : bigint
+  kd_jabatan : character varying
+  kd_tugas : character varying
+  nama : character varying
+  nip : character varying
+  no_ba : character varying
+  status_data : smallint
+  termasuk_ttd : character varying
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_jabatan : character varying
+  ur_tugas : character varying
+}
+
+entity "inventarisasi.temp_t_inventarisasi_bmn" as inventarisasi__temp_t_inventarisasi_bmn {
+  id_inventarisasi_bmn : bigint <<PK>>
+  ada_izin : character varying
+  bukti_kepemilikan : character varying
+  created_at : timestamp without time zone
+  created_by : integer
+  dasar_penguasaan : character varying
+  hrg_brg : double precision
+  hrg_sat : numeric
+  id_aset : bigint
+  id_aset_ruang : integer
+  id_aset_ruang_inv : integer
+  id_inventarisasi : bigint
+  id_satker : integer
+  inv_hrg_brg : double precision
+  inv_hrg_sat : numeric
+  inv_kondisi : character varying
+  inv_kuantitas : double precision
+  inv_luas : double precision
+  inv_ur_kondisi : character varying
+  is_dbl : boolean
+  is_dbr : boolean
+  is_kib : boolean
+  izin_kelola : character varying
+  jns_aset : character varying
+  kd_brg : character varying
+  kd_jns_bmn : smallint
+  kd_kodetifikasi : character varying
+  kd_kondisi : character varying
+  kd_pihak_sengekta : character varying
+  kd_satker : character varying
+  kd_sengketa : character varying
+  kd_status : character varying
+  kd_status_inv : character varying
+  kd_status_pengguna : character varying
+  ket_sengketa : character varying
+  keterangan : character varying
+  keterangan_bmn : text
+  kuantitas : double precision
+  lokasi : character varying
+  luas : double precision
+  merk : character varying
+  no_ba : character varying
+  no_bukti_pemilik : character varying
+  nup : integer
+  pihak_ketiga : character varying
+  pihak_sengketa : character varying
+  satuan : character varying
+  status_data : smallint
+  status_kki : character varying
+  status_kodetifikasi : character varying
+  status_penggunaan : character varying
+  status_penguasaan : character varying
+  status_sengketa : character varying
+  status_tidak_ditemukan : character varying
+  tab_num : smallint
+  tercatat_adm : character varying
+  tercatat_inv : character varying
+  tgl_peroleh : date
+  tgl_rekam : date
+  updated_at : timestamp without time zone
+  updated_by : integer
+  ur_brg : character varying
+  ur_kab : character varying
+  ur_kec : character varying
+  ur_kel : character varying
+  ur_kondisi : character varying
+  ur_prov : character varying
+  ur_satker : character varying
+  ur_status : character varying
+  ur_status_inv : character varying
+  ur_status_pengguna : character varying
+}
+
+inventarisasi__t_inv_bangunan "0..*" --> "1" inventarisasi__t_inventarisasi : id_inventarisasi -> id_inventarisasi
+inventarisasi__t_inv_laksana "0..*" --> "1" inventarisasi__t_inventarisasi_bmn : id_inventarisasi_bmn -> id_inventarisasi_bmn
+inventarisasi__t_inv_laksana "0..*" --> "1" inventarisasi__t_inventarisasi : id_inventarisasi -> id_inventarisasi
+inventarisasi__t_inv_lantai "0..*" --> "1" inventarisasi__t_inventarisasi : id_inventarisasi -> id_inventarisasi
+inventarisasi__t_inv_ruang "0..*" --> "1" inventarisasi__t_inv_lantai : id_inv_lantai -> id_inv_lantai
+inventarisasi__t_inv_ruang "0..*" --> "1" inventarisasi__t_inventarisasi : id_inventarisasi -> id_inventarisasi
+inventarisasi__t_inventarisasi_angk "0..*" --> "1" inventarisasi__t_inventarisasi_bmn : id_inventarisasi_bmn -> id_inventarisasi_bmn
+inventarisasi__t_inventarisasi_bmn "0..*" --> "1" inventarisasi__t_inventarisasi : id_inventarisasi -> id_inventarisasi
+inventarisasi__t_inventarisasi_dok "0..*" --> "1" inventarisasi__t_inventarisasi : id_inventarisasi -> id_inventarisasi
+inventarisasi__t_inventarisasi_file "0..*" --> "1" inventarisasi__t_inventarisasi : id_inventarisasi -> id_inventarisasi
+inventarisasi__t_inventarisasi_lainnya "0..*" --> "1" inventarisasi__t_inventarisasi : id_inventarisasi -> id_inventarisasi
+inventarisasi__t_inventarisasi_lainnya_ybt "0..*" --> "1" inventarisasi__t_inventarisasi : id_inventarisasi -> id_inventarisasi
+inventarisasi__t_inventarisasi_ruang "0..*" --> "1" inventarisasi__t_inventarisasi : id_inventarisasi -> id_inventarisasi
+inventarisasi__t_inventarisasi_tim "0..*" --> "1" inventarisasi__t_inventarisasi : id_inventarisasi -> id_inventarisasi
+@enduml
